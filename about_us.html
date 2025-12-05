@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - ANK AUTOMATION</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .font-nebulica-header {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.15;
+    }
+
+    .glow-effect-circle {
+      background: radial-gradient(circle at center,
+          #ffffff 57%,
+          rgb(157, 4, 217) 70%,
+          #4a026d 80%,
+          #05010d 90%
+        );
+    }
+
+    /* Timeline styles */
+    .timeline-item {
+      position: relative;
+      padding-left: 60px;
+      margin-bottom: 60px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 30px;
+      bottom: -60px;
+      width: 2px;
+      background: linear-gradient(to bottom, #C86BFA 0%, rgba(200, 107, 250, 0.3) 100%);
+    }
+
+    .timeline-item:last-child::before {
+      display: none;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      background: #C86BFA;
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(200, 107, 250, 0.6);
+    }
+
+    .timeline-year {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #A0A0A0;
+      margin-bottom: 20px;
+    }
+
+    .timeline-content li {
+      color: #A0A0A0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    /* Team member cards */
+    .team-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .team-card img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    /* Gallery grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      border: 1px solid #222;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      border-color: #C86BFA;
+      transform: scale(1.02);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body class="relative">
+
+  <div id="top-banner"
+    class="sticky top-0 z-50 bg-banner-primary-purple text-center py-2 px-4 text-white font-semibold relative">
+    Our shop is under construction, we'll be live soon!
+    <button id="close-banner"
+      class="absolute right-4 top-1/2 -translate-y-1/2 text-white font-bold text-lg cursor-pointer">&times;</button>
+  </div>
+
+  <header class="container mx-auto max-w-7xl px-6 md:px-8 py-6">
+    <nav class="flex justify-between items-center">
+      <div class="text-2xl font-bold tracking-tight logo-fade">
+        <a href="index.html">ANK AUTOMATION</a>
+      </div>
+      <div class="hidden md:flex space-x-8 items-center font-medium text-lg">
+        <a href="index.html#products" class="hover:text-primary-purple transition-colors">Product</a>
+        <a href="index.html#services" class="hover:text-primary-purple transition-colors">Services</a>
+        <a href="index.html#testimonials" class="hover:text-primary-purple transition-colors">Testimonials</a>
+        <a href="about_us.html" class="text-primary-purple font-semibold">About Us</a>
+      </div>
+      <div class="hidden md:block">
+        <a href="contact_us.html" class="btn-light">Contact Us</a>
+      </div>
+      <div class="md:hidden text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mx-auto max-w-7xl px-6 md:px-8 py-20 min-h-screen">
+    
+    <!-- Hero Section -->
+    <section class="relative py-24 md:py-32 flex items-center min-h-[70vh]">
+      <div class="glow-effect-circle absolute -top-[200px] right-0 w-[800px] h-[400px] opacity-40 blur-[200px] rounded-full z-0 pointer-events-none"></div>
+      
+      <div class="relative z-10 max-w-5xl">
+        <h1 class="font-nebulica-header font-medium leading-tight">
+          Building Better Automation<br>
+          For Every <span class="text-primary-purple">Enterprise</span>
+        </h1>
+        <p class="text-xl text-secondary mt-8 leading-relaxed max-w-3xl">
+          Creating accessible, modular automation solutions that shape how businesses operate and engineers learn.
+        </p>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="py-24">
+      <div class="grid md:grid-cols-5 gap-12">
+        <div class="md:col-span-1">
+          <div class="flex items-start">
+            <span class="block w-3 h-3 bg-primary-purple rounded-sm mr-4 mt-2"></span>
+            <h2 class="text-3xl font-medium">VISION</h2>
+          </div>
+        </div>
+        
+        <div class="md:col-span-4 space-y-8">
+          <div>
+            <p class="text-lg text-secondary leading-relaxed">
+              Our vision stretches beyond conventional automation. We're building towards a future where 70% of warehouse and factory automation in South Asia will run on RigBetel-derived systems, making India a global hub for ROS-compatible robotics hardware.
+            </p>
+          </div>
+          
+          <div>
+            <p class="text-lg text-secondary leading-relaxed">
+              Born in July 2020 at MIT Pune, our journey began when three engineers identified a critical gap: India's heavy reliance on imported automation solutions was holding back innovation and accessibility. What started with ₹18 lakh in competition winnings has evolved into a pioneering force in robotics, serving 25 countries across ASEAN and MENA regions.
+            </p>
+          </div>
+          
+          <div>
+            <p class="text-lg text-secondary leading-relaxed">
+              Our early challenges shaped our innovative approach. When conventional LIDAR sensors failed in dusty Indian factory environments during our first field tests, we developed a proprietary multi-sensor fusion algorithm combining mmWave radar and stereo vision. This practical problem-solving mindset continues to drive our development of robust, real-world solutions.
+            </p>
+          </div>
+          
+          <div>
+            <p class="text-lg text-secondary leading-relaxed">
+              Today, we're not just building robots; we're nurturing an ecosystem. Through our open-source contributions, educational initiatives, and modular platforms, we're making advanced automation accessible to enterprises of all sizes while cultivating the next generation of robotics talent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="py-32">
+      <h2 class="font-nebulica-header font-medium mb-8">Our Team</h2>
+      <p class="text-lg text-secondary mb-16 max-w-3xl">
+        Our strength comes from our diverse technical expertise. Each team member brings specific skills that add to our collective capabilities:
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="team-card gradient-card-dark border border-gray-800">
+          <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600" 
+               alt="Team Member 1">
+        </div>
+        
+        <div class="team-card gradient-card-dark border border-gray-800">
+          <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=600" 
+               alt="Team Member 2">
+        </div>
+        
+        <div class="team-card gradient-card-dark border border-gray-800">
+          <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=600" 
+               alt="Team Member 3">
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Milestones & Achievements -->
+    <section class="py-32">
+      <h2 class="font-nebulica-header font-medium mb-20">
+        Key Milestones<br>
+        & <span class="text-primary-purple">Achievements</span>
+      </h2>
+      
+      <div class="max-w-4xl">
+        <!-- 2020 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2020</div>
+          <ul class="timeline-content space-y-3">
+            <li>• Founded at MIT Pune</li>
+            <li>• Initial seed capital of ₹18 lakh from competition winnings</li>
+          </ul>
+        </div>
+
+        <!-- 2021 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2021</div>
+          <ul class="timeline-content space-y-3">
+            <li>• First international client: Singapore-based logistics firm</li>
+            <li>• Secured first defense sector contracts</li>
+            <li>• Achieved first break-even quarter</li>
+          </ul>
+        </div>
+
+        <!-- 2022 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2022</div>
+          <ul class="timeline-content space-y-3">
+            <li>• Established strategic partnership with NVIDIA for ISAAC Sim integration</li>
+            <li>• Obtained ISO 9001 certification</li>
+            <li>• Launched Diadem UGV series</li>
+          </ul>
+        </div>
+
+        <!-- 2023 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2023</div>
+          <ul class="timeline-content space-y-3">
+            <li>• Hosted ROSCon India</li>
+            <li>• Expanded ROS 2 Mobile Robotics capabilities with Niagara AI Foundation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-24">
+      <h2 class="font-nebulica-header font-medium mb-16">Our Work</h2>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8566472/pexels-photo-8566472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+               alt="Autonomous Robot">
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8566428/pexels-photo-8566428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+               alt="Robot Platform">
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+               alt="Team at Work">
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000" 
+               alt="Development">
+        </div>
+        
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1561144257-e32e8efc6c4b?auto=format&fit=crop&q=80&w=1000" 
+               alt="Custom Platform">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-gray-800 mt-20">
+    <div class="container mx-auto max-w-7xl px-4 py-16 text-center">
+      <div class="text-3xl font-bold tracking-tight">
+        <a href="index.html">ANK DESIGN & AUTOMATION SOLUTIONS LLP.</a>
+      </div>
+      <div class="flex justify-center space-x-8 items-center font-medium mt-8">
+        <a href="index.html#products" class="text-white hover:text-primary-purple transition-colors">Product</a>
+        <a href="index.html#services" class="text-white hover:text-primary-purple transition-colors">Services</a>
+        <a href="about_us.html" class="text-white hover:text-primary-purple transition-colors">About Us</a>
+        <a href="contact_us.html" class="text-white hover:text-primary-purple transition-colors">Contact Us</a>
+      </div>
+      <p class="text-secondary text-sm mt-12">© 2025 ANK DESIGN & AUTOMATION SOLUTIONS LLP. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    $(function() {
+      // Hero animation
+      gsap.from("header", { duration: 1, y: -30, opacity: 0, delay: 0.3 });
+      gsap.from("main section:first-child", { 
+        duration: 1.2, 
+        y: 50, 
+        opacity: 0,
+        delay: 0.5,
+        ease: "power3.out"
+      });
+    });
+  </script>
+</body>
+</html>

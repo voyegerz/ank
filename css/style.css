@@ -1,54 +1,206 @@
-/* General */
+/* ========================================= */
+/* 1. CUSTOM FONT SETUP (Nebulica)           */
+/* ========================================= */
+
+/* Light (300) */
+@font-face {
+  font-family: 'Nebulica';
+  src: url('../fonts/Nebulica-Light.otf') format('opentype'); 
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular (400) */
+@font-face {
+  font-family: 'Nebulica';
+  src: url('../fonts/Nebulica-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium (500) - This is your main header weight */
+@font-face {
+  font-family: 'Nebulica';
+  src: url('../fonts/Nebulica-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SemiBold (600) */
+@font-face {
+  font-family: 'Nebulica';
+  src: url('../fonts/Nebulica-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold (700) */
+@font-face {
+  font-family: 'Nebulica';
+  src: url('../fonts/Nebulica-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fallback font (Space Grotesk) if Nebulica fails to load */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+
+/* ========================================= */
+/* 2. GLOBAL VARIABLES & RESET               */
+/* ========================================= */
+
+:root {
+  --bg-dark: #0F040C; 
+  --text-light: #F1F1F1; 
+  --primary-purple: #7A1DB9;
+  --card-gray: #1A1A1A;
+  --card-gray-dark: #0F0F0F;
+  --text-secondary: #A0A0A0;
+}
+
+#top-banner {
+  background-color: rgb(122, 29, 185);
+  color: var(--text-light);
+}
+
+.word{
+  transition: all 2s ease;
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  scroll-behavior: smooth;
+  font-family: 'Nebulica', 'Space Grotesk', sans-serif;
+  font-weight: 500; 
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+  letter-spacing: -0.01em; 
+
+  /* UPDATED: Dotted Background Effect (Zoomed in & Visible) */
+  /* 2px radius dots, 45px spacing */
+  background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 2px, transparent 0);
+  background-size: 45px 45px;
 }
 
-/* Hero Section */
-.hero-section {
-  min-height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-              url("https://source.unsplash.com/1600x900/?technology,automation,engineering") no-repeat center center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+/* ========================================= */
+/* 3. UTILITY CLASSES                        */
+/* ========================================= */
+
+.bg-primary-purple { background-color: var(--primary-purple); }
+.bg-banner-primary-purple { background-color: #7A1DB9; }
+
+.text-primary-purple { color: var(--primary-purple); }
+.bg-card-gray { background-color: var(--card-gray); }
+.bg-card-gray-dark { background-color: var(--card-gray-dark); }
+.text-secondary { color: var(--text-secondary); }
+
+/* UPDATED: Gradient Card Style (Light Grey to Dark Grey Metallic) */
+.gradient-card-dark {
+  background: linear-gradient(135deg, #2d2d2d 0%, #111111 100%);
 }
 
-.hero-section h1, 
-.hero-section p {
-  animation: fadeIn 2s ease-in-out;
+/* Testimonial Card Specifics */
+.testimonial-card {
+  background: linear-gradient(180deg, rgba(40, 20, 60, 1.0) 0%, rgba(10, 5, 20, 1.0) 100%);
+  border: 2px solid rgba(147, 51, 234, 0.4); /* Subtle purple border */
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Service Cards */
-.service-card {
-  border: none;
-  border-radius: 15px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(147, 51, 234, 0.2);
+  border-color: rgba(147, 51, 234, 0.8);
 }
 
-/* CTA Section */
-.cta-section {
-  background: linear-gradient(135deg, #007bff, #6610f2);
+/* Button Styles */
+.btn-light {
+  background-color: #E0E0E0;
+  color: #000000;
+  padding: 0.7rem 1.6rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-light:hover { opacity: 0.9; }
+
+/* ========================================= */
+/* 4. COMPONENT STYLES                       */
+/* ========================================= */
+
+/* Tab/Accordion Styles */
+.tab-item {
+  background-color: var(--card-gray-dark);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid #222;
+}
+.tab-item:hover { border-color: var(--primary-purple); }
+.tab-item.active {
+  background-color: var(--card-gray);
+  border-color: rgba(200, 107, 250, 0.5);
 }
 
-/* Animations */
+/* Content sections */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* CSS transition for image fade */
+.img-fade {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
+  from { opacity: 0; }
+  to { opacity: 0.9; }
 }
 
-/* Contact Hero Section */
-.contact-hero {
-  min-height: 50vh;
-  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-              url("https://source.unsplash.com/1600x700/?contact,office,technology") no-repeat center center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.accordion-content {
+  display: none; /* Hidden by default */
+  overflow: hidden;
+  transition: all 0.4s ease-out;
+}
+
+/* Glowing Arc Effects */
+.purple-arc {
+  position: absolute;
+  top: 50%;
+  left: -150px;
+  width: 350px;
+  height: 350px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  z-index: -1;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(200, 180, 255, 0.45) 30%, rgba(120, 60, 180, 0.25) 55%, rgba(0, 0, 0, 0.2) 100%);
+  box-shadow: 0 0 80px 40px rgba(183,121,255,0.5), 0 0 200px 100px rgba(183,121,255,0.2);
+}
+
+.purple-arc-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 900px;
+  height: 300px;
+  transform: translateX(-50%) translateY(-65%);
+  border-radius: 50%;
+  z-index: -1;
+  background: radial-gradient(ellipse at bottom center, rgba(183, 121, 255, 0.9) 0%, rgba(183, 121, 255, 0.45) 25%, rgba(183, 121, 255, 0.15) 55%, rgba(0, 0, 0, 0) 100%);
+  filter: blur(40px);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* Marquee Scroll Animation */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+.scroller {
+  animation: scroll 30s linear infinite;
 }
