@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import logo from '../assets/images/logo.png'
 
 const Footer = () => {
   return (
@@ -6,11 +7,11 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
           <div className="col-span-1 md:col-span-1">
-            <Link to="/" className="text-3xl font-black tracking-tighter">
-              ANK<span className="text-indigo-500">.</span>
+            <Link to="/" className="inline-block mb-8">
+              <img src={logo} alt="ANK Logo" className="h-12 w-auto object-contain brightness-0 invert" />
             </Link>
-            <p className="mt-8 text-slate-400 max-w-xs leading-relaxed">
-              With lots of unique blocks, you can easily build a page without coding. Build your next landing page.
+            <p className="text-slate-400 max-w-xs leading-relaxed">
+              Leading provider of Software, Product Engineering, and Electronics Manufacturing Services and Solutions.
             </p>
           </div>
           
@@ -45,7 +46,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-24 pt-12 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm font-medium">
-          <p>© 2026 ANK DESIGN & AUTOMATION SOLUTIONS LLP. All rights reserved.</p>
+          <p>© 2026 Ank Design and Automation Solutions LLP. All rights reserved.</p>
           <div className="flex space-x-8 mt-6 md:mt-0">
              <Link to="/help" className="hover:text-white transition-colors">Help desk</Link>
              <Link to="/support" className="hover:text-white transition-colors">Support</Link>

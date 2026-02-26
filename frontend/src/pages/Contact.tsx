@@ -21,17 +21,17 @@ const Contact = () => {
                 <ContactInfo 
                   icon={<Mail className="text-accent" />} 
                   title="Email Us" 
-                  detail="hello@ank.com" 
+                  detail="enquiry@ ankautomation.in" 
                 />
                 <ContactInfo 
                   icon={<Phone className="text-accent" />} 
                   title="Call Us" 
-                  detail="+1 (555) 000-0000" 
+                  detail="+91 6354230924, +91 9409588709" 
                 />
                 <ContactInfo 
                   icon={<MapPin className="text-accent" />} 
                   title="Visit Us" 
-                  detail="123 Innovation Way, Tech City" 
+                  detail="485/486-A6 GIDC Makarpura, Vadodara - 390010" 
                 />
               </div>
 

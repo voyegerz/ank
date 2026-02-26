@@ -22,6 +22,8 @@ import {
   Wrench
 } from 'lucide-react'
 
+import logo from '../assets/images/logo.png'
+
 // --- Data for Menus ---
 
 const BUSINESS_UNITS = [
@@ -303,8 +305,8 @@ const Navbar = () => {
       onMouseLeave={() => setHoveredMenu(null)}
     >
       <div className="container mx-auto px-6 h-20 flex justify-between items-center relative">
-        <Link to="/" className="text-2xl font-black tracking-tighter text-slate-900">
-          ANK<span className="text-indigo-600">.</span>
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="ANK Logo" className="h-12 w-auto object-contain" />
         </Link>
 
         {/* Center Navigation Links */}
