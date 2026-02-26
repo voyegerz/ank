@@ -60,40 +60,40 @@ const WHAT_WE_DO_TABS = [
     id: 'prod-eng', 
     label: 'Product Engineering',
     items: [
-      { name: 'Software Engineering', path: '/services/software-engineering' },
-      { name: 'Hardware Engineering', path: '/services/hardware-engineering' },
-      { name: 'Mechanical Engineering', path: '/services/mechanical-engineering' },
-      { name: 'Testing & QA', path: '/services/testing-qa' }
+      { name: 'Software Engineering', path: '/services/software-engineering', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Hardware Engineering', path: '/services/hardware-engineering', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Mechanical Engineering', path: '/services/mechanical-engineering', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Testing & QA', path: '/services/testing-qa', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200' }
     ]
   },
   { 
     id: 'mfg', 
     label: 'Manufacturing',
     items: [
-      { name: 'PCB Assembly', path: '/services/pcb-assembly' },
-      { name: 'Product Assembly', path: '/services/product-assembly' },
-      { name: 'Rapid Prototyping', path: '/services/rapid-prototyping' },
-      { name: 'FDM 3D Printing', path: '/services/fdm-3d-printing' }
+      { name: 'PCB Assembly', path: '/services/pcb-assembly', image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Product Assembly', path: '/services/product-assembly', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Rapid Prototyping', path: '/services/rapid-prototyping', image: 'https://images.unsplash.com/photo-1631034300438-e4b85770337c?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'FDM 3D Printing', path: '/services/fdm-3d-printing', image: 'https://images.unsplash.com/photo-1631034300438-e4b85770337c?auto=format&fit=crop&q=80&w=1200' }
     ]
   },
   { 
     id: 'cloud', 
     label: 'Cloud & Applications',
     items: [
-      { name: 'Web Applications', path: '/services/web-applications' },
-      { name: 'Mobile Applications', path: '/services/mobile-applications' },
-      { name: 'Desktop Applications', path: '/services/desktop-applications' },
-      { name: 'IoT Applications', path: '/services/iot-applications' },
-      { name: 'Scaling & Maintenance', path: '/services/scaling-maintenance' }
+      { name: 'Web Applications', path: '/services/web-applications', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Mobile Applications', path: '/services/mobile-applications', image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Desktop Applications', path: '/services/desktop-applications', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'IoT Applications', path: '/services/iot-applications', image: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Scaling & Maintenance', path: '/services/scaling-maintenance', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200' }
     ]
   },
   { 
     id: 'automation', 
     label: 'Production Automation',
     items: [
-      { name: 'Software Automation', path: '/services/software-automation' },
-      { name: 'Process Automation', path: '/services/process-automation' },
-      { name: 'Maintenance & Troubleshooting', path: '/services/maintenance-troubleshooting' }
+      { name: 'Software Automation', path: '/services/software-automation', image: 'https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Process Automation', path: '/services/process-automation', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200' },
+      { name: 'Maintenance & Troubleshooting', path: '/services/maintenance-troubleshooting', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200' }
     ]
   }
 ]
@@ -170,10 +170,12 @@ const AboutMenu = ({ onClose }: { onClose: () => void }) => (
 
 const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
   const [activeTab, setActiveTab] = useState('prod-eng')
+  const [hoveredImage, setHoveredImage] = useState<string | null>(null)
 
   return (
     <div className="flex w-[1200px] max-w-[98vw] min-h-[500px] bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white">
-      <div className="w-[350px] p-12 bg-indigo-50/50 flex flex-col justify-center">
+      {/* Left Sidebar */}
+      <div className="w-[350px] p-12 bg-indigo-50/50 flex flex-col justify-center z-10">
         <div className="space-y-8">
           {WHAT_WE_DO_TABS.map((tab) => (
             <div 
@@ -190,19 +192,48 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
         </div>
       </div>
 
-      <div className="flex-1 p-16 bg-white flex flex-col justify-center">
-        <div className="grid grid-cols-1 gap-8">
+      {/* Middle Content - Interactive Background */}
+      <div className="flex-1 p-16 bg-white flex flex-col justify-center relative overflow-hidden transition-colors duration-500">
+        {/* Background Image Layer */}
+        <AnimatePresence>
+          {hoveredImage && (
+            <motion.div
+              key={hoveredImage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 z-0"
+            >
+              <img 
+                src={hoveredImage} 
+                className="w-full h-full object-cover" 
+                alt="Background" 
+              />
+              <div className="absolute inset-0 bg-indigo-900/80 mix-blend-multiply"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-950 via-indigo-950/40 to-transparent"></div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="grid grid-cols-1 gap-8 relative z-10">
           {WHAT_WE_DO_TABS.find(t => t.id === activeTab)?.items.map((item, i) => (
             <Link 
               key={i} 
               to={item.path}
               onClick={onClose}
-              className="text-slate-500 hover:text-indigo-600 cursor-pointer transition-colors text-xl font-bold flex items-center gap-3 group"
+              onMouseEnter={() => setHoveredImage(item.image)}
+              onMouseLeave={() => setHoveredImage(null)}
+              className={`cursor-pointer transition-all text-xl font-bold flex items-center gap-3 group ${
+                hoveredImage === item.image ? 'text-white' : 'text-slate-500 hover:text-indigo-600'
+              }`}
             >
               <motion.div 
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="w-1.5 h-1.5 rounded-full bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                  hoveredImage === item.image ? 'bg-white' : 'bg-indigo-600 opacity-0 group-hover:opacity-100'
+                }`}
               ></motion.div>
               {item.name}
             </Link>
@@ -210,7 +241,8 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
         </div>
       </div>
 
-      <div className="w-[300px] p-12 bg-slate-50 border-l border-slate-100 hidden xl:flex flex-col justify-center">
+      {/* Right Sidebar */}
+      <div className="w-[300px] p-12 bg-slate-50 border-l border-slate-100 hidden xl:flex flex-col justify-center z-10">
         <h4 className="text-xs font-black text-slate-400 mb-10 uppercase tracking-[0.2em]">Latest Updates</h4>
         <div className="space-y-10">
           <div className="flex flex-col gap-4">
@@ -253,6 +285,7 @@ const Navbar = () => {
           ANK<span className="text-indigo-600">.</span>
         </Link>
 
+        {/* Center Navigation Links */}
         <div className="hidden md:flex items-center space-x-2">
           {navItems.map((item) => (
             <div 
