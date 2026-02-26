@@ -1,6 +1,6 @@
 import PageLayout from '../components/PageLayout'
 import { motion } from 'framer-motion'
-import { Code2, Globe, Database, Smartphone, Zap, Cpu, Cloud, Settings, Layers, ArrowRight, ShieldCheck, Search } from 'lucide-react'
+import { Globe, Database, Smartphone, Cloud, Settings, Layers, ArrowRight, ShieldCheck, Search, ChevronRight } from 'lucide-react'
 import softwareBg from '../assets/images/Software_dev_page_bg.png'
 
 const SoftwareServices = () => {

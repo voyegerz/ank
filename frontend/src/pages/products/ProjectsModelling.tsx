@@ -1,6 +1,6 @@
 import PageLayout from '../../components/PageLayout'
 import { motion } from 'framer-motion'
-import { Brain, Layers, Box, ArrowRight } from 'lucide-react'
+import {  ArrowRight } from 'lucide-react'
 
 const ProjectsModelling = () => {
   return (

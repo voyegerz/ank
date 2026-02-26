@@ -1,6 +1,6 @@
 import PageLayout from '../../components/PageLayout'
 import { motion } from 'framer-motion'
-import { Newspaper, MessageSquare, Zap, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 const PressNewsroom = () => {
   return (

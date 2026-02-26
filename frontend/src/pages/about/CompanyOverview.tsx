@@ -1,6 +1,6 @@
 import PageLayout from '../../components/PageLayout'
 import { motion } from 'framer-motion'
-import { FileText, Target, Users, Zap, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 const CompanyOverview = () => {
   return (

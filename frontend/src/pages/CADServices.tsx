@@ -1,6 +1,6 @@
 import PageLayout from '../components/PageLayout'
 import { motion } from 'framer-motion'
-import { CheckCircle2, Box, PencilRuler, FileText, Settings, ArrowRight, Layers, Cpu, Star } from 'lucide-react'
+import { Box, Settings, ArrowRight, Layers, Cpu, Star, PencilRuler, ChevronRight } from 'lucide-react'
 import cadBg from '../assets/images/cad_page_bg.png'
 
 const CADServices = () => {

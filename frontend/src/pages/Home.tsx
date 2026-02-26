@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import PageLayout from '../components/PageLayout'
-import { ArrowRight, ChevronRight, Star, Users, MapPin, Layers, Cpu, Settings2 } from 'lucide-react'
+import { ArrowRight, ChevronRight, Layers, Cpu, Settings2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import heroBg from '../assets/images/hero_bg.png'
 

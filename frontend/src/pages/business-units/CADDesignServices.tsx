@@ -1,7 +1,6 @@
 import PageLayout from '../../components/PageLayout'
 import CommonHero from '../../components/CommonHero'
-import { motion } from 'framer-motion'
-import { Layers, PencilRuler, Box, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 const CADDesignServices = () => {
   return (

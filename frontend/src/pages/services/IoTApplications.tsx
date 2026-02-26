@@ -1,6 +1,6 @@
 import PageLayout from '../../components/PageLayout'
 import { motion } from 'framer-motion'
-import { Database, Zap, Cpu, ArrowRight, CheckCircle2 } from 'lucide-react'
+import {  ArrowRight} from 'lucide-react'
 
 const IoTApplications = () => {
   return (

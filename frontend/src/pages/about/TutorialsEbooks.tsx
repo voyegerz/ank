@@ -1,6 +1,5 @@
 import PageLayout from '../../components/PageLayout'
 import { motion } from 'framer-motion'
-import { Layout, ArrowRight } from 'lucide-react'
 
 const TutorialsEbooks = () => {
   return (

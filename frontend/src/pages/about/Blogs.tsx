@@ -1,6 +1,5 @@
 import PageLayout from '../../components/PageLayout'
 import { motion } from 'framer-motion'
-import { Wrench, ArrowRight } from 'lucide-react'
 
 const Blogs = () => {
   return (

@@ -1,6 +1,6 @@
 import PageLayout from '../../components/PageLayout'
 import { motion } from 'framer-motion'
-import { Video, Image as ImageIcon, Play, ArrowRight } from 'lucide-react'
+import { Image as ImageIcon, Play } from 'lucide-react'
 
 const ImagesVideos = () => {
   return (

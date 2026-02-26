@@ -1,5 +1,4 @@
 import PageLayout from '../components/PageLayout'
-import { motion } from 'framer-motion'
 import { Users, Target, Rocket, Award } from 'lucide-react'
 
 const About = () => {

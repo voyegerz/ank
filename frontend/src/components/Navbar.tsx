@@ -109,15 +109,25 @@ const BusinessUnitsMenu = ({ onClose }: { onClose: () => void }) => (
           key={i} 
           to={unit.path}
           onClick={onClose}
-          className={`p-6 rounded-2xl flex items-center gap-4 cursor-pointer transition-all hover:shadow-lg ${unit.color || 'bg-slate-50'}`}
+          className={`p-6 rounded-[2rem] flex items-center gap-4 cursor-pointer transition-all duration-300 group ${
+            unit.color === 'bg-indigo-600' 
+              ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-200' 
+              : 'bg-slate-50 text-slate-900 hover:bg-indigo-600 hover:text-white hover:shadow-xl hover:shadow-indigo-100'
+          }`}
         >
-          <div className={`p-3 rounded-xl ${unit.color === 'bg-indigo-600' ? 'bg-white/20 text-white' : 'bg-white text-indigo-600 shadow-sm'}`}>
-            {unit.icon}
+          <div className={`p-3 rounded-xl transition-all duration-300 ${
+            unit.color === 'bg-indigo-600' 
+              ? 'bg-white/20 text-white' 
+              : 'bg-white text-indigo-600 shadow-sm group-hover:bg-white/20 group-hover:text-white group-hover:scale-110'
+          }`}>
+            {React.cloneElement(unit.icon as React.ReactElement<any>, { size: 24 })}
           </div>
           <div>
-            <h4 className={`font-bold ${unit.textColor || 'text-slate-900'}`}>{unit.title}</h4>
-            <p className={`text-xs flex items-center gap-1 ${unit.textColor || 'text-slate-500'}`}>
-              {unit.desc} <ChevronRight size={12} />
+            <h4 className="font-bold text-sm uppercase tracking-tight">{unit.title}</h4>
+            <p className={`text-[10px] font-black uppercase tracking-widest flex items-center gap-1 transition-colors ${
+              unit.color === 'bg-indigo-600' ? 'text-indigo-100' : 'text-slate-400 group-hover:text-indigo-100'
+            }`}>
+              {unit.desc} <ChevronRight size={10} />
             </p>
           </div>
         </Link>
@@ -172,15 +182,23 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
   const [activeTab, setActiveTab] = useState('prod-eng')
   const [hoveredImage, setHoveredImage] = useState<string | null>(null)
 
+  const currentItems = WHAT_WE_DO_TABS.find(t => t.id === activeTab)?.items || []
+
   return (
     <div className="flex w-[1200px] max-w-[98vw] min-h-[500px] bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white">
       {/* Left Sidebar */}
-      <div className="w-[350px] p-12 bg-indigo-50/50 flex flex-col justify-center z-10">
+      <div 
+        className="w-[350px] p-12 bg-indigo-50/50 flex flex-col justify-center z-10"
+        onMouseEnter={() => setHoveredImage(null)}
+      >
         <div className="space-y-8">
           {WHAT_WE_DO_TABS.map((tab) => (
             <div 
               key={tab.id}
-              onMouseEnter={() => setActiveTab(tab.id)}
+              onMouseEnter={() => {
+                setActiveTab(tab.id)
+                setHoveredImage(null)
+              }}
               className={`flex justify-between items-center cursor-pointer transition-all ${
                 activeTab === tab.id ? 'text-indigo-600 font-black' : 'text-slate-500 hover:text-slate-900'
               }`}
@@ -193,16 +211,20 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
       </div>
 
       {/* Middle Content - Interactive Background */}
-      <div className="flex-1 p-16 bg-white flex flex-col justify-center relative overflow-hidden transition-colors duration-500">
-        {/* Background Image Layer */}
-        <AnimatePresence>
+      <div 
+        className="flex-1 p-16 bg-white flex flex-col justify-center relative overflow-hidden transition-colors duration-700"
+        onMouseEnter={() => !hoveredImage && setHoveredImage(currentItems[0]?.image)}
+        onMouseLeave={() => setHoveredImage(null)}
+      >
+        {/* Background Image Layer with Swirling/Wave Effect */}
+        <AnimatePresence mode="popLayout">
           {hoveredImage && (
             <motion.div
               key={hoveredImage}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, scale: 1.15, rotate: 2, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, scale: 1, rotate: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 0.9, rotate: -2, filter: 'blur(10px)' }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 z-0"
             >
               <img 
@@ -217,22 +239,19 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
         </AnimatePresence>
 
         <div className="grid grid-cols-1 gap-8 relative z-10">
-          {WHAT_WE_DO_TABS.find(t => t.id === activeTab)?.items.map((item, i) => (
+          {currentItems.map((item) => (
             <Link 
-              key={i} 
+              key={item.path} 
               to={item.path}
               onClick={onClose}
               onMouseEnter={() => setHoveredImage(item.image)}
-              onMouseLeave={() => setHoveredImage(null)}
-              className={`cursor-pointer transition-all text-xl font-bold flex items-center gap-3 group ${
-                hoveredImage === item.image ? 'text-white' : 'text-slate-500 hover:text-indigo-600'
+              className={`cursor-pointer transition-all duration-500 text-xl font-bold flex items-center gap-3 group ${
+                hoveredImage ? 'text-white/80 hover:text-white' : 'text-slate-500 hover:text-indigo-600'
               }`}
             >
               <motion.div 
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
                 className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                  hoveredImage === item.image ? 'bg-white' : 'bg-indigo-600 opacity-0 group-hover:opacity-100'
+                  hoveredImage === item.image ? 'bg-white scale-150 shadow-[0_0_10px_white]' : 'bg-indigo-600 opacity-0 group-hover:opacity-100'
                 }`}
               ></motion.div>
               {item.name}
@@ -242,7 +261,10 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
       </div>
 
       {/* Right Sidebar */}
-      <div className="w-[300px] p-12 bg-slate-50 border-l border-slate-100 hidden xl:flex flex-col justify-center z-10">
+      <div 
+        className="w-[300px] p-12 bg-slate-50 border-l border-slate-100 hidden xl:flex flex-col justify-center z-10"
+        onMouseEnter={() => setHoveredImage(null)}
+      >
         <h4 className="text-xs font-black text-slate-400 mb-10 uppercase tracking-[0.2em]">Latest Updates</h4>
         <div className="space-y-10">
           <div className="flex flex-col gap-4">
