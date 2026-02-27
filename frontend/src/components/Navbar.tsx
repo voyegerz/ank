@@ -19,7 +19,9 @@ import {
   Video,
   Newspaper,
   Layout,
-  Wrench
+  Wrench,
+  Menu,
+  X
 } from 'lucide-react'
 
 import logo from '../assets/images/logo.png'
@@ -288,6 +290,8 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
 
 const Navbar = () => {
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const navItems = [
@@ -300,63 +304,191 @@ const Navbar = () => {
   ]
 
   return (
-    <nav 
-      className="fixed top-0 left-0 w-full z-[80] transition-all duration-300 bg-white/80 backdrop-blur-xl border-b border-slate-100"
-      onMouseLeave={() => setHoveredMenu(null)}
-    >
-      <div className="container mx-auto px-6 h-20 flex justify-between items-center relative">
-        <Link to="/" className="flex items-center">
-          <img src={logo} alt="ANK Logo" className="h-12 w-auto object-contain" />
-        </Link>
+    <>
+      <nav 
+        className="fixed top-0 left-0 w-full z-[80] transition-all duration-300 bg-white/80 backdrop-blur-xl border-b border-slate-100"
+        onMouseLeave={() => setHoveredMenu(null)}
+      >
+        <div className="container mx-auto px-6 h-20 flex justify-between items-center relative">
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="ANK Logo" className="h-10 md:h-12 w-auto object-contain" />
+          </Link>
 
-        {/* Center Navigation Links */}
-        <div className="hidden md:flex items-center space-x-2">
-          {navItems.map((item) => (
-            <div 
-              key={item.name}
-              className="py-7 px-4 cursor-pointer"
-              onMouseEnter={() => item.component && setHoveredMenu(item.name)}
-            >
-              {item.path ? (
-                <Link to={item.path} className="text-sm font-bold text-slate-700 hover:text-indigo-600 transition-colors">
-                  {item.name}
-                </Link>
-              ) : (
-                <button className={`text-sm font-bold transition-colors flex items-center gap-1 ${hoveredMenu === item.name ? 'text-indigo-600' : 'text-slate-700 hover:text-indigo-600'}`}>
-                  {item.name}
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-4">
-           <button 
-             onClick={() => navigate('/contact')}
-             className="bg-indigo-600 text-white px-8 py-2.5 rounded-full text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
-           >
-            Get a Quote
-          </button>
-        </div>
-
-        <AnimatePresence>
-          {hoveredMenu && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute top-full left-1/2 -translate-x-1/2 z-[90] pt-2"
-              onMouseEnter={() => setHoveredMenu(hoveredMenu)}
-            >
-              <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden">
-                {navItems.find(i => i.name === hoveredMenu)?.component}
+          {/* Center Navigation Links (Desktop) */}
+          <div className="hidden lg:flex items-center space-x-2">
+            {navItems.map((item) => (
+              <div 
+                key={item.name}
+                className="py-7 px-4 cursor-pointer"
+                onMouseEnter={() => item.component && setHoveredMenu(item.name)}
+              >
+                {item.path ? (
+                  <Link to={item.path} className="text-sm font-bold text-slate-700 hover:text-indigo-600 transition-colors">
+                    {item.name}
+                  </Link>
+                ) : (
+                  <button className={`text-sm font-bold transition-colors flex items-center gap-1 ${hoveredMenu === item.name ? 'text-indigo-600' : 'text-slate-700 hover:text-indigo-600'}`}>
+                    {item.name}
+                  </button>
+                )}
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </nav>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => navigate('/contact')}
+              className="hidden sm:block bg-indigo-600 text-white px-8 py-2.5 rounded-full text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
+            >
+              Get a Quote
+            </button>
+            
+            {/* Mobile Menu Toggle */}
+            <button 
+              className="lg:hidden p-2 text-slate-900"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+
+          {/* Desktop Dropdown */}
+          <AnimatePresence>
+            {hoveredMenu && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="absolute top-full left-1/2 -translate-x-1/2 z-[90] pt-2 hidden lg:block"
+                onMouseEnter={() => setHoveredMenu(hoveredMenu)}
+              >
+                <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden">
+                  {navItems.find(i => i.name === hoveredMenu)?.component}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-white z-[100] lg:hidden overflow-y-auto border-t border-slate-50 shadow-2xl"
+          >
+            <div className="p-6 flex flex-col gap-4">
+              {navItems.map((item) => (
+                <div key={item.name} className="border-b border-slate-50 pb-4">
+                  {item.path ? (
+                    <Link 
+                      to={item.path} 
+                      className="text-xl font-bold text-slate-900 block"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <div>
+                      <button 
+                        onClick={() => setExpandedMobileItem(expandedMobileItem === item.name ? null : item.name)}
+                        className="text-xl font-bold text-slate-900 w-full flex justify-between items-center"
+                      >
+                        {item.name}
+                        <motion.div
+                          animate={{ rotate: expandedMobileItem === item.name ? 90 : 0 }}
+                        >
+                          <ChevronRight size={24} />
+                        </motion.div>
+                      </button>
+                      
+                      <AnimatePresence>
+                        {expandedMobileItem === item.name && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pt-4 pl-4 flex flex-col gap-3">
+                              {item.name === 'What we do' && WHAT_WE_DO_TABS.map(tab => (
+                                <div key={tab.id} className="mb-4">
+                                  <h5 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-2">{tab.label}</h5>
+                                  <div className="flex flex-col gap-2">
+                                    {tab.items.map(subItem => (
+                                      <Link 
+                                        key={subItem.path} 
+                                        to={subItem.path}
+                                        className="text-slate-600 font-medium"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                      >
+                                        {subItem.name}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              ))}
+                              
+                              {item.name === 'Business units' && BUSINESS_UNITS.map(unit => (
+                                <Link 
+                                  key={unit.path} 
+                                  to={unit.path}
+                                  className="text-slate-600 font-medium"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  {unit.title}
+                                </Link>
+                              ))}
+
+                              {item.name === 'Products' && PRODUCTS.map(prod => (
+                                <Link 
+                                  key={prod.path} 
+                                  to={prod.path}
+                                  className="text-slate-600 font-medium"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  {prod.title}
+                                </Link>
+                              ))}
+
+                              {item.name === 'About ANK' && ABOUT_LINKS.map(link => (
+                                <Link 
+                                  key={link.path} 
+                                  to={link.path}
+                                  className="text-slate-600 font-medium"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  {link.title}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )}
+                </div>
+              ))}
+              
+              <button 
+                onClick={() => {
+                  navigate('/contact')
+                  setIsMobileMenuOpen(false)
+                }}
+                className="mt-4 bg-indigo-600 text-white w-full py-4 rounded-xl text-lg font-bold shadow-xl shadow-indigo-100"
+              >
+                Get a Quote
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 

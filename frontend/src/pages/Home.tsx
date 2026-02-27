@@ -31,17 +31,17 @@ const Home = () => {
               ANK DESIGN AND AUTOMATION SOLUTIONS LLP.
             </div>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tighter mb-8 uppercase">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tighter mb-6 uppercase">
               Provider of <span className="text-indigo-500">Software, Product Engineering,</span> Electronics Manufacturing <span className="text-indigo-500">Services & Solutions</span>
             </h1>
             
-            <p className="text-sm md:text-base text-slate-400 max-w-lg leading-relaxed font-medium mb-12">
+            <p className="text-xs md:text-sm text-slate-400 max-w-lg leading-relaxed font-medium mb-10">
               We provide expert services in 3D/2D CAD Development, PLC & SCADA Programming, Panel Automation, Home Automation, Process Automation, Automated Test Equipment (ATE).
             </p>
             
             <div className="flex justify-start">
-              <Link to="/contact" className="bg-indigo-600 text-white px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all flex items-center gap-2 shadow-2xl shadow-indigo-500/20">
-                Get started <ArrowRight size={16} />
+              <Link to="/contact" className="bg-indigo-600 text-white px-7 py-3.5 rounded-lg font-black text-xs uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all flex items-center gap-2 shadow-2xl shadow-indigo-500/20">
+                Get started <ArrowRight size={14} />
               </Link>
             </div>
           </motion.div>
@@ -58,7 +58,7 @@ const Home = () => {
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-[10px] font-black text-indigo-600 tracking-[0.5em] uppercase mb-4">Business Units</h2>
-            <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight uppercase">
+            <h3 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter leading-tight uppercase">
               We help our customers with desired solution based on the latest technology as per their custom requirement
             </h3>
           </div>
@@ -94,7 +94,7 @@ const Home = () => {
           <div className="flex flex-col lg:flex-row gap-20 items-center">
             <div className="lg:w-1/2">
               <h2 className="text-[10px] font-black text-indigo-600 tracking-[0.5em] uppercase mb-4">Our Story</h2>
-              <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-8 leading-tight uppercase">
+              <h3 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter mb-8 leading-tight uppercase">
                 We are a multidisciplinary team providing cutting edge solution, design, development & manufacturing services
               </h3>
               <p className="text-lg text-slate-500 mb-10 leading-relaxed font-medium">
@@ -134,7 +134,7 @@ const Home = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-[10px] font-black text-indigo-600 tracking-[0.5em] uppercase mb-12">Testimonial</h2>
-            <p className="text-3xl md:text-4xl font-black text-slate-900 leading-tight italic">
+            <p className="text-2xl md:text-3xl font-black text-slate-900 leading-tight italic">
               “Simply the best. Better than all the rest. I’d recommend there service to anyone individual or professional, they are great.”
             </p>
             <div className="mt-12 flex flex-col items-center">
@@ -151,7 +151,7 @@ const Home = () => {
       {/* Final CTA */}
       <section className="py-32 bg-slate-950 text-white text-center">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 uppercase leading-tight">Ready to launch your <br /> next project?</h2>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-8 uppercase leading-tight">Ready to launch your <br /> next project?</h2>
           <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto font-medium">
             With having a team of unique minds, you can easily get ur imagined idea into reality, without any hassle. Build your next landing project with us.
           </p>
