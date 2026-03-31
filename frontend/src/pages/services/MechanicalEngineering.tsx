@@ -14,7 +14,7 @@ const MechanicalEngineering = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Core Capabilities</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Core Capabilities</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Advanced 3D Modeling" desc="High-accuracy digital reconstruction and creation of complex industrial parts and assemblies." />
                 <CapabilityItem title="Technical Drafting & Detailing" desc="Precise 2D drawings with full GD&T compliance for seamless manufacturing." />

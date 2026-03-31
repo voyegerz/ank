@@ -8,7 +8,7 @@ const Manufacturing = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6"><span className="text-indigo-500">Manufacturing</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6"><span className="text-indigo-500">Manufacturing</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Advanced additive manufacturing and industrial production services.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const Manufacturing = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Production Capability</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Production Capability</h2>
               <p className="text-slate-600 font-medium leading-relaxed mb-10">We provide Additive manufacturing with precise 3D Printing for all types of filaments (PLA, PETG, ABS, Carbon Fiber, etc).</p>
               <div className="space-y-6">
                 <CapabilityItem title="Additive Manufacturing" desc="Leveraging state-of-the-art 3D printing for rapid prototyping and parts." />

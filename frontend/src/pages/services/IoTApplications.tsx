@@ -8,7 +8,7 @@ const IoTApplications = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">IoT <span className="text-indigo-500">Applications</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">IoT <span className="text-indigo-500">Applications</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Connecting the physical and digital worlds with smart IoT platforms.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const IoTApplications = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Connected Ecosystems</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Connected Ecosystems</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Real-time Monitoring" desc="Dashboards and alerts for live tracking of industrial sensors and devices." />
                 <CapabilityItem title="Device Management" desc="Centralized platforms to manage, update, and secure your IoT fleet." />

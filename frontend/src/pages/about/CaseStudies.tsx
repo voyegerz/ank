@@ -8,7 +8,7 @@ const CaseStudies = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Case <span className="text-indigo-500">Studies</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Case <span className="text-indigo-500">Studies</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Deep dives into our most successful and challenging projects.</p>
           </motion.div>
         </div>

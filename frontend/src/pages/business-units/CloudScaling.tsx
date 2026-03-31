@@ -8,7 +8,7 @@ const CloudScaling = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Cloud Services <br /><span className="text-indigo-500">& Scaling</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Cloud Services <br /><span className="text-indigo-500">& Scaling</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Scaling your applications with expert managed cloud services.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const CloudScaling = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Managed Cloud Solutions</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Managed Cloud Solutions</h2>
               <p className="text-slate-600 font-medium leading-relaxed mb-10">We Provide Scaling Platforms for Application with cross platform (Android/Ios/Web) Managed Services.</p>
               <div className="space-y-6">
                 <CapabilityItem title="Cross-Platform Support" desc="Managed cloud backends for web, iOS, and Android applications." />

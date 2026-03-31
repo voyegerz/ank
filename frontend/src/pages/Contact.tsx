@@ -8,7 +8,7 @@ const Contact = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-20">
-              <h1 className="text-5xl md:text-6xl font-black text-primary tracking-tighter mb-6 uppercase">
+              <h1 className="text-5xl md:text-6xl font-black text-primary tracking-normal mb-6 uppercase">
                 Let's <span className="text-accent">Connect</span>
               </h1>
               <p className="text-xl text-slate-600 max-w-2xl mx-auto">

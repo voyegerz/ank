@@ -14,7 +14,7 @@ const HardwareEngineering = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Core Capabilities</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Core Capabilities</h2>
               <div className="space-y-6">
                 <CapabilityItem title="PCB Design & Layout" desc="High-density multi-layer board design with a focus on signal integrity and thermal management." />
                 <CapabilityItem title="Embedded Systems Design" desc="Architecting custom controller boards and sensor interfaces for specialized applications." />

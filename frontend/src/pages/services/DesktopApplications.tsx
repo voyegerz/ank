@@ -8,7 +8,7 @@ const DesktopApplications = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Desktop <span className="text-indigo-500">Applications</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Desktop <span className="text-indigo-500">Applications</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Powerful desktop software for specialized industrial and business use.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const DesktopApplications = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">High-Performance Software</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">High-Performance Software</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Cross-Platform Tools" desc="Building desktop apps for Windows, macOS, and Linux using modern tech." />
                 <CapabilityItem title="Local Hardware Integration" desc="Software that interacts directly with local sensors, machines, and controllers." />

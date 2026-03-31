@@ -256,7 +256,7 @@ const ServiceDetail = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <div className="text-indigo-400 mb-6">{service.icon}</div>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">{service.title}</h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">{service.title}</h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium italic">"{service.subtitle}"</p>
           </motion.div>
         </div>

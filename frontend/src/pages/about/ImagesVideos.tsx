@@ -8,7 +8,7 @@ const ImagesVideos = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Images <span className="text-indigo-500">& Videos</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Images <span className="text-indigo-500">& Videos</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Visualizing our engineering process and manufacturing facilities.</p>
           </motion.div>
         </div>
@@ -34,7 +34,7 @@ const MediaCard = ({ type, title }: { type: 'image' | 'video', title: string }) 
         {type === 'video' ? <Play size={64} className="text-white fill-white" /> : <ImageIcon size={64} className="text-white" />}
      </div>
      <div className="absolute bottom-0 left-0 w-full p-8 z-20">
-        <h4 className="text-2xl font-black text-white uppercase tracking-tight">{title}</h4>
+        <h4 className="text-2xl font-black text-white uppercase tracking-normal">{title}</h4>
      </div>
   </div>
 )

@@ -8,7 +8,7 @@ const MobileApplications = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Mobile <span className="text-indigo-500">Applications</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Mobile <span className="text-indigo-500">Applications</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Native-grade mobile experiences for iOS and Android.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const MobileApplications = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Mobile-First Strategy</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Mobile-First Strategy</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Cross-Platform Development" desc="Expertise in React Native and Flutter for efficient, unified app development." />
                 <CapabilityItem title="Offline Capabilities" desc="Apps designed to work seamlessly even without an internet connection." />

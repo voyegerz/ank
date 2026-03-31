@@ -8,7 +8,7 @@ const DecorProducts = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Decor <span className="text-indigo-500">Products</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Decor <span className="text-indigo-500">Products</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Innovative, kinetic, and high-end industrial decor solutions.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const DecorProducts = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Art Meets Engineering</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Art Meets Engineering</h2>
               <p className="text-slate-600 font-medium leading-relaxed mb-10">Our decor line combines sophisticated mechanical engineering with artistic expression.</p>
               <div className="space-y-6">
                 <CapabilityItem title="Kinetic Sculptures" desc="Moving mechanical art pieces that captivate and inspire." />

@@ -14,7 +14,7 @@ const PCBassembly = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Manufacturing Excellence</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Manufacturing Excellence</h2>
               <div className="space-y-6">
                 <CapabilityItem title="SMT & Through-Hole" desc="State-of-the-art surface mount and through-hole assembly lines." />
                 <CapabilityItem title="Multi-Layer Expertise" desc="Experience with high-density, multi-layer rigid and flex PCBs." />

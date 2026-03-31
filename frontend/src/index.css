@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
 @font-face {
@@ -16,8 +17,22 @@
 
 @font-face {
   font-family: 'Nebulica';
+  src: url('./assets/fonts/Nebulica-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nebulica';
   src: url('./assets/fonts/Nebulica-Bold.otf') format('opentype');
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nebulica';
+  src: url('./assets/fonts/Nebulica-ExtraBold.otf') format('opentype');
+  font-weight: 800;
   font-style: normal;
 }
 
@@ -29,7 +44,8 @@
 }
 
 :root {
-  --font-nebulica: 'Nebulica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-nebulica: 'Nebulica', var(--font-inter);
 }
 
 @theme {
@@ -43,6 +59,41 @@
 
 body {
   @apply font-sans antialiased bg-white text-slate-900;
+}
+
+/* Amwerk Design System Utilities */
+@layer utilities {
+  .text-outline {
+    @apply text-transparent font-bold;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+  }
+  
+  .text-outline-dark {
+    @apply text-transparent font-bold;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-outline-sky {
+    @apply text-transparent font-bold;
+    -webkit-text-stroke: 1px rgba(14, 165, 233, 0.25);
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .letter-spacing-widest {
+    @apply tracking-[0.2em] lg:tracking-[0.4em];
+  }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
 }
 
 /* Custom Scrollbar for Lenis */

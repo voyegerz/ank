@@ -26,7 +26,7 @@ const CommonHero = ({ title, subtitle }: CommonHeroProps) => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl"
         >
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tighter mb-6 uppercase">
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-normal mb-6 uppercase">
             {title}
           </h1>
           {subtitle && (

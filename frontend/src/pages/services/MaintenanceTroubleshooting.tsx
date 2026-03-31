@@ -8,7 +8,7 @@ const MaintenanceTroubleshooting = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Maintenance <span className="text-indigo-500">& Troubleshooting</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Maintenance <span className="text-indigo-500">& Troubleshooting</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Ensuring your industrial systems stay operational with expert support.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const MaintenanceTroubleshooting = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Support & Reliability</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Support & Reliability</h2>
               <div className="space-y-6">
                 <CapabilityItem title="On-site Support" desc="Expert technicians to troubleshoot and fix industrial hardware and controllers." />
                 <CapabilityItem title="Preventative Maintenance" desc="Scheduled checks and updates to avoid system downtime before it happens." />

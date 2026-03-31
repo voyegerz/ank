@@ -14,7 +14,7 @@ const RapidPrototyping = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Speed to Market</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Speed to Market</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Functional Prototypes" desc="Prototypes that look and work like the final product." />
                 <CapabilityItem title="Iterative Design Support" desc="Fast feedback loops to refine your design before mass production." />

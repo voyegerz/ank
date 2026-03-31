@@ -14,7 +14,7 @@ const ProductAssembly = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Full System Integration</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Full System Integration</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Box Build Assembly" desc="Complete system integration including electronics, mechanicals, and enclosures." />
                 <CapabilityItem title="Final Quality Testing" desc="Comprehensive functional testing before final packaging." />

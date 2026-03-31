@@ -8,7 +8,7 @@ const IndustrialEquipment = () => {
       <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">Industrial <span className="text-indigo-500">Equipment</span></h1>
+            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Industrial <span className="text-indigo-500">Equipment</span></h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Heavy-duty, high-precision hardware for modern production lines.</p>
           </motion.div>
         </div>
@@ -18,7 +18,7 @@ const IndustrialEquipment = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Industrial Grade Hardware</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Industrial Grade Hardware</h2>
               <p className="text-slate-600 font-medium leading-relaxed mb-10">Our equipment is engineered to withstand harsh environments while delivering unmatched accuracy.</p>
               <div className="space-y-6">
                 <CapabilityItem title="Automated Test Equipment" desc="Specialized hardware for rigorous product validation and quality checks." />

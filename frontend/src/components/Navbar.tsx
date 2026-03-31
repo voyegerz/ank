@@ -1,470 +1,554 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
-import { 
-  ChevronRight, 
-  Star, 
-  User, 
-  FileCode, 
-  Search, 
-  GraduationCap, 
-  Settings2,
-  Filter,
-  LayoutGrid,
-  Zap,
-  BookOpen,
-  Stethoscope,
-  Brain,
-  FileText,
-  Video,
-  Newspaper,
-  Layout,
-  Wrench,
-  Menu,
-  X
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import {
+  ChevronRight, Star, User, FileCode, Search, GraduationCap,
+  Settings2, Filter, LayoutGrid, Zap, BookOpen, Stethoscope,
+  Brain, FileText, Video, Newspaper, Layout, Wrench, Menu, X, ArrowUpRight
 } from 'lucide-react'
 
 import logo from '../assets/images/logo.png'
 
-// --- Data for Menus ---
+// ─── Brand Colors ────────────────────────────────────────────────────────────
+const ANK_NAVY = '#002E5D'
+const ANK_CYAN = '#00AEEF'
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const BUSINESS_UNITS = [
-  { title: 'CAD Design Services', desc: 'Learn More', icon: <Star />, color: 'bg-indigo-600', textColor: 'text-white', path: '/business-units/cad-design' },
-  { title: 'Software Development', desc: 'Browse all', icon: <FileCode />, color: 'bg-indigo-100', textColor: 'text-indigo-900', path: '/business-units/software-development' },
-  { title: 'Manufacturing', desc: 'More resources', icon: <Settings2 />, color: 'bg-indigo-100', textColor: 'text-indigo-900', path: '/business-units/manufacturing' },
-  { title: 'Embedded Systems & IoT', desc: 'Learn more', icon: <Zap />, color: 'bg-indigo-100', textColor: 'text-indigo-900', path: '/business-units/embedded-iot' },
-  { title: 'Cloud Services & Scaling', desc: 'Learn more', icon: <Search />, color: 'bg-indigo-100', textColor: 'text-indigo-900', path: '/business-units/cloud-scaling' },
-  { title: 'Education', desc: 'Learn more', icon: <GraduationCap />, color: 'bg-indigo-100', textColor: 'text-indigo-900', path: '/business-units/education' },
-  { title: 'Engineering Consultation', desc: 'Learn more', icon: <Wrench />, color: 'bg-indigo-100', textColor: 'text-indigo-900', path: '/business-units/engineering-consultation' },
-  { title: 'Industry Collaboration', desc: 'Learn more', icon: <User />, color: 'bg-indigo-100', textColor: 'text-indigo-900', path: '/business-units/industry-collaboration' },
+  { title: 'CAD Design Services',       icon: <Star size={15} />,          path: '/business-units/cad-design',              featured: true },
+  { title: 'Software Development',      icon: <FileCode size={15} />,      path: '/business-units/software-development' },
+  { title: 'Manufacturing',             icon: <Settings2 size={15} />,     path: '/business-units/manufacturing' },
+  { title: 'Embedded Systems & IoT',    icon: <Zap size={15} />,           path: '/business-units/embedded-iot' },
+  { title: 'Cloud Services & Scaling',  icon: <Search size={15} />,        path: '/business-units/cloud-scaling' },
+  { title: 'Education',                 icon: <GraduationCap size={15} />, path: '/business-units/education' },
+  { title: 'Engineering Consultation',  icon: <Wrench size={15} />,        path: '/business-units/engineering-consultation' },
+  { title: 'Industry Collaboration',    icon: <User size={15} />,          path: '/business-units/industry-collaboration' },
 ]
 
 const PRODUCTS = [
-  { title: 'Decor Products', desc: 'Innovative solutions', icon: <Filter />, path: '/products/decor' },
-  { title: 'Software Products', desc: 'Digital excellence', icon: <LayoutGrid />, path: '/products/software' },
-  { title: 'Industrial Equipment', desc: 'Heavy-duty hardware', icon: <Zap />, path: '/products/industrial' },
-  { title: 'Courses', desc: 'Professional training', icon: <BookOpen />, path: '/products/courses' },
-  { title: 'Medical Products', desc: 'Precision engineering', icon: <Stethoscope />, path: '/products/medical' },
-  { title: 'Projects & Modelling', desc: 'Bespoke designs', icon: <Brain />, path: '/products/modelling' },
+  { title: 'Decor Products',        desc: 'Innovative solutions',  icon: <Filter size={15} />,      path: '/products/decor' },
+  { title: 'Software Products',     desc: 'Digital excellence',    icon: <LayoutGrid size={15} />,  path: '/products/software' },
+  { title: 'Industrial Equipment',  desc: 'Heavy-duty hardware',   icon: <Zap size={15} />,         path: '/products/industrial' },
+  { title: 'Courses',               desc: 'Professional training', icon: <BookOpen size={15} />,    path: '/products/courses' },
+  { title: 'Medical Products',      desc: 'Precision engineering', icon: <Stethoscope size={15} />, path: '/products/medical' },
+  { title: 'Projects & Modelling',  desc: 'Bespoke designs',       icon: <Brain size={15} />,       path: '/products/modelling' },
 ]
 
 const ABOUT_LINKS = [
-  { title: 'Company Overview', icon: <FileText size={18} />, path: '/about/overview' },
-  { title: 'Press & Newsroom', icon: <Newspaper size={18} />, path: '/about/press' },
-  { title: 'Images & Videos', icon: <Video size={18} />, path: '/about/media' },
-  { title: 'Blogs', icon: <Wrench size={18} />, path: '/about/blogs' },
-  { title: 'Case Studies', icon: <Wrench size={18} />, path: '/about/case-studies' },
-  { title: 'Tutorials & Ebooks', icon: <Layout size={18} />, path: '/about/resources' },
-  { title: 'Whitepapers', icon: <FileText size={18} />, path: '/about/whitepapers' },
-  { title: 'Support', icon: <Wrench size={18} />, path: '/about/support' },
+  { title: 'Company Overview',   icon: <FileText size={14} />,  path: '/about/overview' },
+  { title: 'Press & Newsroom',   icon: <Newspaper size={14} />, path: '/about/press' },
+  { title: 'Images & Videos',    icon: <Video size={14} />,     path: '/about/media' },
+  { title: 'Blogs',              icon: <Wrench size={14} />,    path: '/about/blogs' },
+  { title: 'Case Studies',       icon: <Wrench size={14} />,    path: '/about/case-studies' },
+  { title: 'Tutorials & Ebooks', icon: <Layout size={14} />,    path: '/about/resources' },
+  { title: 'Whitepapers',        icon: <FileText size={14} />,  path: '/about/whitepapers' },
+  { title: 'Support',            icon: <Wrench size={14} />,    path: '/about/support' },
 ]
 
 const WHAT_WE_DO_TABS = [
-  { 
-    id: 'prod-eng', 
-    label: 'Product Engineering',
+  {
+    id: 'prod-eng', label: 'Product Engineering',
+    bg: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1600',
     items: [
-      { name: 'Software Engineering', path: '/services/software-engineering', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Hardware Engineering', path: '/services/hardware-engineering', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Mechanical Engineering', path: '/services/mechanical-engineering', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Testing & QA', path: '/services/testing-qa', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200' }
+      { name: 'Software Engineering',   path: '/services/software-engineering' },
+      { name: 'Hardware Engineering',   path: '/services/hardware-engineering' },
+      { name: 'Mechanical Engineering', path: '/services/mechanical-engineering' },
+      { name: 'Testing & QA',           path: '/services/testing-qa' },
     ]
   },
-  { 
-    id: 'mfg', 
-    label: 'Manufacturing',
+  {
+    id: 'mfg', label: 'Manufacturing',
+    bg: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600',
     items: [
-      { name: 'PCB Assembly', path: '/services/pcb-assembly', image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Product Assembly', path: '/services/product-assembly', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Rapid Prototyping', path: '/services/rapid-prototyping', image: 'https://images.unsplash.com/photo-1631034300438-e4b85770337c?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'FDM 3D Printing', path: '/services/fdm-3d-printing', image: 'https://images.unsplash.com/photo-1631034300438-e4b85770337c?auto=format&fit=crop&q=80&w=1200' }
+      { name: 'PCB Assembly',      path: '/services/pcb-assembly' },
+      { name: 'Product Assembly',  path: '/services/product-assembly' },
+      { name: 'Rapid Prototyping', path: '/services/rapid-prototyping' },
+      { name: 'FDM 3D Printing',   path: '/services/fdm-3d-printing' },
     ]
   },
-  { 
-    id: 'cloud', 
-    label: 'Cloud & Applications',
+  {
+    id: 'cloud', label: 'Cloud & Applications',
+    bg: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
     items: [
-      { name: 'Web Applications', path: '/services/web-applications', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Mobile Applications', path: '/services/mobile-applications', image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Desktop Applications', path: '/services/desktop-applications', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'IoT Applications', path: '/services/iot-applications', image: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Scaling & Maintenance', path: '/services/scaling-maintenance', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200' }
+      { name: 'Web Applications',      path: '/services/web-applications' },
+      { name: 'Mobile Applications',   path: '/services/mobile-applications' },
+      { name: 'Desktop Applications',  path: '/services/desktop-applications' },
+      { name: 'IoT Applications',      path: '/services/iot-applications' },
+      { name: 'Scaling & Maintenance', path: '/services/scaling-maintenance' },
     ]
   },
-  { 
-    id: 'automation', 
-    label: 'Production Automation',
+  {
+    id: 'automation', label: 'Production Automation',
+    bg: 'https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=1600',
     items: [
-      { name: 'Software Automation', path: '/services/software-automation', image: 'https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Process Automation', path: '/services/process-automation', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200' },
-      { name: 'Maintenance & Troubleshooting', path: '/services/maintenance-troubleshooting', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200' }
+      { name: 'Software Automation',           path: '/services/software-automation' },
+      { name: 'Process Automation',            path: '/services/process-automation' },
+      { name: 'Maintenance & Troubleshooting', path: '/services/maintenance-troubleshooting' },
     ]
-  }
+  },
 ]
 
-// --- Sub-Components ---
+// ─── Shared glass style ───────────────────────────────────────────────────────
+
+const glass: React.CSSProperties = {
+  background: 'rgba(255,255,255,0.96)',
+  backdropFilter: 'blur(32px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(32px) saturate(180%)',
+  border: '1px solid rgba(0,0,0,0.08)',
+}
+
+// ─── Dropdown panels ──────────────────────────────────────────────────────────
+
+const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
+  const [activeTab, setActiveTab] = useState(WHAT_WE_DO_TABS[0].id)
+  const current = WHAT_WE_DO_TABS.find(t => t.id === activeTab)!
+
+  return (
+    <div className="flex overflow-hidden bg-white w-full h-full min-h-[380px]" style={{ borderRadius: 4 }}>
+      {/* Sidebar */}
+      <div className="w-56 flex flex-col justify-center gap-0.5 p-6 border-r border-black/[0.04] bg-slate-50/80">
+        <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-4 px-2">Services</p>
+        {WHAT_WE_DO_TABS.map(tab => (
+          <button
+            key={tab.id}
+            onMouseEnter={() => setActiveTab(tab.id)}
+            className={`text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-200 flex items-center justify-between group uppercase tracking-wider ${
+              activeTab === tab.id
+                ? 'text-white shadow-md'
+                : 'text-slate-500 hover:text-slate-900 hover:bg-black/[0.03]'
+            }`}
+            style={{ backgroundColor: activeTab === tab.id ? ANK_NAVY : 'transparent' }}
+          >
+            {tab.label}
+            <ChevronRight
+              size={11}
+              className={`transition-all duration-200 ${
+                activeTab === tab.id ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover:opacity-30'
+              }`}
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* Animated content pane */}
+      <div className="flex-1 relative overflow-hidden bg-white">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -10 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0 flex"
+          >
+            {/* Image strip with fade */}
+            <div className="relative w-48 flex-shrink-0 overflow-hidden hidden md:block">
+              <img
+                src={current.bg}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ opacity: 0.8 }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: 'linear-gradient(to right, transparent 40%, white 100%)' }}
+              />
+            </div>
+
+            {/* Links */}
+            <div className="flex-1 flex flex-col justify-center px-10 py-8 gap-0 bg-white">
+              <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-6" style={{ color: ANK_CYAN }}>{current.label}</p>
+              <div className="grid grid-cols-1 gap-1">
+                {current.items.map((item, i) => (
+                  <motion.div
+                    key={item.path}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.03, duration: 0.2 }}
+                  >
+                    <Link
+                      to={item.path}
+                      onClick={onClose}
+                      className="group flex items-center gap-3 py-2.5 text-[15px] font-black text-slate-600 hover:text-slate-900 transition-all duration-200 uppercase tracking-tight"
+                    >
+                      <span className="w-0 group-hover:w-4 h-0.5 transition-all duration-300" style={{ backgroundColor: ANK_NAVY }} />
+                      {item.name}
+                      <ArrowUpRight
+                        size={13}
+                        className="ml-auto opacity-0 group-hover:opacity-100 transition-all -translate-y-0.5 translate-x-0.5"
+                        style={{ color: ANK_NAVY }}
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  )
+}
 
 const BusinessUnitsMenu = ({ onClose }: { onClose: () => void }) => (
-  <div className="p-8 w-[1100px] max-w-[95vw]">
-    <h3 className="text-[10px] font-black text-slate-400 mb-8 uppercase tracking-[0.3em]">Business Units</h3>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
+    <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-8 px-2">Business Units</p>
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {BUSINESS_UNITS.map((unit, i) => (
-        <Link 
-          key={i} 
-          to={unit.path}
-          onClick={onClose}
-          className={`p-6 rounded-[2rem] flex items-center gap-4 cursor-pointer transition-all duration-300 group ${
-            unit.color === 'bg-indigo-600' 
-              ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-200' 
-              : 'bg-slate-50 text-slate-900 hover:bg-indigo-600 hover:text-white hover:shadow-xl hover:shadow-indigo-100'
-          }`}
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: i * 0.03, duration: 0.2 }}
         >
-          <div className={`p-3 rounded-xl transition-all duration-300 ${
-            unit.color === 'bg-indigo-600' 
-              ? 'bg-white/20 text-white' 
-              : 'bg-white text-indigo-600 shadow-sm group-hover:bg-white/20 group-hover:text-white group-hover:scale-110'
-          }`}>
-            {React.cloneElement(unit.icon as React.ReactElement<any>, { size: 24 })}
-          </div>
-          <div>
-            <h4 className="font-bold text-sm uppercase tracking-tight">{unit.title}</h4>
-            <p className={`text-[10px] font-black uppercase tracking-widest flex items-center gap-1 transition-colors ${
-              unit.color === 'bg-indigo-600' ? 'text-indigo-100' : 'text-slate-400 group-hover:text-indigo-100'
-            }`}>
-              {unit.desc} <ChevronRight size={10} />
-            </p>
-          </div>
-        </Link>
+          <Link
+            to={unit.path}
+            onClick={onClose}
+            className={`group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+              unit.featured
+                ? 'text-white shadow-lg'
+                : 'bg-slate-50 border-black/[0.04] hover:bg-white hover:border-slate-300 text-slate-600 hover:text-slate-900'
+            }`}
+            style={{ 
+              backgroundColor: unit.featured ? ANK_NAVY : undefined,
+              borderColor: unit.featured ? ANK_NAVY : undefined 
+            }}
+          >
+            <div className={`p-2 rounded-sm flex-shrink-0 transition-all duration-200 ${
+              unit.featured
+                ? 'bg-white/20 text-white'
+                : 'bg-white shadow-sm group-hover:bg-slate-900 group-hover:text-white'
+            }`}
+            style={{ 
+              color: !unit.featured ? ANK_NAVY : undefined,
+              backgroundColor: !unit.featured ? '#fff' : undefined,
+            }}
+            >
+              {unit.icon}
+            </div>
+            <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
+              {unit.title}
+            </span>
+          </Link>
+        </motion.div>
       ))}
     </div>
   </div>
 )
 
 const ProductsMenu = ({ onClose }: { onClose: () => void }) => (
-  <div className="p-8 w-[800px] max-w-[90vw]">
-    <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider">Products</h3>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+  <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
+    <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-8 px-2">Products</p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {PRODUCTS.map((prod, i) => (
-        <Link key={i} to={prod.path} onClick={onClose} className="flex items-center gap-4 group cursor-pointer">
-          <div className="p-4 bg-slate-50 rounded-2xl group-hover:bg-indigo-50 transition-colors">
-            <div className="text-indigo-600">{prod.icon}</div>
-          </div>
-          <div>
-            <h4 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors flex items-center gap-2">
-              {prod.title} <ChevronRight size={14} />
-            </h4>
-            <p className="text-sm text-slate-500">{prod.desc}</p>
-          </div>
-        </Link>
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: i * 0.04, duration: 0.2 }}
+        >
+          <Link
+            to={prod.path}
+            onClick={onClose}
+            className="flex items-center gap-5 p-5 rounded-sm border border-black/[0.04] bg-slate-50 hover:bg-white hover:border-slate-300 transition-all duration-200 group h-full"
+          >
+            <div className="p-3 rounded-sm bg-white shadow-sm transition-all group-hover:text-white group-hover:bg-slate-900"
+                 style={{ color: ANK_CYAN }}>
+              {prod.icon}
+            </div>
+            <div>
+              <p className="text-[13px] font-black text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">{prod.title}</p>
+              <p className="text-[10px] font-medium text-slate-400 uppercase tracking-widest mt-0.5">{prod.desc}</p>
+            </div>
+            <ArrowUpRight size={14} className="ml-auto opacity-0 group-hover:opacity-100 transition-all" style={{ color: ANK_NAVY }} />
+          </Link>
+        </motion.div>
       ))}
     </div>
   </div>
 )
 
 const AboutMenu = ({ onClose }: { onClose: () => void }) => (
-  <div className="p-6 w-[350px]">
-    <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider px-4">About ANK</h3>
-    <div className="space-y-1">
+  <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
+    <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-8 px-4">About ANK</p>
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
       {ABOUT_LINKS.map((link, i) => (
-        <Link 
-          key={i} 
-          to={link.path}
-          onClick={onClose}
-          className={`flex items-center gap-4 px-4 py-3 rounded-xl cursor-pointer transition-all hover:bg-slate-50 hover:text-slate-900 text-slate-500`}
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: -5 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.02, duration: 0.18 }}
         >
-          <div className={'text-slate-300'}>
-            {link.icon}
-          </div>
-          <span className="font-medium text-sm">{link.title}</span>
-        </Link>
+          <Link
+            to={link.path}
+            onClick={onClose}
+            className="flex items-center gap-3 px-4 py-4 rounded-sm hover:bg-slate-50 transition-all group border border-transparent hover:border-black/[0.04]"
+          >
+            <div className="transition-colors group-hover:text-slate-900" style={{ color: ANK_NAVY }}>{link.icon}</div>
+            <span className="text-[11px] text-slate-600 group-hover:text-slate-900 transition-colors font-black uppercase tracking-widest">{link.title}</span>
+          </Link>
+        </motion.div>
       ))}
     </div>
   </div>
 )
 
-const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
-  const [activeTab, setActiveTab] = useState('prod-eng')
-  const [hoveredImage, setHoveredImage] = useState<string | null>(null)
-
-  const currentItems = WHAT_WE_DO_TABS.find(t => t.id === activeTab)?.items || []
-
-  return (
-    <div className="flex w-[1200px] max-w-[98vw] min-h-[500px] bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white">
-      {/* Left Sidebar */}
-      <div 
-        className="w-[350px] p-12 bg-indigo-50/50 flex flex-col justify-center z-10"
-        onMouseEnter={() => setHoveredImage(null)}
-      >
-        <div className="space-y-8">
-          {WHAT_WE_DO_TABS.map((tab) => (
-            <div 
-              key={tab.id}
-              onMouseEnter={() => {
-                setActiveTab(tab.id)
-                setHoveredImage(null)
-              }}
-              className={`flex justify-between items-center cursor-pointer transition-all ${
-                activeTab === tab.id ? 'text-indigo-600 font-black' : 'text-slate-500 hover:text-slate-900'
-              }`}
-            >
-              <span className="text-lg uppercase tracking-tight">{tab.label}</span>
-              {activeTab === tab.id && <ChevronRight size={24} />}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Middle Content - Interactive Background */}
-      <div 
-        className="flex-1 p-16 bg-white flex flex-col justify-center relative overflow-hidden transition-colors duration-700"
-        onMouseEnter={() => !hoveredImage && setHoveredImage(currentItems[0]?.image)}
-        onMouseLeave={() => setHoveredImage(null)}
-      >
-        {/* Background Image Layer with Swirling/Wave Effect */}
-        <AnimatePresence mode="popLayout">
-          {hoveredImage && (
-            <motion.div
-              key={hoveredImage}
-              initial={{ opacity: 0, scale: 1.15, rotate: 2, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, scale: 1, rotate: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, scale: 0.9, rotate: -2, filter: 'blur(10px)' }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 z-0"
-            >
-              <img 
-                src={hoveredImage} 
-                className="w-full h-full object-cover" 
-                alt="Background" 
-              />
-              <div className="absolute inset-0 bg-indigo-900/80 mix-blend-multiply"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-950 via-indigo-950/40 to-transparent"></div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="grid grid-cols-1 gap-8 relative z-10">
-          {currentItems.map((item) => (
-            <Link 
-              key={item.path} 
-              to={item.path}
-              onClick={onClose}
-              onMouseEnter={() => setHoveredImage(item.image)}
-              className={`cursor-pointer transition-all duration-500 text-xl font-bold flex items-center gap-3 group ${
-                hoveredImage ? 'text-white/80 hover:text-white' : 'text-slate-500 hover:text-indigo-600'
-              }`}
-            >
-              <motion.div 
-                className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                  hoveredImage === item.image ? 'bg-white scale-150 shadow-[0_0_10px_white]' : 'bg-indigo-600 opacity-0 group-hover:opacity-100'
-                }`}
-              ></motion.div>
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* Right Sidebar */}
-      <div 
-        className="w-[300px] p-12 bg-slate-50 border-l border-slate-100 hidden xl:flex flex-col justify-center z-10"
-        onMouseEnter={() => setHoveredImage(null)}
-      >
-        <h4 className="text-xs font-black text-slate-400 mb-10 uppercase tracking-[0.2em]">Latest Updates</h4>
-        <div className="space-y-10">
-          <div className="flex flex-col gap-4">
-             <div className="w-20 h-20 rounded-[2rem] bg-white shadow-xl shadow-indigo-500/5 flex items-center justify-center text-indigo-600 mb-2">
-                <Search size={40} />
-             </div>
-             <h5 className="font-black text-indigo-600 flex items-center gap-1 text-base">
-                Advanced Analytics <ChevronRight size={18} />
-             </h5>
-             <p className="text-xs text-slate-400 leading-relaxed font-medium">
-                Unlocking deep insights from your industrial data streams.
-             </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+// ─── Navbar ────────────────────────────────────────────────────────────────────
 
 const Navbar = () => {
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [pillGeom, setPillGeom] = useState({ x: 0, w: 0 })
+  const [navBarWidth, setNavBarWidth] = useState(0)
+  const navRefs = useRef<Record<string, HTMLDivElement | null>>({})
+  const navBarRef = useRef<HTMLElement | null>(null)
+
   const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    setHoveredMenu(null)
+    setIsMobileMenuOpen(false)
+  }, [location.pathname])
+
+  const openMenu = (name: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setHoveredMenu(name)
+    const el = navRefs.current[name]
+    const bar = navBarRef.current
+    if (el && bar) {
+      const elRect = el.getBoundingClientRect()
+      const barRect = bar.getBoundingClientRect()
+      setPillGeom({ x: elRect.left - barRect.left, w: elRect.width })
+      setNavBarWidth(barRect.width)
+    }
+  }
+
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setHoveredMenu(null), 140)
+  }
+
+  const cancelClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+  }
 
   const navItems = [
-    { name: 'What we do', component: <WhatWeDoMenu onClose={() => setHoveredMenu(null)} /> },
+    { name: 'What we do',     component: <WhatWeDoMenu    onClose={() => setHoveredMenu(null)} /> },
     { name: 'Business units', component: <BusinessUnitsMenu onClose={() => setHoveredMenu(null)} /> },
-    { name: 'Products', component: <ProductsMenu onClose={() => setHoveredMenu(null)} /> },
-    { name: 'About ANK', component: <AboutMenu onClose={() => setHoveredMenu(null)} /> },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Contact us', path: '/contact' },
+    { name: 'Products',       component: <ProductsMenu    onClose={() => setHoveredMenu(null)} /> },
+    { name: 'About ANK',      component: <AboutMenu       onClose={() => setHoveredMenu(null)} /> },
+    { name: 'Careers',   path: '/careers' },
+    { name: 'Contact',   path: '/contact' },
   ]
 
   return (
     <>
-      <nav 
-        className="fixed top-0 left-0 w-full z-[80] transition-all duration-300 bg-white/80 backdrop-blur-xl border-b border-slate-100"
-        onMouseLeave={() => setHoveredMenu(null)}
-      >
-        <div className="container mx-auto px-6 h-20 flex justify-between items-center relative">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="ANK Logo" className="h-10 md:h-12 w-auto object-contain" />
-          </Link>
-
-          {/* Center Navigation Links (Desktop) */}
-          <div className="hidden lg:flex items-center space-x-2">
-            {navItems.map((item) => (
-              <div 
-                key={item.name}
-                className="py-7 px-4 cursor-pointer"
-                onMouseEnter={() => item.component && setHoveredMenu(item.name)}
-              >
-                {item.path ? (
-                  <Link to={item.path} className="text-sm font-bold text-slate-700 hover:text-indigo-600 transition-colors">
-                    {item.name}
-                  </Link>
-                ) : (
-                  <button className={`text-sm font-bold transition-colors flex items-center gap-1 ${hoveredMenu === item.name ? 'text-indigo-600' : 'text-slate-700 hover:text-indigo-600'}`}>
-                    {item.name}
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={() => navigate('/contact')}
-              className="hidden sm:block bg-indigo-600 text-white px-8 py-2.5 rounded-full text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
-            >
-              Get a Quote
-            </button>
-            
-            {/* Mobile Menu Toggle */}
-            <button 
-              className="lg:hidden p-2 text-slate-900"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
-
-          {/* Desktop Dropdown */}
-          <AnimatePresence>
-            {hoveredMenu && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute top-full left-1/2 -translate-x-1/2 z-[90] pt-2 hidden lg:block"
-                onMouseEnter={() => setHoveredMenu(hoveredMenu)}
-              >
-                <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden">
-                  {navItems.find(i => i.name === hoveredMenu)?.component}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-white z-[100] lg:hidden overflow-y-auto border-t border-slate-50 shadow-2xl"
+      {/* ── Desktop Floating Navbar ── */}
+      <div className="fixed top-0 left-0 w-full z-[80] flex justify-center items-start pt-6 pointer-events-none px-6">
+        <div className="relative">
+          <motion.nav
+            ref={navBarRef as any}
+            initial={{ y: -30, opacity: 0, scale: 0.98 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            style={{ ...glass, borderRadius: 4, pointerEvents: 'auto' }}
+            className="flex items-center gap-0.5 px-3 py-2 relative shadow-2xl shadow-black/5"
+            onMouseLeave={scheduleClose}
           >
-            <div className="p-6 flex flex-col gap-4">
-              {navItems.map((item) => (
-                <div key={item.name} className="border-b border-slate-50 pb-4">
+            {/* Logo */}
+            <Link to="/" className="flex items-center px-4 py-1 mr-2 flex-shrink-0 transition-transform hover:scale-105">
+              <img src={logo} alt="ANK" className="h-[28px] w-auto" />
+            </Link>
+
+            {/* Sliding Highlight */}
+            <AnimatePresence>
+              {hoveredMenu && (
+                <motion.div
+                  layoutId="pill-highlight"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, x: pillGeom.x - 8, width: pillGeom.w + 16 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 450, damping: 36 }}
+                  style={{ position: 'absolute', top: 8, bottom: 8, left: 0, borderRadius: 2, background: 'rgba(0,0,0,0.05)', pointerEvents: 'none' }}
+                />
+              )}
+            </AnimatePresence>
+
+            {/* Nav links */}
+            <div className="hidden lg:flex items-center">
+              {navItems.map(item => (
+                <div
+                  key={item.name}
+                  ref={el => navRefs.current[item.name] = el}
+                  onMouseEnter={() => item.component ? openMenu(item.name) : setHoveredMenu(null)}
+                >
                   {item.path ? (
-                    <Link 
-                      to={item.path} 
-                      className="text-xl font-bold text-slate-900 block"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                    <Link
+                      to={item.path}
+                      className="px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-colors duration-150 block whitespace-nowrap"
+                      style={{ color: location.pathname === item.path ? ANK_NAVY : '#64748b' }}
                     >
                       {item.name}
                     </Link>
                   ) : (
+                    <button
+                      className="px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-colors duration-150 flex items-center gap-1 whitespace-nowrap"
+                      style={{ color: hoveredMenu === item.name ? ANK_NAVY : '#64748b' }}
+                    >
+                      {item.name}
+                      <motion.span
+                        animate={{ rotate: hoveredMenu === item.name ? 90 : 0 }}
+                        transition={{ duration: 0.18 }}
+                        className="opacity-40"
+                      >
+                        <ChevronRight size={11} />
+                      </motion.span>
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Separator + CTA */}
+            <div className="hidden lg:block w-px h-5 bg-black/[0.06] mx-2" />
+            <motion.button
+              onClick={() => navigate('/contact')}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-sm transition-colors whitespace-nowrap shadow-xl"
+              style={{ backgroundColor: ANK_NAVY, pointerEvents: 'auto' }}
+            >
+              Get a quote
+            </motion.button>
+
+            {/* Mobile Menu Toggle */}
+            <button 
+              className="lg:hidden ml-4 p-2 text-slate-400 hover:text-slate-900 transition-colors"
+              onClick={() => setIsMobileMenuOpen(v => !v)}
+              style={{ pointerEvents: 'auto' }}
+            >
+              <Menu size={20} />
+            </button>
+          </motion.nav>
+
+          {/* Fixed-Width Dropdown matching Navbar Width */}
+          <AnimatePresence mode="wait">
+            {hoveredMenu && (
+              <motion.div
+                key={hoveredMenu}
+                initial={{ opacity: 0, y: 15, scale: 0.995 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.995, transition: { duration: 0.14 } }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  ...glass,
+                  position: 'absolute',
+                  top: 'calc(100% + 12px)',
+                  left: 0,
+                  width: navBarWidth,
+                  transformOrigin: 'top center',
+                  borderRadius: 4,
+                  zIndex: 90,
+                  pointerEvents: 'auto',
+                  boxShadow: '0 40px 80px -20px rgba(0,0,0,0.12)',
+                }}
+                onMouseEnter={cancelClose}
+                onMouseLeave={scheduleClose}
+              >
+                {navItems.find(i => i.name === hoveredMenu)?.component}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ── Mobile overlay ── */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-[100] lg:hidden overflow-y-auto"
+            style={{ background: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(24px)' }}
+          >
+            <div className="p-6 flex justify-between items-center border-b border-black/[0.04] bg-white sticky top-0 z-10">
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <img src={logo} alt="ANK" className="h-6 w-auto" />
+              </Link>
+              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-400">
+                <X size={24} />
+              </button>
+            </div>
+            <div className="px-6 pb-12 pt-4">
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="border-b border-black/[0.04]"
+                >
+                  {item.path ? (
+                    <Link
+                      to={item.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center justify-between py-5 text-[18px] font-black uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors"
+                    >
+                      {item.name}
+                      <ArrowUpRight size={17} className="text-slate-300" />
+                    </Link>
+                  ) : (
                     <div>
-                      <button 
+                      <button
                         onClick={() => setExpandedMobileItem(expandedMobileItem === item.name ? null : item.name)}
-                        className="text-xl font-bold text-slate-900 w-full flex justify-between items-center"
+                        className="flex items-center justify-between w-full py-5 text-[18px] font-black uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors"
                       >
                         {item.name}
-                        <motion.div
+                        <motion.span
                           animate={{ rotate: expandedMobileItem === item.name ? 90 : 0 }}
+                          transition={{ duration: 0.2 }}
                         >
-                          <ChevronRight size={24} />
-                        </motion.div>
+                          <ChevronRight size={17} className="text-slate-300" />
+                        </motion.span>
                       </button>
-                      
                       <AnimatePresence>
                         {expandedMobileItem === item.name && (
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
                             className="overflow-hidden"
                           >
-                            <div className="pt-4 pl-4 flex flex-col gap-3">
+                            <div className="pb-5 pl-2 flex flex-col gap-0.5">
                               {item.name === 'What we do' && WHAT_WE_DO_TABS.map(tab => (
                                 <div key={tab.id} className="mb-4">
-                                  <h5 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-2">{tab.label}</h5>
-                                  <div className="flex flex-col gap-2">
-                                    {tab.items.map(subItem => (
-                                      <Link 
-                                        key={subItem.path} 
-                                        to={subItem.path}
-                                        className="text-slate-600 font-medium"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                      >
-                                        {subItem.name}
-                                      </Link>
-                                    ))}
-                                  </div>
+                                  <p className="text-[9px] font-black tracking-[0.22em] text-slate-400 uppercase mb-2 mt-1">{tab.label}</p>
+                                  {tab.items.map(sub => (
+                                    <Link key={sub.path} to={sub.path}
+                                      onClick={() => setIsMobileMenuOpen(false)}
+                                      className="block py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 transition-colors"
+                                    >{sub.name}</Link>
+                                  ))}
                                 </div>
                               ))}
-                              
-                              {item.name === 'Business units' && BUSINESS_UNITS.map(unit => (
-                                <Link 
-                                  key={unit.path} 
-                                  to={unit.path}
-                                  className="text-slate-600 font-medium"
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                  {unit.title}
-                                </Link>
+                              {item.name === 'Business units' && BUSINESS_UNITS.map(u => (
+                                <Link key={u.path} to={u.path} onClick={() => setIsMobileMenuOpen(false)}
+                                  className="py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 block transition-colors">{u.title}</Link>
                               ))}
-
-                              {item.name === 'Products' && PRODUCTS.map(prod => (
-                                <Link 
-                                  key={prod.path} 
-                                  to={prod.path}
-                                  className="text-slate-600 font-medium"
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                  {prod.title}
-                                </Link>
+                              {item.name === 'Products' && PRODUCTS.map(p => (
+                                <Link key={p.path} to={p.path} onClick={() => setIsMobileMenuOpen(false)}
+                                  className="py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 block transition-colors">{p.title}</Link>
                               ))}
-
-                              {item.name === 'About ANK' && ABOUT_LINKS.map(link => (
-                                <Link 
-                                  key={link.path} 
-                                  to={link.path}
-                                  className="text-slate-600 font-medium"
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                  {link.title}
-                                </Link>
+                              {item.name === 'About ANK' && ABOUT_LINKS.map(a => (
+                                <Link key={a.path} to={a.path} onClick={() => setIsMobileMenuOpen(false)}
+                                  className="py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 block transition-colors">{a.title}</Link>
                               ))}
                             </div>
                           </motion.div>
@@ -472,18 +556,19 @@ const Navbar = () => {
                       </AnimatePresence>
                     </div>
                   )}
-                </div>
+                </motion.div>
               ))}
-              
-              <button 
-                onClick={() => {
-                  navigate('/contact')
-                  setIsMobileMenuOpen(false)
-                }}
-                className="mt-4 bg-indigo-600 text-white w-full py-4 rounded-xl text-lg font-bold shadow-xl shadow-indigo-100"
+
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.38 }}
+                onClick={() => { navigate('/contact'); setIsMobileMenuOpen(false) }}
+                className="mt-8 w-full text-white py-4 rounded-sm text-[13px] font-black uppercase tracking-[0.2em] shadow-xl transition-colors"
+                style={{ backgroundColor: ANK_NAVY }}
               >
-                Get a Quote
-              </button>
+                Get a quote
+              </motion.button>
             </div>
           </motion.div>
         )}

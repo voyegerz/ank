@@ -14,7 +14,7 @@ const CADDesignServices = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Business Unit Overview</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Business Unit Overview</h2>
               <p className="text-slate-600 font-medium leading-relaxed mb-10">We Provide 3D/2D CAD Mechanical design development with precision and usability and practical standards.</p>
               <div className="space-y-6">
                 <CapabilityItem title="Technical Drafting" desc="ISO-standard 2D drawings for seamless manufacturing and documentation." />

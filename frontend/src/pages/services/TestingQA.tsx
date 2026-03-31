@@ -14,7 +14,7 @@ const TestingQA = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Core Capabilities</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Core Capabilities</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Automated Software Testing" desc="Comprehensive unit, integration, and end-to-end testing for all software applications." />
                 <CapabilityItem title="Hardware Validation" desc="Rigorous environmental and stress testing of electronic components and mechanical parts." />

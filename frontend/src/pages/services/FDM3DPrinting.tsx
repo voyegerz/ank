@@ -14,7 +14,7 @@ const FDM3DPrinting = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Additive Manufacturing</h2>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Additive Manufacturing</h2>
               <div className="space-y-6">
                 <CapabilityItem title="Material Variety" desc="Printing in PLA, PETG, ABS, Carbon Fiber, and more." />
                 <CapabilityItem title="Large Format Printing" desc="Capabilities for large-scale industrial components." />
