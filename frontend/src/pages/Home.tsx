@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion'
 import PageLayout from '../components/PageLayout'
 import {
-  ArrowRight, ChevronRight, Settings2, ShieldCheck, Lightbulb,
+  ArrowRight, Settings2, ShieldCheck, Lightbulb,
   Mail, Phone, MapPin, CheckCircle2, Users, Briefcase, Zap,
-  Globe, Quote, Clock, ExternalLink, ArrowUpRight
+  Globe, Quote, Clock, ArrowUpRight
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -72,12 +72,6 @@ const portfolio = [
 ]
 
 // ─── Shared glass style ────────────────────────────────────────────────────────
-const glass: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.9)',
-  backdropFilter: 'blur(24px) saturate(160%)',
-  WebkitBackdropFilter: 'blur(24px) saturate(160%)',
-  border: '1px solid rgba(0,0,0,0.05)',
-}
 
 const glassLight: React.CSSProperties = {
   background: 'rgba(255,255,255,0.5)',
@@ -105,7 +99,7 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
 
 // ─── Section label ─────────────────────────────────────────────────────────────
 const Label = ({ children, color = ANK_CYAN }: { children: React.ReactNode, color?: string }) => (
-  <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-5 flex items-center gap-3" style={{ color }}>
+  <p className="text-[10px] font-black tracking-[0.3em] uppercase mb-5 flex items-center gap-3 font-barlow" style={{ color }}>
     <span className="w-6 h-px" style={{ backgroundColor: color }} />
     {children}
   </p>
@@ -129,7 +123,7 @@ const Home = () => {
     <PageLayout>
 
       {/* ── 1. Hero slider ─────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative h-screen min-h-[700px] overflow-hidden bg-slate-900">
+      <section ref={heroRef} className="relative h-screen min-h-175 overflow-hidden bg-slate-900">
         {/* Parallax background */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -167,12 +161,12 @@ const Home = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Slide counter */}
-              <p className="text-[10px] font-black tracking-[0.35em] text-white/50 uppercase mb-8">
+              <p className="text-[10px] font-black tracking-[0.35em] text-white/50 uppercase mb-8 font-barlow">
                 {String(currentSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
               </p>
 
               {/* Title */}
-              <h1 className="text-[clamp(3rem,8vw,7.5rem)] font-black text-white leading-[0.9] tracking-tight mb-8 uppercase">
+              <h1 className="text-[clamp(3rem,8vw,7.5rem)] font-black text-white leading-[0.9] mb-8 uppercase font-barlow">
                 {slides[currentSlide].title.split('\n').map((line, i) => (
                   <span key={i} className="block">{line}</span>
                 ))}
@@ -208,13 +202,13 @@ const Home = () => {
 
         {/* Vertical scroll hint */}
         <div className="absolute bottom-10 right-10 z-20 hidden md:flex flex-col items-center gap-2 text-white/25">
-          <div className="w-px h-16 bg-gradient-to-b from-white/25 to-transparent" />
+          <div className="w-px h-16 bg-linear-to-b from-white/25 to-transparent" />
           <span className="text-[9px] font-black tracking-[0.3em] rotate-90 origin-center translate-y-6 uppercase">scroll</span>
         </div>
       </section>
 
       {/* ── 2. Feature highlights ────────────────────────────────────────────── */}
-      <section className="relative z-20 bg-white border-t border-black/[0.04]">
+      <section className="relative z-20 bg-white border-t border-black/4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {[
             { icon: <ShieldCheck size={22} />, title: 'Integrity', desc: 'We stand behind every project — transparent process, honest timelines, zero compromise on quality.' },
@@ -223,14 +217,14 @@ const Home = () => {
           ].map((item, i) => (
             <FadeIn key={i} delay={i * 0.08}>
               <div
-                className="group p-12 border-r border-b border-black/[0.04] hover:bg-slate-50 transition-all duration-300 cursor-default h-full"
+                className="group p-12 border-r border-b border-black/4 hover:bg-slate-50 transition-all duration-300 cursor-default h-full"
                 style={i === 0 ? { borderLeft: '1px solid rgba(0,0,0,0.04)' } : {}}
               >
                 <div className="w-12 h-12 rounded-sm flex items-center justify-center mb-8 shadow-sm transition-all group-hover:bg-slate-900 group-hover:text-white" 
                      style={{ ...glassLight, color: ANK_NAVY }}>
                   {item.icon}
                 </div>
-                <h4 className="text-[14px] font-black text-slate-900 mb-4 uppercase tracking-widest">{item.title}</h4>
+                <h4 className="text-[14px] font-black text-slate-900 mb-4 uppercase tracking-widest font-barlow">{item.title}</h4>
                 <p className="text-[13px] text-slate-500 leading-relaxed mb-8">{item.desc}</p>
                 <Link to="/about" className="text-[10px] font-black tracking-widest uppercase flex items-center gap-2 transition-all hover:gap-3" style={{ color: ANK_CYAN }}>
                   Learn more <ArrowRight size={12} />
@@ -241,18 +235,18 @@ const Home = () => {
 
           {/* Contact card */}
           <FadeIn delay={0.24}>
-            <div className="p-12 border-b border-black/[0.04] relative overflow-hidden h-full"
+            <div className="p-12 border-b border-black/4 relative overflow-hidden h-full"
               style={{ backgroundColor: ANK_NAVY, borderRight: '1px solid rgba(0,0,0,0.04)' }}
             >
-              <div className="absolute -top-10 -right-10 text-[10rem] font-black text-white/[0.03] select-none pointer-events-none uppercase tracking-tight">ANK</div>
+              <div className="absolute -top-10 -right-10 text-[10rem] font-black text-white/3 select-none pointer-events-none uppercase">ANK</div>
               <p className="text-[10px] font-black tracking-[0.3em] text-white/40 uppercase mb-8">Contact</p>
               <div className="space-y-6 mb-10 relative z-10">
                 <div className="flex gap-4 items-start">
-                  <MapPin size={16} className="text-white/40 mt-0.5 flex-shrink-0" />
+                  <MapPin size={16} className="text-white/40 mt-0.5 shrink-0" />
                   <p className="text-[13px] text-white/70 leading-relaxed font-medium">Office S-4, 2nd Floor, Commercial Bldg, Pune, MH</p>
                 </div>
                 <div className="flex gap-4 items-start">
-                  <Phone size={16} className="text-white/40 mt-0.5 flex-shrink-0" />
+                  <Phone size={16} className="text-white/40 mt-0.5 shrink-0" />
                   <p className="text-[13px] text-white/70 font-medium">+91 123 456 7890</p>
                 </div>
               </div>
@@ -265,14 +259,14 @@ const Home = () => {
       </section>
 
       {/* ── 3. ANK Values ────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/[0.04]">
+      <section className="py-32 bg-white border-t border-black/4">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <div className="flex flex-col lg:flex-row gap-20 items-center">
             {/* Left */}
             <div className="lg:w-5/12">
               <FadeIn>
                 <Label>Our Values</Label>
-                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] tracking-tight mb-8 uppercase">
+                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] mb-8 uppercase font-barlow">
                   Engineering the<br /><span style={{ color: ANK_CYAN }}>best solutions</span>
                 </h2>
                 <p className="text-[15px] text-slate-500 mb-12 leading-relaxed max-w-md font-medium">
@@ -280,27 +274,27 @@ const Home = () => {
                 </p>
 
                 {/* Quote */}
-                <div className="mb-12 p-8 rounded-sm relative overflow-hidden border border-black/[0.04] bg-slate-50">
+                <div className="mb-12 p-8 rounded-sm relative overflow-hidden border border-black/4 bg-slate-50">
                   <Quote size={32} className="mb-6" style={{ color: ANK_CYAN, opacity: 0.2 }} />
                   <p className="text-[15px] text-slate-700 italic leading-relaxed mb-8 font-medium">
                     "As a small family company, our mission is to create the best engineering solutions and deliver them to our clients."
                   </p>
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-sm overflow-hidden flex-shrink-0 shadow-sm">
+                    <div className="w-10 h-10 rounded-sm overflow-hidden shrink-0 shadow-sm">
                       <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100" alt="Peter" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <p className="text-[12px] font-black text-slate-900 uppercase tracking-wide">Peter Trebuchet</p>
+                      <p className="text-[12px] font-black text-slate-900 uppercase tracking-wide font-barlow">Peter Trebuchet</p>
                       <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">ANK Founder</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-8 pt-10 border-t border-black/[0.06]">
+                <div className="grid grid-cols-3 gap-8 pt-10 border-t border-black/6">
                   {[['1K+', 'Monthly Visits'], ['98%', 'Satisfaction'], ['4.9', 'Top Rating']].map(([val, lbl]) => (
                     <div key={lbl}>
-                      <p className="text-4xl font-black text-slate-900 mb-2 tracking-tight">{val}</p>
+                      <p className="text-4xl font-black text-slate-900 mb-2 font-barlow">{val}</p>
                       <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{lbl}</p>
                     </div>
                   ))}
@@ -315,7 +309,7 @@ const Home = () => {
                   <div className="space-y-6 pt-12">
                     {['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800',
                       'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800'].map((src, i) => (
-                      <div key={i} className={`${i === 0 ? 'aspect-[4/5]' : 'aspect-square'} overflow-hidden rounded-sm relative group shadow-2xl`}>
+                      <div key={i} className={`${i === 0 ? 'aspect-4/5' : 'aspect-square'} overflow-hidden rounded-sm relative group shadow-2xl`}>
                         <img src={src} className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700" alt="" />
                         <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
                       </div>
@@ -324,7 +318,7 @@ const Home = () => {
                   <div className="space-y-6">
                     {['https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800',
                       'https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=800'].map((src, i) => (
-                      <div key={i} className={`${i === 0 ? 'aspect-square' : 'aspect-[4/5]'} overflow-hidden rounded-sm relative group shadow-2xl`}>
+                      <div key={i} className={`${i === 0 ? 'aspect-square' : 'aspect-4/5'} overflow-hidden rounded-sm relative group shadow-2xl`}>
                         <img src={src} className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700" alt="" />
                         <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
                       </div>
@@ -338,12 +332,12 @@ const Home = () => {
       </section>
 
       {/* ── 4. Partners marquee ──────────────────────────────────────────────── */}
-      <section className="py-20 bg-slate-50 border-t border-black/[0.04] overflow-hidden">
-        <p className="text-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase mb-12">Trusted by Industry Leaders</p>
+      <section className="py-20 bg-slate-50 border-t border-black/4 overflow-hidden">
+        <p className="text-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase mb-12 font-barlow">Trusted by Industry Leaders</p>
         <div className="flex overflow-hidden">
           <div className="flex gap-24 animate-marquee whitespace-nowrap">
             {[...partners, ...partners].map((p, i) => (
-              <span key={i} className="text-4xl font-black text-slate-200 hover:text-slate-400 uppercase tracking-widest cursor-default transition-colors select-none">
+              <span key={i} className="text-4xl font-black text-slate-200 hover:text-slate-400 uppercase tracking-widest cursor-default transition-colors select-none font-barlow">
                 {p}
               </span>
             ))}
@@ -356,14 +350,14 @@ const Home = () => {
       </section>
 
       {/* ── 5. Numbers ───────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/[0.04]">
+      <section className="py-32 bg-white border-t border-black/4">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <div className="flex flex-col lg:flex-row gap-24 items-start">
             {/* Left */}
             <div className="lg:w-1/2">
               <FadeIn>
                 <Label>Performance</Label>
-                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] tracking-tight mb-8 uppercase">
+                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] mb-8 uppercase font-barlow">
                   Our core<br /><span style={{ color: ANK_CYAN }}>success in numbers</span>
                 </h2>
                 <p className="text-[15px] text-slate-500 mb-14 leading-relaxed max-w-md font-medium">
@@ -393,7 +387,7 @@ const Home = () => {
                          }}>
                       <div className="transition-colors" style={{ color: s.dark ? ANK_CYAN : ANK_NAVY }}>{s.icon}</div>
                       <div>
-                        <p className="text-5xl font-black tracking-tight mb-2" style={{ color: s.dark ? 'white' : ANK_NAVY }}>{s.val}</p>
+                        <p className="text-5xl font-black mb-2 font-barlow" style={{ color: s.dark ? 'white' : ANK_NAVY }}>{s.val}</p>
                         <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: s.dark ? 'white' : '#94a3b8', opacity: s.dark ? 0.5 : 1 }}>{s.label}</p>
                       </div>
                     </div>
@@ -406,13 +400,13 @@ const Home = () => {
       </section>
 
       {/* ── 6. Solutions ─────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-50 border-t border-black/[0.04]">
+      <section className="py-32 bg-slate-50 border-t border-black/4">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
             <div>
               <FadeIn>
                 <Label>Solutions</Label>
-                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] tracking-tight uppercase">
+                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-barlow">
                   Expert services<br /><span style={{ color: ANK_CYAN }}>for industrial needs</span>
                 </h2>
               </FadeIn>
@@ -427,7 +421,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {solutions.map((sol, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div className="group relative overflow-hidden rounded-sm h-[520px] cursor-pointer shadow-xl">
+                <div className="group relative overflow-hidden rounded-sm h-130 cursor-pointer shadow-xl">
                   <img src={sol.image} className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000" alt={sol.title} />
                   <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${ANK_NAVY} 0%, rgba(0,0,0,0.2) 60%, transparent 100%)` }} />
 
@@ -442,7 +436,7 @@ const Home = () => {
 
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-10">
-                    <h3 className="text-[24px] font-black text-white uppercase tracking-tight mb-4">{sol.title}</h3>
+                    <h3 className="text-[24px] font-black text-white uppercase mb-4 font-barlow">{sol.title}</h3>
                     <p className="text-[13px] text-white/60 leading-relaxed mb-6 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-400 font-medium">{sol.desc}</p>
                     <Link to="/services" className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-white/50 uppercase hover:text-white transition-colors">
                       Learn more <ArrowRight size={12} />
@@ -456,7 +450,7 @@ const Home = () => {
       </section>
 
       {/* ── 7. Communication / We Help ───────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/[0.04]">
+      <section className="py-32 bg-white border-t border-black/4">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <div className="flex flex-col lg:flex-row gap-24 items-center">
             {/* Image */}
@@ -468,7 +462,7 @@ const Home = () => {
                 {/* Floating badge */}
                 <div className="absolute -bottom-8 -right-8 p-10 rounded-sm hidden md:flex flex-col justify-center items-center text-center shadow-2xl" 
                      style={{ backgroundColor: ANK_NAVY }}>
-                  <p className="text-4xl font-black text-white uppercase leading-[0.9] tracking-tight">WE<br />HELP<br />YOU.</p>
+                  <p className="text-4xl font-black text-white uppercase leading-[0.9] font-barlow">WE<br />HELP<br />YOU.</p>
                 </div>
               </div>
             </FadeIn>
@@ -476,7 +470,7 @@ const Home = () => {
             <div className="lg:w-1/2">
               <FadeIn>
                 <Label>Communication</Label>
-                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-black text-slate-900 leading-[0.95] tracking-tight mb-8 uppercase">
+                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-black text-slate-900 leading-[0.95] mb-8 uppercase font-barlow">
                   We help you<br /><span style={{ color: ANK_CYAN }}>communicate better</span>
                 </h2>
                 <p className="text-[15px] text-slate-500 mb-12 leading-relaxed font-medium">
@@ -488,11 +482,11 @@ const Home = () => {
                     ['Smart Strategy', 'Re-engineer revolutionary services and premium architectures for scale.'],
                   ].map(([title, desc]) => (
                     <div key={title} className="flex gap-5 group">
-                      <div className="w-10 h-10 rounded-sm flex items-center justify-center flex-shrink-0 bg-slate-50 text-slate-300 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-sm mt-0.5">
+                      <div className="w-10 h-10 rounded-sm flex items-center justify-center shrink-0 bg-slate-50 text-slate-300 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-sm mt-0.5">
                         <CheckCircle2 size={18} style={{ color: title === 'Global Network' ? ANK_CYAN : undefined }} />
                       </div>
                       <div>
-                        <p className="text-[14px] font-black text-slate-900 mb-2 uppercase tracking-widest">{title}</p>
+                        <p className="text-[14px] font-black text-slate-900 mb-2 uppercase tracking-widest font-barlow">{title}</p>
                         <p className="text-[13px] text-slate-500 leading-relaxed font-medium">{desc}</p>
                       </div>
                     </div>
@@ -509,22 +503,22 @@ const Home = () => {
       </section>
 
       {/* ── 8. Team ───────────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-50 border-t border-black/[0.04]">
+      <section className="py-32 bg-slate-50 border-t border-black/4">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <FadeIn className="text-center mb-24">
             <div className="flex justify-center"><Label>Our Team</Label></div>
-            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] tracking-tight uppercase">
+            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-barlow">
               Meet our experts
             </h2>
           </FadeIn>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((m, i) => (
               <FadeIn key={i} delay={i * 0.08}>
-                <div className="group relative overflow-hidden rounded-sm aspect-[3/4] shadow-xl">
+                <div className="group relative overflow-hidden rounded-sm aspect-3/4 shadow-xl">
                   <img src={m.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700" alt={m.name} />
                   <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${ANK_NAVY}CC 0%, transparent 60%)` }} />
                   <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <p className="text-[16px] font-black text-white uppercase tracking-wide">{m.name}</p>
+                    <p className="text-[16px] font-black text-white uppercase tracking-wide font-barlow">{m.name}</p>
                     <p className="text-[10px] font-bold tracking-widest mt-2 uppercase" style={{ color: ANK_CYAN }}>{m.role}</p>
                   </div>
                 </div>
@@ -535,7 +529,7 @@ const Home = () => {
       </section>
 
       {/* ── 9. Testimonials ──────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/[0.04] overflow-hidden">
+      <section className="py-32 bg-white border-t border-black/4 overflow-hidden">
         <div className="max-w-4xl mx-auto px-8 md:px-16 text-center">
           <FadeIn className="flex justify-center">
             <Label>Testimonials</Label>
@@ -557,7 +551,7 @@ const Home = () => {
                   <img src={testimonials[currentTestimonial].image} alt="" className="w-full h-full object-cover grayscale" />
                 </div>
                 <div>
-                  <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest">{testimonials[currentTestimonial].author}</p>
+                  <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest font-barlow">{testimonials[currentTestimonial].author}</p>
                   <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1.5">{testimonials[currentTestimonial].role}</p>
                 </div>
               </div>
@@ -577,15 +571,15 @@ const Home = () => {
       </section>
 
       {/* ── 10. Careers ───────────────────────────────────────────────────────── */}
-      <section className="border-t border-black/[0.04] overflow-hidden flex flex-col lg:flex-row bg-slate-900" style={{ minHeight: 600 }}>
-        <div className="lg:w-1/2 relative min-h-[400px]">
+      <section className="border-t border-black/4 overflow-hidden flex flex-col lg:flex-row bg-slate-900" style={{ minHeight: 600 }}>
+        <div className="lg:w-1/2 relative min-h-100">
           <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200" className="absolute inset-0 w-full h-full object-cover grayscale opacity-60" alt="" />
           <div className="absolute inset-0" style={{ background: `linear-gradient(to right, transparent 50%, ${ANK_NAVY})` }} />
         </div>
         <div className="lg:w-1/2 py-32 px-12 lg:px-24 flex flex-col justify-center" style={{ backgroundColor: ANK_NAVY }}>
           <FadeIn>
             <Label color="white">Join Our Team</Label>
-            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-white leading-[0.95] tracking-tight mb-8 uppercase">
+            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-white leading-[0.95] mb-8 uppercase font-barlow">
               Join our<br /><span style={{ color: ANK_CYAN }}>expert team</span>
             </h2>
             <p className="text-[16px] text-white/60 mb-12 leading-relaxed max-w-md font-medium">
@@ -594,7 +588,7 @@ const Home = () => {
             <div className="flex gap-12 mb-14">
               {[['12+', 'Positions'], ['4', 'Units']].map(([v, l]) => (
                 <div key={l}>
-                  <p className="text-5xl font-black text-white tracking-tight mb-2">{v}</p>
+                  <p className="text-5xl font-black text-white mb-2 font-barlow">{v}</p>
                   <p className="text-[10px] text-white/40 font-black uppercase tracking-widest">{l}</p>
                 </div>
               ))}
@@ -607,12 +601,12 @@ const Home = () => {
       </section>
 
       {/* ── 11. News ─────────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/[0.04]">
+      <section className="py-32 bg-white border-t border-black/4">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-8">
             <FadeIn>
               <Label>Insights</Label>
-              <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] tracking-tight uppercase">
+              <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-barlow">
                 Latest from<br /><span style={{ color: ANK_CYAN }}>ANK news</span>
               </h2>
             </FadeIn>
@@ -625,12 +619,12 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {news.map((item, i) => (
               <FadeIn key={i} delay={i * 0.09}>
-                <div className="group p-10 rounded-sm h-full flex flex-col cursor-pointer bg-slate-50 border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-300">
+                <div className="group p-10 rounded-sm h-full flex flex-col cursor-pointer bg-slate-50 border border-black/3 hover:bg-white hover:shadow-2xl transition-all duration-300">
                   <div className="flex items-center gap-4 mb-8">
                     <span className="px-3 py-1.5 rounded-sm text-[9px] font-black tracking-widest text-white uppercase" style={{ backgroundColor: ANK_CYAN }}>{item.category}</span>
                     <span className="text-[10px] text-slate-400 font-bold uppercase">{item.date}</span>
                   </div>
-                  <h4 className="text-[18px] font-black text-slate-900 transition-colors mb-6 leading-tight uppercase tracking-tight">{item.title}</h4>
+                  <h4 className="text-[18px] font-black text-slate-900 transition-colors mb-6 leading-tight uppercase font-barlow">{item.title}</h4>
                   <p className="text-[13px] text-slate-500 leading-relaxed mb-10 flex-1 font-medium">{item.excerpt}</p>
                   <Link to="/about/newsroom" className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest uppercase transition-all hover:gap-3" style={{ color: ANK_NAVY }}>
                     Read more <ArrowRight size={12} />
@@ -643,12 +637,12 @@ const Home = () => {
       </section>
 
       {/* ── 12. Portfolio ────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-50 border-t border-black/[0.04]">
+      <section className="py-32 bg-slate-50 border-t border-black/4">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 mb-20">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
             <FadeIn>
               <Label>Our Work</Label>
-              <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] tracking-tight uppercase">
+              <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-barlow">
                 Recent projects
               </h2>
             </FadeIn>
@@ -656,12 +650,12 @@ const Home = () => {
         </div>
         <div className="flex gap-6 px-8 md:px-16 lg:px-24 overflow-x-auto pb-10 no-scrollbar">
           {portfolio.map((item, i) => (
-            <FadeIn key={i} delay={i * 0.07} className="flex-shrink-0">
-              <div className="w-[340px] md:w-[520px] aspect-video rounded-sm overflow-hidden relative group cursor-pointer shadow-xl">
+            <FadeIn key={i} delay={i * 0.07} className="shrink-0">
+              <div className="w-85 md:w-130 aspect-video rounded-sm overflow-hidden relative group cursor-pointer shadow-xl">
                 <img src={item.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000" alt={item.title} />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${ANK_NAVY} 0%, transparent 60%)` }} />
                 <div className="absolute bottom-0 left-0 right-0 p-10">
-                  <h4 className="text-[20px] font-black text-white uppercase tracking-tight translate-y-2 group-hover:translate-y-0 transition-transform duration-400">{item.title}</h4>
+                  <h4 className="text-[20px] font-black text-white uppercase translate-y-2 group-hover:translate-y-0 transition-transform duration-400 font-barlow">{item.title}</h4>
                   <Link to="/about/case-studies" className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-white/60 uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-400 mt-4">
                     View project <ArrowUpRight size={12} />
                   </Link>
@@ -673,8 +667,8 @@ const Home = () => {
       </section>
 
       {/* ── 13. Map & Locations ───────────────────────────────────────────────── */}
-      <section className="border-t border-black/[0.04] bg-white">
-        <div className="relative h-[560px] overflow-hidden">
+      <section className="border-t border-black/4 bg-white">
+        <div className="relative h-140 overflow-hidden">
           <div className="absolute inset-0 grayscale opacity-40">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.123!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1610000000000!5m2!1sen!2sin"
@@ -684,16 +678,16 @@ const Home = () => {
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 60%, transparent 100%)' }} />
 
           {/* Floating info card */}
-          <div className="absolute top-1/2 left-10 lg:left-24 -translate-y-1/2 p-10 rounded-sm max-w-sm pointer-events-auto shadow-2xl bg-white border border-black/[0.04]">
+          <div className="absolute top-1/2 left-10 lg:left-24 -translate-y-1/2 p-10 rounded-sm max-w-sm pointer-events-auto shadow-2xl bg-white border border-black/4">
             <p className="text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase mb-6">Visit HQ</p>
-            <h3 className="text-[24px] font-black text-slate-900 uppercase tracking-tight mb-8">Pune, India</h3>
+            <h3 className="text-[24px] font-black text-slate-900 uppercase mb-8 font-barlow">Pune, India</h3>
             <div className="space-y-6 mb-10">
               <div className="flex gap-4 items-start">
-                <MapPin size={16} className="text-slate-300 mt-0.5 flex-shrink-0" style={{ color: ANK_CYAN }} />
+                <MapPin size={16} className="text-slate-300 mt-0.5 shrink-0" style={{ color: ANK_CYAN }} />
                 <p className="text-[14px] text-slate-600 leading-relaxed font-medium">Office S-4, 2nd Floor, Commercial Building, Pune MH 411001</p>
               </div>
               <div className="flex gap-4 items-center">
-                <Mail size={16} className="text-slate-300 flex-shrink-0" style={{ color: ANK_CYAN }} />
+                <Mail size={16} className="text-slate-300 shrink-0" style={{ color: ANK_CYAN }} />
                 <p className="text-[14px] text-slate-600 font-medium">info@ankautomation.com</p>
               </div>
             </div>
@@ -715,9 +709,9 @@ const Home = () => {
             <FadeIn key={i} delay={i * 0.07}>
               <div className="group">
                 <div className="w-12 h-12 rounded-sm flex items-center justify-center text-slate-300 bg-slate-50 group-hover:bg-slate-900 group-hover:text-white mb-6 transition-all shadow-sm">
-                  {React.cloneElement(loc.icon as React.ReactElement, { style: { color: ANK_CYAN } })}
+                  {React.cloneElement(loc.icon as React.ReactElement<{ color?: string }>, { color: ANK_CYAN })}
                 </div>
-                <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest mb-3">{loc.city}</p>
+                <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest mb-3 font-barlow">{loc.city}</p>
                 <p className="text-[13px] text-slate-500 leading-relaxed font-medium">{loc.address}</p>
               </div>
             </FadeIn>
@@ -726,16 +720,16 @@ const Home = () => {
       </section>
 
       {/* ── 14. Final CTA ─────────────────────────────────────────────────────── */}
-      <section className="py-48 bg-slate-50 border-t border-black/[0.04] text-center relative overflow-hidden">
+      <section className="py-48 bg-slate-50 border-t border-black/4 text-center relative overflow-hidden">
         {/* Ambient glow with Cyan */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full opacity-[0.08]" 
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-125 rounded-full opacity-[0.08]" 
                style={{ background: `radial-gradient(ellipse, ${ANK_CYAN}, transparent 70%)` }} />
         </div>
         <div className="max-w-4xl mx-auto px-8 relative z-10">
           <FadeIn>
             <p className="text-[11px] font-black tracking-[0.4em] text-slate-400 uppercase mb-10">Ready to begin?</p>
-            <h2 className="text-[clamp(3.5rem,8vw,7.5rem)] font-black text-slate-900 leading-[0.85] tracking-tight mb-12 uppercase">
+            <h2 className="text-[clamp(3.5rem,8vw,7.5rem)] font-black text-slate-900 leading-[0.85] mb-12 uppercase font-barlow">
               Launch your<br /><span style={{ color: ANK_CYAN }}>next project.</span>
             </h2>
             <p className="text-[18px] text-slate-500 mb-16 max-w-xl mx-auto leading-relaxed font-medium">
@@ -765,7 +759,7 @@ const ProgressBar = ({ label, percentage }: { label: string; percentage: number 
   return (
     <div ref={ref}>
       <div className="flex justify-between mb-4">
-        <span className="text-[12px] font-black text-slate-900 uppercase tracking-widest">{label}</span>
+        <span className="text-[12px] font-black text-slate-900 uppercase tracking-widest font-barlow">{label}</span>
         <span className="text-[12px] font-black text-slate-400">{percentage}%</span>
       </div>
       <div className="h-1.5 bg-slate-100 overflow-hidden rounded-full shadow-inner">

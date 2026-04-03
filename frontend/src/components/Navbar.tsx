@@ -55,6 +55,10 @@ const WHAT_WE_DO_TABS = [
       { name: 'Hardware Engineering',   path: '/services/hardware-engineering' },
       { name: 'Mechanical Engineering', path: '/services/mechanical-engineering' },
       { name: 'Testing & QA',           path: '/services/testing-qa' },
+    ],
+    news: [
+      { title: 'Advanced Analytics', desc: 'Smarter data processing for complex hardware systems.', image: 'https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=400' },
+      { title: 'Auto Reporting', desc: 'Automated compliance and safety reporting for factories.', image: 'https://images.unsplash.com/photo-1518186239717-2e9b136758e5?auto=format&fit=crop&q=80&w=400' },
     ]
   },
   {
@@ -65,6 +69,10 @@ const WHAT_WE_DO_TABS = [
       { name: 'Product Assembly',  path: '/services/product-assembly' },
       { name: 'Rapid Prototyping', path: '/services/rapid-prototyping' },
       { name: 'FDM 3D Printing',   path: '/services/fdm-3d-printing' },
+    ],
+    news: [
+      { title: 'Precision PCB', desc: 'Our new assembly line achieves 0.1mm accuracy.', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400' },
+      { title: '3D Printing Lab', desc: 'Expanded prototyping capabilities with 10 new printers.', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=400' },
     ]
   },
   {
@@ -76,6 +84,10 @@ const WHAT_WE_DO_TABS = [
       { name: 'Desktop Applications',  path: '/services/desktop-applications' },
       { name: 'IoT Applications',      path: '/services/iot-applications' },
       { name: 'Scaling & Maintenance', path: '/services/scaling-maintenance' },
+    ],
+    news: [
+      { title: 'Cloud Scaling', desc: 'How we handle 1M+ concurrent users for our clients.', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400' },
+      { title: 'IoT Edge Pro', desc: 'Secure local processing for industrial IoT sensors.', image: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=400' },
     ]
   },
   {
@@ -85,6 +97,10 @@ const WHAT_WE_DO_TABS = [
       { name: 'Software Automation',           path: '/services/software-automation' },
       { name: 'Process Automation',            path: '/services/process-automation' },
       { name: 'Maintenance & Troubleshooting', path: '/services/maintenance-troubleshooting' },
+    ],
+    news: [
+      { title: 'Smart Factory', desc: 'Full SCADA integration for a major automotive plant.', image: 'https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=400' },
+      { title: 'Predictive Care', desc: 'AI-based maintenance system reduced downtime by 30%.', image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=400' },
     ]
   },
 ]
@@ -105,9 +121,9 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
   const current = WHAT_WE_DO_TABS.find(t => t.id === activeTab)!
 
   return (
-    <div className="flex overflow-hidden bg-white w-full h-full min-h-[380px]" style={{ borderRadius: 4 }}>
+    <div className="flex overflow-hidden bg-white w-full h-full min-h-95" style={{ borderRadius: 4 }}>
       {/* Sidebar */}
-      <div className="w-56 flex flex-col justify-center gap-0.5 p-6 border-r border-black/[0.04] bg-slate-50/80">
+      <div className="w-56 flex flex-col justify-center gap-0.5 p-6 border-r border-black/4 bg-indigo-50/30">
         <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-4 px-2">Services</p>
         {WHAT_WE_DO_TABS.map(tab => (
           <button
@@ -116,7 +132,7 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
             className={`text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-200 flex items-center justify-between group uppercase tracking-wider ${
               activeTab === tab.id
                 ? 'text-white shadow-md'
-                : 'text-slate-500 hover:text-slate-900 hover:bg-black/[0.03]'
+                : 'text-slate-500 hover:text-slate-900 hover:bg-black/3'
             }`}
             style={{ backgroundColor: activeTab === tab.id ? ANK_NAVY : 'transparent' }}
           >
@@ -142,22 +158,21 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 flex"
           >
-            {/* Image strip with fade */}
-            <div className="relative w-48 flex-shrink-0 overflow-hidden hidden md:block">
+            {/* Image strip with subtle dark/grey gradient */}
+            <div className="relative w-40 shrink-0 overflow-hidden hidden md:block">
               <img
                 src={current.bg}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ opacity: 0.8 }}
+                className="absolute inset-0 w-full h-full object-cover grayscale brightness-75"
               />
               <div
                 className="absolute inset-0"
-                style={{ background: 'linear-gradient(to right, transparent 40%, white 100%)' }}
+                style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.4) 0%, #f8fafc 100%)' }}
               />
             </div>
 
             {/* Links */}
-            <div className="flex-1 flex flex-col justify-center px-10 py-8 gap-0 bg-white">
+            <div className="flex-1 flex flex-col justify-center px-8 py-8 gap-0 bg-slate-50">
               <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-6" style={{ color: ANK_CYAN }}>{current.label}</p>
               <div className="grid grid-cols-1 gap-1">
                 {current.items.map((item, i) => (
@@ -170,7 +185,7 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
                     <Link
                       to={item.path}
                       onClick={onClose}
-                      className="group flex items-center gap-3 py-2.5 text-[15px] font-black text-slate-600 hover:text-slate-900 transition-all duration-200 uppercase tracking-tight"
+                      className="group flex items-center gap-3 py-2.5 text-[14px] font-black text-slate-600 hover:text-slate-900 transition-all duration-200 uppercase tracking-tight"
                     >
                       <span className="w-0 group-hover:w-4 h-0.5 transition-all duration-300" style={{ backgroundColor: ANK_NAVY }} />
                       {item.name}
@@ -180,6 +195,31 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
                         style={{ color: ANK_NAVY }}
                       />
                     </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* News Section */}
+            <div className="w-72 border-l border-black/4 bg-slate-50/50 p-8 flex flex-col overflow-y-auto no-scrollbar">
+              <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-6">Latest News</p>
+              <div className="space-y-4">
+                {current.news.map((n, i) => (
+                  <motion.div
+                    key={n.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
+                    className="group cursor-pointer bg-white p-3 rounded-sm border border-black/5 shadow-sm hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="aspect-[16/9] rounded-sm overflow-hidden mb-3">
+                      <img src={n.image} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div className="flex items-center gap-1 mb-1">
+                      <h5 className="text-[10px] font-black uppercase text-slate-900 group-hover:text-[#00AEEF] transition-colors">{n.title}</h5>
+                      <ArrowUpRight size={9} className="text-slate-400 group-hover:text-[#00AEEF] transition-colors" />
+                    </div>
+                    <p className="text-[9px] text-slate-500 leading-relaxed line-clamp-2">{n.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -208,14 +248,14 @@ const BusinessUnitsMenu = ({ onClose }: { onClose: () => void }) => (
             className={`group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
               unit.featured
                 ? 'text-white shadow-lg'
-                : 'bg-slate-50 border-black/[0.04] hover:bg-white hover:border-slate-300 text-slate-600 hover:text-slate-900'
+                : 'bg-slate-50 border-black/4 hover:bg-white hover:border-slate-300 text-slate-600 hover:text-slate-900'
             }`}
             style={{ 
               backgroundColor: unit.featured ? ANK_NAVY : undefined,
               borderColor: unit.featured ? ANK_NAVY : undefined 
             }}
           >
-            <div className={`p-2 rounded-sm flex-shrink-0 transition-all duration-200 ${
+            <div className={`p-2 rounded-sm shrink-0 transition-all duration-200 ${
               unit.featured
                 ? 'bg-white/20 text-white'
                 : 'bg-white shadow-sm group-hover:bg-slate-900 group-hover:text-white'
@@ -251,7 +291,7 @@ const ProductsMenu = ({ onClose }: { onClose: () => void }) => (
           <Link
             to={prod.path}
             onClick={onClose}
-            className="flex items-center gap-5 p-5 rounded-sm border border-black/[0.04] bg-slate-50 hover:bg-white hover:border-slate-300 transition-all duration-200 group h-full"
+            className="flex items-center gap-5 p-5 rounded-sm border border-black/4 bg-slate-50 hover:bg-white hover:border-slate-300 transition-all duration-200 group h-full"
           >
             <div className="p-3 rounded-sm bg-white shadow-sm transition-all group-hover:text-white group-hover:bg-slate-900"
                  style={{ color: ANK_CYAN }}>
@@ -283,7 +323,7 @@ const AboutMenu = ({ onClose }: { onClose: () => void }) => (
           <Link
             to={link.path}
             onClick={onClose}
-            className="flex items-center gap-3 px-4 py-4 rounded-sm hover:bg-slate-50 transition-all group border border-transparent hover:border-black/[0.04]"
+            className="flex items-center gap-3 px-4 py-4 rounded-sm hover:bg-slate-50 transition-all group border border-transparent hover:border-black/4"
           >
             <div className="transition-colors group-hover:text-slate-900" style={{ color: ANK_NAVY }}>{link.icon}</div>
             <span className="text-[11px] text-slate-600 group-hover:text-slate-900 transition-colors font-black uppercase tracking-widest">{link.title}</span>
@@ -347,7 +387,7 @@ const Navbar = () => {
   return (
     <>
       {/* ── Desktop Floating Navbar ── */}
-      <div className="fixed top-0 left-0 w-full z-[80] flex justify-center items-start pt-6 pointer-events-none px-6">
+      <div className="fixed top-0 left-0 w-full z-80 flex justify-center items-start pt-6 pointer-events-none px-6">
         <div className="relative">
           <motion.nav
             ref={navBarRef as any}
@@ -359,8 +399,8 @@ const Navbar = () => {
             onMouseLeave={scheduleClose}
           >
             {/* Logo */}
-            <Link to="/" className="flex items-center px-4 py-1 mr-2 flex-shrink-0 transition-transform hover:scale-105">
-              <img src={logo} alt="ANK" className="h-[28px] w-auto" />
+            <Link to="/" className="flex items-center px-4 py-1 mr-2 shrink-0 transition-transform hover:scale-105">
+              <img src={logo} alt="ANK" className="h-7 w-auto" />
             </Link>
 
             {/* Sliding Highlight */}
@@ -382,7 +422,7 @@ const Navbar = () => {
               {navItems.map(item => (
                 <div
                   key={item.name}
-                  ref={el => navRefs.current[item.name] = el}
+                  ref={el => { navRefs.current[item.name] = el }}
                   onMouseEnter={() => item.component ? openMenu(item.name) : setHoveredMenu(null)}
                 >
                   {item.path ? (
@@ -413,7 +453,7 @@ const Navbar = () => {
             </div>
 
             {/* Separator + CTA */}
-            <div className="hidden lg:block w-px h-5 bg-black/[0.06] mx-2" />
+            <div className="hidden lg:block w-px h-5 bg-black/6 mx-2" />
             <motion.button
               onClick={() => navigate('/contact')}
               whileHover={{ scale: 1.02 }}
@@ -473,10 +513,10 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-[100] lg:hidden overflow-y-auto"
+            className="fixed inset-0 z-100 lg:hidden overflow-y-auto"
             style={{ background: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(24px)' }}
           >
-            <div className="p-6 flex justify-between items-center border-b border-black/[0.04] bg-white sticky top-0 z-10">
+            <div className="p-6 flex justify-between items-center border-b border-black/4 bg-white sticky top-0 z-10">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
                 <img src={logo} alt="ANK" className="h-6 w-auto" />
               </Link>
@@ -492,8 +532,9 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="border-b border-black/[0.04]"
+                  className="border-b border-black/4"
                 >
+...
                   {item.path ? (
                     <Link
                       to={item.path}

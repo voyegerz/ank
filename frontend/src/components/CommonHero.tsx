@@ -16,7 +16,7 @@ const CommonHero = ({ title, subtitle }: CommonHeroProps) => {
           className="w-full h-full object-cover opacity-40 grayscale"
         />
         <div className="absolute inset-0 bg-indigo-950/60 mix-blend-multiply"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-transparent to-slate-950"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-slate-950/80 via-transparent to-slate-950"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
