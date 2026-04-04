@@ -1,13 +1,13 @@
-import PageLayout from "../../components/PageLayout";
-import CommonHero from "../../components/CommonHero";
+import PageLayout from "../../../components/PageLayout";
+import CommonHero from "../../../components/CommonHero";
 import { ArrowRight } from "lucide-react";
 
-const CADDesignServices = () => {
+const FDM3DPrinting = () => {
   return (
     <PageLayout>
       <CommonHero
-        title="CAD Design Services"
-        caption="Precision-engineered 3D/2D CAD development for industrial excellence."
+        title="FDM 3D Printing"
+        caption="Industrial-grade additive manufacturing for robust parts and models."
       />
 
       <section className="py-32 bg-white">
@@ -15,37 +15,33 @@ const CADDesignServices = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
               <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">
-                Business Unit Overview
+                Additive Manufacturing
               </h2>
-              <p className="text-slate-600 font-medium leading-relaxed mb-10">
-                We Provide 3D/2D CAD Mechanical design development with
-                precision and usability and practical standards.
-              </p>
               <div className="space-y-6">
                 <CapabilityItem
-                  title="Technical Drafting"
-                  desc="ISO-standard 2D drawings for seamless manufacturing and documentation."
+                  title="Material Variety"
+                  desc="Printing in PLA, PETG, ABS, Carbon Fiber, and more."
                 />
                 <CapabilityItem
-                  title="Mechanical Design"
-                  desc="High-accuracy 3D modeling of parts, assemblies, and complex industrial systems."
+                  title="Large Format Printing"
+                  desc="Capabilities for large-scale industrial components."
                 />
                 <CapabilityItem
-                  title="Usability Optimization"
-                  desc="Ensuring designs are not only accurate but practical for end-users."
+                  title="High Precision"
+                  desc="Consistent accuracy and surface finish for every print."
                 />
               </div>
             </div>
             <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100">
               <h3 className="text-xl font-black text-slate-900 mb-8 uppercase">
-                Industrial Design
+                Custom Solutions
               </h3>
               <p className="text-slate-600 font-medium leading-relaxed mb-8">
-                Our team of expert engineers uses industry-standard tools to
-                deliver meticulous designs.
+                We provide tailored 3D printing services for prototypes, tools,
+                and end-use parts.
               </p>
               <button className="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3">
-                Get Started <ArrowRight size={20} />
+                Order Prints <ArrowRight size={20} />
               </button>
             </div>
           </div>
@@ -64,4 +60,4 @@ const CapabilityItem = ({ title, desc }: { title: string; desc: string }) => (
   </div>
 );
 
-export default CADDesignServices;
+export default FDM3DPrinting;

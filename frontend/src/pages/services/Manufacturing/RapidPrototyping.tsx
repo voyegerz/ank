@@ -1,13 +1,13 @@
-import PageLayout from "../../components/PageLayout";
-import CommonHero from "../../components/CommonHero";
+import PageLayout from "../../../components/PageLayout";
+import CommonHero from "../../../components/CommonHero";
 import { ArrowRight } from "lucide-react";
 
-const CADDesignServices = () => {
+const RapidPrototyping = () => {
   return (
     <PageLayout>
       <CommonHero
-        title="CAD Design Services"
-        caption="Precision-engineered 3D/2D CAD development for industrial excellence."
+        title="Rapid Prototyping"
+        caption="Accelerating your design cycles with fast, functional prototypes."
       />
 
       <section className="py-32 bg-white">
@@ -15,37 +15,33 @@ const CADDesignServices = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div>
               <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">
-                Business Unit Overview
+                Speed to Market
               </h2>
-              <p className="text-slate-600 font-medium leading-relaxed mb-10">
-                We Provide 3D/2D CAD Mechanical design development with
-                precision and usability and practical standards.
-              </p>
               <div className="space-y-6">
                 <CapabilityItem
-                  title="Technical Drafting"
-                  desc="ISO-standard 2D drawings for seamless manufacturing and documentation."
+                  title="Functional Prototypes"
+                  desc="Prototypes that look and work like the final product."
                 />
                 <CapabilityItem
-                  title="Mechanical Design"
-                  desc="High-accuracy 3D modeling of parts, assemblies, and complex industrial systems."
+                  title="Iterative Design Support"
+                  desc="Fast feedback loops to refine your design before mass production."
                 />
                 <CapabilityItem
-                  title="Usability Optimization"
-                  desc="Ensuring designs are not only accurate but practical for end-users."
+                  title="Material Variety"
+                  desc="Access to a wide range of industrial-grade materials for testing."
                 />
               </div>
             </div>
             <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100">
               <h3 className="text-xl font-black text-slate-900 mb-8 uppercase">
-                Industrial Design
+                Precision Prototyping
               </h3>
               <p className="text-slate-600 font-medium leading-relaxed mb-8">
-                Our team of expert engineers uses industry-standard tools to
-                deliver meticulous designs.
+                Move from CAD to physical model in record time with our advanced
+                prototyping tools.
               </p>
               <button className="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3">
-                Get Started <ArrowRight size={20} />
+                Get Prototype <ArrowRight size={20} />
               </button>
             </div>
           </div>
@@ -64,4 +60,4 @@ const CapabilityItem = ({ title, desc }: { title: string; desc: string }) => (
   </div>
 );
 
-export default CADDesignServices;
+export default RapidPrototyping;
