@@ -47,7 +47,7 @@ const Testimonials = ({
   testimonials,
 }: TestimonialsProps) => {
   return (
-    <section className="w-full bg-white overflow-hidden px-32 py-10">
+    <section className="w-full bg-white overflow-hidden px-6 md:px-16 lg:px-32 py-10">
       {/* ── Header ── */}
       <div className="relative flex flex-col items-center text-center pt-16 pb-10 px-6 overflow-hidden">
         <span

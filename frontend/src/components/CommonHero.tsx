@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import heroBg from "../assets/images/hero_bg.png";
 
@@ -79,7 +78,7 @@ const CommonHero = ({
       </motion.span>
 
       {/* ── Content ── */}
-      <div className="relative z-10 max-w-[1200px] mx-auto px-10 w-full md:px-6 sm:px-5">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 w-full">
         {/* Caption - Enhanced Badge Style */}
         <motion.div
           className="inline-flex items-center gap-2.5 mb-5"
