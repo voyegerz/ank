@@ -3,9 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "./components/SmoothScroll";
 import Home from "./pages/Home";
-import CADServices from "./pages/CADServices";
-import SoftwareServices from "./pages/SoftwareServices";
-import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Navbar from "./components/Navbar";
@@ -77,9 +74,6 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
-              <Route path="/cad-services" element={<CADServices />} />
-              <Route path="/software-services" element={<SoftwareServices />} />
-              <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />
 

@@ -1,3 +1,4 @@
-# ank_website_design_files
+/ank_website_design_files
+/assets
 .gemini/
 gha-creds-*.json

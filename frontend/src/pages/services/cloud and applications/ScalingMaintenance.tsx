@@ -1,74 +1,81 @@
 import PageLayout from "../../../components/PageLayout";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import CommonHero from "../../../components/CommonHero";
+import DetailedProcessSection from "../../../components/service/DetailedProcessSection";
+import type { ProcessStep } from "../../../components/service/DetailedProcessSection";
+import CTASection from "@/components/service/CTA";
 
 const ScalingMaintenance = () => {
+  const steps: ProcessStep[] = [
+    {
+      number: "1",
+      title: "Performance Benchmarking",
+      subtitle: "Baseline Metric Analysis",
+      description:
+        "Our engineers begin with an exhaustive profiling of your current software architecture, identifying bottlenecks in database execution, network latency, and server resource allocation.",
+      images: [
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200",
+      ],
+    },
+    {
+      number: "2",
+      title: "Infrastructure Refactoring",
+      subtitle: "Efficiency Optimization",
+      description:
+        "We implement advanced caching layers, code-level optimizations, and database indexing to transform your legacy infrastructure into a high-performance system capable of handling peak loads.",
+      images: [
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600",
+        "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=600",
+      ],
+    },
+    {
+      number: "3",
+      title: "Elastic Scalability Implementation",
+      subtitle: "Cloud-Native Growth",
+      description:
+        "By architecting containerized, multi-region cloud solutions, we ensure your digital assets can scale horizontally in real-time. We build for tomorrow's traffic, today.",
+      images: [
+        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200",
+      ],
+    },
+    {
+      number: "4",
+      title: "Operational Monitoring & Security",
+      subtitle: "24/7 Technical Oversight",
+      description:
+        "Long-term maintenance is about proactive security auditing and real-time observability. We ensure your system is patched, secure, and performant across the entire lifecycle.",
+      images: [
+        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600",
+        "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600",
+      ],
+    },
+  ];
+
   return (
     <PageLayout>
-      <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10 text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">
-              Scaling & <span className="text-indigo-500">Maintenance</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">
-              Ensuring your digital platforms grow and stay reliable over time.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <CommonHero
+        bgImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000"
+        caption="Future-Proof Solutions"
+        title="Scaling & Maintenance"
+        subtitle="Dedicated performance optimization and long-term maintenance infrastructure designed to keep your high-traffic industrial platforms secure and resilient."
+        watermarkNumber="17"
+      />
 
-      <section className="py-32 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">
-                Long-term Reliability
-              </h2>
-              <div className="space-y-6">
-                <CapabilityItem
-                  title="Infrastructure Scaling"
-                  desc="Adapting your cloud resources to handle increased user load and data traffic."
-                />
-                <CapabilityItem
-                  title="Proactive Maintenance"
-                  desc="Regular updates, security patching, and bug fixes to keep systems healthy."
-                />
-                <CapabilityItem
-                  title="Continuous Optimization"
-                  desc="Fine-tuning performance and costs as your business evolves."
-                />
-              </div>
-            </div>
-            <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100">
-              <h3 className="text-xl font-black text-slate-900 mb-8 uppercase">
-                Future-Proofing
-              </h3>
-              <p className="text-slate-600 font-medium leading-relaxed mb-8">
-                We provide the support needed to ensure your software remains
-                competitive and secure.
-              </p>
-              <button className="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3">
-                Get Support Plan <ArrowRight size={20} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DetailedProcessSection
+        eyebrow="Evolutionary Growth"
+        title="From Prototype to Platform"
+        description="Our maintenance infrastructure handles billions of data points annually, providing the scaling path your mission-critical applications require."
+        steps={steps}
+      />
+
+      <CTASection
+        eyebrowHighlight="Global"
+        eyebrow="Global Availability"
+        heading="Ready to scale your digital infrastructure and ensure absolute uptime for your mission-critical applications?"
+        primaryLabel="Request a Scaling Audit"
+        secondaryLabel="Explore Infrastructure"
+      />
     </PageLayout>
   );
 };
-
-const CapabilityItem = ({ title, desc }: { title: string; desc: string }) => (
-  <div className="group">
-    <h4 className="text-xl font-black text-slate-900 mb-2 uppercase group-hover:text-indigo-600 transition-colors">
-      {title}
-    </h4>
-    <p className="text-slate-500 font-medium leading-relaxed">{desc}</p>
-  </div>
-);
 
 export default ScalingMaintenance;

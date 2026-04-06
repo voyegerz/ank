@@ -22,31 +22,31 @@ const CTASection = ({
   onSecondaryClick,
 }: CTASectionProps) => {
   return (
-    <section className="w-full bg-white px-32 py-10">
-      <div className="max-w-3xl mx-auto flex flex-col items-center text-center gap-8">
-        {/* Eyebrow */}
+    <section className="w-full bg-white px-6 md:px-20 lg:px-32 py-16 md:py-24">
+      <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-8 md:gap-12">
+        {/* Eyebrow - Responsive Spacing */}
         <motion.div
-          className="flex items-center justify-center gap-1.5"
+          className="flex flex-wrap items-center justify-center gap-1.5"
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="text-sm text-gray-500 font-medium">
+          <span className="text-[11px] md:text-sm text-gray-500 font-bold uppercase tracking-widest">
             {eyebrow.split(eyebrowHighlight)[0]}
           </span>
-          <span className="bg-[#2d9cdb] text-white text-sm font-semibold px-2 py-0.5 leading-snug">
+          <span className="bg-[#2d9cdb] text-white text-[10px] md:text-xs font-black px-2 py-0.5 leading-snug uppercase tracking-widest">
             {eyebrowHighlight}
           </span>
-          <span className="text-sm text-gray-500 font-medium">
+          <span className="text-[11px] md:text-sm text-gray-500 font-bold uppercase tracking-widest">
             {eyebrow.split(eyebrowHighlight)[1]}
           </span>
         </motion.div>
 
-        {/* Heading */}
+        {/* Heading - Responsive Scaling */}
         <motion.h2
-          className="font-black text-gray-900 leading-tight"
-          style={{ fontSize: "clamp(1.3rem, 3vw, 2rem)" }}
+          className="font-black text-gray-900 leading-[1.1] tracking-tight uppercase"
+          style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }}
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -55,9 +55,9 @@ const CTASection = ({
           {heading}
         </motion.h2>
 
-        {/* Buttons */}
+        {/* Buttons - Mobile Stacked / Desktop Row */}
         <motion.div
-          className="flex items-center gap-10"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-10 w-full sm:w-auto"
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -66,9 +66,9 @@ const CTASection = ({
           {/* Primary */}
           <button
             onClick={onPrimaryClick}
-            className="bg-[#2d9cdb] text-white font-semibold
-                       text-sm px-8 py-4 transition-all duration-200 whitespace-nowrap
-                       hover:-translate-y-1 hover:shadow-lg"
+            className="w-full sm:w-auto bg-[#2d9cdb] text-white font-black
+                       text-[11px] md:text-[13px] px-8 py-4 uppercase tracking-widest transition-all duration-300
+                       hover:-translate-y-1 hover:shadow-xl active:scale-95"
           >
             {primaryLabel}
           </button>
@@ -76,12 +76,12 @@ const CTASection = ({
           {/* Secondary with arrow */}
           <button
             onClick={onSecondaryClick}
-            className="bg-gray-900 text-white font-semibold
-                       text-sm px-8 py-4 transition-all duration-200 whitespace-nowrap
-                       flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg"
+            className="w-full sm:w-auto bg-gray-900 text-white font-black
+                       text-[11px] md:text-[13px] px-8 py-4 uppercase tracking-widest transition-all duration-300
+                       flex items-center justify-center gap-2 hover:-translate-y-1 hover:shadow-xl active:scale-95"
           >
             {secondaryLabel}
-            <ChevronRight size={18} />
+            <ChevronRight size={16}  />
           </button>
         </motion.div>
       </div>
