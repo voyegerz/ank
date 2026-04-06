@@ -101,7 +101,7 @@ const PhilosophySection = ({
   return (
     <section
       ref={sectionRef}
-      className="w-full py-16 px-8 grid grid-cols-1 lg:grid-cols-2 bg-[#f4f4f2]"
+      className="w-full px-32 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10 bg-[#f4f4f2]"
     >
       {/* ── Left content ── */}
       <div className="flex flex-col justify-center">

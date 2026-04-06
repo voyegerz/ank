@@ -14,7 +14,7 @@ interface ServiceProcessProps {
 
 const ServiceProcess = ({ items }: ServiceProcessProps) => {
   return (
-    <section className="w-full bg-white py-16 px-8">
+    <section className="w-full bg-white px-32 py-10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
           {items.map((item, i) => (

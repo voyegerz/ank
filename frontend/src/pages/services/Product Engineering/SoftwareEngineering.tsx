@@ -10,145 +10,146 @@ import CTASection from "@/components/service/CTA";
 
 const SoftwareEngineering = () => {
   const clients = [
-    { name: "Client 1", logo: "/clients/client1.png" },
-    { name: "Client 2", logo: "/clients/client2.png" },
-    { name: "Client 3", logo: "/clients/client3.png" },
-    { name: "Client 4", logo: "/clients/client4.png" },
-    { name: "Client 5", logo: "/clients/client5.png" },
-    { name: "Client 6", logo: "/clients/client6.png" },
+    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
+    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
+    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
+    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
   ];
   return (
     <PageLayout>
       <CommonHero
-        caption="Custom manufacturing solutions"
-        title="Product fabrication"
-        subtitle="From prototyping through delivery, each customer is assigned a dedicated support team..."
-        watermarkNumber="01" // optional decorative number
+        bgImage="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=2000"
+        caption="Enterprise-Grade Software Solutions"
+        title="Software Engineering"
+        subtitle="We design, build, and scale robust software applications that empower industrial automation, data analytics, and operational efficiency."
+        watermarkNumber="01"
       />
       <ServiceDetail
-        image=""
-        caption="Custom manufacturing solutions"
+        image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000"
+        caption="Digital Transformation"
         leftTitle="Core Capabilities"
         leftParagraphs={[
-          "Tailored software designed to meet the unique challenges of your business operations.",
-          "Developing sophisticated algorithms for PLC, SCADA, and automated control systems.",
-          "Building reliable server-side architectures that handle massive data loads with ease.",
-          "Connecting disparate software and hardware components into a unified ecosystem.",
+          "Embedded Software & Firmware: Developing low-level firmware and embedded control applications for complex hardware systems, ensuring real-time responsiveness and reliability.",
+          "Industrial IoT & Connectivity: Architecting seamless communication networks between physical assets and cloud infrastructure using modern protocols like MQTT, OPC UA, and Edge Computing.",
+          "Enterprise Application Development: Engineering scalable web and desktop applications that provide intuitive data visualization, control interfaces, and operational oversight.",
+          "Data Analytics & Machine Learning: Harnessing operational data through advanced algorithms to enable predictive maintenance and intelligent automation.",
         ]}
         rightTitle="Why Partner With Us?"
         rightParagraphs={[
-          "Our software engineering team combines deep domain knowledge with modern development practices to deliver solutions that are not just functional, but future-proof.",
+          "Our software engineering division operates at the intersection of bits and atoms. We don't just write code; we develop mission-critical software that drives physical machinery, secures industrial networks, and interprets high-frequency sensor data.",
+          "By employing Agile methodologies complemented by rigorous compliance and security testing, we ensure that every software deployment is resilient against both system failures and cyber threats."
         ]}
         features={[
-          "Agile Development Methodology",
-          "Rigorous Testing & QA",
-          "Security-First Architecture",
+          "Real-Time OS (RTOS) Expertise",
+          "Cloud-Native Architecture",
+          "Secure by Design Principles",
         ]}
-        ctaLabel="Discuss Your Project"
+        ctaLabel="Discuss Your Software Needs"
         onCtaClick={() => {
-          // Handle CTA click
+          console.log("Software CTA clicked");
         }}
       />
       <ServiceProcess
         items={[
           {
             number: "01",
-            title: "Requirement Analysis",
+            title: "Discovery & Architecture",
             description:
-              "We begin by thoroughly understanding your business needs and technical requirements to ensure the solution aligns perfectly with your goals.",
+              "We commence with a deep technological audit to understand your operational environment, defining a scalable software architecture that aligns with your industrial objectives.",
           },
           {
             number: "02",
-            title: "Design & Architecture",
+            title: "Agile Development Cycles",
             description:
-              "Our team creates a robust architecture that ensures scalability, security, and performance from day one.",
+              "Our engineering teams work in iterative sprints, delivering functional software components that allow for continuous feedback and proactive path correction.",
           },
           {
             number: "03",
-            title: "Development & Integration",
+            title: "Integration & Simulation",
             description:
-              "We build your solution using the latest technologies and integrate it seamlessly with your existing systems.",
+              "Before deployment, software is subjected to exhaustive simulation environments, testing edge cases and integration points with existing hardware and legacy systems.",
           },
           {
             number: "04",
-            title: "Testing & Deployment",
+            title: "Deployment & Lifecycle Support",
             description:
-              "Rigorous testing ensures quality and reliability, followed by a smooth deployment to your production environment.",
+              "We provide seamless deployment orchestration followed by continuous monitoring, patch management, and lifecycle support to ensure long-term stability.",
           },
         ]}
       />
       <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        eyebrow="Our philosophy"
-        eyebrowHighlight="Our"
-        title="Quality system certifications"
+        image="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our execution framework"
+        eyebrowHighlight="execution"
+        title="Predictable Quality in Every Release"
         paragraphs={[
-          "We have decades of experience meeting the stringent regulations and certifications for the automotive, aerospace and medical device industries, which serve as benchmarks for all of the products we manufacture.",
-          "We have decades of experience meeting the stringent regulations and certifications for the automotive, aerospace and medical device industries, which serve as benchmarks for all of the products we manufacture.",
+          "Software in the industrial sector must perform flawlessly under the most demanding conditions. We adhere strictly to industry standards such as ISO/IEC 27001 for information security and IEC 62443 for industrial control system security.",
+          "Our quality assurance process guarantees that from the lowest-level firmware to the highest-level graphical interface, our solutions are highly performant, observable, and deeply integrated into your strategic goals.",
         ]}
         items={[
           {
             icon: <Code2 size={32} strokeWidth={1.2} />,
-            label: "Construction",
-            description: "Fulfilling client requests on the go",
-            progress: 85,
+            label: "Clean Code",
+            description: "Maintainable, peer-reviewed codebases",
+            progress: 95,
           },
           {
             icon: <GitBranch size={32} strokeWidth={1.2} />,
-            label: "Production",
-            description: "Manufacturing the product",
-            progress: 70,
+            label: "CI/CD Pipeline",
+            description: "Automated testing and continuous delivery",
+            progress: 88,
           },
           {
             icon: <ShieldCheck size={32} strokeWidth={1.2} />,
-            label: "Deadline",
-            description: "Finishing upon requested time",
-            progress: 92,
+            label: "Cybersecurity",
+            description: "Zero-trust models and vulnerability testing",
+            progress: 98,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="People about Company"
-        eyebrowHighlight="about"
-        heading="What are our clients saying"
-        watermarkText="Clients"
-        bgImage=""
+        eyebrow="Client Perspectives"
+        eyebrowHighlight="Perspectives"
+        heading="Transforming Operations Through Code"
+        watermarkText="Reviews"
+        bgImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000"
         testimonials={[
           {
-            title: "Quality system certifications",
+            title: "Unprecedented Reliability",
             rating: 5,
             review:
-              "We have decades of experience meeting the stringent regulations and certifications for the automotive, aerospace and medical device industries, which serve as benchmarks for all of the products we manufacture.",
-            name: "John Doe",
-            company: "Company",
-            avatar: "",
+              "ANK Design & Automation delivered a custom SCADA integration that fundamentally changed how we monitor our production floor. The software is intuitive, blazing fast, and hasn't suffered a single minute of downtime.",
+            name: "Michael Chen",
+            company: "Director of Operations, Nexus Manufacturing",
+            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
           },
           {
-            title: "Quality system certifications",
+            title: "A True Technical Partner",
             rating: 5,
             review:
-              "We have decades of experience meeting the stringent regulations and certifications for the automotive, aerospace and medical device industries, which serve as benchmarks for all of the products we manufacture.",
-            name: "John Doe",
-            company: "Company",
-            avatar: "",
+              "Their grasp of bridging complex hardware protocols with modern cloud architectures is unparalleled. They delivered a predictive maintenance ML model that saved us millions in unplanned downtime.",
+            name: "Sarah Jenkins",
+            company: "CTO, Horizon Energy",
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Ready to talk?"
-        eyebrowHighlight="to"
-        heading="With diverse capabilities and extensive manufacturing experience, you can rely on Amwerk as a critical part of your supply chain."
-        primaryLabel="Book a meeting"
-        secondaryLabel="Get a quote"
+        eyebrow="Accelerate your digital journey"
+        eyebrowHighlight="Accelerate"
+        heading="Ready to modernize your infrastructure with custom, high-performance software engineering?"
+        primaryLabel="Schedule a Consultation"
+        secondaryLabel="View Case Studies"
         onPrimaryClick={() => {
-          // TODO: Implement contact form or redirect to contact page
-          console.log("Book a meeting clicked");
+          console.log("Consultation clicked");
         }}
         onSecondaryClick={() => {
-          // TODO: Implement quote form or redirect to quote page
-          console.log("Get a quote clicked");
+          console.log("Case Studies clicked");
         }}
       />
     </PageLayout>

@@ -27,7 +27,7 @@ const ServiceDetail = ({
   onCtaClick,
 }: ServiceDetailProps) => {
   return (
-    <section className="w-full py-16 px-8 bg-white border border-gray-100 rounded-2xl overflow-hidden">
+    <section className="w-full px-32 py-10 bg-white border border-gray-100 rounded-2xl overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-[42%_1fr_1fr] min-h-[480px]">
         {/* ── Image column ── */}
         <motion.div

@@ -22,7 +22,7 @@ const CTASection = ({
   onSecondaryClick,
 }: CTASectionProps) => {
   return (
-    <section className="w-full bg-white py-16 px-8">
+    <section className="w-full bg-white px-32 py-10">
       <div className="max-w-3xl mx-auto flex flex-col items-center text-center gap-8">
         {/* Eyebrow */}
         <motion.div
