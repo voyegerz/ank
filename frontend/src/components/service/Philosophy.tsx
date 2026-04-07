@@ -74,7 +74,7 @@ const ProgressRing = ({
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke="#2d9cdb"
+        stroke="var(--color-primary)"
         strokeWidth={stroke}
         strokeLinecap="round"
         strokeDasharray={circumference}
@@ -112,7 +112,7 @@ const PhilosophySection = ({
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <span className="bg-[#2d9cdb] text-white text-sm font-semibold px-2 py-0.5 leading-snug">
+          <span className="bg-primary text-white text-sm font-semibold px-2 py-0.5 leading-snug">
             {eyebrowHighlight}
           </span>
           <span className="text-sm text-gray-500 font-medium">

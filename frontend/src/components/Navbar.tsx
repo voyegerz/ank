@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import {
   ChevronRight,
   Star,
@@ -28,8 +28,8 @@ import {
 import logo from "../assets/images/logo.png";
 
 // ─── Brand Colors ────────────────────────────────────────────────────────────
-const ANK_NAVY = "#002E5D";
-const ANK_CYAN = "#00AEEF";
+const ANK_PRIMARY = "#010080";
+const ANK_PRIMARY_HOVER = "#1a19b3";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -281,30 +281,33 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
         <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-4 px-2">
           Services
         </p>
-        {WHAT_WE_DO_TABS.map((tab) => (
-          <button
-            key={tab.id}
-            onMouseEnter={() => setActiveTab(tab.id)}
-            className={`text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-200 flex items-center justify-between group uppercase tracking-wider ${
-              activeTab === tab.id
-                ? "text-white shadow-md"
-                : "text-slate-500 hover:text-slate-900 hover:bg-black/3"
-            }`}
-            style={{
-              backgroundColor: activeTab === tab.id ? ANK_NAVY : "transparent",
-            }}
-          >
-            {tab.label}
-            <ChevronRight
-              size={11}
-              className={`transition-all duration-200 ${
+        {WHAT_WE_DO_TABS.map((tab) => {
+          return (
+            <button
+              key={tab.id}
+              onMouseEnter={() => setActiveTab(tab.id)}
+              className={`text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-200 flex items-center justify-between group uppercase tracking-wider ${
                 activeTab === tab.id
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 -translate-x-2 group-hover:opacity-30"
+                  ? "text-white shadow-md"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-black/3"
               }`}
-            />
-          </button>
-        ))}
+              style={{
+                backgroundColor:
+                  activeTab === tab.id ? ANK_PRIMARY : "transparent",
+              }}
+            >
+              {tab.label}
+              <ChevronRight
+                size={11}
+                className={`transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-2 group-hover:opacity-30"
+                }`}
+              />
+            </button>
+          );
+        })}
       </div>
 
       {/* Animated content pane */}
@@ -336,43 +339,53 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
 
             {/* Links */}
             <div className="flex-1 flex flex-col justify-center px-8 py-8 gap-0 bg-slate-50">
-              <p
-                className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-6"
-                style={{ color: ANK_CYAN }}
-              >
-                {current.label}
-              </p>
+              <p style={{ color: ANK_PRIMARY }}>{current.label}</p>
               <div className="grid grid-cols-1 gap-1">
-                {current.items.map((item, i) => (
-                  <motion.div
-                    key={item.path}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.03, duration: 0.2 }}
-                  >
-                    <Link
-                      to={item.path}
-                      onClick={onClose}
-                      className="group flex items-center gap-3 py-2.5 text-[14px] font-black text-slate-600 hover:text-slate-900 transition-all duration-200 uppercase tracking-tight"
+                {current.items.map((item, i) => {
+                  return (
+                    <motion.div
+                      key={item.path}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.03, duration: 0.2 }}
                     >
-                      <span
-                        className="w-0 group-hover:w-4 h-0.5 transition-all duration-300"
-                        style={{ backgroundColor: ANK_NAVY }}
-                      />
-                      {item.name}
-                      <ArrowUpRight
-                        size={13}
-                        className="ml-auto opacity-0 group-hover:opacity-100 transition-all -translate-y-0.5 translate-x-0.5"
-                        style={{ color: ANK_NAVY }}
-                      />
-                    </Link>
-                  </motion.div>
-                ))}
+                      <NavLink
+                        to={item.path}
+                        onClick={onClose}
+                        className={({ isActive }) =>
+                          `group flex items-center gap-3 py-2.5 text-[14px] font-black transition-all duration-200 uppercase tracking-tight ${
+                            isActive
+                              ? "text-primary"
+                              : "text-slate-600 hover:text-primary"
+                          }`
+                        }
+                      >
+                        {({ isActive }) => (
+                          <>
+                            <span
+                              className={`transition-all duration-300 ${isActive ? "w-4" : "w-0 group-hover:w-4"} h-0.5`}
+                              style={{ backgroundColor: ANK_PRIMARY }}
+                            />
+                            {item.name}
+                            <ArrowUpRight
+                              size={13}
+                              className={`ml-auto transition-all -translate-y-0.5 translate-x-0.5 ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+                              style={{ color: ANK_PRIMARY }}
+                            />
+                          </>
+                        )}
+                      </NavLink>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
 
             {/* News Section */}
-            <div className="w-72 border-l border-black/4 bg-slate-50/50 p-8 flex flex-col overflow-y-auto no-scrollbar">
+            <div
+              className="w-72 border-l border-black/4 bg-slate-50/50 p-8 flex flex-col overflow-y-auto no-scrollbar"
+              data-lenis-prevent
+            >
               <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-6">
                 Latest News
               </p>
@@ -393,12 +406,12 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
                       />
                     </div>
                     <div className="flex items-center gap-1 mb-1">
-                      <h5 className="text-[10px] font-black uppercase text-slate-900 group-hover:text-[#00AEEF] transition-colors">
+                      <h5 className="text-[10px] font-black uppercase text-slate-900 group-hover:text-primary transition-colors">
                         {n.title}
                       </h5>
                       <ArrowUpRight
                         size={9}
-                        className="text-slate-400 group-hover:text-[#00AEEF] transition-colors"
+                        className="text-slate-400 group-hover:text-primary transition-colors"
                       />
                     </div>
                     <p className="text-[9px] text-slate-500 leading-relaxed line-clamp-2">
@@ -415,132 +428,121 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-const BusinessUnitsMenu = ({ onClose }: { onClose: () => void }) => (
-  <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
-    <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-8 px-2">
-      Business Units
-    </p>
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      {BUSINESS_UNITS.map((unit, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.03, duration: 0.2 }}
-        >
-          <Link
-            to={unit.path}
-            onClick={onClose}
-            className={`group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
-              unit.featured
-                ? "text-white shadow-lg"
-                : "bg-slate-50 border-black/4 hover:bg-white hover:border-slate-300 text-slate-600 hover:text-slate-900"
-            }`}
-            style={{
-              backgroundColor: unit.featured ? ANK_NAVY : undefined,
-              borderColor: unit.featured ? ANK_NAVY : undefined,
-            }}
-          >
-            <div
-              className={`p-2 rounded-sm shrink-0 transition-all duration-200 ${
-                unit.featured
-                  ? "bg-white/20 text-white"
-                  : "bg-white shadow-sm group-hover:bg-slate-900 group-hover:text-white"
-              }`}
-              style={{
-                color: !unit.featured ? ANK_NAVY : undefined,
-                backgroundColor: !unit.featured ? "#fff" : undefined,
-              }}
+const BusinessUnitsMenu = ({ onClose }: { onClose: () => void }) => {
+  return (
+    <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {BUSINESS_UNITS.map((unit, i) => {
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.03, duration: 0.2 }}
             >
-              {unit.icon}
-            </div>
-            <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
-              {unit.title}
-            </span>
-          </Link>
-        </motion.div>
-      ))}
+              <NavLink
+                to={unit.path}
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+                    isActive
+                      ? "text-white shadow-lg"
+                      : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
+                  }`
+                }
+                style={({ isActive }) => ({
+                  backgroundColor: isActive ? ANK_PRIMARY : undefined,
+                  borderColor: isActive ? ANK_PRIMARY : undefined,
+                })}
+              >
+                <div>{unit.icon}</div>
+                <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
+                  {unit.title}
+                </span>
+              </NavLink>
+            </motion.div>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-const ProductsMenu = ({ onClose }: { onClose: () => void }) => (
-  <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
-    <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-8 px-2">
-      Products
-    </p>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {PRODUCTS.map((prod, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.04, duration: 0.2 }}
-        >
-          <Link
-            to={prod.path}
-            onClick={onClose}
-            className="flex items-center gap-5 p-5 rounded-sm border border-black/4 bg-slate-50 hover:bg-white hover:border-slate-300 transition-all duration-200 group h-full"
-          >
-            <div
-              className="p-3 rounded-sm bg-white shadow-sm transition-all group-hover:text-white group-hover:bg-slate-900"
-              style={{ color: ANK_CYAN }}
+const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
+  return (
+    <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        {PRODUCTS.map((prod, i) => {
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.03, duration: 0.2 }}
             >
-              {prod.icon}
-            </div>
-            <div>
-              <p className="text-[13px] font-black text-slate-600 group-hover:text-slate-900 transition-colors uppercase tracking-tight">
-                {prod.title}
-              </p>
-              <p className="text-[10px] font-medium text-slate-400 uppercase tracking-widest mt-0.5">
-                {prod.desc}
-              </p>
-            </div>
-            <ArrowUpRight
-              size={14}
-              className="ml-auto opacity-0 group-hover:opacity-100 transition-all"
-              style={{ color: ANK_NAVY }}
-            />
-          </Link>
-        </motion.div>
-      ))}
+              <NavLink
+                to={prod.path}
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+                    isActive
+                      ? "text-white shadow-lg"
+                      : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
+                  }`
+                }
+              >
+                <div>{prod.icon}</div>
+                <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
+                  {prod.title}
+                </span>
+              </NavLink>
+            </motion.div>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-const AboutMenu = ({ onClose }: { onClose: () => void }) => (
-  <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
-    <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-8 px-4">
-      About ANK
-    </p>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-      {ABOUT_LINKS.map((link, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -5 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.02, duration: 0.18 }}
-        >
-          <Link
-            to={link.path}
-            onClick={onClose}
-            className="flex items-center gap-3 px-4 py-4 rounded-sm hover:bg-slate-50 transition-all group border border-transparent hover:border-black/4"
-          >
-            <div
-              className="transition-colors group-hover:text-slate-900"
-              style={{ color: ANK_NAVY }}
+const AboutMenu = ({ onClose }: { onClose: () => void }) => {
+  return (
+    <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {ABOUT_LINKS.map((link, i) => {
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.03, duration: 0.2 }}
             >
-              {link.icon}
-            </div>
-            <span className="text-[11px] text-slate-600 group-hover:text-slate-900 transition-colors font-black uppercase tracking-widest">
-              {link.title}
-            </span>
-          </Link>
-        </motion.div>
-      ))}
+              <NavLink
+                to={link.path}
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+                    isActive
+                      ? "text-white shadow-lg"
+                      : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
+                  }`
+                }
+                style={({ isActive }) => ({
+                  backgroundColor: isActive ? ANK_PRIMARY : undefined,
+                  borderColor: isActive ? ANK_PRIMARY : undefined,
+                })}
+              >
+                <div>{link.icon}</div>
+                <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
+                  {link.title}
+                </span>
+              </NavLink>
+            </motion.div>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // ─── Navbar ────────────────────────────────────────────────────────────────────
 
@@ -609,15 +611,15 @@ const Navbar = () => {
   return (
     <>
       {/* ── Desktop Floating Navbar ── */}
-      <div className="fixed top-0 left-0 w-full z-80 flex justify-center items-start pt-6 pointer-events-none px-6">
-        <div className="relative">
+      <div className="fixed top-0 left-0 w-full z-80 flex justify-center items-start lg:pt-6 pointer-events-none px-0 lg:px-6">
+        <div className="relative w-full lg:w-auto">
           <motion.nav
             ref={navBarRef as any}
             initial={{ y: -30, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            style={{ ...glass, borderRadius: 4, pointerEvents: "auto" }}
-            className="flex items-center gap-0.5 px-3 py-2 relative shadow-2xl shadow-black/5"
+            style={{ ...glass, pointerEvents: "auto" }}
+            className="flex items-center justify-between lg:justify-start gap-0.5 px-6 lg:px-3 py-4 lg:py-2 relative shadow-2xl shadow-black/5 rounded-none lg:rounded-sm border-x-0 lg:border-x w-full lg:w-auto"
             onMouseLeave={scheduleClose}
           >
             {/* Logo */}
@@ -667,23 +669,35 @@ const Navbar = () => {
                   }
                 >
                   {item.path ? (
-                    <Link
+                    <NavLink
                       to={item.path}
-                      className="px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-colors duration-150 block whitespace-nowrap"
-                      style={{
-                        color:
-                          location.pathname === item.path
-                            ? ANK_NAVY
-                            : "#64748b",
-                      }}
+                      className={({ isActive }) =>
+                        `px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-colors duration-150 block whitespace-nowrap ${
+                          isActive
+                            ? "text-primary"
+                            : "text-[#64748b] hover:text-primary"
+                        }`
+                      }
+                      style={{ color: undefined }} // Let NavLink className handle it
                     >
                       {item.name}
-                    </Link>
+                    </NavLink>
                   ) : (
                     <button
                       className="px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-colors duration-150 flex items-center gap-1 whitespace-nowrap"
                       style={{
-                        color: hoveredMenu === item.name ? ANK_NAVY : "#64748b",
+                        color:
+                          hoveredMenu === item.name ||
+                          (item.name === "What we do" &&
+                            location.pathname.startsWith("/services/")) ||
+                          (item.name === "Business units" &&
+                            location.pathname.startsWith("/business-units/")) ||
+                          (item.name === "Products" &&
+                            location.pathname.startsWith("/products/")) ||
+                          (item.name === "About ANK" &&
+                            location.pathname.startsWith("/about/"))
+                            ? ANK_PRIMARY
+                            : "#64748b",
                       }}
                     >
                       {item.name}
@@ -706,8 +720,8 @@ const Navbar = () => {
               onClick={() => navigate("/contact")}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-sm transition-colors whitespace-nowrap shadow-xl"
-              style={{ backgroundColor: ANK_NAVY, pointerEvents: "auto" }}
+              className="text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-sm transition-colors whitespace-nowrap shadow-xl hover:bg-primary-hover"
+              style={{ backgroundColor: ANK_PRIMARY, pointerEvents: "auto" }}
             >
               Get a quote
             </motion.button>
@@ -742,6 +756,8 @@ const Navbar = () => {
                   top: "calc(100% + 12px)",
                   left: 0,
                   width: navBarWidth,
+                  maxHeight: "85vh",
+                  overflowY: "auto",
                   transformOrigin: "top center",
                   borderRadius: 4,
                   zIndex: 90,
@@ -750,6 +766,7 @@ const Navbar = () => {
                 }}
                 onMouseEnter={cancelClose}
                 onMouseLeave={scheduleClose}
+                data-lenis-prevent
               >
                 {navItems.find((i) => i.name === hoveredMenu)?.component}
               </motion.div>
@@ -766,7 +783,8 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-100 lg:hidden overflow-y-auto"
+            className="fixed inset-0  w-screen  z-100 lg:hidden overflow-y-auto"
+            data-lenis-prevent
             style={{
               background: "rgba(255,255,255,0.98)",
               backdropFilter: "blur(24px)",
@@ -797,7 +815,6 @@ const Navbar = () => {
                   }}
                   className="border-b border-black/4"
                 >
-                  ...
                   {item.path ? (
                     <Link
                       to={item.path}
@@ -911,7 +928,7 @@ const Navbar = () => {
                   setIsMobileMenuOpen(false);
                 }}
                 className="mt-8 w-full text-white py-4 rounded-sm text-[13px] font-black uppercase tracking-[0.2em] shadow-xl transition-colors"
-                style={{ backgroundColor: ANK_NAVY }}
+                style={{ backgroundColor: ANK_PRIMARY }}
               >
                 Get a quote
               </motion.button>

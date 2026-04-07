@@ -41,7 +41,7 @@ const ServiceDetail = ({
             alt="Service"
             className="w-full h-full object-cover"
           />
-          <div className="absolute bottom-0 left-0 right-0 bg-[#2d9cdb] px-6 py-5">
+          <div className="absolute bottom-0 left-0 right-0 bg-primary px-6 py-5">
             <p className="text-white text-sm leading-relaxed">{caption}</p>
           </div>
         </motion.div>
@@ -90,7 +90,7 @@ const ServiceDetail = ({
               >
                 <CheckCircle2
                   size={16}
-                  className="text-[#2d9cdb] mt-0.5 shrink-0"
+                  className="text-primary mt-0.5 shrink-0"
                 />
                 {f}
               </motion.li>
@@ -99,7 +99,7 @@ const ServiceDetail = ({
 
           <button
             onClick={onCtaClick}
-            className="mt-2 bg-[#2d9cdb] hover:bg-[#1a7ab5] text-white text-sm font-semibold
+            className="mt-2 bg-primary hover:bg-primary-hover text-white text-sm font-semibold
                        px-6 py-2.5 rounded-lg transition-colors duration-200"
           >
             {ctaLabel}

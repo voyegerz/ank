@@ -28,12 +28,12 @@ const DetailedProcessSection = ({
         {/* Header Section */}
         <div className="mb-16 md:mb-24 text-center">
           <motion.div
-            className="inline-flex items-center gap-2 px-3 py-1 bg-[#2d9cdb]/10 border border-[#2d9cdb]/20 rounded-full text-[#2d9cdb] text-[11px] font-bold uppercase tracking-widest mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[11px] font-bold uppercase tracking-widest mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2d9cdb] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             {eyebrow}
           </motion.div>
           <motion.h2
@@ -92,7 +92,7 @@ const DetailedProcessSection = ({
                   className={`w-full flex ${isLeft ? "md:justify-start" : "md:justify-end"} mb-12 md:mb-[-60px]`}
                 >
                   <motion.div
-                    className="w-full md:w-[46%] bg-[#f4f4f4] p-8 md:p-10 border-b-[4px] border-[#2d9cdb] rounded-sm shadow-sm relative group"
+                    className="w-full md:w-[46%] bg-[#f4f4f4] p-8 md:p-10 border-b-[4px] border-primary rounded-sm shadow-sm relative group"
                     initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
@@ -103,12 +103,12 @@ const DetailedProcessSection = ({
                       <h3 className="text-2xl md:text-3xl font-black text-[#1a1a1a] uppercase tracking-tight mb-2 flex items-center justify-between">
                         {step.title}
                         <ArrowRight
-                          className="text-[#2d9cdb] opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all"
+                          className="text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all"
                           size={24}
                         />
                       </h3>
                       {step.subtitle && (
-                        <p className="text-[#2d9cdb] font-black uppercase text-[11px] tracking-[0.3em]">
+                        <p className="text-primary font-black uppercase text-[11px] tracking-[0.3em]">
                           {step.subtitle}
                         </p>
                       )}

@@ -35,7 +35,7 @@ const CTASection = ({
           <span className="text-[11px] md:text-sm text-gray-500 font-bold uppercase tracking-widest">
             {eyebrow.split(eyebrowHighlight)[0]}
           </span>
-          <span className="bg-[#2d9cdb] text-white text-[10px] md:text-xs font-black px-2 py-0.5 leading-snug uppercase tracking-widest">
+          <span className="bg-primary text-white text-[10px] md:text-xs font-black px-2 py-0.5 leading-snug uppercase tracking-widest">
             {eyebrowHighlight}
           </span>
           <span className="text-[11px] md:text-sm text-gray-500 font-bold uppercase tracking-widest">
@@ -66,7 +66,7 @@ const CTASection = ({
           {/* Primary */}
           <button
             onClick={onPrimaryClick}
-            className="w-full sm:w-auto bg-[#2d9cdb] text-white font-black
+            className="w-full sm:w-auto bg-primary text-white font-black
                        text-[11px] md:text-[13px] px-8 py-4 uppercase tracking-widest transition-all duration-300
                        hover:-translate-y-1 hover:shadow-xl active:scale-95"
           >

@@ -56,7 +56,7 @@ const CommonHero = ({
 
       {/* ── Left accent bar ── */}
       <motion.div
-        className="absolute left-0 top-0 w-1 bg-[#2d9cdb] z-[4]"
+        className="absolute left-0 top-0 w-1 bg-primary z-[4]"
         initial={{ height: 0 }}
         animate={{ height: "55%" }}
         transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -67,8 +67,8 @@ const CommonHero = ({
         className="absolute right-[-20px] bottom-[-30px] z-[3] select-none pointer-events-none
                    font-black text-white/[0.025] leading-none tracking-[-0.02em]"
         style={{
-          fontFamily: "'Barlow Condensed', sans-serif",
-          fontSize: "clamp(8rem, 20vw, 18rem)",
+          fontFamily: "var(--font-sans)",
+          fontSize: "clamp(6rem, 15vw, 12rem)",
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -86,8 +86,8 @@ const CommonHero = ({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="w-2 h-2 rounded-full bg-[#2d9cdb] animate-pulse" />
-          <span className="text-[#7dd3f8] text-[13px] font-semibold tracking-[.12em] uppercase">
+          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="text-[#7dd3f8] text-[11px] font-semibold tracking-[.12em] uppercase">
             {caption}
           </span>
         </motion.div>
@@ -96,19 +96,19 @@ const CommonHero = ({
         <motion.h1
           className="font-black uppercase leading-none tracking-[.02em] text-white mb-6"
           style={{
-            fontFamily: "'Barlow Condensed', sans-serif",
-            fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+            fontFamily: "var(--font-sans)",
+            fontSize: "clamp(2rem, 6vw, 4rem)",
           }}
           initial={{ opacity: 0, x: -36 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
         >
           {restOfTitle && <>{restOfTitle} </>}
-          <span className="text-[#2d9cdb] relative">
+          <span className=" relative">
             {lastWord}
             {/* Decorative underline */}
             <motion.span
-              className="absolute -bottom-2 left-0 h-1 bg-[#2d9cdb]/50 rounded-full"
+              className="absolute -bottom-2 left-0 h-1 bg-white/40 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{
@@ -129,7 +129,7 @@ const CommonHero = ({
             transition={{ duration: 0.8, delay: 0.52, ease: [0.16, 1, 0.3, 1] }}
           >
             <motion.div
-              className="w-12 h-[2px] bg-[#2d9cdb] mt-3 flex-shrink-0"
+              className="w-12 h-[2px] bg-primary mt-3 flex-shrink-0"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -137,7 +137,7 @@ const CommonHero = ({
             />
             <p
               className="text-white/60 max-w-[560px] leading-[1.75] font-normal"
-              style={{ fontSize: "clamp(.95rem, 1.8vw, 1.15rem)" }}
+              style={{ fontSize: "clamp(.875rem, 1.5vw, 1rem)" }}
             >
               {subtitle}
             </p>
@@ -161,7 +161,7 @@ const CommonHero = ({
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <motion.div
-            className="w-1.5 h-3 bg-[#2d9cdb] rounded-full mt-2"
+            className="w-1.5 h-3 bg-primary rounded-full mt-2"
             animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           />

@@ -29,7 +29,7 @@ const ServiceProcess = ({ items }: ServiceProcessProps) => {
             >
               {/* Step Number Badge */}
               <div className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-100 text-[#2d9cdb] text-[11px] font-black tracking-widest shadow-sm">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-100 text-primary text-[11px] font-black tracking-widest shadow-sm">
                   {item.number}
                 </span>
                 <div className="h-px flex-1 bg-gray-50 md:hidden" />
@@ -41,7 +41,7 @@ const ServiceProcess = ({ items }: ServiceProcessProps) => {
                   {item.title}
                 </h3>
                 {/* Visual Accent */}
-                <div className="w-12 h-[3px] bg-[#2d9cdb] rounded-full transition-all duration-300 group-hover:w-20" />
+                <div className="w-12 h-[3px] bg-primary rounded-full transition-all duration-300 group-hover:w-20" />
               </div>
 
               {/* Description */}
@@ -52,10 +52,9 @@ const ServiceProcess = ({ items }: ServiceProcessProps) => {
               {/* Functional CTA / Arrow Indicator */}
               <motion.div className="mt-auto">
                 <button
-                  className="w-10 h-10 rounded-full border border-gray-100 text-[#2d9cdb]
-                              flex items-center justify-center
-                              hover:bg-[#2d9cdb] hover:text-white hover:border-[#2d9cdb]
-                              transition-all duration-300 shadow-sm"
+                  className="w-10 h-10 rounded-full border border-gray-100 text-primary
+                              flex items-center justify-center transition-all duration-300 shadow-sm
+                              hover:bg-primary hover:text-white hover:border-primary"
                 >
                   <ArrowRight
                     size={16}

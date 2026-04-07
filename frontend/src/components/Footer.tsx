@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <footer className="bg-slate-950 text-white relative overflow-hidden">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-sky-500/5 -skew-x-12 translate-x-1/2 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2 pointer-events-none"></div>
       
       <div className="container mx-auto px-6 pt-24 pb-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
@@ -38,7 +38,7 @@ const Footer = () => {
           
           {/* Services Links */}
           <div>
-            <h4 className="text-[10px] font-black text-sky-500 uppercase tracking-[0.3em] mb-10">Our Services</h4>
+            <h4 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-10">Our Services</h4>
             <ul className="space-y-4">
               <FooterLink to="/services/mechanical-engineering" label="Mechanical Engineering" />
               <FooterLink to="/services/software-engineering" label="Industrial Software" />
@@ -50,22 +50,22 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-[10px] font-black text-sky-500 uppercase tracking-[0.3em] mb-10">Contact Us</h4>
+            <h4 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-10">Contact Us</h4>
             <div className="space-y-8">
               <div className="flex gap-4 group cursor-default">
-                <MapPin className="text-sky-500 shrink-0 group-hover:scale-110 transition-transform" size={20} />
+                <MapPin className="text-white shrink-0 group-hover:scale-110 transition-transform" size={20} />
                 <p className="text-sm font-bold text-slate-300 leading-relaxed">
                   Office No. S-4, 2nd Floor, Commercial Building, Pune, MH 411001
                 </p>
               </div>
               <div className="flex gap-4 group cursor-default">
-                <Phone className="text-sky-500 shrink-0 group-hover:scale-110 transition-transform" size={20} />
+                <Phone className="text-white shrink-0 group-hover:scale-110 transition-transform" size={20} />
                 <p className="text-sm font-bold text-slate-300">
                   +91 123 456 7890
                 </p>
               </div>
               <div className="flex gap-4 group cursor-default">
-                <Mail className="text-sky-500 shrink-0 group-hover:scale-110 transition-transform" size={20} />
+                <Mail className="text-white shrink-0 group-hover:scale-110 transition-transform" size={20} />
                 <p className="text-sm font-bold text-slate-300">
                   info@ankautomation.com
                 </p>
@@ -75,7 +75,7 @@ const Footer = () => {
 
           {/* Quick Links / Newsletter */}
           <div>
-            <h4 className="text-[10px] font-black text-sky-500 uppercase tracking-[0.3em] mb-10">Quick Links</h4>
+            <h4 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-10">Quick Links</h4>
             <ul className="space-y-4 mb-10">
               <FooterLink to="/about/company-overview" label="About Company" />
               <FooterLink to="/careers" label="Join Our Team" />
@@ -87,9 +87,9 @@ const Footer = () => {
                <input 
                  type="email" 
                  placeholder="Newsletter..." 
-                 className="w-full bg-slate-900 border-none px-6 py-4 text-sm font-bold text-white placeholder:text-slate-600 focus:ring-2 focus:ring-sky-500 transition-all outline-none"
+                 className="w-full bg-slate-900 border-none px-6 py-4 text-sm font-bold text-white placeholder:text-slate-600 focus:ring-2 focus:ring-primary transition-all outline-none"
                />
-               <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-sky-500 flex items-center justify-center hover:bg-white hover:text-sky-500 transition-all">
+               <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-primary flex items-center justify-center hover:bg-white hover:text-primary transition-all">
                   <Send size={16} />
                </button>
             </div>
@@ -111,15 +111,15 @@ const Footer = () => {
 }
 
 const SocialIcon = ({ icon }: { icon: any }) => (
-  <a href="#" className="w-10 h-10 bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-sky-500 hover:text-white transition-all duration-300">
+  <a href="#" className="w-10 h-10 bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all duration-300">
     {icon}
   </a>
 )
 
 const FooterLink = ({ to, label }: { to: string, label: string }) => (
   <li>
-    <Link to={to} className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-sky-500 transition-all">
-      <ChevronRight size={12} className="text-sky-500 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+    <Link to={to} className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white transition-all">
+      <ChevronRight size={12} className="text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
       {label}
     </Link>
   </li>

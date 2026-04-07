@@ -28,8 +28,8 @@ const Stars = ({ count }: { count: number }) => (
         key={i}
         className="w-4 h-4"
         viewBox="0 0 24 24"
-        fill={i < count ? "#2d9cdb" : "none"}
-        stroke={i < count ? "#2d9cdb" : "#6b7280"}
+        fill={i < count ? "var(--color-primary)" : "none"}
+        stroke={i < count ? "var(--color-primary)" : "#6b7280"}
         strokeWidth="1.5"
       >
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -68,7 +68,7 @@ const Testimonials = ({
           <span className="text-sm text-gray-500 font-medium">
             {eyebrow.split(eyebrowHighlight)[0]}
           </span>
-          <span className="bg-[#2d9cdb] text-white text-sm font-semibold px-2 py-0.5 leading-snug">
+          <span className="bg-primary text-white text-sm font-semibold px-2 py-0.5 leading-snug">
             {eyebrowHighlight}
           </span>
           <span className="text-sm text-gray-500 font-medium">
