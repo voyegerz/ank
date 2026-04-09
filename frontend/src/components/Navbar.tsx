@@ -29,7 +29,6 @@ import logo from "../assets/images/logo.png";
 
 // ─── Brand Colors ────────────────────────────────────────────────────────────
 const ANK_PRIMARY = "#010080";
-const ANK_PRIMARY_HOVER = "#1a19b3";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
