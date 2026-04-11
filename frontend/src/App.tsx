@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "./components/SmoothScroll";
@@ -7,7 +6,6 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Preloader from "./components/Preloader";
 import ScrollToTop from "./components/ScrollToTop";
 
 // --- Services ---
@@ -59,14 +57,9 @@ import SoftwareEngineering from "./pages/services/Product Engineering/SoftwareEn
 
 function App() {
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
 
   return (
     <>
-      {/* <AnimatePresence mode="wait">
-        {loading && <Preloader onComplete={() => setLoading(false)} />}
-      </AnimatePresence> */}
-
       <SmoothScroll>
         <div className="min-h-screen bg-white text-slate-900 font-sans">
           <ScrollToTop />

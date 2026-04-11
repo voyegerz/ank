@@ -613,7 +613,7 @@ const Navbar = () => {
       <div className="fixed top-0 left-0 w-full z-80 flex justify-center items-start lg:pt-6 pointer-events-none px-0 lg:px-6">
         <div className="relative w-full lg:w-auto">
           <motion.nav
-            ref={navBarRef as any}
+            ref={navBarRef}
             initial={{ y: -30, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}

@@ -110,7 +110,7 @@ const Footer = () => {
   )
 }
 
-const SocialIcon = ({ icon }: { icon: any }) => (
+const SocialIcon = ({ icon }: { icon: React.ReactNode }) => (
   <a href="#" className="w-10 h-10 bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all duration-300">
     {icon}
   </a>

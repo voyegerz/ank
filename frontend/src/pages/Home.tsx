@@ -1213,7 +1213,7 @@ const Home = () => {
               <div className="group">
                 <div className="w-12 h-12 rounded-sm flex items-center justify-center text-slate-300 bg-slate-50 group-hover:bg-slate-900 group-hover:text-white mb-6 transition-all shadow-sm">
                   {React.cloneElement(
-                    loc.icon as React.ReactElement<{ color?: string }>,
+                    loc.icon as React.ReactElement<{ className?: string }>,
                     { className: "text-primary-hover" },
                   )}
                 </div>

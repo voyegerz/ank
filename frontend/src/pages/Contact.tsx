@@ -68,7 +68,7 @@ const Contact = () => {
   )
 }
 
-const ContactInfo = ({ icon, title, detail }: { icon: any, title: string, detail: string }) => (
+const ContactInfo = ({ icon, title, detail }: { icon: React.ReactNode, title: string, detail: string }) => (
   <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex items-start gap-4">
     <div className="p-4 bg-blue-50 rounded-2xl">{icon}</div>
     <div>
