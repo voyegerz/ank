@@ -1,0 +1,22 @@
+Category,Page Name,URL Path,Section Name,Complexity,Status,Notes
+Home,Landing Page,/,Hero Slider,High,In Progress,Multi-slide parallax Framer Motion
+Home,Landing Page,/,Feature Highlights,Low,Done,3-column icon grid (Glassmorphism)
+Home,Landing Page,/,ANK Values,Medium,In Progress,Stats counter + Founder Quote
+Home,Landing Page,/,Partners Marquee,Low,Done,Infinite auto-scroll CSS animation
+Home,Landing Page,/,Performance Progress,Medium,In Progress,Animated progress bars (In-view)
+Home,Landing Page,/,Expert Team,Medium,In Progress,Grayscale hover cards
+Home,Landing Page,/,Testimonials,Medium,In Progress,Centered quote slider
+Home,Landing Page,/,Portfolio Row,Medium,In Progress,Horizontal scrollable project cards
+Home,Landing Page,/,Map & HQ,Medium,In Progress,Google Maps Iframe + Info Card
+Services,CAD Services,/cad-services,Hero / Design Watermark,Medium,Done,Large background image + Tint
+Services,CAD Services,/cad-services,Capabilities Grid,Medium,Done,8-card technical grid
+Services,Software Services,/software-services,Hero / Tech Watermark,Medium,Done,Large background image + Tint
+Services,Software Services,/software-services,Digital Checklist,Low,Done,Checkmark list + Image
+Sub-Page,Software Eng.,/services/software-eng,Core Capabilities,Low,In Progress,Standard 2-column detail layout
+Sub-Page,PCB Assembly,/services/pcb-assembly,Core Capabilities,Low,In Progress,Standard 2-column detail layout
+Company,About Us,/about,Mission / Story,Medium,Done,High-contrast split layouts
+Company,Careers,/careers,Job Search CTA,Low,Done,Simple hero + "View Positions"
+Contact,Get in Touch,/contact,Inquiry Form,High,Pending,Form validation + API Integration
+Contact,Get in Touch,/contact,Office Details,Low,Done,Email/Phone/Address icon boxes
+Global,Navigation,N/A,Main Navbar,Medium,Done,Glassmorphism Responsive Mobile
+Global,Footer,N/A,Multi-column Footer,Low,Done,Sitemap + Social Links + Logo

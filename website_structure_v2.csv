@@ -1,0 +1,39 @@
+Page Name,Section Name,Status,Notes
+Home Page (/),Hero Slider (Multi-slide),In Progress,4 slides parallax Framer Motion
+Home Page (/),Feature Highlights (3-col),Done,Integrity Automation Innovation
+Home Page (/),ANK Values (Founder Quote),In Progress,Founder's quote + Stats (1K+)
+Home Page (/),Partners Marquee,Done,Infinite Brand scroll
+Home Page (/),Performance Stats (Progress Bars),In Progress,Animated skill bars
+Home Page (/),Expert Team (4-col),In Progress,Grayscale hover profiles
+Home Page (/),Testimonials (Slider),In Progress,Center-aligned quotes
+Home Page (/),Careers Split CTA,Done,"Join our expert team"
+Home Page (/),Insights / News (3-col),Done,Latest ANK News cards
+Home Page (/),Portfolio Row (H-Scroll),In Progress,Case study images
+Home Page (/),Map & Locations,In Progress,Google Maps + HQ Address
+Home Page (/),Final Footer CTA,Done,"Launch your next project"
+CAD Services (/cad-services),Hero Design Watermark,Done,"Cyan accent, Large background"
+CAD Services (/cad-services),Values Checklist,Done,Checkmarks + Engineering Future
+CAD Services (/cad-services),Capabilities Grid (8 cards),Done,"CAD, 3D Modelling, Rendering, DFM"
+CAD Services (/cad-services),Job Done Split Section,Done,"ANK always gets the job done"
+Software Services (/software-services),Hero Software Watermark,Done,"Cyan accent, Large background"
+Software Services (/software-services),Approach Checklist,Done,"Custom software, Cloud, UI/UX"
+Software Services (/software-services),Software Capabilities (8 cards),Done,"Web, Mobile, Cloud, SaaS, QA"
+Software Services (/software-services),Scale Performance Split,Done,"Performance at scale CTA"
+About Us (/about),Hero Background Tint,Done,"Who we are? typography"
+About Us (/about),Stat Boxes (4-col),Done,"Awards, Success Rate, Expertise"
+About Us (/about),Mission / Vision Section,Done,Background image overlay
+About Us (/about),Service List Detail (Numbered),Done,"Parts production, Precision, Aero"
+About Us (/about),Team & Careers Preview,Done,Expert profiles + Join Us card
+Company Overview (/about/overview),Split Intro (Who we are),Done,Text vs Vision Sidebar
+Company Overview (/about/overview),Key Company Stats,Done,"Years of Excellence, Expert Engineers"
+Sub-Pages (Templates),Hero (CommonHero),Done,Standard Title / Subtitle component
+Sub-Pages (Templates),Capabilities / Features List,In Progress,Detailed capability items
+Sub-Pages (Templates),Vertical Why Partner Sidebar,In Progress,Why Partner with us? panel
+Sub-Pages (Templates),CTA Primary Button,Done,Discuss Your Project
+Careers (/careers),Join the Team Hero,Done,Indigo-500 accents
+Careers (/careers),Open Positions Section,Pending,Button link to job list
+Contact (/contact),Let's Connect Hero,Done,Centered accent title
+Contact (/contact),Contact Info Cards (3-col),Done,"Mail, Phone, MapPin"
+Contact (/contact),Inquiry Form (Interactive),In Progress,"Name, Email, Subject, Message"
+Global Navigation,Main Navbar (Sticky),Done,"Logo + Dropdowns (Services, Units)"
+Global Footer,Bottom Sitemap,Done,4 columns + Social Icons
