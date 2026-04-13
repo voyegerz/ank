@@ -38,27 +38,31 @@ const UnitValue = ({
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Category Tag with Animated Square */}
-          <div className="flex items-center gap-3 mb-5">
-            <motion.div
-              className="w-7 h-7 bg-primary shadow-lg shadow-primary/20"
-              initial={{ scale: 0, rotate: -45 }}
-              whileInView={{ scale: 1, rotate: 0 }}
+          {/* Category Tag with Highlighted First Word */}
+          <div className="flex items-center mb-6">
+            <motion.span
+              className="bg-primary text-white font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs px-3 py-1.5 shadow-lg shadow-primary/20"
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-            />
-            <span className="text-slate-500 font-bold tracking-[0.2em] uppercase text-xs">
-              {category}
-            </span>
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            >
+              {category.split(" ")[0]}
+            </motion.span>
+            {category.split(" ").length > 1 && (
+              <span className="text-slate-500 font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs ml-1">
+                {category.split(" ").slice(1).join(" ")}
+              </span>
+            )}
           </div>
 
           {/* Title */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-5 leading-[1.1] tracking-tight">
+          <h2 className="text-2xl md:text-4xl lg:text-4xl font-black text-slate-900 mb-5 leading-[1.1] tracking-tight">
             {title}
           </h2>
 
           {/* Description */}
-          <p className="text-slate-600 text-base leading-relaxed mb-7 max-w-xl font-medium">
+          <p className="text-slate-600 text-sm leading-relaxed mb-7 max-w-xl font-medium">
             {description}
           </p>
 
@@ -79,7 +83,7 @@ const UnitValue = ({
                     strokeWidth={2.5}
                   />
                 </div>
-                <span className="text-slate-800 font-bold text-base md:text-lg leading-tight">
+                <span className="text-slate-800 font-bold text-base  leading-tight">
                   {highlight}
                 </span>
               </motion.li>
@@ -110,7 +114,7 @@ const UnitValue = ({
           <div className="absolute top-8 -right-8 w-14 h-14 bg-primary/10 rounded-full blur-3xl" />
 
           {/* Main Image Container */}
-          <div className="relative aspect-[4/5] lg:aspect-[3/4] xl:aspect-auto xl:h-[540px] overflow-hidden rounded-sm shadow-xl border-4 border-white">
+          <div className="relative aspect-[4/5] lg:aspect-[3/4] xl:aspect-auto xl:h-[450px] overflow-hidden rounded-sm shadow-xl border-4 border-white">
             <img
               src={imageUrl}
               alt={imageAlt}
@@ -122,17 +126,17 @@ const UnitValue = ({
 
           {/* Floating Info */}
           <motion.div
-            className="absolute -bottom-8 -left-8 bg-[#010080] p-7 hidden xl:block shadow-xl skew-x-[-12deg]"
+            className="absolute -bottom-8 -left-8 bg-[#010080] px-4 py-2 hidden xl:block  skew-x-[-12deg]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.8 }}
           >
             <div className="skew-x-[12deg]">
-              <div className="text-white text-3xl font-black tracking-tighter italic">
+              <div className="text-white text-2xl font-black tracking-tighter italic">
                 ANK
               </div>
-              <div className="text-white text-xs font-bold uppercase tracking-[0.3em] mt-1 ml-1">
+              <div className="text-white  font-bold uppercase ">
                 Excellence
               </div>
             </div>

@@ -27,11 +27,11 @@ const ServiceDetail = ({
   onCtaClick,
 }: ServiceDetailProps) => {
   return (
-    <section className="w-full px-6 md:px-16 lg:px-32 py-10 bg-white border border-gray-100 rounded-2xl overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-[42%_1fr_1fr] min-h-[480px]">
+    <section className="w-full mt-10 px-6 md:px-16 lg:px-32 py-16 bg-white  rounded-2xl overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-[35%_1fr_1fr] min-h-[450px] gap-10">
         {/* ── Image column ── */}
         <motion.div
-          className="relative overflow-hidden min-h-[300px] md:min-h-0"
+          className="relative overflow-hidden bg-white"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -39,7 +39,7 @@ const ServiceDetail = ({
           <img
             src={image || defaultImage}
             alt="Service"
-            className="w-full h-full object-cover"
+            className="w-full h-full  object-cover"
           />
           <div className="absolute bottom-0 left-0 right-0 bg-primary px-6 py-5">
             <p className="text-white text-sm leading-relaxed">{caption}</p>
@@ -48,7 +48,6 @@ const ServiceDetail = ({
 
         {/* ── Left text column ── */}
         <motion.div
-          className="px-4 md:px-7 py-6 md:py-8 border-t md:border-t-0 md:border-l border-gray-100"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -65,7 +64,6 @@ const ServiceDetail = ({
 
         {/* ── Right features column ── */}
         <motion.div
-          className="px-4 md:px-7 py-6 md:py-8 border-t md:border-t-0 md:border-l border-gray-100"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}

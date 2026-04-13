@@ -55,7 +55,7 @@ const defaultClients: Client[] = [
 const UnitClients = ({ clients = defaultClients }: UnitClientsProps) => {
   return (
     <section 
-      className="w-full h-100 flex items-center px-6 md:px-16 lg:px-32 py-10 overflow-hidden bg-white"
+      className="w-full h-50 flex items-center px-6 md:px-16 lg:px-32 overflow-hidden bg-white"
     >
       <div className="w-full mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16 lg:gap-24 items-center">
