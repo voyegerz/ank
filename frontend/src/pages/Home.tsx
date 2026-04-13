@@ -8,21 +8,17 @@ import {
 } from "framer-motion";
 import PageLayout from "../components/PageLayout";
 import {
-  ArrowRight,
-  Settings2,
-  ShieldCheck,
-  Lightbulb,
   Mail,
-  Phone,
   MapPin,
   CheckCircle2,
   Users,
   Briefcase,
   Zap,
   Globe,
+  ArrowRight,
+  Settings2,
   Quote,
-  Clock,
-  ArrowUpRight,
+  ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -64,41 +60,6 @@ const slides = [
     cta: "Learn More",
     link: "/contact",
     bg: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=2400",
-  },
-];
-
-const partners = [
-  "Siemens",
-  "Bosch",
-  "Rockwell",
-  "Honeywell",
-  "ABB",
-  "Schneider",
-  "Emerson",
-  "Parker",
-];
-
-const solutions = [
-  {
-    title: "Power & Energy",
-    desc: "Smart grid integration, energy management systems, and renewable infrastructure for the modern world.",
-    icon: <Zap size={24} />,
-    image:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    title: "Auto & Aero",
-    desc: "Precision manufacturing, quality engineering and assembly for the automotive and aerospace sectors.",
-    icon: <Globe size={24} />,
-    image:
-      "https://images.unsplash.com/photo-1539186607619-df4765be0585?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    title: "Manufacturing",
-    desc: "End-to-end manufacturing solutions: from rapid prototyping to full-scale production line setup.",
-    icon: <Settings2 size={24} />,
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
@@ -155,62 +116,6 @@ const team = [
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
   },
 ];
-
-const news = [
-  {
-    title: "ANK named industry leader",
-    date: "Oct 02, 2025",
-    excerpt:
-      "Recognized by the Engineering Excellence Awards for the third consecutive year for innovation in industrial automation.",
-    category: "Announcements",
-  },
-  {
-    title: "Travis Kirkpatrick appointed EU CEO",
-    date: "Sep 26, 2025",
-    excerpt:
-      "Seasoned executive with 20+ years in European manufacturing brings deep regional expertise to drive expansion.",
-    category: "News",
-  },
-  {
-    title: "ANK volunteers for local charity",
-    date: "Sep 17, 2025",
-    excerpt:
-      "Our team spent the weekend building STEM labs for under-resourced schools — because engineering begins with education.",
-    category: "Community",
-  },
-];
-
-const portfolio = [
-  {
-    title: "Industrial Aero Products",
-    image:
-      "https://images.unsplash.com/photo-1539186607619-df4765be0585?auto=format&fit=crop&q=80&w=900",
-  },
-  {
-    title: "Tools for Industry",
-    image:
-      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=900",
-  },
-  {
-    title: "Berlin Railway Elements",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=900",
-  },
-  {
-    title: "Aircraft Components",
-    image:
-      "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=900",
-  },
-];
-
-// ─── Shared glass style ────────────────────────────────────────────────────────
-
-const glassLight: React.CSSProperties = {
-  background: "rgba(255,255,255,0.5)",
-  backdropFilter: "blur(20px)",
-  WebkitBackdropFilter: "blur(20px)",
-  border: "1px solid rgba(0,0,0,0.05)",
-};
 
 // ─── Fade-in wrapper ───────────────────────────────────────────────────────────
 const FadeIn = ({
@@ -388,6 +293,169 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── 2. Our Services ─────────────────────────────────────────────────── */}
+      <section id="services" className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+          <FadeIn className="mb-20">
+            <Label>Our Solutions</Label>
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+              Professional <span className="text-primary-hover">Services</span>
+            </h2>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Product Designs",
+                items: ["Cad Design - 2D/3D", "FEA Analysis", "Reverse Engineering", "SPM"],
+                icon: <Settings2 size={24} />,
+              },
+              {
+                title: "Industrial Automation",
+                items: ["PLC Programming", "Panel Automation", "DCS/SCADA/HMI"],
+                icon: <Zap size={24} />,
+              },
+              {
+                title: "Software Solutions",
+                items: ["Website Design", "Application Design", "SAAS", "Mobile App", "Web/IoT App", "Inventory Mgt."],
+                icon: <Globe size={24} />,
+              },
+              {
+                title: "Manufacturing",
+                items: ["Rapid Prototyping", "3D Printing", "PCB Design/Manufacture"],
+                icon: <Briefcase size={24} />,
+              },
+              {
+                title: "Student Outreach",
+                items: ["Schools/College Projects", "Workshops", "Project to Product (P2P)", "DIY Robotics Kits"],
+                icon: <Users size={24} />,
+              },
+            ].map((service, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="p-10 rounded-sm border border-black/5 bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 group h-full">
+                  <div className="w-12 h-12 bg-white rounded-sm flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 uppercase mb-6 font-sans group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {service.items.map((item, j) => (
+                      <li key={j} className="flex items-center gap-2 text-[13px] text-slate-500 font-bold uppercase tracking-tight">
+                        <CheckCircle2 size={14} className="text-primary/40" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2.5 Our Values ─────────────────────────────────────────────────── */}
+      <section className="py-32 bg-slate-50 border-t border-black/5">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+          <FadeIn className="text-center mb-20">
+            <Label>ANK Values</Label>
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+              Built on <span className="text-primary-hover">Core Principles</span>
+            </h2>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                title: "Integrity",
+                desc: "Honesty and transparency in all engineering processes.",
+                icon: <ShieldCheck size={24} />,
+              },
+              {
+                title: "Automation",
+                desc: "Streamlining operations for maximum efficiency and growth.",
+                icon: <Zap size={24} />,
+              },
+              {
+                title: "Innovation",
+                desc: "Constantly pushing the boundaries of design and automation.",
+                icon: <Globe size={24} />,
+              },
+              {
+                title: "Excellence",
+                desc: "Committed to delivering high-quality, precise industrial solutions.",
+                icon: <Settings2 size={24} />,
+              },
+            ].map((value, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="p-10 rounded-sm bg-white border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group text-center">
+                  <div className="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-8 mx-auto group-hover:bg-primary group-hover:text-white transition-colors">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-lg font-black text-slate-900 uppercase mb-4 font-sans">
+                    {value.title}
+                  </h3>
+                  <p className="text-[13px] text-slate-500 font-medium leading-relaxed uppercase tracking-tight">
+                    {value.desc}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. Student Outreach ─────────────────────────────────────────────── */}
+      <section className="py-32 bg-slate-950 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 skew-x-[-15deg] translate-x-1/2" />
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <FadeIn>
+              <Label color="var(--color-primary-hover)">Student Outreach</Label>
+              <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-[0.95] mb-8 uppercase font-sans">
+                Are you a <span className="text-primary-hover">student?</span>
+              </h2>
+              <p className="text-base text-slate-400 mb-10 leading-relaxed max-w-lg font-medium">
+                We believe engineering begins with education. Our student outreach programs provide hands-on experience, mentorship, and resources to help the next generation of innovators build the future.
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                {[
+                  "Schools/College Projects",
+                  "Industry Workshops",
+                  "Project to Product (P2P)",
+                  "DIY Robotics Kits",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-[12px] font-black uppercase tracking-widest text-slate-300">
+                    <span className="w-2 h-2 bg-primary-hover rounded-full" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-3 bg-primary text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm hover:bg-primary-hover transition-all shadow-2xl"
+              >
+                Get in touch with us <ArrowRight size={16} />
+              </Link>
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <div className="relative aspect-video rounded-sm overflow-hidden shadow-2xl border border-white/10">
+                <img
+                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200"
+                  className="w-full h-full object-cover grayscale brightness-50"
+                  alt="Student Outreach"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="p-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-sm text-center">
+                    <p className="text-3xl font-black text-white mb-2 uppercase font-sans">1000+</p>
+                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.2em]">Students Empowered</p>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
 
       {/* ── 8. Team ───────────────────────────────────────────────────────────── */}
       <section className="py-32 bg-slate-50 border-t border-black/4">
@@ -426,6 +494,74 @@ const Home = () => {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 9. Testimonials ────────────────────────────────────────────────────── */}
+      <section className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-primary rounded-full blur-3xl" />
+        </div>
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+          <FadeIn className="text-center mb-20">
+            <Label>Testimonials</Label>
+            <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+              What our <span className="text-primary-hover">clients say</span>
+            </h2>
+          </FadeIn>
+
+          <div className="max-w-4xl mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTestimonial}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-10 text-primary-hover/20">
+                  <Quote size={80} strokeWidth={1} />
+                </div>
+                <p className="text-[clamp(1.1rem,2.5vw,1.8rem)] font-black text-slate-800 leading-tight mb-12 font-sans italic">
+                  "{testimonials[currentTestimonial].quote}"
+                </p>
+                <div className="flex items-center justify-center gap-5">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-hover shadow-xl">
+                    <img
+                      src={testimonials[currentTestimonial].image}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest">
+                      {testimonials[currentTestimonial].author}
+                    </p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                      {testimonials[currentTestimonial].role}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex justify-center gap-3 mt-16">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentTestimonial(i)}
+                  className={`transition-all duration-500 rounded-full ${currentTestimonial === i ? "w-8 h-1" : "w-1 h-1 bg-slate-200"}`}
+                  style={{
+                    backgroundColor:
+                      currentTestimonial === i
+                        ? "var(--color-primary)"
+                        : undefined,
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -485,50 +621,6 @@ const Home = () => {
         </div>
       </section>
 
-
-      {/* ── 12. Portfolio ────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-50 border-t border-black/4">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 mb-20">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-            <FadeIn>
-              <Label>Our Work</Label>
-              <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
-                Recent projects
-              </h2>
-            </FadeIn>
-          </div>
-        </div>
-        <div className="flex gap-6 px-8 md:px-16 lg:px-24 overflow-x-auto pb-10 no-scrollbar">
-          {portfolio.map((item, i) => (
-            <FadeIn key={i} delay={i * 0.07} className="shrink-0">
-              <div className="w-85 md:w-130 aspect-video rounded-sm overflow-hidden relative group cursor-pointer shadow-xl">
-                <img
-                  src={item.image}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000"
-                  alt={item.title}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(to top, var(--color-primary) 0%, transparent 60%)`,
-                  }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-10">
-                  <h4 className="text-[18px] font-black text-white uppercase translate-y-2 group-hover:translate-y-0 transition-transform duration-400 font-sans">
-                    {item.title}
-                  </h4>
-                  <Link
-                    to="/about/case-studies"
-                    className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-white/60 uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-400 mt-4"
-                  >
-                    View project <ArrowUpRight size={12} />
-                  </Link>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
 
       {/* ── 13. Map & Locations ───────────────────────────────────────────────── */}
       <section className="border-t border-black/4 bg-white">
@@ -613,18 +705,18 @@ const Home = () => {
               without the hassle.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link
-                to="/contact"
+              <a
+                href="#services"
                 className="group inline-flex items-center justify-center gap-3 text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm shadow-2xl transition-all hover:bg-primary-hover bg-primary"
               >
-                Start a project{" "}
+                Explore Solutions{" "}
                 <ArrowRight
                   size={16}
                   className="group-hover:translate-x-1 transition-transform"
                 />
-              </Link>
+              </a>
               <Link
-                to="/services"
+                to="/services/software-engineering"
                 className="inline-flex items-center justify-center gap-3 text-[11px] font-black tracking-widest text-slate-900 uppercase px-12 py-5 rounded-sm border-2 border-slate-900/10 hover:border-slate-900 transition-all bg-white shadow-sm"
               >
                 Our services
@@ -634,38 +726,6 @@ const Home = () => {
         </div>
       </section>
     </PageLayout>
-  );
-};
-
-// ─── Progress bar ──────────────────────────────────────────────────────────────
-const ProgressBar = ({
-  label,
-  percentage,
-}: {
-  label: string;
-  percentage: number;
-}) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  return (
-    <div ref={ref}>
-      <div className="flex justify-between mb-4">
-        <span className="text-[11px] font-black text-slate-900 uppercase tracking-widest font-sans">
-          {label}
-        </span>
-        <span className="text-[11px] font-black text-slate-400">
-          {percentage}%
-        </span>
-      </div>
-      <div className="h-1.5 bg-slate-100 overflow-hidden rounded-full shadow-inner">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${percentage}%` } : {}}
-          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
-          className="h-full rounded-full bg-primary"
-        />
-      </div>
-    </div>
   );
 };
 

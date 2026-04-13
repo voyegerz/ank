@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 
 interface MarqueeProps {
   images: string[];
@@ -12,7 +12,6 @@ const Marquee = ({ images, speed = 50, className = "" }: MarqueeProps) => {
   const pausedRef = useRef(false);
   const rafRef = useRef<number>(0);
   const lastTimeRef = useRef<number | null>(null);
-  const [singleWidth, setSingleWidth] = useState(0);
 
   // Ensure enough copies for a seamless loop
   const repeatCount = Math.ceil(12 / images.length) + 1;
@@ -22,16 +21,6 @@ const Marquee = ({ images, speed = 50, className = "" }: MarqueeProps) => {
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
-
-    // Wait for images to load or next tick to measure
-    const measureWidth = () => {
-      const halfWidth = track.scrollWidth / 2;
-      setSingleWidth(halfWidth);
-    };
-
-    measureWidth();
-    // Re-measure after a short delay to account for image loading
-    const timer = setTimeout(measureWidth, 500);
 
     const animate = (timestamp: number) => {
       if (lastTimeRef.current === null) lastTimeRef.current = timestamp;
@@ -54,7 +43,6 @@ const Marquee = ({ images, speed = 50, className = "" }: MarqueeProps) => {
     rafRef.current = requestAnimationFrame(animate);
     return () => {
       cancelAnimationFrame(rafRef.current);
-      clearTimeout(timer);
     };
   }, [speed, images.length]);
 

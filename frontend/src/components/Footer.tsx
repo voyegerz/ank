@@ -40,7 +40,7 @@ const Footer = () => {
 
         {/* Services Links */}
         <div>
-          <h4 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-10">
+          <h4 className="text-xs font-black text-white uppercase tracking-[0.3em] mb-10">
             Our Services
           </h4>
           <ul className="space-y-4">
@@ -63,7 +63,7 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h4 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-10">
+          <h4 className="text-xs font-black text-white uppercase tracking-[0.3em] mb-10">
             Contact Us
           </h4>
           <div className="space-y-8">
@@ -99,14 +99,14 @@ const Footer = () => {
 
         {/* Quick Links / Newsletter */}
         <div>
-          <h4 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-10">
+          <h4 className="text-xs font-black text-white uppercase tracking-[0.3em] mb-10">
             Quick Links
           </h4>
           <ul className="space-y-4 mb-10">
             <FooterLink to="/about/company-overview" label="About Company" />
             <FooterLink to="/careers" label="Join Our Team" />
             <FooterLink to="/about/case-studies" label="Case Studies" />
-            <FooterLink to="/contact" label="Get A Quote" />
+            <FooterLink to="/contact" label="Contact Us" />
           </ul>
 
           <div className="relative group">
@@ -156,7 +156,7 @@ const FooterLink = ({ to, label }: { to: string; label: string }) => (
   <li>
     <Link
       to={to}
-      className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white transition-all"
+      className="group flex items-center gap-2 text-base font-bold text-slate-400 hover:text-white transition-all"
     >
       <ChevronRight
         size={12}

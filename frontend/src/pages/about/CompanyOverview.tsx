@@ -25,15 +25,25 @@ const CompanyOverview = () => {
               <p className="text-lg text-slate-600 font-medium leading-relaxed mb-10">
                 From mechanical design and automation to embedded and IoT systems, to Custom Application Development our team collaborates closely to ensure every project meets technical accuracy, industry relevance, and execution quality.
               </p>
-              <div className="grid grid-cols-2 gap-8">
-                 <StatItem label="Years of Excellence" value="15+" />
-                 <StatItem label="Expert Engineers" value="50+" />
+              <div className="grid grid-cols-2 gap-8 mb-12">
+                 <StatItem label="Years of Exp" value="8+" />
+                 <StatItem label="Expertise" value="15+" />
               </div>
+              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Govt. Associations</h2>
+              <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                We are proud to be associated with various government initiatives and certifications, ensuring our solutions meet the highest standards of regulatory compliance and industrial safety.
+              </p>
             </div>
-            <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100 flex flex-col justify-center">
-               <h3 className="text-xl font-black text-slate-900 mb-8 uppercase">Our Vision</h3>
-               <p className="text-slate-600 font-medium leading-relaxed mb-8">To be the global leader in providing integrated engineering and software solutions that empower industries to reach their full potential.</p>
-               <button className="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3">Contact Leadership <ArrowRight size={20} /></button>
+            <div className="flex flex-col gap-8">
+              <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100 flex flex-col justify-center">
+                 <h3 className="text-xl font-black text-slate-900 mb-4 uppercase text-primary-hover">Our Vision</h3>
+                 <p className="text-slate-600 font-medium leading-relaxed">To be the global leader in providing integrated engineering and software solutions that empower industries to reach their full potential.</p>
+              </div>
+              <div className="bg-slate-900 p-12 rounded-[3rem] border border-slate-800 flex flex-col justify-center text-white">
+                 <h3 className="text-xl font-black mb-4 uppercase text-primary-hover">Our Mission</h3>
+                 <p className="text-slate-300 font-medium leading-relaxed">To deliver cutting-edge engineering excellence through innovative design, automation, and manufacturing solutions that solve complex challenges for our global clients.</p>
+              </div>
+               <button className="w-full bg-primary text-white py-5 rounded-2xl font-black text-lg hover:bg-primary-hover transition-all flex items-center justify-center gap-3">Contact Leadership <ArrowRight size={20} /></button>
             </div>
           </div>
         </div>

@@ -1,24 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   ChevronRight,
-  Star,
-  User,
-  FileCode,
-  Search,
-  GraduationCap,
-  Settings2,
   Filter,
   LayoutGrid,
   Zap,
   BookOpen,
   Stethoscope,
-  Brain,
   FileText,
-  Video,
-  Newspaper,
-  Layout,
   Wrench,
   Menu,
   X,
@@ -31,50 +21,6 @@ import logo from "../assets/images/logo.png";
 const ANK_PRIMARY = "#010080";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-
-const BUSINESS_UNITS = [
-  {
-    title: "CAD Design Services",
-    icon: <Star size={15} />,
-    path: "/business-units/cad-design",
-    featured: true,
-  },
-  {
-    title: "Software Development",
-    icon: <FileCode size={15} />,
-    path: "/business-units/software-development",
-  },
-  {
-    title: "Manufacturing",
-    icon: <Settings2 size={15} />,
-    path: "/business-units/manufacturing",
-  },
-  {
-    title: "Embedded Systems & IoT",
-    icon: <Zap size={15} />,
-    path: "/business-units/embedded-iot",
-  },
-  {
-    title: "Cloud Services & Scaling",
-    icon: <Search size={15} />,
-    path: "/business-units/cloud-scaling",
-  },
-  {
-    title: "Education",
-    icon: <GraduationCap size={15} />,
-    path: "/business-units/education",
-  },
-  {
-    title: "Engineering Consultation",
-    icon: <Wrench size={15} />,
-    path: "/business-units/engineering-consultation",
-  },
-  {
-    title: "Industry Collaboration",
-    icon: <User size={15} />,
-    path: "/business-units/industry-collaboration",
-  },
-];
 
 const PRODUCTS = [
   {
@@ -107,12 +53,6 @@ const PRODUCTS = [
     icon: <Stethoscope size={15} />,
     path: "/products/medical",
   },
-  {
-    title: "Projects & Modelling",
-    desc: "Bespoke designs",
-    icon: <Brain size={15} />,
-    path: "/products/modelling",
-  },
 ];
 
 const ABOUT_LINKS = [
@@ -122,56 +62,109 @@ const ABOUT_LINKS = [
     path: "/about/overview",
   },
   {
-    title: "Press & Newsroom",
-    icon: <Newspaper size={14} />,
-    path: "/about/press",
-  },
-  { title: "Images & Videos", icon: <Video size={14} />, path: "/about/media" },
-  { title: "Blogs", icon: <Wrench size={14} />, path: "/about/blogs" },
-  {
     title: "Case Studies",
     icon: <Wrench size={14} />,
     path: "/about/case-studies",
   },
-  {
-    title: "Tutorials & Ebooks",
-    icon: <Layout size={14} />,
-    path: "/about/resources",
-  },
-  {
-    title: "Whitepapers",
-    icon: <FileText size={14} />,
-    path: "/about/whitepapers",
-  },
-  { title: "Support", icon: <Wrench size={14} />, path: "/about/support" },
 ];
 
-const WHAT_WE_DO_TABS = [
+const OUR_SERVICES_TABS = [
   {
-    id: "prod-eng",
-    label: "Product Engineering",
-    bg: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1600",
+    id: "prod-design",
+    label: "Product Designs",
+    bg: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1600",
     items: [
-      { name: "Software Engineering", path: "/services/software-engineering" },
-      { name: "Hardware Engineering", path: "/services/hardware-engineering" },
       {
-        name: "Mechanical Engineering",
+        name: "Cad Design - 2D/3D",
         path: "/services/mechanical-engineering",
+        image:
+          "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=800",
       },
-      { name: "Testing & QA", path: "/services/testing-qa" },
+      {
+        name: "FEA Analysis",
+        path: "/services/testing-qa",
+        image:
+          "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "Reverse Engineering",
+        path: "/services/reverse-engineering",
+        image:
+          "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "SPM",
+        path: "/services/spm",
+        image:
+          "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800",
+      },
     ],
-    news: [
+  },
+  {
+    id: "ind-auto",
+    label: "Industrial Automation",
+    bg: "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=1600",
+    items: [
       {
-        title: "Advanced Analytics",
-        desc: "Smarter data processing for complex hardware systems.",
+        name: "PLC Programming",
+        path: "/services/process-automation",
         image:
-          "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=400",
+          "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=800",
       },
       {
-        title: "Auto Reporting",
-        desc: "Automated compliance and safety reporting for factories.",
+        name: "Panel Automation",
+        path: "/services/panel-automation",
         image:
-          "https://images.unsplash.com/photo-1518186239717-2e9b136758e5?auto=format&fit=crop&q=80&w=400",
+          "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "DCS/SCADA/HMI",
+        path: "/services/software-automation",
+        image:
+          "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=800",
+      },
+    ],
+  },
+  {
+    id: "soft-sol",
+    label: "Software Solutions",
+    bg: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600",
+    items: [
+      {
+        name: "Website Design",
+        path: "/services/web-applications",
+        image:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "Application Design",
+        path: "/services/desktop-applications",
+        image:
+          "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "SAAS",
+        path: "/services/saas",
+        image:
+          "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "Mobile Application",
+        path: "/services/mobile-applications",
+        image:
+          "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "Web/IoT Application",
+        path: "/services/iot-applications",
+        image:
+          "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "Inventory Mgt.",
+        path: "/services/scaling-maintenance",
+        image:
+          "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
       },
     ],
   },
@@ -180,76 +173,54 @@ const WHAT_WE_DO_TABS = [
     label: "Manufacturing",
     bg: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600",
     items: [
-      { name: "PCB Assembly", path: "/services/pcb-assembly" },
-      { name: "Product Assembly", path: "/services/product-assembly" },
-      { name: "Rapid Prototyping", path: "/services/rapid-prototyping" },
-      { name: "FDM 3D Printing", path: "/services/fdm-3d-printing" },
-    ],
-    news: [
       {
-        title: "Precision PCB",
-        desc: "Our new assembly line achieves 0.1mm accuracy.",
+        name: "Rapid Prototyping",
+        path: "/services/rapid-prototyping",
         image:
-          "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400",
+          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
       },
       {
-        title: "3D Printing Lab",
-        desc: "Expanded prototyping capabilities with 10 new printers.",
+        name: "3D Printing",
+        path: "/services/fdm-3d-printing",
         image:
-          "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=400",
-      },
-    ],
-  },
-  {
-    id: "cloud",
-    label: "Cloud & Applications",
-    bg: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600",
-    items: [
-      { name: "Web Applications", path: "/services/web-applications" },
-      { name: "Mobile Applications", path: "/services/mobile-applications" },
-      { name: "Desktop Applications", path: "/services/desktop-applications" },
-      { name: "IoT Applications", path: "/services/iot-applications" },
-      { name: "Scaling & Maintenance", path: "/services/scaling-maintenance" },
-    ],
-    news: [
-      {
-        title: "Cloud Scaling",
-        desc: "How we handle 1M+ concurrent users for our clients.",
-        image:
-          "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400",
+          "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=800",
       },
       {
-        title: "IoT Edge Pro",
-        desc: "Secure local processing for industrial IoT sensors.",
+        name: "PCB Design/Manufacture",
+        path: "/services/pcb-assembly",
         image:
-          "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=400",
+          "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
       },
     ],
   },
   {
-    id: "automation",
-    label: "Production Automation",
-    bg: "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=1600",
+    id: "std-outreach",
+    label: "Student Outreach",
+    bg: "https://images.unsplash.com/photo-1523240715630-9918c13bc1ad?auto=format&fit=crop&q=80&w=1600",
     items: [
-      { name: "Software Automation", path: "/services/software-automation" },
-      { name: "Process Automation", path: "/services/process-automation" },
       {
-        name: "Maintenance & Troubleshooting",
-        path: "/services/maintenance-troubleshooting",
-      },
-    ],
-    news: [
-      {
-        title: "Smart Factory",
-        desc: "Full SCADA integration for a major automotive plant.",
+        name: "Schools/College Projects",
+        path: "/services/schools-college-projects",
         image:
-          "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=400",
+          "https://images.unsplash.com/photo-1523240715630-9918c13bc1ad?auto=format&fit=crop&q=80&w=800",
       },
       {
-        title: "Predictive Care",
-        desc: "AI-based maintenance system reduced downtime by 30%.",
+        name: "Workshops",
+        path: "/services/workshops",
         image:
-          "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=400",
+          "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "Project to Product (P2P)",
+        path: "/services/project-to-product",
+        image:
+          "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        name: "DIY Robotics Kits",
+        path: "/products/courses",
+        image:
+          "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800",
       },
     ],
   },
@@ -266,9 +237,22 @@ const glass: React.CSSProperties = {
 
 // ─── Dropdown panels ──────────────────────────────────────────────────────────
 
-const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
-  const [activeTab, setActiveTab] = useState(WHAT_WE_DO_TABS[0].id);
-  const current = WHAT_WE_DO_TABS.find((t) => t.id === activeTab)!;
+const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
+  const location = useLocation();
+  const currentPath = location.pathname.replace(/\/$/, "");
+  
+  // Find the tab that contains the current active path, or default to the first one
+  const initialTab = OUR_SERVICES_TABS.find(tab => 
+    tab.items.some(item => item.path.replace(/\/$/, "") === currentPath)
+  )?.id || OUR_SERVICES_TABS[0].id;
+
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
+  const current = OUR_SERVICES_TABS.find((t) => t.id === activeTab)!;
+
+  const activeImage =
+    current.items.find((item) => item.name === hoveredSubItem)?.image ||
+    current.items[0].image;
 
   return (
     <div
@@ -276,37 +260,45 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
       style={{ borderRadius: 4 }}
     >
       {/* Sidebar */}
-      <div className="w-56 flex flex-col justify-center gap-0.5 p-6 border-r border-black/4 bg-indigo-50/30">
-        <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-4 px-2">
+      <div className="w-56 flex flex-col justify-center gap-0.5 p-6 border-r border-black/4 bg-indigo-50/30 relative">
+        <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-4 px-2 relative z-10">
           Services
         </p>
-        {WHAT_WE_DO_TABS.map((tab) => {
-          return (
-            <button
-              key={tab.id}
-              onMouseEnter={() => setActiveTab(tab.id)}
-              className={`text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-200 flex items-center justify-between group uppercase tracking-wider ${
-                activeTab === tab.id
-                  ? "text-white shadow-md"
-                  : "text-slate-500 hover:text-slate-900 hover:bg-black/3"
-              }`}
-              style={{
-                backgroundColor:
-                  activeTab === tab.id ? ANK_PRIMARY : "transparent",
-              }}
-            >
-              {tab.label}
-              <ChevronRight
-                size={11}
-                className={`transition-all duration-200 ${
-                  activeTab === tab.id
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-2 group-hover:opacity-30"
+        <div className="relative flex flex-col gap-0.5">
+          {OUR_SERVICES_TABS.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onMouseEnter={() => {
+                  setActiveTab(tab.id);
+                  setHoveredSubItem(null);
+                }}
+                className={`text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-300 flex items-center justify-between group uppercase tracking-wider relative z-10 ${
+                  isActive ? "text-white" : "text-slate-500 hover:text-slate-900"
                 }`}
-              />
-            </button>
-          );
-        })}
+              >
+                {tab.label}
+                <ChevronRight
+                  size={11}
+                  className={`transition-all duration-300 ${
+                    isActive
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 group-hover:opacity-30"
+                  }`}
+                />
+                {isActive && (
+                  <motion.div
+                    layoutId="active-tab-bg"
+                    className="absolute inset-0 z-[-1] rounded-sm shadow-md"
+                    style={{ backgroundColor: ANK_PRIMARY }}
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Animated content pane */}
@@ -320,25 +312,14 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 flex"
           >
-            {/* Image strip with subtle dark/grey gradient */}
-            <div className="relative w-40 shrink-0 overflow-hidden hidden md:block">
-              <img
-                src={current.bg}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover grayscale brightness-75"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to right, rgba(0,0,0,0.4) 0%, #f8fafc 100%)",
-                }}
-              />
-            </div>
-
             {/* Links */}
-            <div className="flex-1 flex flex-col justify-center px-8 py-8 gap-0 bg-slate-50">
-              <p style={{ color: ANK_PRIMARY }}>{current.label}</p>
+            <div className="flex-1 flex flex-col justify-start px-8 pt-12 pb-10 gap-0 bg-white">
+              <p
+                className="text-[10px] font-black tracking-[0.2em] uppercase mb-6 opacity-40"
+                style={{ color: ANK_PRIMARY }}
+              >
+                {current.label}
+              </p>
               <div className="grid grid-cols-1 gap-1">
                 {current.items.map((item, i) => {
                   return (
@@ -347,32 +328,37 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.03, duration: 0.2 }}
+                      onMouseEnter={() => setHoveredSubItem(item.name)}
                     >
                       <NavLink
                         to={item.path}
                         onClick={onClose}
-                        className={({ isActive }) =>
-                          `group flex items-center gap-3 py-2.5 text-[14px] font-black transition-all duration-200 uppercase tracking-tight ${
-                            isActive
+                        className={({ isActive }) => {
+                          const active = isActive || location.pathname.replace(/\/$/, "") === item.path.replace(/\/$/, "");
+                          return `group flex items-center gap-3 py-2.5 text-[14px] font-black transition-all duration-200 uppercase tracking-tight ${
+                            active
                               ? "text-primary"
                               : "text-slate-600 hover:text-primary"
-                          }`
-                        }
+                          }`;
+                        }}
                       >
-                        {({ isActive }) => (
-                          <>
-                            <span
-                              className={`transition-all duration-300 ${isActive ? "w-4" : "w-0 group-hover:w-4"} h-0.5`}
-                              style={{ backgroundColor: ANK_PRIMARY }}
-                            />
-                            {item.name}
-                            <ArrowUpRight
-                              size={13}
-                              className={`ml-auto transition-all -translate-y-0.5 translate-x-0.5 ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
-                              style={{ color: ANK_PRIMARY }}
-                            />
-                          </>
-                        )}
+                        {({ isActive: navActive }) => {
+                          const active = navActive || location.pathname.replace(/\/$/, "") === item.path.replace(/\/$/, "");
+                          return (
+                            <>
+                              <span
+                                className={`transition-all duration-300 ${active ? "w-4" : "w-0 group-hover:w-4"} h-0.5`}
+                                style={{ backgroundColor: ANK_PRIMARY }}
+                              />
+                              {item.name}
+                              <ArrowUpRight
+                                size={13}
+                                className={`ml-auto transition-all -translate-y-0.5 translate-x-0.5 ${active ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+                                style={{ color: ANK_PRIMARY }}
+                              />
+                            </>
+                          );
+                        }}
                       </NavLink>
                     </motion.div>
                   );
@@ -380,45 +366,44 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
               </div>
             </div>
 
-            {/* News Section */}
-            <div
-              className="w-72 border-l border-black/4 bg-slate-50/50 p-8 flex flex-col overflow-y-auto no-scrollbar"
-              data-lenis-prevent
-            >
-              <p className="text-[9px] font-black tracking-[0.25em] text-slate-400 uppercase mb-6">
-                Latest News
-              </p>
-              <div className="space-y-4">
-                {current.news.map((n, i) => (
-                  <motion.div
-                    key={n.title}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
-                    className="group cursor-pointer bg-white p-3 rounded-sm border border-black/5 shadow-sm hover:shadow-md transition-all duration-300"
-                  >
-                    <div className="aspect-[16/9] rounded-sm overflow-hidden mb-3">
-                      <img
-                        src={n.image}
-                        alt=""
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="flex items-center gap-1 mb-1">
-                      <h5 className="text-[10px] font-black uppercase text-slate-900 group-hover:text-primary transition-colors">
-                        {n.title}
-                      </h5>
-                      <ArrowUpRight
-                        size={9}
-                        className="text-slate-400 group-hover:text-primary transition-colors"
-                      />
-                    </div>
-                    <p className="text-[9px] text-slate-500 leading-relaxed line-clamp-2">
-                      {n.desc}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
+            {/* Dynamic Image Display */}
+            <div className="w-85 border-l border-black/4 bg-slate-50 relative overflow-hidden">
+              <AnimatePresence mode="popLayout">
+                <motion.div
+                  key={activeImage}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={activeImage}
+                    alt=""
+                    className="w-full h-full object-cover grayscale-[0.2] brightness-90"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(to top, var(--color-primary) 0%, transparent 60%)`,
+                      opacity: 0.4,
+                    }}
+                  />
+                  <div className="absolute bottom-8 left-8 right-8">
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-[10px] font-black text-white uppercase tracking-[0.2em]"
+                    >
+                      {hoveredSubItem || "Featured Solution"}
+                    </motion.p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -427,50 +412,10 @@ const WhatWeDoMenu = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-const BusinessUnitsMenu = ({ onClose }: { onClose: () => void }) => {
-  return (
-    <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {BUSINESS_UNITS.map((unit, i) => {
-          return (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.03, duration: 0.2 }}
-            >
-              <NavLink
-                to={unit.path}
-                onClick={onClose}
-                className={({ isActive }) =>
-                  `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
-                    isActive
-                      ? "text-white shadow-lg"
-                      : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
-                  }`
-                }
-                style={({ isActive }) => ({
-                  backgroundColor: isActive ? ANK_PRIMARY : undefined,
-                  borderColor: isActive ? ANK_PRIMARY : undefined,
-                })}
-              >
-                <div>{unit.icon}</div>
-                <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
-                  {unit.title}
-                </span>
-              </NavLink>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
 const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
   return (
     <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         {PRODUCTS.map((prod, i) => {
           return (
             <motion.div
@@ -482,13 +427,21 @@ const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
               <NavLink
                 to={prod.path}
                 onClick={onClose}
-                className={({ isActive }) =>
-                  `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
-                    isActive
+                className={({ isActive }) => {
+                  const active = isActive || location.pathname.replace(/\/$/, "") === prod.path.replace(/\/$/, "");
+                  return `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+                    active
                       ? "text-white shadow-lg"
                       : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
-                  }`
-                }
+                  }`;
+                }}
+                style={({ isActive }) => {
+                  const active = isActive || location.pathname.replace(/\/$/, "") === prod.path.replace(/\/$/, "");
+                  return {
+                    backgroundColor: active ? ANK_PRIMARY : undefined,
+                    borderColor: active ? ANK_PRIMARY : undefined,
+                  };
+                }}
               >
                 <div>{prod.icon}</div>
                 <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
@@ -518,17 +471,21 @@ const AboutMenu = ({ onClose }: { onClose: () => void }) => {
               <NavLink
                 to={link.path}
                 onClick={onClose}
-                className={({ isActive }) =>
-                  `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
-                    isActive
+                className={({ isActive }) => {
+                  const active = isActive || location.pathname.replace(/\/$/, "") === link.path.replace(/\/$/, "");
+                  return `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+                    active
                       ? "text-white shadow-lg"
                       : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
-                  }`
-                }
-                style={({ isActive }) => ({
-                  backgroundColor: isActive ? ANK_PRIMARY : undefined,
-                  borderColor: isActive ? ANK_PRIMARY : undefined,
-                })}
+                  }`;
+                }}
+                style={({ isActive }) => {
+                  const active = isActive || location.pathname.replace(/\/$/, "") === link.path.replace(/\/$/, "");
+                  return {
+                    backgroundColor: active ? ANK_PRIMARY : undefined,
+                    borderColor: active ? ANK_PRIMARY : undefined,
+                  };
+                }}
               >
                 <div>{link.icon}</div>
                 <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
@@ -557,8 +514,22 @@ const Navbar = () => {
   const navRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const navBarRef = useRef<HTMLElement | null>(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
+
+  // Helper to find current subpage name for subtext
+  const getActiveSubtext = (menuName: string) => {
+    if (menuName === "Our Services") {
+      const allItems = OUR_SERVICES_TABS.flatMap((t) => t.items);
+      return allItems.find((i) => i.path === location.pathname)?.name;
+    }
+    if (menuName === "Products") {
+      return PRODUCTS.find((i) => i.path === location.pathname)?.title;
+    }
+    if (menuName === "About ANK") {
+      return ABOUT_LINKS.find((i) => i.path === location.pathname)?.title;
+    }
+    return null;
+  };
 
   useEffect(() => {
     setHoveredMenu(null);
@@ -588,12 +559,8 @@ const Navbar = () => {
 
   const navItems = [
     {
-      name: "What we do",
-      component: <WhatWeDoMenu onClose={() => setHoveredMenu(null)} />,
-    },
-    {
-      name: "Business units",
-      component: <BusinessUnitsMenu onClose={() => setHoveredMenu(null)} />,
+      name: "Our Services",
+      component: <OurServicesMenu onClose={() => setHoveredMenu(null)} />,
     },
     {
       name: "Products",
@@ -604,7 +571,6 @@ const Navbar = () => {
       component: <AboutMenu onClose={() => setHoveredMenu(null)} />,
     },
     { name: "Careers", path: "/careers" },
-    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -626,7 +592,7 @@ const Navbar = () => {
               to="/"
               className="flex items-center px-4 py-1 mr-2 shrink-0 transition-transform hover:scale-105"
             >
-              <img src={logo} alt="ANK" className="h-7 w-auto" />
+              <img src={logo} alt="ANK" className="h-10 w-auto" />
             </Link>
 
             {/* Sliding Highlight */}
@@ -657,73 +623,88 @@ const Navbar = () => {
 
             {/* Nav links */}
             <div className="hidden lg:flex items-center">
-              {navItems.map((item) => (
-                <div
-                  key={item.name}
-                  ref={(el) => {
-                    navRefs.current[item.name] = el;
-                  }}
-                  onMouseEnter={() =>
-                    item.component ? openMenu(item.name) : setHoveredMenu(null)
-                  }
-                >
-                  {item.path ? (
-                    <NavLink
-                      to={item.path}
-                      className={({ isActive }) =>
-                        `px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-colors duration-150 block whitespace-nowrap ${
-                          isActive
-                            ? "text-primary"
-                            : "text-[#64748b] hover:text-primary"
-                        }`
-                      }
-                      style={{ color: undefined }} // Let NavLink className handle it
-                    >
-                      {item.name}
-                    </NavLink>
-                  ) : (
-                    <button
-                      className="px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-colors duration-150 flex items-center gap-1 whitespace-nowrap"
-                      style={{
-                        color:
-                          hoveredMenu === item.name ||
-                          (item.name === "What we do" &&
-                            location.pathname.startsWith("/services/")) ||
-                          (item.name === "Business units" &&
-                            location.pathname.startsWith("/business-units/")) ||
-                          (item.name === "Products" &&
-                            location.pathname.startsWith("/products/")) ||
-                          (item.name === "About ANK" &&
-                            location.pathname.startsWith("/about/"))
-                            ? ANK_PRIMARY
-                            : "#64748b",
-                      }}
-                    >
-                      {item.name}
-                      <motion.span
-                        animate={{ rotate: hoveredMenu === item.name ? 90 : 0 }}
-                        transition={{ duration: 0.18 }}
-                        className="opacity-40"
+              {navItems.map((item) => {
+                const activeSub = getActiveSubtext(item.name);
+                return (
+                  <div
+                    key={item.name}
+                    ref={(el) => {
+                      navRefs.current[item.name] = el;
+                    }}
+                    onMouseEnter={() =>
+                      item.component ? openMenu(item.name) : setHoveredMenu(null)
+                    }
+                  >
+                    {item.path ? (
+                      <NavLink
+                        to={item.path}
+                        className={({ isActive }) =>
+                          `px-4 py-2 text-[13px] font-black uppercase tracking-[0.15em] transition-colors duration-150 block whitespace-nowrap ${
+                            isActive
+                              ? "text-primary"
+                              : "text-[#64748b] hover:text-primary"
+                          }`
+                        }
+                        style={{ color: undefined }} // Let NavLink className handle it
                       >
-                        <ChevronRight size={11} />
-                      </motion.span>
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
+                        {item.name}
+                      </NavLink>
+                    ) : (
+                      <button
+                        className="px-4 py-2 flex flex-col items-start justify-center min-w-[100px] transition-colors duration-150 group"
+                        style={{
+                          color:
+                            hoveredMenu === item.name ||
+                            (item.name === "Our Services" &&
+                              location.pathname.startsWith("/services/")) ||
+                            (item.name === "Products" &&
+                              location.pathname.startsWith("/products/")) ||
+                            (item.name === "About ANK" &&
+                              location.pathname.startsWith("/about/"))
+                              ? ANK_PRIMARY
+                              : "#64748b",
+                        }}
+                      >
+                        <div className="flex items-center gap-1">
+                          <span className="text-[13px] font-black uppercase tracking-[0.15em] whitespace-nowrap">
+                            {item.name}
+                          </span>
+                          <motion.span
+                            animate={{
+                              rotate: hoveredMenu === item.name ? 90 : 0,
+                            }}
+                            transition={{ duration: 0.18 }}
+                            className="opacity-40"
+                          >
+                            <ChevronRight size={11} />
+                          </motion.span>
+                        </div>
+                        {activeSub && (
+                          <motion.span
+                            initial={{ opacity: 0, y: -2 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-[8px] font-black uppercase tracking-[0.1em] -mt-0.5 text-left block w-full"
+                            style={{ color: ANK_PRIMARY }}
+                          >
+                            {activeSub}
+                          </motion.span>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
 
-            {/* Separator + CTA */}
-            <div className="hidden lg:block w-px h-5 bg-black/6 mx-2" />
-            <motion.button
-              onClick={() => navigate("/contact")}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-sm transition-colors whitespace-nowrap shadow-xl hover:bg-primary-hover"
-              style={{ backgroundColor: ANK_PRIMARY, pointerEvents: "auto" }}
-            >
-              Get a quote
-            </motion.button>
+              {/* Contact Us CTA Button */}
+              <div className="ml-2">
+                <Link
+                  to="/contact"
+                  className="px-6 py-2 bg-primary text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-sm shadow-xl hover:bg-primary-hover transition-all inline-block whitespace-nowrap"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -856,8 +837,8 @@ const Navbar = () => {
                             className="overflow-hidden"
                           >
                             <div className="pb-5 pl-2 flex flex-col gap-0.5">
-                              {item.name === "What we do" &&
-                                WHAT_WE_DO_TABS.map((tab) => (
+                              {item.name === "Our Services" &&
+                                OUR_SERVICES_TABS.map((tab) => (
                                   <div key={tab.id} className="mb-4">
                                     <p className="text-[9px] font-black tracking-[0.22em] text-slate-400 uppercase mb-2 mt-1">
                                       {tab.label}
@@ -875,17 +856,6 @@ const Navbar = () => {
                                       </Link>
                                     ))}
                                   </div>
-                                ))}
-                              {item.name === "Business units" &&
-                                BUSINESS_UNITS.map((u) => (
-                                  <Link
-                                    key={u.path}
-                                    to={u.path}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 block transition-colors"
-                                  >
-                                    {u.title}
-                                  </Link>
                                 ))}
                               {item.name === "Products" &&
                                 PRODUCTS.map((p) => (
@@ -917,20 +887,6 @@ const Navbar = () => {
                   )}
                 </motion.div>
               ))}
-
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.38 }}
-                onClick={() => {
-                  navigate("/contact");
-                  setIsMobileMenuOpen(false);
-                }}
-                className="mt-8 w-full text-white py-4 rounded-sm text-[13px] font-black uppercase tracking-[0.2em] shadow-xl transition-colors"
-                style={{ backgroundColor: ANK_PRIMARY }}
-              >
-                Get a quote
-              </motion.button>
             </div>
           </motion.div>
         )}

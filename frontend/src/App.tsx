@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "./components/SmoothScroll";
@@ -7,13 +6,15 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Preloader from "./components/Preloader";
 import ScrollToTop from "./components/ScrollToTop";
 
 // --- Services ---
 
 import HardwareEngineering from "./pages/services/Product Engineering/HardwareEngineering";
 import MechanicalEngineering from "./pages/services/Product Engineering/MechanicalEngineering";
+import ReverseEngineering from "./pages/services/Product Engineering/ReverseEngineering";
+import SPM from "./pages/services/Product Engineering/SPM";
+import SoftwareEngineering from "./pages/services/Product Engineering/SoftwareEngineering";
 import TestingQA from "./pages/services/Product Engineering/TestingQA";
 import PCBassembly from "./pages/services/Manufacturing/PCBassembly";
 import ProductAssembly from "./pages/services/Manufacturing/ProductAssembly";
@@ -24,19 +25,14 @@ import MobileApplications from "./pages/services/cloud and applications/MobileAp
 import DesktopApplications from "./pages/services/cloud and applications/DesktopApplications";
 import IoTApplications from "./pages/services/cloud and applications/IoTApplications";
 import ScalingMaintenance from "./pages/services/cloud and applications/ScalingMaintenance";
+import SAAS from "./pages/services/cloud and applications/SAAS";
 import SoftwareAutomation from "./pages/services/Production And Automation/SoftwareAutomation";
 import ProcessAutomation from "./pages/services/Production And Automation/ProcessAutomation";
+import PanelAutomation from "./pages/services/Production And Automation/PanelAutomation";
 import MaintenanceTroubleshooting from "./pages/services/Production And Automation/MaintenanceTroubleshooting";
-
-// --- Business Units ---
-import CADDesignServicesUnit from "./pages/business-units/CADDesignServices";
-import SoftwareDevelopmentUnit from "./pages/business-units/SoftwareDevelopment";
-import ManufacturingUnit from "./pages/business-units/Manufacturing";
-import EmbeddedSystemsIoTUnit from "./pages/business-units/EmbeddedSystemsIoT";
-import CloudScalingUnit from "./pages/business-units/CloudScaling";
-import EducationUnit from "./pages/business-units/Education";
-import EngineeringConsultationUnit from "./pages/business-units/EngineeringConsultation";
-import IndustryCollaborationUnit from "./pages/business-units/IndustryCollaboration";
+import SchoolsCollegeProjects from "./pages/services/Student Outreach/SchoolsCollegeProjects";
+import Workshops from "./pages/services/Student Outreach/Workshops";
+import ProjectToProduct from "./pages/services/Student Outreach/ProjectToProduct";
 
 // --- Products ---
 import DecorProducts from "./pages/products/DecorProducts";
@@ -48,25 +44,13 @@ import ProjectsModelling from "./pages/products/ProjectsModelling";
 
 // --- About ---
 import CompanyOverview from "./pages/about/CompanyOverview";
-import PressNewsroom from "./pages/about/PressNewsroom";
-import ImagesVideos from "./pages/about/ImagesVideos";
-import Blogs from "./pages/about/Blogs";
 import CaseStudies from "./pages/about/CaseStudies";
-import TutorialsEbooks from "./pages/about/TutorialsEbooks";
-import Whitepapers from "./pages/about/Whitepapers";
-import Support from "./pages/about/Support";
-import SoftwareEngineering from "./pages/services/Product Engineering/SoftwareEngineering";
 
 function App() {
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
 
   return (
     <>
-      {/* <AnimatePresence mode="wait">
-        {loading && <Preloader onComplete={() => setLoading(false)} />}
-      </AnimatePresence> */}
-
       <SmoothScroll>
         <div className="min-h-screen bg-white text-slate-900 font-sans">
           <ScrollToTop />
@@ -90,6 +74,11 @@ function App() {
                 path="/services/mechanical-engineering"
                 element={<MechanicalEngineering />}
               />
+              <Route
+                path="/services/reverse-engineering"
+                element={<ReverseEngineering />}
+              />
+              <Route path="/services/spm" element={<SPM />} />
               <Route path="/services/testing-qa" element={<TestingQA />} />
               <Route path="/services/pcb-assembly" element={<PCBassembly />} />
               <Route
@@ -124,6 +113,7 @@ function App() {
                 path="/services/scaling-maintenance"
                 element={<ScalingMaintenance />}
               />
+              <Route path="/services/saas" element={<SAAS />} />
               <Route
                 path="/services/software-automation"
                 element={<SoftwareAutomation />}
@@ -133,42 +123,21 @@ function App() {
                 element={<ProcessAutomation />}
               />
               <Route
+                path="/services/panel-automation"
+                element={<PanelAutomation />}
+              />
+              <Route
                 path="/services/maintenance-troubleshooting"
                 element={<MaintenanceTroubleshooting />}
               />
-
-              {/* Business Units */}
               <Route
-                path="/business-units/cad-design"
-                element={<CADDesignServicesUnit />}
+                path="/services/schools-college-projects"
+                element={<SchoolsCollegeProjects />}
               />
+              <Route path="/services/workshops" element={<Workshops />} />
               <Route
-                path="/business-units/software-development"
-                element={<SoftwareDevelopmentUnit />}
-              />
-              <Route
-                path="/business-units/manufacturing"
-                element={<ManufacturingUnit />}
-              />
-              <Route
-                path="/business-units/embedded-iot"
-                element={<EmbeddedSystemsIoTUnit />}
-              />
-              <Route
-                path="/business-units/cloud-scaling"
-                element={<CloudScalingUnit />}
-              />
-              <Route
-                path="/business-units/education"
-                element={<EducationUnit />}
-              />
-              <Route
-                path="/business-units/engineering-consultation"
-                element={<EngineeringConsultationUnit />}
-              />
-              <Route
-                path="/business-units/industry-collaboration"
-                element={<IndustryCollaborationUnit />}
+                path="/services/project-to-product"
+                element={<ProjectToProduct />}
               />
 
               {/* Products */}
@@ -187,13 +156,7 @@ function App() {
 
               {/* About Section */}
               <Route path="/about/overview" element={<CompanyOverview />} />
-              <Route path="/about/press" element={<PressNewsroom />} />
-              <Route path="/about/media" element={<ImagesVideos />} />
-              <Route path="/about/blogs" element={<Blogs />} />
               <Route path="/about/case-studies" element={<CaseStudies />} />
-              <Route path="/about/resources" element={<TutorialsEbooks />} />
-              <Route path="/about/whitepapers" element={<Whitepapers />} />
-              <Route path="/about/support" element={<Support />} />
             </Routes>
           </AnimatePresence>
           <Footer />
