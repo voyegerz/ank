@@ -49,6 +49,10 @@ import ProjectsModelling from "./pages/products/ProjectsModelling";
 import CompanyOverview from "./pages/about/CompanyOverview";
 import CaseStudies from "./pages/about/CaseStudies";
 
+// --- Admin ---
+import AdminLogin from "./pages/admin/Login";
+import AdminDashboard from "./pages/admin/Dashboard";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -166,6 +170,10 @@ function App() {
               {/* About Section */}
               <Route path="/about/overview" element={<CompanyOverview />} />
               <Route path="/about/case-studies" element={<CaseStudies />} />
+
+              {/* Admin */}
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
             </Routes>
           </AnimatePresence>
           <Footer />
