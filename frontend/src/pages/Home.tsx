@@ -200,15 +200,15 @@ const Home = () => {
             className="absolute inset-0"
           >
             <motion.div
-              style={{ y: heroParallax }}
-              className="absolute inset-0 scale-110"
-            >
-              <img
-                src={slides[currentSlide].bg}
-                className="w-full h-full object-cover"
-                alt=""
-              />
-            </motion.div>
+              style={{ 
+                y: heroParallax,
+                backgroundImage: `url(${slides[currentSlide].bg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundBlendMode: "multiply",
+              }}
+              className="absolute inset-0 scale-110 bg-primary"
+            />
             {/* Dark gradient overlay with Navy tint */}
             <div
               className="absolute inset-0"
@@ -571,16 +571,20 @@ const Home = () => {
         className="border-t border-black/4 overflow-hidden flex flex-col lg:flex-row bg-slate-900"
         style={{ minHeight: 600 }}
       >
-        <div className="lg:w-1/2 relative min-h-100">
-          <img
-            src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200"
-            className="absolute inset-0 w-full h-full object-cover grayscale opacity-60"
-            alt=""
-          />
+        <div 
+          className="lg:w-1/2 relative min-h-100 bg-primary"
+          style={{
+            backgroundImage: `url(https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundBlendMode: "multiply",
+          }}
+        >
+          {/* Subtle overlay to fade into the right content side */}
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(to right, transparent 50%, var(--color-primary))`,
+              background: `linear-gradient(to right, transparent 60%, var(--color-primary))`,
             }}
           />
         </div>

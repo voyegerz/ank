@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   Facebook,
-  Twitter,
   Instagram,
   Linkedin,
   MapPin,
@@ -9,32 +8,63 @@ import {
   Mail,
   ChevronRight,
   Send,
+  MessageCircle,
+  Globe,
 } from "lucide-react";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logo.svg";
 
 const Footer = () => {
   return (
     <footer className="px-6 md:px-16 lg:px-32 py-16  bg-slate-950 text-white relative overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-        {/* Company Info */}
+        {/* Company Info / Business Card Style */}
         <div className="col-span-1">
-          <Link to="/" className="inline-block mb-10 group">
-            <img
-              src={logo}
-              alt="ANK Logo"
-              className="h-10 w-auto object-contain brightness-0 invert group-hover:scale-105 transition-transform duration-500"
-            />
-          </Link>
-          <p className="text-slate-400 mb-10 leading-relaxed font-medium">
-            ANK Design & Automation Solutions LLP is a leading provider of
-            professional engineering, industrial automation, and manufacturing
-            services.
-          </p>
-          <div className="flex gap-4">
+          <div className="bg-white p-6 rounded-t-sm">
+            <Link to="/" className="block group">
+              <img
+                src={logo}
+                alt="ANK Logo"
+                className="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-500"
+              />
+            </Link>
+          </div>
+          <div className="bg-primary p-6 rounded-b-sm space-y-4">
+            <div>
+              <h3 className="text-sm font-black uppercase tracking-tight leading-tight">
+                ANK Design & <br /> Automation Solutions
+              </h3>
+              <p className="text-[9px] font-bold text-white/60 mt-1 uppercase tracking-widest">
+                GSTIN: 24ACKFA7111N1ZB
+              </p>
+            </div>
+            
+            <div className="space-y-3 pt-4 border-t border-white/10">
+              <div className="flex items-center gap-3">
+                <Phone size={14} className="text-white/60" />
+                <p className="text-[10px] font-bold">+91 63542 30924 / 94095 88709</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Globe size={14} className="text-white/60" />
+                <p className="text-[10px] font-bold">www.ankautomation.in</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail size={14} className="text-white/60" />
+                <p className="text-[10px] font-bold lowercase">enquiry@ankautomation.in</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin size={14} className="text-white/60 mt-0.5" />
+                <p className="text-[10px] font-bold leading-tight">
+                  Shop No. A4, Lovely Mobile Market, Near Marimatas Lane, Palace Road, Vadodara, Gujarat 390001
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-2 mt-8">
             <SocialIcon icon={<Facebook size={18} />} />
-            <SocialIcon icon={<Twitter size={18} />} />
             <SocialIcon icon={<Instagram size={18} />} />
             <SocialIcon icon={<Linkedin size={18} />} />
+            <SocialIcon icon={<MessageCircle size={18} />} />
           </div>
         </div>
 
@@ -73,7 +103,7 @@ const Footer = () => {
                 size={20}
               />
               <p className="text-sm font-bold text-slate-300 leading-relaxed">
-                Office No. S-4, 2nd Floor, Commercial Building, Pune, MH 411001
+                Shop No. A4, Lovely Mobile Market, Near Marimatas Lane, Palace Road, Vadodara - 390001
               </p>
             </div>
             <div className="flex gap-4 group cursor-default">
@@ -82,7 +112,7 @@ const Footer = () => {
                 size={20}
               />
               <p className="text-sm font-bold text-slate-300">
-                +91 123 456 7890
+                +91 63542 30924
               </p>
             </div>
             <div className="flex gap-4 group cursor-default">
@@ -91,7 +121,7 @@ const Footer = () => {
                 size={20}
               />
               <p className="text-sm font-bold text-slate-300">
-                info@ankautomation.com
+                enquiry@ankautomation.in
               </p>
             </div>
           </div>
@@ -125,7 +155,7 @@ const Footer = () => {
       {/* Copyright */}
       <div className="pt-12 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-slate-500 text-[10px] font-black uppercase tracking-widest">
         <p>
-          © 2026 Ank Design and Automation Solutions LLP. All rights reserved.
+          © 2026 ANK DESIGN & AUTOMATION SOLUTIONS LLP. All rights reserved.
         </p>
         <div className="flex space-x-8 mt-6 md:mt-0">
           <Link to="/privacy" className="hover:text-white transition-colors">

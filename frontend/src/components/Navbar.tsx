@@ -15,7 +15,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logo.svg";
 
 // ─── Brand Colors ────────────────────────────────────────────────────────────
 const ANK_PRIMARY = "#010080";
@@ -229,7 +229,7 @@ const OUR_SERVICES_TABS = [
 // ─── Shared glass style ───────────────────────────────────────────────────────
 
 const glass: React.CSSProperties = {
-  background: "rgba(255,255,255,0.96)",
+  background: "#ffffff",
   backdropFilter: "blur(32px) saturate(180%)",
   WebkitBackdropFilter: "blur(32px) saturate(180%)",
   border: "1px solid rgba(0,0,0,0.08)",
@@ -592,7 +592,7 @@ const Navbar = () => {
               to="/"
               className="flex items-center px-4 py-1 mr-2 shrink-0 transition-transform hover:scale-105"
             >
-              <img src={logo} alt="ANK" className="h-10 w-auto" />
+              <img src={logo} alt="ANK" className="h-12 w-auto" />
             </Link>
 
             {/* Sliding Highlight */}
@@ -766,7 +766,7 @@ const Navbar = () => {
             className="fixed inset-0  w-screen  z-100 lg:hidden overflow-y-auto"
             data-lenis-prevent
             style={{
-              background: "rgba(255,255,255,0.98)",
+              background: "#ffffff",
               backdropFilter: "blur(24px)",
             }}
           >

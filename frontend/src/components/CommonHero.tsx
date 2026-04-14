@@ -25,17 +25,17 @@ const CommonHero = ({
     <section className="relative h-screen min-h-[560px] flex items-center overflow-hidden">
       {/* ── Background image ── */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 bg-primary brightness-70 grayscale-[10%]"
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundBlendMode: "multiply",
+        }}
         initial={{ scale: 1 }}
         animate={{ scale: 1.06 }}
         transition={{ duration: 8, ease: "easeOut" }}
-      >
-        <img
-          src={bgImage}
-          alt="Hero background"
-          className="w-full h-full object-cover brightness-70 grayscale-[10%]"
-        />
-      </motion.div>
+      />
 
       {/* ── Gradient overlays ── */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#050c1c]/90 via-[#050c1c]/45 to-transparent" />

@@ -103,7 +103,7 @@ const Testimonials = ({
             {testimonials.map((t, i) => (
               <motion.div
                 key={i}
-                className="bg-[#1f1f1f]/70 p-6 md:p-8 flex flex-col gap-4"
+                className="bg-slate-900/80 backdrop-blur-md p-6 md:p-8 flex flex-col gap-4 border border-white/5 rounded-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
