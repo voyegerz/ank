@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Plus, Package, Tags, Briefcase, FileText, Send, UserCheck, Layers, CheckCircle2, AlertCircle, Upload } from "lucide-react";
+import { Package, Tags, Briefcase, FileText, Send, UserCheck, Layers, CheckCircle2, AlertCircle, Upload } from "lucide-react";
 import catalogService from "../../appwrite/services/catalog";
 import careersService from "../../appwrite/services/careers";
 import contentService from "../../appwrite/services/content";
