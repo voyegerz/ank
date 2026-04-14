@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "./components/SmoothScroll";
@@ -7,6 +8,7 @@ import Careers from "./pages/Careers";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import Preloader from "./components/Preloader";
 
 // --- Services ---
 
@@ -47,6 +49,7 @@ import CompanyOverview from "./pages/about/CompanyOverview";
 import CaseStudies from "./pages/about/CaseStudies";
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
 
   return (
