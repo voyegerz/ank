@@ -5,6 +5,8 @@ import {
   useScroll,
   useTransform,
   useInView,
+  useMotionValue,
+  useSpring,
 } from "framer-motion";
 import PageLayout from "../components/PageLayout";
 import {
@@ -159,6 +161,115 @@ const Label = ({
   </p>
 );
 
+// ─── 3D Glass Card ──────────────────────────────────────────────────────────
+const GlassCard = ({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseY = useSpring(y, { stiffness: 300, damping: 30 });
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [15, -15]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-15, 15]);
+
+  const glareX = useTransform(mouseX, [-0.5, 0.5], ["0%", "100%"]);
+  const glareY = useTransform(mouseY, [-0.5, 0.5], ["0%", "100%"]);
+  const glareOpacity = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const mouseXVal = (e.clientX - rect.left) / rect.width - 0.5;
+    const mouseYVal = (e.clientY - rect.top) / rect.height - 0.5;
+    
+    x.set(mouseXVal);
+    y.set(mouseYVal);
+    glareOpacity.set(0.6);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    glareOpacity.set(0);
+  };
+
+  return (
+    <FadeIn delay={delay} className="h-full">
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          perspective: "1200px",
+        }}
+        className={`relative h-full w-full group ${className}`}
+      >
+        <motion.div
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
+          }}
+          className="h-full w-full relative"
+        >
+          {/* External glow */}
+          <div 
+            className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle at center, var(--color-primary-hover) 0%, transparent 80%)",
+              filter: "blur(60px)",
+              transform: "translateZ(-20px)",
+            }}
+          />
+
+          {/* Main Card */}
+          <div
+            className="h-full w-full p-10 rounded-sm border border-white/40 transition-all duration-500 backdrop-blur-2xl relative overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(1,0,128,0.1)] group-hover:shadow-[0_20px_80px_rgba(125,211,248,0.2)]"
+            style={{
+              background: "linear-gradient(135deg, rgba(125, 211, 248, 0.15) 0%, rgba(1, 0, 128, 0.05) 50%, rgba(125, 211, 248, 0.05) 100%)",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {/* Ambient inner glow */}
+            <div className="absolute inset-0 bg-radial-gradient from-white/10 to-transparent opacity-50 pointer-events-none" />
+
+            {/* Dynamic Glare */}
+            <motion.div 
+              style={{
+                background: `radial-gradient(circle at center, rgba(125,211,248,0.5) 0%, transparent 80%)`,
+                left: glareX,
+                top: glareY,
+                opacity: glareOpacity,
+                width: "150%",
+                height: "150%",
+                translateX: "-50%",
+                translateY: "-50%",
+              }}
+              className="absolute pointer-events-none z-20 mix-blend-overlay"
+            />
+
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/p6.png')] z-0" />
+            
+            <div style={{ transform: "translateZ(50px)" }} className="relative z-10 flex flex-col h-full">
+              {children}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </FadeIn>
+  );
+};
+
 // ─── Home ──────────────────────────────────────────────────────────────────────
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -205,22 +316,24 @@ const Home = () => {
                 backgroundImage: `url(${slides[currentSlide].bg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                backgroundBlendMode: "multiply",
               }}
-              className="absolute inset-0 scale-110 bg-primary"
+              className="absolute inset-0 scale-110"
             />
-            {/* Dark gradient overlay with Navy tint */}
+            {/* Theme Tint Overlay */}
+            <div className="absolute inset-0 bg-primary/50" />
+
+            {/* Dark gradient overlay for text readability */}
             <div
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(120deg, var(--color-primary)CC 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%)`,
+                background: `linear-gradient(120deg, rgba(15, 35, 82, 0.8) 0%, rgba(15, 35, 82, 0.4) 50%, transparent 100%)`,
               }}
             />
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)",
+                  "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)",
               }}
             />
           </motion.div>
@@ -331,24 +444,22 @@ const Home = () => {
                 icon: <Users size={24} />,
               },
             ].map((service, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="p-10 rounded-sm border border-black/5 bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 group h-full">
-                  <div className="w-12 h-12 bg-white rounded-sm flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-black text-slate-900 uppercase mb-6 font-sans group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {service.items.map((item, j) => (
-                      <li key={j} className="flex items-center gap-2 text-[13px] text-slate-500 font-bold uppercase tracking-tight">
-                        <CheckCircle2 size={14} className="text-primary/40" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+              <GlassCard key={i} delay={i * 0.1}>
+                <div className="w-12 h-12 bg-white/50 rounded-sm flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                  {service.icon}
                 </div>
-              </FadeIn>
+                <h3 className="text-xl font-black text-slate-900 uppercase mb-6 font-sans group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                <ul className="space-y-3">
+                  {service.items.map((item, j) => (
+                    <li key={j} className="flex items-center gap-2 text-[13px] text-slate-500 font-bold uppercase tracking-tight">
+                      <CheckCircle2 size={14} className="text-primary/40" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
             ))}
           </div>
         </div>
@@ -387,19 +498,17 @@ const Home = () => {
                 icon: <Settings2 size={24} />,
               },
             ].map((value, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="p-10 rounded-sm bg-white border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group text-center">
-                  <div className="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-8 mx-auto group-hover:bg-primary group-hover:text-white transition-colors">
-                    {value.icon}
-                  </div>
-                  <h3 className="text-lg font-black text-slate-900 uppercase mb-4 font-sans">
-                    {value.title}
-                  </h3>
-                  <p className="text-[13px] text-slate-500 font-medium leading-relaxed uppercase tracking-tight">
-                    {value.desc}
-                  </p>
+              <GlassCard key={i} delay={i * 0.1}>
+                <div className="w-14 h-14 bg-white/50 rounded-sm flex items-center justify-center mb-8 mx-auto group-hover:bg-primary group-hover:text-white transition-colors">
+                  {value.icon}
                 </div>
-              </FadeIn>
+                <h3 className="text-lg font-black text-slate-900 uppercase mb-4 font-sans text-center">
+                  {value.title}
+                </h3>
+                <p className="text-[13px] text-slate-500 font-medium leading-relaxed uppercase tracking-tight text-center">
+                  {value.desc}
+                </p>
+              </GlassCard>
             ))}
           </div>
         </div>

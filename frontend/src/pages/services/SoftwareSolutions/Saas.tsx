@@ -4,7 +4,7 @@ import DetailedProcessSection from "../../../components/service/DetailedProcessS
 import type { ProcessStep } from "../../../components/service/DetailedProcessSection";
 import CTASection from "@/components/service/CTA";
 
-const SAAS = () => {
+const Saas = () => {
   const steps: ProcessStep[] = [
     {
       number: "1",
@@ -66,4 +66,4 @@ const SAAS = () => {
   );
 };
 
-export default SAAS;
+export default Saas;

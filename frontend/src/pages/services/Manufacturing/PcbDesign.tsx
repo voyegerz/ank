@@ -8,7 +8,7 @@ import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
-const PCBassembly = () => {
+const PcbDesign = () => {
   const clients = [
     { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
     { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
@@ -157,4 +157,4 @@ const PCBassembly = () => {
   );
 };
 
-export default PCBassembly;
+export default PcbDesign;

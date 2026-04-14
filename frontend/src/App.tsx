@@ -13,29 +13,38 @@ import Preloader from "./components/Preloader";
 
 // --- Services ---
 
-import HardwareEngineering from "./pages/services/Product Engineering/HardwareEngineering";
-import MechanicalEngineering from "./pages/services/Product Engineering/MechanicalEngineering";
-import ReverseEngineering from "./pages/services/Product Engineering/ReverseEngineering";
-import SPM from "./pages/services/Product Engineering/SPM";
-import SoftwareEngineering from "./pages/services/Product Engineering/SoftwareEngineering";
-import TestingQA from "./pages/services/Product Engineering/TestingQA";
-import PCBassembly from "./pages/services/Manufacturing/PCBassembly";
+// Product Designs
+import HardwareEngineering from "./pages/services/ProductDesigns/HardwareEngineering";
+import CadDesign from "./pages/services/ProductDesigns/CadDesign";
+import ReverseEngineering from "./pages/services/ProductDesigns/ReverseEngineering";
+import SPM from "./pages/services/ProductDesigns/SPM";
+import SoftwareEngineering from "./pages/services/ProductDesigns/SoftwareEngineering";
+import FeaAnalysis from "./pages/services/ProductDesigns/FeaAnalysis";
+
+// Manufacturing
+import PcbDesign from "./pages/services/Manufacturing/PcbDesign";
 import ProductAssembly from "./pages/services/Manufacturing/ProductAssembly";
 import RapidPrototyping from "./pages/services/Manufacturing/RapidPrototyping";
-import FDM3DPrinting from "./pages/services/Manufacturing/FDM3DPrinting";
-import WebApplications from "./pages/services/cloud and applications/WebApplications";
-import MobileApplications from "./pages/services/cloud and applications/MobileApplications";
-import DesktopApplications from "./pages/services/cloud and applications/DesktopApplications";
-import IoTApplications from "./pages/services/cloud and applications/IoTApplications";
-import ScalingMaintenance from "./pages/services/cloud and applications/ScalingMaintenance";
-import SAAS from "./pages/services/cloud and applications/SAAS";
-import SoftwareAutomation from "./pages/services/Production And Automation/SoftwareAutomation";
-import ProcessAutomation from "./pages/services/Production And Automation/ProcessAutomation";
-import PanelAutomation from "./pages/services/Production And Automation/PanelAutomation";
-import MaintenanceTroubleshooting from "./pages/services/Production And Automation/MaintenanceTroubleshooting";
-import SchoolsCollegeProjects from "./pages/services/Student Outreach/SchoolsCollegeProjects";
-import Workshops from "./pages/services/Student Outreach/Workshops";
-import ProjectToProduct from "./pages/services/Student Outreach/ProjectToProduct";
+import Fdm3DPrinting from "./pages/services/Manufacturing/Fdm3DPrinting";
+
+// Software Solutions
+import WebsiteDesign from "./pages/services/SoftwareSolutions/WebsiteDesign";
+import MobileApplication from "./pages/services/SoftwareSolutions/MobileApplication";
+import ApplicationDesign from "./pages/services/SoftwareSolutions/ApplicationDesign";
+import IotApplication from "./pages/services/SoftwareSolutions/IotApplication";
+import InventoryManagement from "./pages/services/SoftwareSolutions/InventoryManagement";
+import Saas from "./pages/services/SoftwareSolutions/Saas";
+
+// Industrial Automation
+import ScadaHmi from "./pages/services/IndustrialAutomation/ScadaHmi";
+import PlcProgramming from "./pages/services/IndustrialAutomation/PlcProgramming";
+import PanelAutomation from "./pages/services/IndustrialAutomation/PanelAutomation";
+import MaintenanceTroubleshooting from "./pages/services/IndustrialAutomation/MaintenanceTroubleshooting";
+
+// Student Outreach
+import SchoolsCollegeProjects from "./pages/services/StudentOutreach/SchoolsCollegeProjects";
+import Workshops from "./pages/services/StudentOutreach/Workshops";
+import ProjectToProduct from "./pages/services/StudentOutreach/ProjectToProduct";
 
 // --- Products ---
 import DecorProducts from "./pages/products/DecorProducts";
@@ -84,16 +93,16 @@ function App() {
                 element={<HardwareEngineering />}
               />
               <Route
-                path="/services/mechanical-engineering"
-                element={<MechanicalEngineering />}
+                path="/services/cad-design"
+                element={<CadDesign />}
               />
               <Route
                 path="/services/reverse-engineering"
                 element={<ReverseEngineering />}
               />
               <Route path="/services/spm" element={<SPM />} />
-              <Route path="/services/testing-qa" element={<TestingQA />} />
-              <Route path="/services/pcb-assembly" element={<PCBassembly />} />
+              <Route path="/services/fea-analysis" element={<FeaAnalysis />} />
+              <Route path="/services/pcb-design" element={<PcbDesign />} />
               <Route
                 path="/services/product-assembly"
                 element={<ProductAssembly />}
@@ -103,37 +112,37 @@ function App() {
                 element={<RapidPrototyping />}
               />
               <Route
-                path="/services/fdm-3d-printing"
-                element={<FDM3DPrinting />}
+                path="/services/3d-printing"
+                element={<Fdm3DPrinting />}
               />
               <Route
-                path="/services/web-applications"
-                element={<WebApplications />}
+                path="/services/website-design"
+                element={<WebsiteDesign />}
               />
               <Route
-                path="/services/mobile-applications"
-                element={<MobileApplications />}
+                path="/services/mobile-application"
+                element={<MobileApplication />}
               />
               <Route
-                path="/services/desktop-applications"
-                element={<DesktopApplications />}
+                path="/services/application-design"
+                element={<ApplicationDesign />}
               />
               <Route
-                path="/services/iot-applications"
-                element={<IoTApplications />}
+                path="/services/iot-application"
+                element={<IotApplication />}
               />
               <Route
-                path="/services/scaling-maintenance"
-                element={<ScalingMaintenance />}
+                path="/services/inventory-management"
+                element={<InventoryManagement />}
               />
-              <Route path="/services/saas" element={<SAAS />} />
+              <Route path="/services/saas" element={<Saas />} />
               <Route
-                path="/services/software-automation"
-                element={<SoftwareAutomation />}
+                path="/services/scada-hmi"
+                element={<ScadaHmi />}
               />
               <Route
-                path="/services/process-automation"
-                element={<ProcessAutomation />}
+                path="/services/plc-programming"
+                element={<PlcProgramming />}
               />
               <Route
                 path="/services/panel-automation"

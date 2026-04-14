@@ -5,7 +5,7 @@ import type { ProcessStep } from "../../../components/service/DetailedProcessSec
 
 import CTASection from "@/components/service/CTA";
 
-const TestingQA = () => {
+const FeaAnalysis = () => {
 
   const steps: ProcessStep[] = [
     {
@@ -81,4 +81,4 @@ const TestingQA = () => {
   );
 };
 
-export default TestingQA;
+export default FeaAnalysis;

@@ -27,7 +27,7 @@ const defaultServices: Service[] = [
     image:
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
     icon: <Activity size={24} />,
-    link: "/services/testing-qa",
+    link: "/services/fea-analysis",
   },
   {
     title: "Auto & aero manufacture",
@@ -36,7 +36,7 @@ const defaultServices: Service[] = [
     image:
       "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800",
     icon: <Cpu size={24} />,
-    link: "/services/mechanical-engineering",
+    link: "/services/cad-design",
   },
   {
     title: "Quality replacement parts",
@@ -45,7 +45,7 @@ const defaultServices: Service[] = [
     image:
       "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=800",
     icon: <Wrench size={24} />,
-    link: "/services/pcb-assembly",
+    link: "/services/pcb-design",
   },
 ];
 

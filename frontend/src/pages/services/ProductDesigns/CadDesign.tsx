@@ -8,7 +8,7 @@ import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
-const MechanicalEngineering = () => {
+const CadDesign = () => {
   const navigate = useNavigate();
 
   const cadImages = [
@@ -157,4 +157,4 @@ const MechanicalEngineering = () => {
   );
 };
 
-export default MechanicalEngineering;
+export default CadDesign;

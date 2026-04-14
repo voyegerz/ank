@@ -76,13 +76,13 @@ const OUR_SERVICES_TABS = [
     items: [
       {
         name: "Cad Design - 2D/3D",
-        path: "/services/mechanical-engineering",
+        path: "/services/cad-design",
         image:
           "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=800",
       },
       {
         name: "FEA Analysis",
-        path: "/services/testing-qa",
+        path: "/services/fea-analysis",
         image:
           "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
       },
@@ -107,7 +107,7 @@ const OUR_SERVICES_TABS = [
     items: [
       {
         name: "PLC Programming",
-        path: "/services/process-automation",
+        path: "/services/plc-programming",
         image:
           "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=800",
       },
@@ -119,7 +119,7 @@ const OUR_SERVICES_TABS = [
       },
       {
         name: "DCS/SCADA/HMI",
-        path: "/services/software-automation",
+        path: "/services/scada-hmi",
         image:
           "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=800",
       },
@@ -132,13 +132,13 @@ const OUR_SERVICES_TABS = [
     items: [
       {
         name: "Website Design",
-        path: "/services/web-applications",
+        path: "/services/website-design",
         image:
           "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
       },
       {
         name: "Application Design",
-        path: "/services/desktop-applications",
+        path: "/services/application-design",
         image:
           "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800",
       },
@@ -150,19 +150,19 @@ const OUR_SERVICES_TABS = [
       },
       {
         name: "Mobile Application",
-        path: "/services/mobile-applications",
+        path: "/services/mobile-application",
         image:
           "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
       },
       {
         name: "Web/IoT Application",
-        path: "/services/iot-applications",
+        path: "/services/iot-application",
         image:
           "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
       },
       {
         name: "Inventory Mgt.",
-        path: "/services/scaling-maintenance",
+        path: "/services/inventory-management",
         image:
           "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
       },
@@ -181,13 +181,13 @@ const OUR_SERVICES_TABS = [
       },
       {
         name: "3D Printing",
-        path: "/services/fdm-3d-printing",
+        path: "/services/3d-printing",
         image:
           "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=800",
       },
       {
         name: "PCB Design/Manufacture",
-        path: "/services/pcb-assembly",
+        path: "/services/pcb-design",
         image:
           "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
       },
@@ -413,40 +413,73 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
 };
 
 const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
+  const location = useLocation();
   return (
-    <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+    <div className="p-6 bg-white w-full" style={{ borderRadius: 4 }}>
+      <div className="flex flex-col gap-1 max-w-md mx-auto">
+        <p
+          className="text-[10px] font-black tracking-[0.2em] uppercase mb-4 opacity-40 px-4"
+          style={{ color: ANK_PRIMARY }}
+        >
+          Our Products
+        </p>
         {PRODUCTS.map((prod, i) => {
           return (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.03, duration: 0.2 }}
             >
               <NavLink
                 to={prod.path}
                 onClick={onClose}
                 className={({ isActive }) => {
-                  const active = isActive || location.pathname.replace(/\/$/, "") === prod.path.replace(/\/$/, "");
-                  return `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+                  const active =
+                    isActive ||
+                    location.pathname.replace(/\/$/, "") ===
+                      prod.path.replace(/\/$/, "");
+                  return `group flex items-center gap-4 px-4 py-3 transition-all duration-200 rounded-sm ${
                     active
-                      ? "text-white shadow-lg"
-                      : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
+                      ? "bg-slate-50 text-primary"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-primary"
                   }`;
                 }}
-                style={({ isActive }) => {
-                  const active = isActive || location.pathname.replace(/\/$/, "") === prod.path.replace(/\/$/, "");
-                  return {
-                    backgroundColor: active ? ANK_PRIMARY : undefined,
-                    borderColor: active ? ANK_PRIMARY : undefined,
-                  };
-                }}
               >
-                <div>{prod.icon}</div>
-                <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
-                  {prod.title}
-                </span>
+                {({ isActive: navActive }) => {
+                  const active =
+                    navActive ||
+                    location.pathname.replace(/\/$/, "") ===
+                      prod.path.replace(/\/$/, "");
+                  return (
+                    <>
+                      <div
+                        className={`p-2 rounded-sm transition-colors ${
+                          active ? "bg-primary text-white" : "bg-slate-100 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary"
+                        }`}
+                      >
+                        {prod.icon}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[13px] font-black uppercase leading-tight tracking-tight">
+                          {prod.title}
+                        </span>
+                        <span className="text-[10px] font-medium text-slate-400 group-hover:text-slate-500 transition-colors uppercase tracking-wider">
+                          {prod.desc}
+                        </span>
+                      </div>
+                      <ArrowUpRight
+                        size={14}
+                        className={`ml-auto transition-all ${
+                          active
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                        }`}
+                        style={{ color: ANK_PRIMARY }}
+                      />
+                    </>
+                  );
+                }}
               </NavLink>
             </motion.div>
           );
@@ -457,40 +490,68 @@ const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
 };
 
 const AboutMenu = ({ onClose }: { onClose: () => void }) => {
+  const location = useLocation();
   return (
-    <div className="p-10 bg-white w-full h-full" style={{ borderRadius: 4 }}>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="p-6 bg-white w-full" style={{ borderRadius: 4 }}>
+      <div className="flex flex-col gap-1 max-w-md mx-auto">
+        <p
+          className="text-[10px] font-black tracking-[0.2em] uppercase mb-4 opacity-40 px-4"
+          style={{ color: ANK_PRIMARY }}
+        >
+          About ANK
+        </p>
         {ABOUT_LINKS.map((link, i) => {
           return (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.03, duration: 0.2 }}
             >
               <NavLink
                 to={link.path}
                 onClick={onClose}
                 className={({ isActive }) => {
-                  const active = isActive || location.pathname.replace(/\/$/, "") === link.path.replace(/\/$/, "");
-                  return `group flex items-center gap-4 p-5 border transition-all duration-200 rounded-sm h-full ${
+                  const active =
+                    isActive ||
+                    location.pathname.replace(/\/$/, "") ===
+                      link.path.replace(/\/$/, "");
+                  return `group flex items-center gap-4 px-4 py-3 transition-all duration-200 rounded-sm ${
                     active
-                      ? "text-white shadow-lg"
-                      : "bg-slate-50 border-black/4 hover:border-primary text-slate-600 hover:text-primary"
+                      ? "bg-slate-50 text-primary"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-primary"
                   }`;
                 }}
-                style={({ isActive }) => {
-                  const active = isActive || location.pathname.replace(/\/$/, "") === link.path.replace(/\/$/, "");
-                  return {
-                    backgroundColor: active ? ANK_PRIMARY : undefined,
-                    borderColor: active ? ANK_PRIMARY : undefined,
-                  };
-                }}
               >
-                <div>{link.icon}</div>
-                <span className="text-[11px] font-black uppercase leading-tight tracking-tight">
-                  {link.title}
-                </span>
+                {({ isActive: navActive }) => {
+                  const active =
+                    navActive ||
+                    location.pathname.replace(/\/$/, "") ===
+                      link.path.replace(/\/$/, "");
+                  return (
+                    <>
+                      <div
+                        className={`p-2 rounded-sm transition-colors ${
+                          active ? "bg-primary text-white" : "bg-slate-100 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary"
+                        }`}
+                      >
+                        {link.icon}
+                      </div>
+                      <span className="text-[13px] font-black uppercase leading-tight tracking-tight">
+                        {link.title}
+                      </span>
+                      <ArrowUpRight
+                        size={14}
+                        className={`ml-auto transition-all ${
+                          active
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                        }`}
+                        style={{ color: ANK_PRIMARY }}
+                      />
+                    </>
+                  );
+                }}
               </NavLink>
             </motion.div>
           );

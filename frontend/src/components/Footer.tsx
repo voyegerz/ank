@@ -75,19 +75,19 @@ const Footer = () => {
           </h4>
           <ul className="space-y-4">
             <FooterLink
-              to="/services/mechanical-engineering"
+              to="/services/cad-design"
               label="Mechanical Engineering"
             />
             <FooterLink
               to="/services/software-engineering"
               label="Industrial Software"
             />
-            <FooterLink to="/services/pcb-assembly" label="PCB & Electronics" />
+            <FooterLink to="/services/pcb-design" label="PCB & Electronics" />
             <FooterLink
               to="/services/rapid-prototyping"
               label="Rapid Prototyping"
             />
-            <FooterLink to="/services/testing-qa" label="Quality Assurance" />
+            <FooterLink to="/services/fea-analysis" label="Quality Assurance" />
           </ul>
         </div>
 

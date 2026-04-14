@@ -8,7 +8,7 @@ import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
-const FDM3DPrinting = () => {
+const Fdm3DPrinting = () => {
   const clients = [
     { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
     { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
@@ -157,4 +157,4 @@ const FDM3DPrinting = () => {
   );
 };
 
-export default FDM3DPrinting;
+export default Fdm3DPrinting;
