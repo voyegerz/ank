@@ -25,21 +25,21 @@ const CommonHero = ({
     <section className="relative h-screen min-h-[560px] flex items-center overflow-hidden">
       {/* ── Background image ── */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 bg-primary brightness-70 grayscale-[10%]"
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundBlendMode: "multiply",
+        }}
         initial={{ scale: 1 }}
         animate={{ scale: 1.06 }}
         transition={{ duration: 8, ease: "easeOut" }}
-      >
-        <img
-          src={bgImage}
-          alt="Hero background"
-          className="w-full h-full object-cover brightness-50 grayscale-[30%]"
-        />
-      </motion.div>
+      />
 
       {/* ── Gradient overlays ── */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#050c1c]/90 via-[#050c1c]/45 to-transparent" />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#050c1c] via-transparent to-transparent" />
+      
 
       {/* ── Subtle grid ── */}
       <motion.div
@@ -54,13 +54,6 @@ const CommonHero = ({
         transition={{ duration: 1.2, delay: 0.3 }}
       />
 
-      {/* ── Left accent bar ── */}
-      <motion.div
-        className="absolute left-0 top-0 w-1 bg-primary z-[4]"
-        initial={{ height: 0 }}
-        animate={{ height: "55%" }}
-        transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      />
 
       {/* ── Watermark number ── */}
       <motion.span

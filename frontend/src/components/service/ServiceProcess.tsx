@@ -21,19 +21,26 @@ const ServiceProcess = ({ items }: ServiceProcessProps) => {
           {items.map((item, i) => (
             <motion.div
               key={i}
-              className={`md:p-8 p-4 flex flex-col gap-6 group bg-neutral-100/50 ${i === 0 ? "md:border-l-0" : "md:border-l border-gray-100"}`}
+              className={`md:p-8 p-6 flex flex-col gap-6 group bg-neutral-100/50 relative ${i === 0 ? "md:border-l-0" : "md:border-l border-gray-100"}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               {/* Step Number Badge */}
               <div className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-100 text-primary text-[11px] font-black tracking-widest shadow-sm">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-100 text-primary text-[11px] font-black tracking-widest shadow-sm bg-white">
                   {item.number}
                 </span>
-                <div className="h-px flex-1 bg-gray-50 md:hidden" />
+                <div className="h-px flex-1 bg-gray-200 lg:hidden" />
               </div>
+
+              {/* Directional Arrow (Desktop only - between items) */}
+              {i < items.length - 1 && (
+                <div className="hidden lg:flex absolute top-1/2 -right-4 -translate-y-1/2 z-10 items-center justify-center w-8 h-8 rounded-full bg-white border border-gray-100 shadow-sm text-primary">
+                  <ArrowRight size={14} className="opacity-40 group-hover:opacity-100 transition-opacity" />
+                </div>
+              )}
 
               {/* Title Section */}
               <div className="space-y-4">
@@ -41,27 +48,13 @@ const ServiceProcess = ({ items }: ServiceProcessProps) => {
                   {item.title}
                 </h3>
                 {/* Visual Accent */}
-                <div className="w-12 h-[3px] bg-primary rounded-full transition-all duration-300 group-hover:w-20" />
+                <div className="w-12 h-[3px] bg-primary rounded-full transition-all duration-300 group-hover:w-24" />
               </div>
 
               {/* Description */}
               <p className="text-sm md:text-[15px] text-gray-500 leading-relaxed font-normal">
                 {item.description}
               </p>
-
-              {/* Functional CTA / Arrow Indicator */}
-              <motion.div className="mt-auto">
-                <button
-                  className="w-10 h-10 rounded-full border border-gray-100 text-primary
-                              flex items-center justify-center transition-all duration-300 shadow-sm
-                              hover:bg-primary hover:text-white hover:border-primary"
-                >
-                  <ArrowRight
-                    size={16}
-                    className="group-hover:translate-x-0.5 transition-transform duration-300"
-                  />
-                </button>
-              </motion.div>
             </motion.div>
           ))}
         </div>

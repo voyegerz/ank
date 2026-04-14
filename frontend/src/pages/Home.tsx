@@ -8,21 +8,17 @@ import {
 } from "framer-motion";
 import PageLayout from "../components/PageLayout";
 import {
-  ArrowRight,
-  Settings2,
-  ShieldCheck,
-  Lightbulb,
   Mail,
-  Phone,
   MapPin,
   CheckCircle2,
   Users,
   Briefcase,
   Zap,
   Globe,
+  ArrowRight,
+  Settings2,
   Quote,
-  Clock,
-  ArrowUpRight,
+  ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -64,41 +60,6 @@ const slides = [
     cta: "Learn More",
     link: "/contact",
     bg: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=2400",
-  },
-];
-
-const partners = [
-  "Siemens",
-  "Bosch",
-  "Rockwell",
-  "Honeywell",
-  "ABB",
-  "Schneider",
-  "Emerson",
-  "Parker",
-];
-
-const solutions = [
-  {
-    title: "Power & Energy",
-    desc: "Smart grid integration, energy management systems, and renewable infrastructure for the modern world.",
-    icon: <Zap size={24} />,
-    image:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    title: "Auto & Aero",
-    desc: "Precision manufacturing, quality engineering and assembly for the automotive and aerospace sectors.",
-    icon: <Globe size={24} />,
-    image:
-      "https://images.unsplash.com/photo-1539186607619-df4765be0585?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    title: "Manufacturing",
-    desc: "End-to-end manufacturing solutions: from rapid prototyping to full-scale production line setup.",
-    icon: <Settings2 size={24} />,
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
@@ -155,62 +116,6 @@ const team = [
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
   },
 ];
-
-const news = [
-  {
-    title: "ANK named industry leader",
-    date: "Oct 02, 2025",
-    excerpt:
-      "Recognized by the Engineering Excellence Awards for the third consecutive year for innovation in industrial automation.",
-    category: "Announcements",
-  },
-  {
-    title: "Travis Kirkpatrick appointed EU CEO",
-    date: "Sep 26, 2025",
-    excerpt:
-      "Seasoned executive with 20+ years in European manufacturing brings deep regional expertise to drive expansion.",
-    category: "News",
-  },
-  {
-    title: "ANK volunteers for local charity",
-    date: "Sep 17, 2025",
-    excerpt:
-      "Our team spent the weekend building STEM labs for under-resourced schools — because engineering begins with education.",
-    category: "Community",
-  },
-];
-
-const portfolio = [
-  {
-    title: "Industrial Aero Products",
-    image:
-      "https://images.unsplash.com/photo-1539186607619-df4765be0585?auto=format&fit=crop&q=80&w=900",
-  },
-  {
-    title: "Tools for Industry",
-    image:
-      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=900",
-  },
-  {
-    title: "Berlin Railway Elements",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=900",
-  },
-  {
-    title: "Aircraft Components",
-    image:
-      "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=900",
-  },
-];
-
-// ─── Shared glass style ────────────────────────────────────────────────────────
-
-const glassLight: React.CSSProperties = {
-  background: "rgba(255,255,255,0.5)",
-  backdropFilter: "blur(20px)",
-  WebkitBackdropFilter: "blur(20px)",
-  border: "1px solid rgba(0,0,0,0.05)",
-};
 
 // ─── Fade-in wrapper ───────────────────────────────────────────────────────────
 const FadeIn = ({
@@ -295,15 +200,15 @@ const Home = () => {
             className="absolute inset-0"
           >
             <motion.div
-              style={{ y: heroParallax }}
-              className="absolute inset-0 scale-110"
-            >
-              <img
-                src={slides[currentSlide].bg}
-                className="w-full h-full object-cover"
-                alt=""
-              />
-            </motion.div>
+              style={{ 
+                y: heroParallax,
+                backgroundImage: `url(${slides[currentSlide].bg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundBlendMode: "multiply",
+              }}
+              className="absolute inset-0 scale-110 bg-primary"
+            />
             {/* Dark gradient overlay with Navy tint */}
             <div
               className="absolute inset-0"
@@ -388,494 +293,166 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── 2. Feature highlights ────────────────────────────────────────────── */}
-      <section className="relative z-20 bg-white border-t border-black/4">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              icon: <ShieldCheck size={22} />,
-              title: "Integrity",
-              desc: "We stand behind every project — transparent process, honest timelines, zero compromise on quality.",
-            },
-            {
-              icon: <Settings2 size={22} />,
-              title: "Automation",
-              desc: "Smarter factories start with smarter software. We automate processes at every level of your operation.",
-            },
-            {
-              icon: <Lightbulb size={22} />,
-              title: "Innovation",
-              desc: "From R&D to production: we combine novel thinking with field-tested engineering to solve hard problems.",
-            },
-          ].map((item, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <div
-                className="group p-12 border-r border-b border-black/4 hover:bg-slate-50 transition-all duration-300 cursor-default h-full"
-                style={
-                  i === 0 ? { borderLeft: "1px solid rgba(0,0,0,0.04)" } : {}
-                }
-              >
-                <div
-                  className="w-12 h-12 rounded-sm flex items-center justify-center mb-8 shadow-sm transition-all group-hover:bg-slate-900 group-hover:text-white"
-                  style={{ ...glassLight, color: "var(--color-primary)" }}
-                >
-                  {item.icon}
-                </div>
-                <h4 className="text-[14px] font-black text-slate-900 mb-4 uppercase tracking-widest font-barlow">
-                  {item.title}
-                </h4>
-                <p className="text-[13px] text-slate-500 leading-relaxed mb-8">
-                  {item.desc}
-                </p>
-                <Link
-                  to="/about"
-                  className="text-[10px] font-black tracking-widest uppercase flex items-center gap-2 transition-all hover:gap-3 text-primary-hover"
-                >
-                  Learn more <ArrowRight size={12} />
-                </Link>
-              </div>
-            </FadeIn>
-          ))}
+      {/* ── 2. Our Services ─────────────────────────────────────────────────── */}
+      <section id="services" className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+          <FadeIn className="mb-20">
+            <Label>Our Solutions</Label>
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+              Professional <span className="text-primary-hover">Services</span>
+            </h2>
+          </FadeIn>
 
-          {/* Contact card */}
-          <FadeIn delay={0.24}>
-            <div
-              className="p-12 border-b border-black/4 relative overflow-hidden h-full bg-primary"
-              style={{ borderRight: "1px solid rgba(0,0,0,0.04)" }}
-            >
-              <div className="absolute -top-10 -right-10 text-[10rem] font-black text-white/3 select-none pointer-events-none uppercase">
-                ANK
-              </div>
-              <p className="text-[10px] font-black tracking-[0.3em] text-white/40 uppercase mb-8">
-                Contact
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Product Designs",
+                items: ["Cad Design - 2D/3D", "FEA Analysis", "Reverse Engineering", "SPM"],
+                icon: <Settings2 size={24} />,
+              },
+              {
+                title: "Industrial Automation",
+                items: ["PLC Programming", "Panel Automation", "DCS/SCADA/HMI"],
+                icon: <Zap size={24} />,
+              },
+              {
+                title: "Software Solutions",
+                items: ["Website Design", "Application Design", "SAAS", "Mobile App", "Web/IoT App", "Inventory Mgt."],
+                icon: <Globe size={24} />,
+              },
+              {
+                title: "Manufacturing",
+                items: ["Rapid Prototyping", "3D Printing", "PCB Design/Manufacture"],
+                icon: <Briefcase size={24} />,
+              },
+              {
+                title: "Student Outreach",
+                items: ["Schools/College Projects", "Workshops", "Project to Product (P2P)", "DIY Robotics Kits"],
+                icon: <Users size={24} />,
+              },
+            ].map((service, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="p-10 rounded-sm border border-black/5 bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 group h-full">
+                  <div className="w-12 h-12 bg-white rounded-sm flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 uppercase mb-6 font-sans group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {service.items.map((item, j) => (
+                      <li key={j} className="flex items-center gap-2 text-[13px] text-slate-500 font-bold uppercase tracking-tight">
+                        <CheckCircle2 size={14} className="text-primary/40" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2.5 Our Values ─────────────────────────────────────────────────── */}
+      <section className="py-32 bg-slate-50 border-t border-black/5">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+          <FadeIn className="text-center mb-20">
+            <Label>ANK Values</Label>
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+              Built on <span className="text-primary-hover">Core Principles</span>
+            </h2>
+          </FadeIn>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                title: "Integrity",
+                desc: "Honesty and transparency in all engineering processes.",
+                icon: <ShieldCheck size={24} />,
+              },
+              {
+                title: "Automation",
+                desc: "Streamlining operations for maximum efficiency and growth.",
+                icon: <Zap size={24} />,
+              },
+              {
+                title: "Innovation",
+                desc: "Constantly pushing the boundaries of design and automation.",
+                icon: <Globe size={24} />,
+              },
+              {
+                title: "Excellence",
+                desc: "Committed to delivering high-quality, precise industrial solutions.",
+                icon: <Settings2 size={24} />,
+              },
+            ].map((value, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="p-10 rounded-sm bg-white border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group text-center">
+                  <div className="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-8 mx-auto group-hover:bg-primary group-hover:text-white transition-colors">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-lg font-black text-slate-900 uppercase mb-4 font-sans">
+                    {value.title}
+                  </h3>
+                  <p className="text-[13px] text-slate-500 font-medium leading-relaxed uppercase tracking-tight">
+                    {value.desc}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. Student Outreach ─────────────────────────────────────────────── */}
+      <section className="py-32 bg-slate-950 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 skew-x-[-15deg] translate-x-1/2" />
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <FadeIn>
+              <Label color="var(--color-primary-hover)">Student Outreach</Label>
+              <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-[0.95] mb-8 uppercase font-sans">
+                Are you a <span className="text-primary-hover">student?</span>
+              </h2>
+              <p className="text-base text-slate-400 mb-10 leading-relaxed max-w-lg font-medium">
+                We believe engineering begins with education. Our student outreach programs provide hands-on experience, mentorship, and resources to help the next generation of innovators build the future.
               </p>
-              <div className="space-y-6 mb-10 relative z-10">
-                <div className="flex gap-4 items-start">
-                  <MapPin size={16} className="text-white/40 mt-0.5 shrink-0" />
-                  <p className="text-[13px] text-white/70 leading-relaxed font-medium">
-                    Office S-4, 2nd Floor, Commercial Bldg, Pune, MH
-                  </p>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <Phone size={16} className="text-white/40 mt-0.5 shrink-0" />
-                  <p className="text-[13px] text-white/70 font-medium">
-                    +91 123 456 7890
-                  </p>
-                </div>
-              </div>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                {[
+                  "Schools/College Projects",
+                  "Industry Workshops",
+                  "Project to Product (P2P)",
+                  "DIY Robotics Kits",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-[12px] font-black uppercase tracking-widest text-slate-300">
+                    <span className="w-2 h-2 bg-primary-hover rounded-full" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-white text-slate-900 text-[10px] font-black tracking-widest uppercase px-6 py-3 rounded-sm hover:bg-white/90 transition-all relative z-10"
+                className="inline-flex items-center gap-3 bg-primary text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm hover:bg-primary-hover transition-all shadow-2xl"
               >
-                Contact Us <ArrowRight size={12} />
-              </Link>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 3. ANK Values ────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/4">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="flex flex-col lg:flex-row gap-20 items-center">
-            {/* Left */}
-            <div className="lg:w-5/12">
-              <FadeIn>
-                <Label>Our Values</Label>
-                <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] mb-8 uppercase font-sans">
-                  Engineering the
-                  <br />
-                  <span className="text-primary-hover">best solutions</span>
-                </h2>
-                <p className="text-[14px] text-slate-500 mb-12 leading-relaxed max-w-sm font-medium">
-                  We unite global engineering talent with deep domain expertise
-                  — delivering outcomes that matter from Pune to the world.
-                </p>
-
-                {/* Quote */}
-                <div className="mb-12 p-8 rounded-sm relative overflow-hidden border border-black/4 bg-slate-50">
-                  <Quote
-                    size={32}
-                    className="mb-6 text-primary-hover opacity-20"
-                  />
-                  <p className="text-[15px] text-slate-700 italic leading-relaxed mb-8 font-medium">
-                    "As a small family company, our mission is to create the
-                    best engineering solutions and deliver them to our clients."
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-9 h-9 rounded-sm overflow-hidden shrink-0 shadow-sm">
-                      <img
-                        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100"
-                        alt="Peter"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-[11px] font-black text-slate-900 uppercase tracking-wide font-sans">
-                        Peter Trebuchet
-                      </p>
-                      <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">
-                        ANK Founder
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-8 pt-10 border-t border-black/6">
-                  {[
-                    ["1K+", "Monthly Visits"],
-                    ["98%", "Satisfaction"],
-                    ["4.9", "Top Rating"],
-                  ].map(([val, lbl]) => (
-                    <div key={lbl}>
-                      <p className="text-3xl font-black text-slate-900 mb-2 font-sans">
-                        {val}
-                      </p>
-                      <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
-                        {lbl}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </FadeIn>
-            </div>
-
-            {/* Right — image grid */}
-            <div className="lg:w-7/12">
-              <FadeIn delay={0.15}>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="space-y-6 pt-12">
-                    {[
-                      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
-                      "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800",
-                    ].map((src, i) => (
-                      <div
-                        key={i}
-                        className={`${i === 0 ? "aspect-4/5" : "aspect-square"} overflow-hidden rounded-sm relative group shadow-2xl`}
-                      >
-                        <img
-                          src={src}
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
-                          alt=""
-                        />
-                        <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="space-y-6">
-                    {[
-                      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800",
-                      "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=800",
-                    ].map((src, i) => (
-                      <div
-                        key={i}
-                        className={`${i === 0 ? "aspect-square" : "aspect-4/5"} overflow-hidden rounded-sm relative group shadow-2xl`}
-                      >
-                        <img
-                          src={src}
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
-                          alt=""
-                        />
-                        <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. Partners marquee ──────────────────────────────────────────────── */}
-      <section className="py-20 bg-slate-50 border-t border-black/4 overflow-hidden">
-        <p className="text-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase mb-12 font-barlow">
-          Trusted by Industry Leaders
-        </p>
-        <div className="flex overflow-hidden">
-          <div className="flex gap-24 animate-marquee whitespace-nowrap">
-            {[...partners, ...partners].map((p, i) => (
-              <span
-                key={i}
-                className="text-4xl font-black text-slate-200 hover:text-slate-400 uppercase tracking-widest cursor-default transition-colors select-none font-barlow"
-              >
-                {p}
-              </span>
-            ))}
-          </div>
-        </div>
-        <style>{`
-          @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
-          .animate-marquee { animation: marquee 40s linear infinite; }
-        `}</style>
-      </section>
-
-      {/* ── 5. Numbers ───────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/4">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="flex flex-col lg:flex-row gap-24 items-start">
-            {/* Left */}
-            <div className="lg:w-1/2">
-              <FadeIn>
-                <Label>Performance</Label>
-                <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] mb-8 uppercase font-sans">
-                  Our core
-                  <br />
-                  <span className="text-primary-hover">success in numbers</span>
-                </h2>
-                <p className="text-[14px] text-slate-500 mb-14 leading-relaxed max-w-sm font-medium">
-                  Consistent delivery, elite engineering and a relentless focus
-                  on outcomes — measured across every project we've shipped.
-                </p>
-                <div className="space-y-10 max-w-md">
-                  {[
-                    ["Construction", 98],
-                    ["Production", 92],
-                    ["Deadlines Met", 95],
-                  ].map(([label, pct]) => (
-                    <ProgressBar
-                      key={label as string}
-                      label={label as string}
-                      percentage={pct as number}
-                    />
-                  ))}
-                </div>
-              </FadeIn>
-            </div>
-            {/* Right — stat grid */}
-            <div className="lg:w-1/2">
-              <FadeIn delay={0.15}>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    {
-                      icon: <Clock size={24} />,
-                      val: "24/7",
-                      label: "Support",
-                      dark: true,
-                    },
-                    {
-                      icon: <Users size={24} />,
-                      val: "150+",
-                      label: "Expert Staff",
-                      dark: false,
-                    },
-                    {
-                      icon: <Briefcase size={24} />,
-                      val: "500+",
-                      label: "Projects",
-                      dark: false,
-                    },
-                    {
-                      icon: <Globe size={24} />,
-                      val: "12",
-                      label: "Global Locations",
-                      dark: true,
-                    },
-                  ].map((s, i) => (
-                    <div
-                      key={i}
-                      className="p-12 rounded-sm flex flex-col items-start gap-6 group transition-all hover:shadow-2xl"
-                      style={{
-                        backgroundColor: s.dark
-                          ? "var(--color-primary)"
-                          : "#f8fafc",
-                        border: "1px solid rgba(0,0,0,0.04)",
-                      }}
-                    >
-                      <div
-                        className="transition-colors"
-                        style={{
-                          color: s.dark
-                            ? "var(--color-primary-hover)"
-                            : "var(--color-primary)",
-                        }}
-                      >
-                        {s.icon}
-                      </div>
-                      <div>
-                        <p
-                          className="text-4xl font-black mb-2 font-sans"
-                          style={{
-                            color: s.dark ? "white" : "var(--color-primary)",
-                          }}
-                        >
-                          {s.val}
-                        </p>
-                        <p
-                          className="text-[9px] font-black uppercase tracking-[0.2em]"
-                          style={{
-                            color: s.dark ? "white" : "#94a3b8",
-                            opacity: s.dark ? 0.5 : 1,
-                          }}
-                        >
-                          {s.label}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. Solutions ─────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-50 border-t border-black/4">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
-            <div>
-              <FadeIn>
-                <Label>Solutions</Label>
-                <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
-                  Expert services
-                  <br />
-                  <span className="text-primary-hover">
-                    for industrial needs
-                  </span>
-                </h2>
-              </FadeIn>
-            </div>
-            <FadeIn delay={0.1}>
-              <Link
-                to="/services"
-                className="inline-flex items-center gap-2 text-[11px] font-black tracking-widest uppercase transition-colors text-primary"
-              >
-                View all solutions <ArrowUpRight size={14} />
+                Get in touch with us <ArrowRight size={16} />
               </Link>
             </FadeIn>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {solutions.map((sol, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="group relative overflow-hidden rounded-sm h-130 cursor-pointer shadow-xl">
-                  <img
-                    src={sol.image}
-                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000"
-                    alt={sol.title}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(to top, var(--color-primary) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)`,
-                    }}
-                  />
-
-                  {/* Index */}
-                  <div className="absolute top-8 right-8 text-[11px] font-black text-white/20 tracking-widest">
-                    0{i + 1}
+            <FadeIn delay={0.2}>
+              <div className="relative aspect-video rounded-sm overflow-hidden shadow-2xl border border-white/10">
+                <img
+                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200"
+                  className="w-full h-full object-cover grayscale brightness-50"
+                  alt="Student Outreach"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="p-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-sm text-center">
+                    <p className="text-3xl font-black text-white mb-2 uppercase font-sans">1000+</p>
+                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.2em]">Students Empowered</p>
                   </div>
-
-                  {/* Icon */}
-                  <div className="absolute top-8 left-8 w-12 h-12 rounded-sm flex items-center justify-center text-white shadow-lg transition-all group-hover:bg-white group-hover:text-slate-900 bg-primary-hover">
-                    {sol.icon}
-                  </div>
-
-                  {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-10">
-                    <h3 className="text-[20px] font-black text-white uppercase mb-4 font-sans">
-                      {sol.title}
-                    </h3>
-                    <p className="text-[13px] text-white/60 leading-relaxed mb-6 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-400 font-medium">
-                      {sol.desc}
-                    </p>
-                    <Link
-                      to="/services"
-                      className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-white/50 uppercase hover:text-white transition-colors"
-                    >
-                      Learn more <ArrowRight size={12} />
-                    </Link>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. Communication / We Help ───────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/4">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="flex flex-col lg:flex-row gap-24 items-center">
-            {/* Image */}
-            <FadeIn className="lg:w-1/2" delay={0.1}>
-              <div className="relative">
-                <div className="aspect-video rounded-sm overflow-hidden shadow-2xl">
-                  <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                    alt=""
-                  />
-                </div>
-                {/* Floating badge */}
-                <div className="absolute -bottom-8 -right-8 p-10 rounded-sm hidden md:flex flex-col justify-center items-center text-center shadow-2xl bg-primary">
-                  <p className="text-4xl font-black text-white uppercase leading-[0.9] font-sans">
-                    WE
-                    <br />
-                    HELP
-                    <br />
-                    YOU.
-                  </p>
                 </div>
               </div>
             </FadeIn>
-            {/* Text */}
-            <div className="lg:w-1/2">
-              <FadeIn>
-                <Label>Communication</Label>
-                <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] font-black text-slate-900 leading-[0.95] mb-8 uppercase font-sans">
-                  We help you
-                  <br />
-                  <span className="text-primary-hover">communicate better</span>
-                </h2>
-                <p className="text-[15px] text-slate-500 mb-12 leading-relaxed font-medium">
-                  From first contact to ongoing support — we embed ourselves in
-                  your engineering process and stay until the job is done right.
-                </p>
-                <div className="space-y-8 mb-12">
-                  {[
-                    [
-                      "Global Network",
-                      "Mesh low-risk, high-yield alignments with transparent global partners.",
-                    ],
-                    [
-                      "Smart Strategy",
-                      "Re-engineer revolutionary services and premium architectures for scale.",
-                    ],
-                  ].map(([title, desc]) => (
-                    <div key={title} className="flex gap-5 group">
-                      <div className="w-10 h-10 rounded-sm flex items-center justify-center shrink-0 bg-slate-50 text-slate-300 group-hover:bg-slate-900 group-hover:text-white transition-all shadow-sm mt-0.5">
-                        <CheckCircle2
-                          size={18}
-                          style={{
-                            color:
-                              title === "Global Network"
-                                ? "var(--color-primary-hover)"
-                                : undefined,
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <p className="text-[13px] font-black text-slate-900 mb-2 uppercase tracking-widest font-sans">
-                          {title}
-                        </p>
-                        <p className="text-[12px] text-slate-500 leading-relaxed font-medium">
-                          {desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-3 text-white text-[11px] font-black tracking-widest uppercase px-10 py-4 rounded-sm transition-all shadow-xl shadow-slate-900/10 bg-primary"
-                >
-                  Find out more <ArrowRight size={14} />
-                </Link>
-              </FadeIn>
-            </div>
           </div>
         </div>
       </section>
@@ -921,60 +498,70 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── 9. Testimonials ──────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/4 overflow-hidden">
-        <div className="max-w-4xl mx-auto px-8 md:px-16 text-center">
-          <FadeIn className="flex justify-center">
+      {/* ── 9. Testimonials ────────────────────────────────────────────────────── */}
+      <section className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-primary rounded-full blur-3xl" />
+        </div>
+        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+          <FadeIn className="text-center mb-20">
             <Label>Testimonials</Label>
+            <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+              What our <span className="text-primary-hover">clients say</span>
+            </h2>
           </FadeIn>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentTestimonial}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <Quote
-                size={56}
-                className="mx-auto mb-12 opacity-[0.08] text-primary"
-              />
-              <h3 className="text-[clamp(1rem,2.5vw,1.8rem)] font-medium text-slate-700 leading-relaxed mb-16 italic font-serif">
-                "{testimonials[currentTestimonial].quote}"
-              </h3>
-              <div className="flex flex-col items-center gap-4">
-                <div className="w-14 h-14 rounded-sm overflow-hidden border-2 shadow-xl border-primary-hover">
-                  <img
-                    src={testimonials[currentTestimonial].image}
-                    alt=""
-                    className="w-full h-full object-cover grayscale"
-                  />
+
+          <div className="max-w-4xl mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTestimonial}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-10 text-primary-hover/20">
+                  <Quote size={80} strokeWidth={1} />
                 </div>
-                <div>
-                  <p className="text-[13px] font-black text-slate-900 uppercase tracking-widest font-sans">
-                    {testimonials[currentTestimonial].author}
-                  </p>
-                  <p className="text-[9px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1.5">
-                    {testimonials[currentTestimonial].role}
-                  </p>
+                <p className="text-[clamp(1.1rem,2.5vw,1.8rem)] font-black text-slate-800 leading-tight mb-12 font-sans italic">
+                  "{testimonials[currentTestimonial].quote}"
+                </p>
+                <div className="flex items-center justify-center gap-5">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-hover shadow-xl">
+                    <img
+                      src={testimonials[currentTestimonial].image}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest">
+                      {testimonials[currentTestimonial].author}
+                    </p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                      {testimonials[currentTestimonial].role}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-          <div className="flex justify-center gap-3 mt-16">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentTestimonial(i)}
-                className={`transition-all duration-500 rounded-full ${currentTestimonial === i ? "w-10 h-1.5" : "w-1.5 h-1.5 bg-slate-200 hover:bg-slate-300"}`}
-                style={{
-                  backgroundColor:
-                    currentTestimonial === i
-                      ? "var(--color-primary)"
-                      : undefined,
-                }}
-              />
-            ))}
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex justify-center gap-3 mt-16">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentTestimonial(i)}
+                  className={`transition-all duration-500 rounded-full ${currentTestimonial === i ? "w-8 h-1" : "w-1 h-1 bg-slate-200"}`}
+                  style={{
+                    backgroundColor:
+                      currentTestimonial === i
+                        ? "var(--color-primary)"
+                        : undefined,
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -984,16 +571,20 @@ const Home = () => {
         className="border-t border-black/4 overflow-hidden flex flex-col lg:flex-row bg-slate-900"
         style={{ minHeight: 600 }}
       >
-        <div className="lg:w-1/2 relative min-h-100">
-          <img
-            src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200"
-            className="absolute inset-0 w-full h-full object-cover grayscale opacity-60"
-            alt=""
-          />
+        <div 
+          className="lg:w-1/2 relative min-h-100 bg-primary"
+          style={{
+            backgroundImage: `url(https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundBlendMode: "multiply",
+          }}
+        >
+          {/* Subtle overlay to fade into the right content side */}
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(to right, transparent 50%, var(--color-primary))`,
+              background: `linear-gradient(to right, transparent 60%, var(--color-primary))`,
             }}
           />
         </div>
@@ -1034,101 +625,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── 11. News ─────────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white border-t border-black/4">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-8">
-            <FadeIn>
-              <Label>Insights</Label>
-              <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
-                Latest from
-                <br />
-                <span className="text-primary-hover">ANK news</span>
-              </h2>
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <Link
-                to="/about/newsroom"
-                className="inline-flex items-center gap-2 text-[11px] font-black tracking-widest uppercase transition-colors text-primary"
-              >
-                Read all news <ArrowUpRight size={14} />
-              </Link>
-            </FadeIn>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {news.map((item, i) => (
-              <FadeIn key={i} delay={i * 0.09}>
-                <div className="group p-10 rounded-sm h-full flex flex-col cursor-pointer bg-slate-50 border border-black/3 hover:bg-white hover:shadow-2xl transition-all duration-300">
-                  <div className="flex items-center gap-4 mb-8">
-                    <span className="px-3 py-1.5 rounded-sm text-[9px] font-black tracking-widest text-white uppercase bg-primary-hover">
-                      {item.category}
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-bold uppercase">
-                      {item.date}
-                    </span>
-                  </div>
-                  <h4 className="text-[16px] font-black text-slate-900 transition-colors mb-6 leading-tight uppercase font-sans">
-                    {item.title}
-                  </h4>
-                  <p className="text-[12px] text-slate-500 leading-relaxed mb-10 flex-1 font-medium">
-                    {item.excerpt}
-                  </p>
-                  <Link
-                    to="/about/newsroom"
-                    className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest uppercase transition-all hover:gap-3 text-primary"
-                  >
-                    Read more <ArrowRight size={12} />
-                  </Link>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 12. Portfolio ────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-50 border-t border-black/4">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 mb-20">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-            <FadeIn>
-              <Label>Our Work</Label>
-              <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
-                Recent projects
-              </h2>
-            </FadeIn>
-          </div>
-        </div>
-        <div className="flex gap-6 px-8 md:px-16 lg:px-24 overflow-x-auto pb-10 no-scrollbar">
-          {portfolio.map((item, i) => (
-            <FadeIn key={i} delay={i * 0.07} className="shrink-0">
-              <div className="w-85 md:w-130 aspect-video rounded-sm overflow-hidden relative group cursor-pointer shadow-xl">
-                <img
-                  src={item.image}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000"
-                  alt={item.title}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(to top, var(--color-primary) 0%, transparent 60%)`,
-                  }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-10">
-                  <h4 className="text-[18px] font-black text-white uppercase translate-y-2 group-hover:translate-y-0 transition-transform duration-400 font-sans">
-                    {item.title}
-                  </h4>
-                  <Link
-                    to="/about/case-studies"
-                    className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-white/60 uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-400 mt-4"
-                  >
-                    View project <ArrowUpRight size={12} />
-                  </Link>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
 
       {/* ── 13. Map & Locations ───────────────────────────────────────────────── */}
       <section className="border-t border-black/4 bg-white">
@@ -1185,48 +681,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Location grid */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-24 grid grid-cols-2 lg:grid-cols-4 gap-12">
-          {[
-            {
-              icon: <MapPin size={18} />,
-              city: "Pune HQ",
-              address: "Commercial Bldg, Pune 411001",
-            },
-            {
-              icon: <MapPin size={18} />,
-              city: "Mumbai",
-              address: "Tech Park, Mumbai 400001",
-            },
-            {
-              icon: <Mail size={18} />,
-              city: "Email Us",
-              address: "info@ankautomation.com",
-            },
-            {
-              icon: <Phone size={18} />,
-              city: "Call Us",
-              address: "+91 123 456 7890",
-            },
-          ].map((loc, i) => (
-            <FadeIn key={i} delay={i * 0.07}>
-              <div className="group">
-                <div className="w-12 h-12 rounded-sm flex items-center justify-center text-slate-300 bg-slate-50 group-hover:bg-slate-900 group-hover:text-white mb-6 transition-all shadow-sm">
-                  {React.cloneElement(
-                    loc.icon as React.ReactElement<{ className?: string }>,
-                    { className: "text-primary-hover" },
-                  )}
-                </div>
-                <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest mb-3 font-sans">
-                  {loc.city}
-                </p>
-                <p className="text-[13px] text-slate-500 leading-relaxed font-medium">
-                  {loc.address}
-                </p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
       </section>
 
       {/* ── 14. Final CTA ─────────────────────────────────────────────────────── */}
@@ -1255,18 +709,18 @@ const Home = () => {
               without the hassle.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link
-                to="/contact"
+              <a
+                href="#services"
                 className="group inline-flex items-center justify-center gap-3 text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm shadow-2xl transition-all hover:bg-primary-hover bg-primary"
               >
-                Start a project{" "}
+                Explore Solutions{" "}
                 <ArrowRight
                   size={16}
                   className="group-hover:translate-x-1 transition-transform"
                 />
-              </Link>
+              </a>
               <Link
-                to="/services"
+                to="/services/software-engineering"
                 className="inline-flex items-center justify-center gap-3 text-[11px] font-black tracking-widest text-slate-900 uppercase px-12 py-5 rounded-sm border-2 border-slate-900/10 hover:border-slate-900 transition-all bg-white shadow-sm"
               >
                 Our services
@@ -1276,38 +730,6 @@ const Home = () => {
         </div>
       </section>
     </PageLayout>
-  );
-};
-
-// ─── Progress bar ──────────────────────────────────────────────────────────────
-const ProgressBar = ({
-  label,
-  percentage,
-}: {
-  label: string;
-  percentage: number;
-}) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-  return (
-    <div ref={ref}>
-      <div className="flex justify-between mb-4">
-        <span className="text-[11px] font-black text-slate-900 uppercase tracking-widest font-sans">
-          {label}
-        </span>
-        <span className="text-[11px] font-black text-slate-400">
-          {percentage}%
-        </span>
-      </div>
-      <div className="h-1.5 bg-slate-100 overflow-hidden rounded-full shadow-inner">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${percentage}%` } : {}}
-          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
-          className="h-full rounded-full bg-primary"
-        />
-      </div>
-    </div>
   );
 };
 
