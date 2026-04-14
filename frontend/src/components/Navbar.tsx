@@ -514,7 +514,30 @@ const Navbar = () => {
   const navRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const navBarRef = useRef<HTMLElement | null>(null);
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show if scrolling up OR at the top of the page
+      if (currentScrollY < lastScrollY || currentScrollY < 50) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Hide if scrolling down and moved past 100px
+        setIsVisible(false);
+        setHoveredMenu(null); // Close any open dropdowns when hiding
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   // Helper to find current subpage name for subtext
   const getActiveSubtext = (menuName: string) => {
@@ -576,7 +599,10 @@ const Navbar = () => {
   return (
     <>
       {/* ── Desktop Floating Navbar ── */}
-      <div className="fixed top-0 left-0 w-full z-80 flex justify-center items-start lg:pt-6 pointer-events-none px-0 lg:px-6">
+      <div 
+        className="fixed top-0 left-0 w-full z-80 flex justify-center items-start lg:pt-6 pointer-events-none px-0 lg:px-6 transition-transform duration-500 ease-[0.16, 1, 0.3, 1]"
+        style={{ transform: isVisible || isMobileMenuOpen ? 'translateY(0)' : 'translateY(-120%)' }}
+      >
         <div className="relative w-full lg:w-auto">
           <motion.nav
             ref={navBarRef}
