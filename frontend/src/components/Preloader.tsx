@@ -33,14 +33,14 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
         <img src={logo} alt="ANK Logo" className="h-48 md:h-64 w-auto object-contain" />
       </motion.div>
       
-      <div className="w-48 h-[1px] bg-slate-100 relative overflow-hidden rounded-full">
+      <div className="w-72 md:w-102 h-[2px] bg-slate-100 relative overflow-hidden rounded-full">
         <motion.div 
           className="absolute inset-y-0 left-0"
           style={{ width: `${percent}%`, backgroundColor: '#010080' }}
         />
       </div>
       
-      <div className="mt-6 text-[8px] uppercase tracking-[0.6em] text-slate-400 font-black">
+      <div className="mt-6 text-[8px] uppercase tracking-[0.6em] text-blue-900 font-black">
         {percent}% Loading ...
       </div>
     </motion.div>
