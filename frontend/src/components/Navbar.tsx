@@ -335,7 +335,7 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
                         onClick={onClose}
                         className={({ isActive }) => {
                           const active = isActive || location.pathname.replace(/\/$/, "") === item.path.replace(/\/$/, "");
-                          return `group flex items-center gap-3 py-2.5 text-[14px] font-black transition-all duration-200 uppercase tracking-tight ${
+                          return `group flex items-center gap-2 py-2.5 text-[14px] font-black transition-all duration-200 uppercase tracking-tight ${
                             active
                               ? "text-primary"
                               : "text-slate-600 hover:text-primary"
@@ -353,7 +353,7 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
                               {item.name}
                               <ArrowUpRight
                                 size={13}
-                                className={`ml-auto transition-all -translate-y-0.5 translate-x-0.5 ${active ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+                                className={`transition-all -translate-y-0.5 translate-x-0.5 ${active ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
                                 style={{ color: ANK_PRIMARY }}
                               />
                             </>
@@ -414,23 +414,46 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
 
 const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
   const location = useLocation();
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   return (
-    <div className="p-6 bg-white w-full" style={{ borderRadius: 4 }}>
-      <div className="flex flex-col gap-1 max-w-md mx-auto">
+    <div
+      className="p-2 bg-white relative"
+      style={{ borderRadius: 4 }}
+      onMouseLeave={() => setHoveredIdx(null)}
+    >
+      <div className="flex flex-col gap-0.5 relative">
         <p
-          className="text-[10px] font-black tracking-[0.2em] uppercase mb-4 opacity-40 px-4"
+          className="text-[10px] font-black tracking-[0.2em] uppercase mb-3 mt-2 opacity-40 px-4"
           style={{ color: ANK_PRIMARY }}
         >
           Our Products
         </p>
         {PRODUCTS.map((prod, i) => {
+          const isHovered = hoveredIdx === i;
           return (
             <motion.div
               key={i}
+              className="relative group"
+              onMouseEnter={() => setHoveredIdx(i)}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.03, duration: 0.2 }}
             >
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div
+                    layoutId="products-highlight"
+                    className="absolute inset-0 rounded-sm"
+                    style={{ backgroundColor: ANK_PRIMARY }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                  />
+                )}
+              </AnimatePresence>
+
               <NavLink
                 to={prod.path}
                 onClick={onClose}
@@ -439,10 +462,12 @@ const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
                     isActive ||
                     location.pathname.replace(/\/$/, "") ===
                       prod.path.replace(/\/$/, "");
-                  return `group flex items-center gap-4 px-4 py-3 transition-all duration-200 rounded-sm ${
-                    active
-                      ? "bg-slate-50 text-primary"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-primary"
+                  return `relative z-10 flex items-center gap-2 px-4 py-3 transition-colors duration-200 rounded-sm ${
+                    isHovered
+                      ? "text-white"
+                      : active
+                        ? "text-primary"
+                        : "text-slate-600"
                   }`;
                 }}
               >
@@ -453,29 +478,19 @@ const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
                       prod.path.replace(/\/$/, "");
                   return (
                     <>
-                      <div
-                        className={`p-2 rounded-sm transition-colors ${
-                          active ? "bg-primary text-white" : "bg-slate-100 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary"
-                        }`}
-                      >
-                        {prod.icon}
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[13px] font-black uppercase leading-tight tracking-tight">
-                          {prod.title}
-                        </span>
-                        <span className="text-[10px] font-medium text-slate-400 group-hover:text-slate-500 transition-colors uppercase tracking-wider">
-                          {prod.desc}
-                        </span>
-                      </div>
+                      <span className="text-[13px] font-black uppercase leading-tight tracking-tight">
+                        {prod.title}
+                      </span>
                       <ArrowUpRight
                         size={14}
-                        className={`ml-auto transition-all ${
-                          active
+                        className={`transition-all ${
+                          isHovered
                             ? "opacity-100 translate-x-0"
-                            : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                            : active
+                              ? "opacity-100 translate-x-0"
+                              : "opacity-0 -translate-x-1"
                         }`}
-                        style={{ color: ANK_PRIMARY }}
+                        style={{ color: isHovered ? "white" : ANK_PRIMARY }}
                       />
                     </>
                   );
@@ -491,23 +506,46 @@ const ProductsMenu = ({ onClose }: { onClose: () => void }) => {
 
 const AboutMenu = ({ onClose }: { onClose: () => void }) => {
   const location = useLocation();
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   return (
-    <div className="p-6 bg-white w-full" style={{ borderRadius: 4 }}>
-      <div className="flex flex-col gap-1 max-w-md mx-auto">
+    <div
+      className="p-2 bg-white relative"
+      style={{ borderRadius: 4 }}
+      onMouseLeave={() => setHoveredIdx(null)}
+    >
+      <div className="flex flex-col gap-0.5 relative">
         <p
-          className="text-[10px] font-black tracking-[0.2em] uppercase mb-4 opacity-40 px-4"
+          className="text-[10px] font-black tracking-[0.2em] uppercase mb-3 mt-2 opacity-40 px-4"
           style={{ color: ANK_PRIMARY }}
         >
           About ANK
         </p>
         {ABOUT_LINKS.map((link, i) => {
+          const isHovered = hoveredIdx === i;
           return (
             <motion.div
               key={i}
+              className="relative group"
+              onMouseEnter={() => setHoveredIdx(i)}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.03, duration: 0.2 }}
             >
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div
+                    layoutId="about-highlight"
+                    className="absolute inset-0 rounded-sm"
+                    style={{ backgroundColor: ANK_PRIMARY }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                  />
+                )}
+              </AnimatePresence>
+
               <NavLink
                 to={link.path}
                 onClick={onClose}
@@ -516,10 +554,12 @@ const AboutMenu = ({ onClose }: { onClose: () => void }) => {
                     isActive ||
                     location.pathname.replace(/\/$/, "") ===
                       link.path.replace(/\/$/, "");
-                  return `group flex items-center gap-4 px-4 py-3 transition-all duration-200 rounded-sm ${
-                    active
-                      ? "bg-slate-50 text-primary"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-primary"
+                  return `relative z-10 flex items-center gap-2 px-4 py-3 transition-colors duration-200 rounded-sm ${
+                    isHovered
+                      ? "text-white"
+                      : active
+                        ? "text-primary"
+                        : "text-slate-600"
                   }`;
                 }}
               >
@@ -530,24 +570,19 @@ const AboutMenu = ({ onClose }: { onClose: () => void }) => {
                       link.path.replace(/\/$/, "");
                   return (
                     <>
-                      <div
-                        className={`p-2 rounded-sm transition-colors ${
-                          active ? "bg-primary text-white" : "bg-slate-100 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary"
-                        }`}
-                      >
-                        {link.icon}
-                      </div>
                       <span className="text-[13px] font-black uppercase leading-tight tracking-tight">
                         {link.title}
                       </span>
                       <ArrowUpRight
                         size={14}
-                        className={`ml-auto transition-all ${
-                          active
+                        className={`transition-all ${
+                          isHovered
                             ? "opacity-100 translate-x-0"
-                            : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                            : active
+                              ? "opacity-100 translate-x-0"
+                              : "opacity-0 -translate-x-1"
                         }`}
-                        style={{ color: ANK_PRIMARY }}
+                        style={{ color: isHovered ? "white" : ANK_PRIMARY }}
                       />
                     </>
                   );
@@ -803,7 +838,7 @@ const Navbar = () => {
             </button>
           </motion.nav>
 
-          {/* Fixed-Width Dropdown matching Navbar Width */}
+          {/* Dropdown Container */}
           <AnimatePresence mode="wait">
             {hoveredMenu && (
               <motion.div
@@ -821,8 +856,8 @@ const Navbar = () => {
                   ...glass,
                   position: "absolute",
                   top: "calc(100% + 12px)",
-                  left: 0,
-                  width: navBarWidth,
+                  left: hoveredMenu === "Our Services" ? 0 : pillGeom.x - 8,
+                  width: hoveredMenu === "Our Services" ? navBarWidth : 300,
                   maxHeight: "85vh",
                   overflowY: "auto",
                   transformOrigin: "top center",
