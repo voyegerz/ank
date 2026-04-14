@@ -7,6 +7,9 @@ import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
+import ServiceFeatureLayout from "@/components/ServiceFeatureLayout";
+import ServiceCarouselSection from "@/components/ServiceCarouselSection";
+import ServiceExpectationLayout from "@/components/ServiceExpectationLayout";
 
 const MechanicalEngineering = () => {
   const navigate = useNavigate();
@@ -27,29 +30,69 @@ const MechanicalEngineering = () => {
         subtitle="Professional 3D designing and 2D drafting services to support engineering development, manufacturing, and system integration. Our designs are accurate, standards-compliant, and production-ready."
         watermarkNumber="04"
       />
-      <ServiceDetail
-        images={cadImages}
-        caption="Engineering Excellence"
-        leftTitle="Core Capabilities"
-        leftParagraphs={[
-          "Our team works closely with clients to convert concepts, references, and existing data into clear engineering drawings and 3D models that simplify manufacturing, assembly, and future modifications.",
-          "We provide comprehensive 3D modeling for complex assemblies, ensuring perfect spatial alignment and kinematic motion before a single part is produced.",
-        ]}
-        rightTitle="Mastery Over Matter"
-        rightParagraphs={[
-          "Great mechanical engineering isn't just about making things fit; it's about optimizing weight, durability, and manufacturability into a single, cohesive form.",
-          "We deliver industrial-grade mechanical solutions that form the robust backbone of automation equipment and consumer products.",
-        ]}
+      <ServiceFeatureLayout
+        badgeText="Core Capabilities"
+        watermarkText="CAD"
+        title={
+          <>
+            Professional 3D
+            <br />
+            Modeling & Drafting
+          </>
+        }
+        description1="Our team works closely with clients to convert concepts, references, and existing data into clear engineering drawings and 3D models that simplify manufacturing, assembly, and future modifications."
+        description2="Great mechanical engineering isn't just about making things fit; it's about optimizing weight, durability, and manufacturability into a single, cohesive form."
+        buttonText="Get a free quote"
+        buttonLink="/contact"
         features={[
-          "Professional 3D Modeling",
-          "2D Technical Drafting",
-          "Design for Manufacturing (DFM)",
-          "Standards Compliant (ASME/ISO)",
+          {
+            type: "image",
+            image: cadImages[0],
+            className: "h-full",
+          },
+          {
+            type: "color",
+            className: "bg-[#fbbf24] text-slate-900",
+            icon: <Wrench />,
+            title: "Prototyping",
+            description:
+              "Rapid iteration and testing of designs to ensure fit, form, and function before high-volume manufacturing begins.",
+          },
+          {
+            type: "image-text",
+            image: cadImages[2],
+            className: "bg-slate-50 text-slate-800",
+            icon: <Settings2 />,
+            title: "Precision Modeling",
+            description:
+              "Dramatically visualize customer directed convergence with detailed dimensional tolerancing (GD&T) for error-free production.",
+          },
+          {
+            type: "color",
+            className: "bg-primary text-white",
+            icon: <Hammer />,
+            title: "DFM / DFA",
+            description:
+              "Design for Manufacturing and Assembly optimization to maximize efficiency, reduce waste, and streamline the assembly process.",
+          },
         ]}
-        ctaLabel="Contact Us"
-        onCtaClick={() => {
-          navigate("/contact");
-        }}
+      />
+      <ServiceCarouselSection
+        title="Mechanical Custom Made Components"
+        paragraphs={[
+          "ANK provides a broad range of custom mechanical options tailored precisely to your unique engineering project needs. From complex parametric drafting to scalable fabrication models.",
+          "Our engineering team helps resolve your intricate design challenges securely using advanced CAD methodologies to get your product structurally sound and market-ready faster.",
+        ]}
+        bullets={[
+          "Advanced parametric 3D modeling",
+          "Kinematic assembly testing",
+          "Finite Element Analysis (FEA) prep",
+          "Tolerance stack-up optimization",
+          "Material selection planning",
+        ]}
+        images={[cadImages[1], cadImages[2], cadImages[3]]}
+        buttonText="Get Pricing Details"
+        buttonLink="/contact"
       />
       <ServiceProcess
         items={[
@@ -80,7 +123,29 @@ const MechanicalEngineering = () => {
         ]}
       />
 
-      <PhilosophySection
+      <ServiceExpectationLayout
+        badgeText="Solution for your business"
+        title={
+          <>
+            What can you
+            <br />
+            expect
+          </>
+        }
+        description="ANK will deliver a high quality physical product for you each and every time."
+        bullets={[
+          "Solutions for your manufacturing business",
+          "Production of bespoke tools and machines",
+          "Designing, building and testing with highest quality",
+          "Fulfilling customer technical requirements",
+        ]}
+        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
+        quoteText="The best part about ANK is that you work with such passionate engineers who are eager to solve challenges. I love the dedication to precision."
+        quoteAuthor="Sanjay Shah"
+        quoteRole="Technical Director"
+      />
+
+      {/* <PhilosophySection
         image="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2000"
         eyebrow="Our mechanical ethos"
         eyebrowHighlight="ethos"
@@ -109,9 +174,9 @@ const MechanicalEngineering = () => {
             progress: 99,
           },
         ]}
-      />
+      /> */}
 
-      <Testimonials
+      {/* <Testimonials
         eyebrow="Success Stories"
         eyebrowHighlight="Stories"
         heading="Client Satisfaction"
@@ -139,8 +204,8 @@ const MechanicalEngineering = () => {
               "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
           },
         ]}
-      />
-      <CTASection
+      /> */}
+      {/* <CTASection
         eyebrow="Bridge the gap to industry"
         eyebrowHighlight="industry"
         heading="Need professional 3D design and 2D drafting to bring your next physical product to life?"
@@ -152,7 +217,7 @@ const MechanicalEngineering = () => {
         onSecondaryClick={() => {
           navigate("/contact");
         }}
-      />
+      /> */}
     </PageLayout>
   );
 };

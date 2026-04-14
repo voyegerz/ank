@@ -89,7 +89,7 @@ const Testimonials = ({
       </div>
 
       {/* ── Image band with floating cards ── */}
-      <div className="relative mx-0 md:mx-8 mb-8 md:mb-10 overflow-hidden h-[600px] md:h-[400px]">
+      <div className="relative mx-0 md:mx-8 mb-8 md:mb-10 overflow-hidden shadow-xl h-[600px] md:h-[400px]">
         {/* Background image */}
         <img
           src={bgImage || TestinomialBg}
@@ -127,7 +127,7 @@ const Testimonials = ({
                   <img
                     src={t.avatar || ClientAvatar}
                     alt={t.name}
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                    className="w-10 h-10 rounded-full object-cover shadow-md flex-shrink-0"
                   />
                   <div>
                     <p className="text-white font-bold text-sm leading-tight">

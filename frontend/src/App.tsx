@@ -60,9 +60,9 @@ function App() {
   return (
     <>
       <Analytics />
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {loading && <Preloader onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
       <SmoothScroll>
         <div className="min-h-screen bg-white text-slate-900 font-sans">

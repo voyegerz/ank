@@ -15,7 +15,7 @@ import logo from "../assets/images/logo.svg";
 
 const Footer = () => {
   return (
-    <footer className="px-6 md:px-16 lg:px-32 py-16  bg-slate-950 text-white relative overflow-hidden">
+    <footer className="px-6  md:px-16 lg:px-32 py-16  bg-slate-950 text-white relative overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
         {/* Company Info / Business Card Style */}
         <div className="col-span-1">
@@ -37,11 +37,13 @@ const Footer = () => {
                 GSTIN: 24ACKFA7111N1ZB
               </p>
             </div>
-            
+
             <div className="space-y-3 pt-4 border-t border-white/10">
               <div className="flex items-center gap-3">
                 <Phone size={14} className="text-white/60" />
-                <p className="text-[10px] font-bold">+91 63542 30924 / 94095 88709</p>
+                <p className="text-[10px] font-bold">
+                  +91 63542 30924 / 94095 88709
+                </p>
               </div>
               <div className="flex items-center gap-3">
                 <Globe size={14} className="text-white/60" />
@@ -49,12 +51,15 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={14} className="text-white/60" />
-                <p className="text-[10px] font-bold lowercase">enquiry@ankautomation.in</p>
+                <p className="text-[10px] font-bold lowercase">
+                  enquiry@ankautomation.in
+                </p>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={14} className="text-white/60 mt-0.5" />
                 <p className="text-[10px] font-bold leading-tight">
-                  Shop No. A4, Lovely Mobile Market, Near Marimatas Lane, Palace Road, Vadodara, Gujarat 390001
+                  Shop No. A4, Lovely Mobile Market, Near Marimatas Lane, Palace
+                  Road, Vadodara, Gujarat 390001
                 </p>
               </div>
             </div>
@@ -103,7 +108,8 @@ const Footer = () => {
                 size={20}
               />
               <p className="text-sm font-bold text-slate-300 leading-relaxed">
-                Shop No. A4, Lovely Mobile Market, Near Marimatas Lane, Palace Road, Vadodara - 390001
+                Shop No. A4, Lovely Mobile Market, Near Marimatas Lane, Palace
+                Road, Vadodara - 390001
               </p>
             </div>
             <div className="flex gap-4 group cursor-default">

@@ -183,7 +183,7 @@ const PhilosophySection = ({
 
       {/* ── Right image ── */}
       <motion.div
-        className="relative min-h-[300px] md:min-h-[400px] lg:min-h-[520px] order-first lg:order-last"
+        className="relative min-h-[300px] md:min-h-[400px] lg:min-h-[520px] order-first lg:order-last shadow-xl"
         initial={{ opacity: 0, scale: 1.04 }}
         animate={inView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.2 }}

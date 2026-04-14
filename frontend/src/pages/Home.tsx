@@ -659,7 +659,7 @@ const Home = () => {
               <div className="flex gap-4 items-start">
                 <MapPin
                   size={16}
-                  className="text-slate-300 mt-0.5 shrink-0 text-primary-hover"
+                  className=" mt-0.5 shrink-0 text-primary-hover"
                 />
                 <p className="text-[14px] text-slate-600 leading-relaxed font-medium">
                   Office S-4, 2nd Floor, Commercial Building, Pune MH 411001
@@ -668,7 +668,7 @@ const Home = () => {
               <div className="flex gap-4 items-center">
                 <Mail
                   size={16}
-                  className="text-slate-300 shrink-0 text-primary-hover"
+                  className=" shrink-0 text-primary-hover"
                 />
                 <p className="text-[14px] text-slate-600 font-medium">
                   info@ankautomation.com

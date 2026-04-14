@@ -25,7 +25,7 @@ const CommonHero = ({
     <section className="relative h-screen min-h-[560px] flex items-center overflow-hidden">
       {/* ── Background image ── */}
       <motion.div
-        className="absolute inset-0 z-0 bg-primary brightness-70 grayscale-[10%]"
+        className="absolute inset-0 z-0"
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
@@ -37,9 +37,8 @@ const CommonHero = ({
         transition={{ duration: 8, ease: "easeOut" }}
       />
 
-      {/* ── Gradient overlays ── */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#050c1c]/90 via-[#050c1c]/45 to-transparent" />
-      
+      {/* ── Blue overlay ── */}
+      <div className="absolute inset-0 z-[1] bg-[#010080]/50" />
 
       {/* ── Subtle grid ── */}
       <motion.div

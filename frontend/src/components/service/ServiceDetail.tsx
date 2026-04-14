@@ -47,7 +47,7 @@ const ServiceDetail = ({
       <div className="grid grid-cols-1 lg:grid-cols-[35%_1fr_1fr] min-h-[450px] gap-10">
         {/* ── Image/Carousel column ── */}
         <motion.div
-          className="relative overflow-hidden bg-slate-100 rounded-xl group"
+          className="relative overflow-hidden bg-slate-100 rounded-xl shadow-xl group"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
