@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuthStore } from "./store/useAuthStore";
 import { Analytics } from "@vercel/analytics/react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -63,37 +64,71 @@ import ProjectsModelling from "./pages/products/ProjectsModelling";
 // --- About ---
 import CompanyOverview from "./pages/about/CompanyOverview";
 import CaseStudies from "./pages/about/CaseStudies";
+import CaseStudyDetail from "./pages/about/CaseStudyDetail";
 
 // --- Admin ---
 import AdminLogin from "./pages/admin/Login";
-import AdminDashboard from "./pages/admin/Dashboard";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminOverview from "./pages/admin/Overview";
+import AdminProducts from "./pages/admin/Products/ProductsPage";
+import AdminProductDetail from "./pages/admin/Products/ProductDetailPage";
+import AdminCategories from "./pages/admin/CategoriesPage";
+import AdminApplications from "./pages/admin/ApplicationsPage";
+import AdminCaseStudies from "./pages/admin/CaseStudies/CaseStudiesPage";
+import AdminCaseStudyDetail from "./pages/admin/CaseStudies/CaseStudyDetail";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const { checkAuth, loading: authLoading } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  if (authLoading) {
+    return null; // Or a professional loading screen
+  }
+
+  const isAdmin = location.pathname.startsWith("/admin");
 
   return (
     <>
       <Analytics />
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {loading && <Preloader onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
       <SmoothScroll>
         <div className="min-h-screen bg-white text-slate-900 font-sans">
           <ScrollToTop />
-          <Navbar />
+          {!isAdmin && <Navbar />}
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<OurServices />} />
-              
+
               {/* Service Category Overviews */}
-              <Route path="/services/product-designs" element={<ProductDesignsOverview />} />
-              <Route path="/services/industrial-automation" element={<IndustrialAutomationOverview />} />
-              <Route path="/services/software-solutions" element={<SoftwareSolutionsOverview />} />
-              <Route path="/services/manufacturing" element={<ManufacturingOverview />} />
-              <Route path="/services/student-outreach" element={<StudentOutreachOverview />} />
+              <Route
+                path="/services/product-designs"
+                element={<ProductDesignsOverview />}
+              />
+              <Route
+                path="/services/industrial-automation"
+                element={<IndustrialAutomationOverview />}
+              />
+              <Route
+                path="/services/software-solutions"
+                element={<SoftwareSolutionsOverview />}
+              />
+              <Route
+                path="/services/manufacturing"
+                element={<ManufacturingOverview />}
+              />
+              <Route
+                path="/services/student-outreach"
+                element={<StudentOutreachOverview />}
+              />
 
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />
@@ -107,10 +142,7 @@ function App() {
                 path="/services/hardware-engineering"
                 element={<HardwareEngineering />}
               />
-              <Route
-                path="/services/cad-design"
-                element={<CadDesign />}
-              />
+              <Route path="/services/cad-design" element={<CadDesign />} />
               <Route
                 path="/services/reverse-engineering"
                 element={<ReverseEngineering />}
@@ -126,10 +158,7 @@ function App() {
                 path="/services/rapid-prototyping"
                 element={<RapidPrototyping />}
               />
-              <Route
-                path="/services/3d-printing"
-                element={<Fdm3DPrinting />}
-              />
+              <Route path="/services/3d-printing" element={<Fdm3DPrinting />} />
               <Route
                 path="/services/website-design"
                 element={<WebsiteDesign />}
@@ -151,10 +180,7 @@ function App() {
                 element={<InventoryManagement />}
               />
               <Route path="/services/saas" element={<Saas />} />
-              <Route
-                path="/services/scada-hmi"
-                element={<ScadaHmi />}
-              />
+              <Route path="/services/scada-hmi" element={<ScadaHmi />} />
               <Route
                 path="/services/plc-programming"
                 element={<PlcProgramming />}
@@ -194,13 +220,27 @@ function App() {
               {/* About Section */}
               <Route path="/about/overview" element={<CompanyOverview />} />
               <Route path="/about/case-studies" element={<CaseStudies />} />
-
+              <Route
+                path="/about/case-studies/:id"
+                element={<CaseStudyDetail />}
+              />
               {/* Admin */}
               <Route path="/admin" element={<AdminLogin />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/dashboard" element={<AdminLayout />}>
+                <Route index element={<AdminOverview />} />
+                <Route path="products" element={<AdminProducts />} />
+                <Route path="products/:id" element={<AdminProductDetail />} />
+                <Route path="categories" element={<AdminCategories />} />
+                <Route path="applications" element={<AdminApplications />} />
+                <Route path="case-studies" element={<AdminCaseStudies />} />
+                <Route
+                  path="case-studies/:id"
+                  element={<AdminCaseStudyDetail />}
+                />
+              </Route>
             </Routes>
           </AnimatePresence>
-          <Footer />
+          {!isAdmin && <Footer />}
         </div>
       </SmoothScroll>
     </>

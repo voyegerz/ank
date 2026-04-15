@@ -181,7 +181,7 @@ export class CatalogService {
 
     // Sync Helper: Get Image URL
     getProductImagePreview(fileId: string) {
-        return storage.getFilePreview(
+        return storage.getFileView(
             conf.appwriteBucketID,
             fileId
         );
