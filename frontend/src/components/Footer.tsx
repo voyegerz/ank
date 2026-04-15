@@ -42,40 +42,70 @@ const Footer = () => {
     <footer className="bg-[#020617] text-white pt-24 pb-12 relative overflow-hidden border-t border-white/5">
       {/* Modern Gradient Overlays */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-10%] w-[70%] h-[70%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#01014a]/30 rounded-full blur-[100px]" />
+        {/* <div className="absolute top-[-10%] right-[-10%] w-[70%] h-[70%] bg-primary rounded-full blur-[120px] animate-pulse " /> */}
+        <motion.div
+          className="absolute w-[70%] h-[70%] bg-primary rounded-full blur-[120px]"
+          animate={{
+            x: [0, -50, 30, -20, 0],
+            y: [0, 40, -30, 20, 0],
+            scale: [1, 1.1, 0.9, 1.05, 1],
+            opacity: [0.4, 0.6, 0.3, 0.5, 0.4],
+          }}
+          transition={{
+            duration: 2500,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{ top: "-10%", right: "-10%" }}
+        />
+        <motion.div
+          className="absolute w-[60%] h-[60%] bg-primary/40 rounded-full blur-[100px]"
+          animate={{
+            x: [0, 60, -40, 20, 0],
+            y: [0, -30, 50, -10, 0],
+            scale: [1, 0.95, 1.1, 1, 1],
+            opacity: [0.3, 0.5, 0.4, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 2500,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{ bottom: "-10%", left: "-10%" }}
+        />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-primary/40 rounded-full blur-[100px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(1,0,128,0.05)_0%,transparent_70%)]" />
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
-          
+
           {/* ─── Business Card Section (Left) ─── */}
           <div className="lg:col-span-4 xl:col-span-3">
             <div className="perspective-1000 group cursor-pointer w-full max-w-[280px]">
-              <motion.div 
+              <motion.div
                 className="relative w-full aspect-[9/16] preserve-3d transition-all duration-1000"
                 style={{ transformStyle: "preserve-3d" }}
                 whileHover={{ rotateY: 180 }}
               >
                 {/* Front Side */}
                 <div className="backface-hidden shadow-2xl rounded-lg overflow-hidden absolute inset-0" style={{ transform: "translateZ(0)" }}>
-                  <img 
-                    src={cardFront} 
-                    alt="ANK Business Card Front" 
-                    className="w-full h-full object-cover" 
+                  <img
+                    src={cardFront}
+                    alt="ANK Business Card Front"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
                 {/* Back Side */}
-                <div 
+                <div
                   className="absolute inset-0 backface-hidden shadow-2xl rounded-lg overflow-hidden"
                   style={{ transform: "rotateY(180deg) translateZ(0)" }}
                 >
-                  <img 
-                    src={cardBack} 
-                    alt="ANK Business Card Back" 
-                    className="w-full h-full object-cover" 
+                  <img
+                    src={cardBack}
+                    alt="ANK Business Card Back"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </motion.div>
@@ -85,7 +115,7 @@ const Footer = () => {
           {/* ─── Links Sections ─── */}
           <div className="lg:col-span-8 xl:col-span-9">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
-              
+
               {/* Our Services */}
               <div className="space-y-8">
                 <h4 className="text-xs font-bold text-white uppercase tracking-[0.25em] opacity-90 border-b border-white/10 pb-4">
@@ -124,7 +154,7 @@ const Footer = () => {
             </div>
 
             {/* Newsletter & Socials Row */}
-            <div className="mt-20 pt-16 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="xl:mt-5 xl:pt-10 lg:mt-20 lg:pt-10 border-white/5 grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
               {/* Newsletter */}
               <div className="max-w-md">
                 <h4 className="text-sm font-bold mb-4 uppercase tracking-widest">Stay Updated</h4>
@@ -191,9 +221,9 @@ const FooterLink = ({ to, label }: { to: string; label: string }) => (
         {label}
         <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary/50 transition-all duration-300 group-hover:w-full" />
       </span>
-      <ArrowUpRight 
-        size={14} 
-        className="text-white opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out" 
+      <ArrowUpRight
+        size={14}
+        className="text-white opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out"
       />
     </Link>
   </li>

@@ -22,7 +22,7 @@ const FeaAnalysis = () => {
         bgImage="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000"
         caption="Virtual Testing & Simulation"
         title="FEA Analysis Services"
-        subtitle="Validate your designs through advanced Finite Element Analysis. We simulate real-world physical stresses, thermal loads, and fluid dynamics to ensure safety and optimize performance before physical prototyping."
+        subtitle="Validate your designs through advanced Finite Element Analysis (FEA) and Finite Element Method (FEM). We simulate real-world physical stresses, thermal loads, and fluid dynamics to ensure safety and optimize performance before physical prototyping."
         watermarkNumber="05"
       />
       <ServiceDetail
@@ -30,13 +30,7 @@ const FeaAnalysis = () => {
         caption="Predictive Engineering"
         leftTitle="Simulating Reality"
         leftParagraphs={[
-          "We utilize state-of-the-art simulation software to predict how your products will react to real-world forces, vibration, heat, fluid flow, and other physical effects.",
-          "Finite Element Analysis (FEA) allows us to identify potential failure points early in the design cycle, saving significant time and costs associated with physical testing.",
-        ]}
-        rightTitle="Optimization & Safety"
-        rightParagraphs={[
-          "Beyond simple validation, we use simulation data to optimize material usage and geometry, ensuring the highest performance-to-weight ratios.",
-          "Our reports provide clear, actionable insights into safety factors, fatigue life, and structural integrity, ensuring your products meet or exceed regulatory requirements.",
+          "We utilize state-of-the-art simulation software like Finite Element Analysis (FEA) and Finite Element Method (FEM) to predict how your products will react to real-world forces, vibration, heat, and fluid flow. We identify potential failure points early in the design cycle, saving significant time and costs.",
         ]}
         features={[
           "Static & Dynamic Analysis",
@@ -44,7 +38,7 @@ const FeaAnalysis = () => {
           "Fatigue & Durability Testing",
           "Material Optimization Reports",
         ]}
-        ctaLabel="Consult our Analysts"
+        ctaLabel="Contact Us"
         onCtaClick={() => {
           navigate("/contact");
         }}
@@ -84,24 +78,25 @@ const FeaAnalysis = () => {
         eyebrowHighlight="ethos"
         title="Validated by Science"
         paragraphs={[
-          "Simulation is not just about pretty pictures; it's about the rigorous mathematical validation of engineering intent. We combine theoretical knowledge with practical experience to deliver results you can trust.",
-          "By integrating FEA early in our Product Design workflow, we ensure that every solution we deliver is fundamentally sound and optimized for its intended environment.",
+          "Simulation is not just about pretty pictures; it's about the rigorous mathematical validation of engineering intent. We combine theoretical knowledge with practical experience to deliver results you can trust and optimize designs for their intended environment.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <ShieldAlert size={32} strokeWidth={1.2} />,
+            icon: <ShieldAlert size={20} strokeWidth={1.2} />,
             label: "Risk Mitigation",
             description: "Identify failures before they happen",
             progress: 100,
           },
           {
-            icon: <BarChart3 size={32} strokeWidth={1.2} />,
+            icon: <BarChart3 size={20} strokeWidth={1.2} />,
             label: "Performance Optimization",
             description: "Maximum strength with minimum weight",
             progress: 96,
           },
           {
-            icon: <Binary size={32} strokeWidth={1.2} />,
+            icon: <Binary size={20} strokeWidth={1.2} />,
             label: "Numerical Precision",
             description: "Validated against physical test benchmarks",
             progress: 98,
@@ -132,7 +127,7 @@ const FeaAnalysis = () => {
         eyebrow="Simulate the future"
         eyebrowHighlight="future"
         heading="Ensure your designs are safe and optimized with our advanced simulation services."
-        primaryLabel="Request a Simulation"
+        primaryLabel="Talk to our FEA Experts"
         secondaryLabel="Contact Us"
         onPrimaryClick={() => {
           navigate("/contact");
