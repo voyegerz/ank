@@ -1,81 +1,145 @@
+import { ShieldAlert, BarChart3, Binary } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
-import DetailedProcessSection from "../../../components/service/DetailedProcessSection";
-import type { ProcessStep } from "../../../components/service/DetailedProcessSection";
-
+import ServiceDetail from "../../../components/service/ServiceDetail";
+import ServiceProcess from "@/components/service/ServiceProcess";
+import PhilosophySection from "@/components/service/Philosophy";
+import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const FeaAnalysis = () => {
+  const navigate = useNavigate();
 
-  const steps: ProcessStep[] = [
-    {
-      number: "1",
-      title: "Regulatory Compliance Audit",
-      subtitle: "Standards Verification",
-      description:
-        "We commence every engagement with a rigorous audit of your designs against international ISO, IEC, and CE standards, ensuring your product is globally compliant and market-ready from day one.",
-      images: [
-        "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=600",
-      ],
-    },
-    {
-      number: "2",
-      title: "Environmental Stress Testing",
-      subtitle: "Reliability Analysis",
-      description:
-        "Subjecting hardware to extreme thermal cycling, vibration analysis, and mechanical stress helps us identify latent vulnerabilities. We ensure your product survives the harshest industrial environments.",
-      images: [
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
-      ],
-    },
-    {
-      number: "3",
-      title: "Automated Software Validation",
-      subtitle: "Continuous Testing",
-      description:
-        "Our software engineering team deploys advanced CI/CD pipelines including unit, integration, and regression test suites to guarantee code stability, cybersecurity, and sub-second performance metrics.",
-      images: [
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600",
-      ],
-    },
-    {
-      number: "4",
-      title: "Final Certification & Handover",
-      subtitle: "Operational Readiness",
-      description:
-        "The final phase involves a comprehensive functional sign-off. We provide exhaustive documentation, test reports, and compliance certificates before the product transitions to full-scale production.",
-      images: [
-        "https://images.unsplash.com/photo-1454165833767-027eeed1a131?auto=format&fit=crop&q=80&w=1200",
-      ],
-    },
+  const feaImages = [
+    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
-        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
-        caption="Engineering Integrity"
-        title="Testing & Quality Assurance"
-        subtitle="We deliver uncompromising technical validation for mission-critical hardware and software, ensuring every deployment is resilient, secure, and performant."
-        watermarkNumber="16"
+        bgImage="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000"
+        caption="Virtual Testing & Simulation"
+        title="FEA Analysis Services"
+        subtitle="Validate your designs through advanced Finite Element Analysis. We simulate real-world physical stresses, thermal loads, and fluid dynamics to ensure safety and optimize performance before physical prototyping."
+        watermarkNumber="05"
+      />
+      <ServiceDetail
+        images={feaImages}
+        caption="Predictive Engineering"
+        leftTitle="Simulating Reality"
+        leftParagraphs={[
+          "We utilize state-of-the-art simulation software to predict how your products will react to real-world forces, vibration, heat, fluid flow, and other physical effects.",
+          "Finite Element Analysis (FEA) allows us to identify potential failure points early in the design cycle, saving significant time and costs associated with physical testing.",
+        ]}
+        rightTitle="Optimization & Safety"
+        rightParagraphs={[
+          "Beyond simple validation, we use simulation data to optimize material usage and geometry, ensuring the highest performance-to-weight ratios.",
+          "Our reports provide clear, actionable insights into safety factors, fatigue life, and structural integrity, ensuring your products meet or exceed regulatory requirements.",
+        ]}
+        features={[
+          "Static & Dynamic Analysis",
+          "Thermal & Fluid Simulation",
+          "Fatigue & Durability Testing",
+          "Material Optimization Reports",
+        ]}
+        ctaLabel="Consult our Analysts"
+        onCtaClick={() => {
+          navigate("/contact");
+        }}
+      />
+      <ServiceProcess
+        items={[
+          {
+            number: "01",
+            title: "Data Preparation",
+            description:
+              "Preparing CAD geometry for analysis by simplifying non-critical features and defining precise material properties.",
+          },
+          {
+            number: "02",
+            title: "Meshing & Setup",
+            description:
+              "Generating high-quality mesh networks and defining boundary conditions, loads, and environmental constraints.",
+          },
+          {
+            number: "03",
+            title: "Solver Execution",
+            description:
+              "Running advanced mathematical solvers to calculate stress distributions, displacements, and safety factors.",
+          },
+          {
+            number: "04",
+            title: "Reporting & Iteration",
+            description:
+              "Delivering comprehensive technical reports with visual plots and providing design recommendations for improvement.",
+          },
+        ]}
       />
 
-      <DetailedProcessSection
-        eyebrow="Precision Workflow"
-        title="An Exhaustive Audit of Your Vision"
-        description="Our quality assurance framework is built on thirty years of industrial expertise, combining physical stress tests with advanced digital simulation."
-        steps={steps}
+      <PhilosophySection
+        image="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our analytical ethos"
+        eyebrowHighlight="ethos"
+        title="Validated by Science"
+        paragraphs={[
+          "Simulation is not just about pretty pictures; it's about the rigorous mathematical validation of engineering intent. We combine theoretical knowledge with practical experience to deliver results you can trust.",
+          "By integrating FEA early in our Product Design workflow, we ensure that every solution we deliver is fundamentally sound and optimized for its intended environment.",
+        ]}
+        items={[
+          {
+            icon: <ShieldAlert size={32} strokeWidth={1.2} />,
+            label: "Risk Mitigation",
+            description: "Identify failures before they happen",
+            progress: 100,
+          },
+          {
+            icon: <BarChart3 size={32} strokeWidth={1.2} />,
+            label: "Performance Optimization",
+            description: "Maximum strength with minimum weight",
+            progress: 96,
+          },
+          {
+            icon: <Binary size={32} strokeWidth={1.2} />,
+            label: "Numerical Precision",
+            description: "Validated against physical test benchmarks",
+            progress: 98,
+          },
+        ]}
       />
 
-
+      <Testimonials
+        eyebrow="Proven Results"
+        eyebrowHighlight="Results"
+        heading="Client Trust"
+        watermarkText="Verified"
+        bgImage="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2000&auto=format&fit=crop"
+        testimonials={[
+          {
+            title: "Structural Validation",
+            rating: 5,
+            review:
+              "ANK's FEA reports were instrumental in getting our heavy machinery certified. Their simulation matched our physical drop test results with remarkable accuracy.",
+            name: "Vikram Mehta",
+            company: "Engineering Head, Mahavir Heavy Industries",
+            avatar:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
+          },
+        ]}
+      />
       <CTASection
-        eyebrowHighlight="Zero"
-        eyebrow="Zero-Defect Goal"
-        heading="Ready to ensure your next industrial project meets the highest standards of reliability and performance?"
-        primaryLabel="Request a QA Audit"
-        secondaryLabel="View Case Studies"
+        eyebrow="Simulate the future"
+        eyebrowHighlight="future"
+        heading="Ensure your designs are safe and optimized with our advanced simulation services."
+        primaryLabel="Request a Simulation"
+        secondaryLabel="Contact Us"
+        onPrimaryClick={() => {
+          navigate("/contact");
+        }}
+        onSecondaryClick={() => {
+          navigate("/contact");
+        }}
       />
     </PageLayout>
   );

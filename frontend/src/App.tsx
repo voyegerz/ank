@@ -12,8 +12,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import Preloader from "./components/Preloader";
 
 // --- Services ---
+import OurServices from "./pages/services/OurServices";
 
 // Product Designs
+import ProductDesignsOverview from "./pages/services/ProductDesigns/Overview";
 import HardwareEngineering from "./pages/services/ProductDesigns/HardwareEngineering";
 import CadDesign from "./pages/services/ProductDesigns/CadDesign";
 import ReverseEngineering from "./pages/services/ProductDesigns/ReverseEngineering";
@@ -22,12 +24,14 @@ import SoftwareEngineering from "./pages/services/ProductDesigns/SoftwareEnginee
 import FeaAnalysis from "./pages/services/ProductDesigns/FeaAnalysis";
 
 // Manufacturing
+import ManufacturingOverview from "./pages/services/Manufacturing/Overview";
 import PcbDesign from "./pages/services/Manufacturing/PcbDesign";
 import ProductAssembly from "./pages/services/Manufacturing/ProductAssembly";
 import RapidPrototyping from "./pages/services/Manufacturing/RapidPrototyping";
 import Fdm3DPrinting from "./pages/services/Manufacturing/Fdm3DPrinting";
 
 // Software Solutions
+import SoftwareSolutionsOverview from "./pages/services/SoftwareSolutions/Overview";
 import WebsiteDesign from "./pages/services/SoftwareSolutions/WebsiteDesign";
 import MobileApplication from "./pages/services/SoftwareSolutions/MobileApplication";
 import ApplicationDesign from "./pages/services/SoftwareSolutions/ApplicationDesign";
@@ -36,12 +40,14 @@ import InventoryManagement from "./pages/services/SoftwareSolutions/InventoryMan
 import Saas from "./pages/services/SoftwareSolutions/Saas";
 
 // Industrial Automation
+import IndustrialAutomationOverview from "./pages/services/IndustrialAutomation/Overview";
 import ScadaHmi from "./pages/services/IndustrialAutomation/ScadaHmi";
 import PlcProgramming from "./pages/services/IndustrialAutomation/PlcProgramming";
 import PanelAutomation from "./pages/services/IndustrialAutomation/PanelAutomation";
 import MaintenanceTroubleshooting from "./pages/services/IndustrialAutomation/MaintenanceTroubleshooting";
 
 // Student Outreach
+import StudentOutreachOverview from "./pages/services/StudentOutreach/Overview";
 import SchoolsCollegeProjects from "./pages/services/StudentOutreach/SchoolsCollegeProjects";
 import Workshops from "./pages/services/StudentOutreach/Workshops";
 import ProjectToProduct from "./pages/services/StudentOutreach/ProjectToProduct";
@@ -80,6 +86,15 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
+              <Route path="/services" element={<OurServices />} />
+              
+              {/* Service Category Overviews */}
+              <Route path="/services/product-designs" element={<ProductDesignsOverview />} />
+              <Route path="/services/industrial-automation" element={<IndustrialAutomationOverview />} />
+              <Route path="/services/software-solutions" element={<SoftwareSolutionsOverview />} />
+              <Route path="/services/manufacturing" element={<ManufacturingOverview />} />
+              <Route path="/services/student-outreach" element={<StudentOutreachOverview />} />
+
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />
 

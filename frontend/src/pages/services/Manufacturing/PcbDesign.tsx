@@ -1,156 +1,144 @@
-import { Cpu, Microchip, ShieldCheck } from "lucide-react";
+import { Cpu, Zap, Settings } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
-import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const PcbDesign = () => {
-  const clients = [
-    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
+  const navigate = useNavigate();
+
+  const pcbImages = [
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
         bgImage="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
-        caption="Precision Electronics Manufacturing"
-        title="PCB Assembly"
-        subtitle="High-reliability SMT and through-hole PCB assembly services for industrial control, medical devices, and aerospace systems."
-        watermarkNumber="10"
+        caption="Electronics Engineering & Assembly"
+        title="PCB Design & Manufacture"
+        subtitle="High-quality printed circuit board (PCB) design, fabrication, and assembly services. We provide end-to-end electronics solutions, from schematic capture and layout optimization to component sourcing and final board testing."
+        watermarkNumber="19"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=2000"
-        caption="Uncompromising Reliability"
-        leftTitle="Core PCB Capabilities"
+        images={pcbImages}
+        caption="Intelligence on a Board"
+        leftTitle="Precision Electronics Design"
         leftParagraphs={[
-          "Advanced SMT & Through-Hole: Implementing high-speed Surface Mount Technology and precise manual through-hole assembly for complex, high-density PCBs.",
-          "Rigid, Flex, & Rigid-Flex: Assembly expertise spanning various board materials and multi-layer stackups, including high-speed and HDI designs.",
-          "AOI & X-Ray Inspection: Every board is subjected to Automated Optical Inspection (AOI) and X-ray analysis to verify joint integrity and component placement accuracy.",
-          "Turnkey Component Sourcing: We manage the full supply chain, sourcing verified, long-lifecycle components directly from authorized distributors to mitigate risk.",
+          "We specialize in creating robust PCB designs that meet your specific electrical and mechanical requirements. Our team focuses on optimal component placement, signal integrity, and thermal management to ensure long-term reliability.",
+          "From simple single-layer boards to complex multi-layer high-speed designs, we provide comprehensive schematic capture and layout services using industry-leading EDA tools.",
         ]}
-        rightTitle="Why Trust Our PCB Assembly?"
+        rightTitle="Turnkey Manufacturing"
         rightParagraphs={[
-          "Electronics are the brain of your industrial assets. We treat every board with absolute precision, utilizing an antistatic environment and climate-controlled storage for moisture-sensitive components.",
-          "By strictly adhering to IPC-A-610 Class 2 and Class 3 standards, we guarantee that your PCBs will function reliably for years, dramatically reducing your field replacement rates and long-term costs.",
+          "Our PCB services extend beyond design. We manage the entire fabrication and assembly process, including component procurement and quality inspection. This ensures that your electronics are built to the highest standards.",
+          "We offer both prototyping and low-to-medium volume assembly services, providing you with fully tested and functional boards that are ready for integration into your products or systems.",
         ]}
         features={[
-          "IPC Class 3 Solder Quality",
-          "Automated Optical Inspection",
-          "Clean-Room Quality Assembly",
+          "Custom Schematic & PCB Layout",
+          "Signal & Power Integrity Analysis",
+          "Component Sourcing & Procurement",
+          "Fully Assembled & Tested Boards",
         ]}
-        ctaLabel="Consult PCB Expert"
+        ctaLabel="Design your PCB"
         onCtaClick={() => {
-          console.log("PCB CTA clicked");
+          navigate("/contact");
         }}
       />
       <ServiceProcess
         items={[
           {
             number: "01",
-            title: "Sourcing & Stencil",
+            title: "Schematic Capture",
             description:
-              "We procure high-quality components and laser-cut ultra-precise stainless steel stencils for accurate solder paste deposition.",
+              "Translating your circuit requirements into a detailed electrical schematic with precise component definitions.",
           },
           {
             number: "02",
-            title: "SMT & Pick-and-Place",
+            title: "PCB Layout",
             description:
-              "Our high-speed automated assembly lines place components with micrometer-level precision, followed by optimized reflow profiling.",
+              "Designing the physical board layout, prioritizing signal paths, thermal dissipation, and mechanical constraints.",
           },
           {
             number: "03",
-            title: "In-Line Inspection",
+            title: "Fabrication & PCBA",
             description:
-              "Every PCB undergoes automated visual and optical verification before and after reflow to identify any defects in placement or soldering.",
+              "Managing the board fabrication and surface-mount (SMT) or through-hole assembly of all components.",
           },
           {
             number: "04",
-            title: "Functional Testing",
+            title: "Testing & Validation",
             description:
-              "We perform full-board bring-up and functional testing using custom test fixtures to ensure your board is ready for the field.",
+              "Performing rigorous functional testing and visual inspection to ensure zero defects in the final electronic assembly.",
           },
         ]}
       />
-      <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our assembly philosophy"
-        eyebrowHighlight="assembly"
-        title="Predictable Electronics Excellence"
+        image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our electronics ethos"
+        eyebrowHighlight="ethos"
+        title="Logic in Copper"
         paragraphs={[
-          "Precision is not an option; it is a requirement. In the electronics sector, a single loose joint can lead to catastrophic system failure. Our philosophy centers on absolute quality control and traceability for every component.",
-          "Whether you are developing next-generation medical devices or ruggedized industrial IoT gateways, our high-end PCB assembly processes provide the reliability that your strategic mission demands.",
+          "A well-designed PCB is a work of engineering art. It requires a perfect understanding of physics, electricity, and manufacturing limitations to create a truly reliable foundation for digital intelligence.",
+          "We approach electronics with a focus on 'Design for Excellence' (DFX), ensuring that our boards are not only functional but also cost-effective to manufacture and easy to assemble.",
         ]}
         items={[
           {
-            icon: <Microchip size={32} strokeWidth={1.2} />,
-            label: "Joint Integrity",
-            description: "IPC Class 3 solder quality focus",
-            progress: 99,
+            icon: <Cpu size={32} strokeWidth={1.2} />,
+            label: "Signal Integrity",
+            description: "Clean data and power flow",
+            progress: 100,
           },
           {
-            icon: <ShieldCheck size={32} strokeWidth={1.2} />,
-            label: "Zero-Defect Goal",
-            description: "Rigorous AOI and X-ray inspection",
+            icon: <Zap size={32} strokeWidth={1.2} />,
+            label: "High Reliability",
+            description: "Built for industrial lifecycles",
             progress: 98,
           },
           {
-            icon: <Cpu size={32} strokeWidth={1.2} />,
-            label: "Static Safety",
-            description: "ESD-safe manufacturing environment",
-            progress: 94,
+            icon: <Settings size={32} strokeWidth={1.2} />,
+            label: "Precision Layout",
+            description: "Optimized for dense footprints",
+            progress: 99,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="Client Reviews"
-        eyebrowHighlight="Reviews"
-        heading="Electronics Under Extreme Pressure"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1544256718-3b2234b751ee?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Electronic Success"
+        eyebrowHighlight="Success"
+        heading="Client Feedback"
+        watermarkText="PCBA"
+        bgImage="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {
-            title: "Unmatched Build Quality",
+            title: "Miniaturization Mastery",
             rating: 5,
             review:
-              "ANK Design managed our 30-layer board assembly with incredible poise. Every board passed our internal QC on the first pass, a feat no other vendor has achieved for us.",
-            name: "Dr. Ethan Brooks",
-            company: "Principal Engineer, BioMed Robotics",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Sourcing Done Right",
-            rating: 5,
-            review:
-              "Their grasp of component lifecycles saved our project from a massive supply chain bottleneck. They found verified alternatives for obsolete parts without missing our launch date.",
-            name: "Rebecca Vance",
-            company: "Ops Director, Telelink Global",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+              "ANK helped us shrink our sensor board by 50% without compromising on signal quality. Their expertise in 4-layer PCB layout was exactly what we needed for our IoT project.",
+            name: "Dr. Arun V.",
+            company: "CTO, SmartSense Systems",
+            avatar:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Bring your PCB to life"
-        eyebrowHighlight="PCB"
-        heading="Ready to build your mission-critical electronics with high-precision manufacturing and absolute reliability?"
-        primaryLabel="Schedule Assembly"
-        secondaryLabel="View Quality Standards"
+        eyebrow="Empower your product"
+        eyebrowHighlight="product"
+        heading="Need professional PCB design and assembly services for your next innovation?"
+        primaryLabel="Start PCB Project"
+        secondaryLabel="Contact Us"
         onPrimaryClick={() => {
-          console.log("PCB Start clicked");
+          navigate("/contact");
         }}
         onSecondaryClick={() => {
-          console.log("Standards clicked");
+          navigate("/contact");
         }}
       />
     </PageLayout>

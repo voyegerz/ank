@@ -1,156 +1,144 @@
-import { Smartphone, Layers, ShieldCheck } from "lucide-react";
+import { Smartphone, Tablet, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
-import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const MobileApplication = () => {
-  const clients = [
-    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
+  const navigate = useNavigate();
+
+  const mobileImages = [
+    "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
         bgImage="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2000"
-        caption="Native and Cross-Platform Excellence"
-        title="Mobile Applications"
-        subtitle="We develop powerful, high-performance mobile experiences for iOS and Android, focusing on native-level speed and pixel-perfect design."
-        watermarkNumber="06"
+        caption="Next-Gen Mobile Experiences"
+        title="Mobile Application Development"
+        subtitle="High-performance iOS and Android applications designed for the modern mobile world. We build native and cross-platform apps that provide seamless, fast, and engaging experiences for your users on the go."
+        watermarkNumber="14"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=2000"
-        caption="Mobile Ecosystems"
-        leftTitle="Service Capabilities"
+        images={mobileImages}
+        caption="Innovation in your Pocket"
+        leftTitle="Native-Feel Experiences"
         leftParagraphs={[
-          "React Native & Flutter: Building unified codebases that deliver native performance on both iOS and Android platforms, reducing development time without compromising quality.",
-          "Native iOS & Android: Optimizing low-level system integrations for demanding applications that require the maximum performance only native platforms can provide.",
-          "IoT Mobile Dashboards: Developing specialized mobile controllers for industrial hardware, integrating real-time telemetry and advanced remote control features.",
-          "Offline-First Architectures: Ensuring mission-critical mobile tools function flawlessly in environments with poor or zero connectivity, with robust data synchronization models.",
+          "We specialize in developing mobile applications that feel fast and fluid. Our team utilizes modern frameworks like React Native and Flutter to deliver near-native performance with the efficiency of a single codebase.",
+          "From consumer-facing apps to specialized industrial mobile tools, we focus on creating intuitive touch interfaces and robust offline capabilities that ensure your app works perfectly everywhere.",
         ]}
-        rightTitle="Why Your App Needs Our Touch?"
+        rightTitle="End-to-End Mobile Strategy"
         rightParagraphs={[
-          "A mobile application is the most intimate connection your business has with its users. We don't just build apps; we design experiences that feel right in the palm of the hand—fast, fluid, and focused.",
-          "Our mobile engineering process prioritizes battery efficiency, security, and consistent UI/UX across all device form factors, ensuring your app stands out in a crowded digital landscape.",
+          "Our mobile development process covers everything from initial concept and UI/UX design to App Store submission and ongoing support. We ensure your app integrates seamlessly with your existing backend systems.",
+          "We prioritize security, performance, and battery efficiency, ensuring that your application provides a premium experience that keeps users coming back.",
         ]}
         features={[
-          "Biometric Authentication",
-          "Real-Time Data Syncing",
-          "Advanced Push Logic",
+          "Cross-Platform App Development",
+          "Intuitive Touch UI/UX Design",
+          "Seamless Backend Integration",
+          "App Store & Play Store Support",
         ]}
-        ctaLabel="Design Your Mobile App"
+        ctaLabel="Build your Mobile App"
         onCtaClick={() => {
-          console.log("Mobile CTA clicked");
+          navigate("/contact");
         }}
       />
       <ServiceProcess
         items={[
           {
             number: "01",
-            title: "UX Wireframing",
+            title: "Concept & Prototyping",
             description:
-              "We map out user journeys and wireframe every screen to ensure a frictionless, mobile-first experience that prioritizes your core functionalities.",
+              "Defining the app's core value, mapping user journeys, and creating interactive mobile-first prototypes.",
           },
           {
             number: "02",
-            title: "Modern Development",
+            title: "Agile Mobile Development",
             description:
-              "Our mobile engineers write clean, efficient code using modern frameworks, ensuring your application is lightweight and high-performing on all hardware.",
+              "Coding the application using modern frameworks, with regular build releases for continuous client feedback.",
           },
           {
             number: "03",
-            title: "Hardware Integration",
+            title: "Rigorous Device Testing",
             description:
-              "Whether it's camera, GPS, NFC, or Bluetooth, we specialize in bridging software with mobile hardware for truly integrated digital experiences.",
+              "Testing the app across a wide range of real iOS and Android devices to ensure flawless performance and UI consistency.",
           },
           {
             number: "04",
-            title: "App Store Strategy",
+            title: "Launch & Maintenance",
             description:
-              "We manage the full submission process for Apple App Store and Google Play, ensuring compliance with all guidelines and optimal store presence.",
+              "Managing the submission process to stores and providing ongoing updates to keep the app compatible with new OS versions.",
           },
         ]}
       />
-      <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        image="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our mobile philosophy"
-        eyebrowHighlight="mobile"
+        image="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our mobile ethos"
+        eyebrowHighlight="ethos"
         title="Mobility Without Compromise"
         paragraphs={[
-          "The most successful mobile applications are those that simplify complexity. We strive to build mobile tools that feel like a natural extension of the user's intent, with zero friction and maximum reliability.",
-          "From consumer-facing startups to mission-critical industrial controllers, our approach to mobile engineering is consistent: build for performance, design for clarity, and secure for peace of mind.",
+          "Mobile applications are the most personal way to connect with your users. We believe that a great mobile experience is one that respects the user's time and attention with speed and clarity.",
+          "Whether it's an internal tool for your field engineers or a marketplace for your customers, we apply the same high standards of engineering excellence to every line of mobile code we write.",
         ]}
         items={[
           {
             icon: <Smartphone size={32} strokeWidth={1.2} />,
-            label: "Device Integration",
-            description: "Deep integration with mobile hardware",
-            progress: 98,
+            label: "Pocket Power",
+            description: "High-performance native feel",
+            progress: 99,
           },
           {
-            icon: <Layers size={32} strokeWidth={1.2} />,
-            label: "Layered Architecture",
-            description: "Modular, maintainable code structures",
-            progress: 94,
-          },
-          {
-            icon: <ShieldCheck size={32} strokeWidth={1.2} />,
-            label: "End-to-End Security",
-            description: "Encrypted local storage and secure APIs",
+            icon: <Tablet size={32} strokeWidth={1.2} />,
+            label: "Multi-Device",
+            description: "Optimized for all screens",
             progress: 97,
+          },
+          {
+            icon: <Zap size={32} strokeWidth={1.2} />,
+            label: "Fast Response",
+            description: "Instant loading & interactions",
+            progress: 100,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="Client Reviews"
-        eyebrowHighlight="Reviews"
-        heading="Taking Business Mobile with High Impact"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Mobile Impact"
+        eyebrowHighlight="Impact"
+        heading="Client Feedback"
+        watermarkText="Mobile"
+        bgImage="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {
-            title: "A Stellar User Experience",
+            title: "Field Efficiency",
             rating: 5,
             review:
-              "ANK built our field service app which requires heavy offline tasks and complex hardware syncing. It's been a game-changer for our technicians and has increased efficiency by 40%.",
-            name: "Emily Thompson",
-            company: "COO, Vertex Field Services",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Precision in Every Pixel",
-            rating: 5,
-            review:
-              "Their grasp of both React Native and native module development is impressive. They delivered a high-end consumer app that feels and performs just like a native solution.",
-            name: "Marcus Aurelius",
-            company: "Founder, NexaApp Venture",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
+              "ANK developed a custom mobile inspection tool for our site engineers. It's incredibly stable even in low-connectivity areas, and the offline sync works like a charm.",
+            name: "Vikram S.",
+            company: "Tech Lead, Global Infrastructure Corp.",
+            avatar:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Go mobile today"
-        eyebrowHighlight="mobile"
-        heading="Ready to put your business in the palm of your customer's hand with a high-performance mobile application?"
+        eyebrow="Connect with users anywhere"
+        eyebrowHighlight="anywhere"
+        heading="Ready to build a high-performance mobile application for your business?"
         primaryLabel="Start Mobile Project"
-        secondaryLabel="View Case Studies"
+        secondaryLabel="Contact Us"
         onPrimaryClick={() => {
-          console.log("Mobile Start clicked");
+          navigate("/contact");
         }}
         onSecondaryClick={() => {
-          console.log("Case Studies clicked");
+          navigate("/contact");
         }}
       />
     </PageLayout>

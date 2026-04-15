@@ -32,13 +32,7 @@ const CadDesign = () => {
         caption="Engineering Excellence"
         leftTitle="Core Capabilities"
         leftParagraphs={[
-          "Our team works closely with clients to convert concepts, references, and existing data into clear engineering drawings and 3D models that simplify manufacturing, assembly, and future modifications.",
-          "We provide comprehensive 3D modeling for complex assemblies, ensuring perfect spatial alignment and kinematic motion before a single part is produced.",
-        ]}
-        rightTitle="Mastery Over Matter"
-        rightParagraphs={[
-          "Great mechanical engineering isn't just about making things fit; it's about optimizing weight, durability, and manufacturability into a single, cohesive form.",
-          "We deliver industrial-grade mechanical solutions that form the robust backbone of automation equipment and consumer products.",
+          "Our team converts concepts and references into accurate engineering data, 3D models, and 2D drafting to simplify manufacturing, assembly, and future modifications. We ensure perfect spatial alignment and kinematic motion before production.",
         ]}
         features={[
           "Professional 3D Modeling",
@@ -82,31 +76,32 @@ const CadDesign = () => {
 
       <PhilosophySection
         image="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our mechanical ethos"
-        eyebrowHighlight="ethos"
+        eyebrow="Mechanical design with a conscience"
+        eyebrowHighlight="Expert"
         title="Precision in every dimension"
         paragraphs={[
           "Practical engineering solutions built with clear thinking, real experience, and a focus on long-term value. We approach every design with a deep respect for physical limitations and manufacturing efficiency.",
-          "Our multidisciplinary capabilities allow clients to access multiple services under one roof, ensuring better coordination, reduced turnaround time, and consistent quality across projects.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Settings2 size={32} strokeWidth={1.2} />,
+            icon: <Settings2 size={20} strokeWidth={1.2} />,
             label: "Accuracy & Reliability",
             description: "Micron-level precision in every model",
-            progress: 98,
+            progress: 100,
           },
           {
-            icon: <Wrench size={32} strokeWidth={1.2} />,
+            icon: <Wrench size={20} strokeWidth={1.2} />,
             label: "Production Ready",
             description: "Designs optimized for seamless assembly",
-            progress: 95,
+            progress: 100,
           },
           {
-            icon: <Hammer size={32} strokeWidth={1.2} />,
+            icon: <Hammer size={20} strokeWidth={1.2} />,
             label: "Industry Standards",
             description: "Fully compliant with ASME & ISO norms",
-            progress: 99,
+            progress: 100,
           },
         ]}
       />
@@ -115,7 +110,7 @@ const CadDesign = () => {
         eyebrow="Success Stories"
         eyebrowHighlight="Stories"
         heading="Client Satisfaction"
-        watermarkText="Feedback"
+        watermarkText="Reviews"
         bgImage="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {

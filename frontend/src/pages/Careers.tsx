@@ -1,5 +1,6 @@
 import PageLayout from '../components/PageLayout'
 import CommonHero from '../components/CommonHero'
+import MapSection from '../components/MapSection'
 import { motion } from 'framer-motion'
 import { ArrowRight, Send } from 'lucide-react'
 
@@ -78,6 +79,8 @@ const Careers = () => {
            </div>
         </div>
       </section>
+
+      <MapSection />
     </PageLayout>
   )
 }

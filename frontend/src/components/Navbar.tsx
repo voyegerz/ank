@@ -72,10 +72,11 @@ const OUR_SERVICES_TABS = [
   {
     id: "prod-design",
     label: "Product Designs",
+    path: "/services/product-designs",
     bg: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1600",
     items: [
       {
-        name: "Cad Design - 2D/3D",
+        name: "Cad Design - 2D & 3D",
         path: "/services/cad-design",
         image:
           "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=800",
@@ -103,6 +104,7 @@ const OUR_SERVICES_TABS = [
   {
     id: "ind-auto",
     label: "Industrial Automation",
+    path: "/services/industrial-automation",
     bg: "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=1600",
     items: [
       {
@@ -128,6 +130,7 @@ const OUR_SERVICES_TABS = [
   {
     id: "soft-sol",
     label: "Software Solutions",
+    path: "/services/software-solutions",
     bg: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600",
     items: [
       {
@@ -171,6 +174,7 @@ const OUR_SERVICES_TABS = [
   {
     id: "mfg",
     label: "Manufacturing",
+    path: "/services/manufacturing",
     bg: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600",
     items: [
       {
@@ -196,6 +200,7 @@ const OUR_SERVICES_TABS = [
   {
     id: "std-outreach",
     label: "Student Outreach",
+    path: "/services/student-outreach",
     bg: "https://images.unsplash.com/photo-1523240715630-9918c13bc1ad?auto=format&fit=crop&q=80&w=1600",
     items: [
       {
@@ -241,8 +246,9 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
   const location = useLocation();
   const currentPath = location.pathname.replace(/\/$/, "");
   
-  // Find the tab that contains the current active path, or default to the first one
+  // Find the tab that matches the current category or contains the current active path
   const initialTab = OUR_SERVICES_TABS.find(tab => 
+    tab.path.replace(/\/$/, "") === currentPath ||
     tab.items.some(item => item.path.replace(/\/$/, "") === currentPath)
   )?.id || OUR_SERVICES_TABS[0].id;
 
@@ -268,17 +274,29 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
           {OUR_SERVICES_TABS.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
-              <button
+              <NavLink
                 key={tab.id}
+                to={tab.path}
+                onClick={onClose}
                 onMouseEnter={() => {
                   setActiveTab(tab.id);
                   setHoveredSubItem(null);
                 }}
-                className={`text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-300 flex items-center justify-between group uppercase tracking-wider relative z-10 ${
-                  isActive ? "text-white" : "text-slate-500 hover:text-slate-900"
-                }`}
+                className={({ isActive: navActive }) => {
+                  // The text should be white ONLY if it's the activeTab (which has the blue bg)
+                  // If it's the current route but NOT the activeTab, show it as primary color or with a dot
+                  return `text-left text-[11px] font-black py-3 px-4 rounded-sm transition-all duration-300 flex items-center justify-between group uppercase tracking-wider relative z-10 ${
+                    isActive 
+                      ? "text-white" 
+                      : navActive 
+                        ? "text-primary" 
+                        : "text-slate-500 hover:text-slate-900"
+                  }`;
+                }}
               >
-                {tab.label}
+                <div className="flex items-center gap-2">
+                  {tab.label}
+                </div>
                 <ChevronRight
                   size={11}
                   className={`transition-all duration-300 ${
@@ -295,7 +313,7 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
                     transition={{ type: "spring", stiffness: 400, damping: 35 }}
                   />
                 )}
-              </button>
+              </NavLink>
             );
           })}
         </div>
@@ -314,12 +332,14 @@ const OurServicesMenu = ({ onClose }: { onClose: () => void }) => {
           >
             {/* Links */}
             <div className="flex-1 flex flex-col justify-start px-8 pt-12 pb-10 gap-0 bg-white">
-              <p
-                className="text-[10px] font-black tracking-[0.2em] uppercase mb-6 opacity-40"
+              <Link
+                to={current.path}
+                onClick={onClose}
+                className="text-[10px] font-black tracking-[0.2em] uppercase mb-6 opacity-40 hover:opacity-100 transition-opacity block"
                 style={{ color: ANK_PRIMARY }}
               >
                 {current.label}
-              </p>
+              </Link>
               <div className="grid grid-cols-1 gap-1">
                 {current.items.map((item, i) => {
                   return (
@@ -679,6 +699,7 @@ const Navbar = () => {
   const navItems = [
     {
       name: "Our Services",
+      path: "/services",
       component: <OurServicesMenu onClose={() => setHoveredMenu(null)} />,
     },
     {
@@ -757,7 +778,7 @@ const Navbar = () => {
                       item.component ? openMenu(item.name) : setHoveredMenu(null)
                     }
                   >
-                    {item.path ? (
+                    {item.path && !item.component ? (
                       <NavLink
                         to={item.path}
                         className={({ isActive }) =>
@@ -767,10 +788,53 @@ const Navbar = () => {
                               : "text-[#64748b] hover:text-primary"
                           }`
                         }
-                        style={{ color: undefined }} // Let NavLink className handle it
                       >
                         {item.name}
                       </NavLink>
+                    ) : item.path ? (
+                      <Link
+                        to={item.path}
+                        className="px-4 py-2 flex flex-col items-start justify-center min-w-[100px] transition-colors duration-150 group cursor-pointer"
+                        style={{
+                          color:
+                            hoveredMenu === item.name ||
+                            (item.name === "Our Services" &&
+                              location.pathname.startsWith("/services")) ||
+                            (item.name === "Products" &&
+                              location.pathname.startsWith("/products")) ||
+                            (item.name === "About ANK" &&
+                              location.pathname.startsWith("/about"))
+                              ? ANK_PRIMARY
+                              : "#64748b",
+                        }}
+                      >
+                        <div className="flex items-center gap-1">
+                          <span className="text-[13px] font-black uppercase tracking-[0.15em] whitespace-nowrap">
+                            {item.name}
+                          </span>
+                          {item.component && (
+                            <motion.span
+                              animate={{
+                                rotate: hoveredMenu === item.name ? 90 : 0,
+                              }}
+                              transition={{ duration: 0.18 }}
+                              className="opacity-40"
+                            >
+                              <ChevronRight size={11} />
+                            </motion.span>
+                          )}
+                        </div>
+                        {activeSub && (
+                          <motion.span
+                            initial={{ opacity: 0, y: -2 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-[8px] font-black uppercase tracking-[0.1em] -mt-0.5 text-left block w-full"
+                            style={{ color: ANK_PRIMARY }}
+                          >
+                            {activeSub}
+                          </motion.span>
+                        )}
+                      </Link>
                     ) : (
                       <button
                         className="px-4 py-2 flex flex-col items-start justify-center min-w-[100px] transition-colors duration-150 group"
@@ -830,11 +894,16 @@ const Navbar = () => {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="lg:hidden ml-4 p-2 text-slate-400 hover:text-slate-900 transition-colors"
+              className="lg:hidden ml-4 p-2 bg-primary text-white rounded-sm shadow-lg active:scale-95 transition-all flex items-center justify-center h-10 w-10 shrink-0"
               onClick={() => setIsMobileMenuOpen((v) => !v)}
               style={{ pointerEvents: "auto" }}
             >
-              <Menu size={20} />
+              <motion.div
+                animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Menu size={24} strokeWidth={2.5} />
+              </motion.div>
             </button>
           </motion.nav>
 
@@ -881,134 +950,140 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.22 }}
-            className="fixed inset-0  w-screen  z-100 lg:hidden overflow-y-auto"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-0 w-screen h-screen z-100 lg:hidden overflow-y-auto bg-white"
             data-lenis-prevent
-            style={{
-              background: "#ffffff",
-              backdropFilter: "blur(24px)",
-            }}
           >
             <div className="p-6 flex justify-between items-center border-b border-black/4 bg-white sticky top-0 z-10">
-              <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
-                <img src={logo} alt="ANK" className="h-6 w-auto" />
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center px-4 py-1 mr-2 shrink-0 transition-transform hover:scale-105">
+                <img src={logo} alt="ANK" className="h-12 w-auto" />
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-slate-400"
+                className="w-10 h-10 bg-primary text-white rounded-sm flex items-center justify-center shadow-lg active:scale-95 transition-all"
               >
-                <X size={24} />
+                <X size={24} strokeWidth={2.5} />
               </button>
             </div>
             <div className="px-6 pb-12 pt-4">
-              {navItems.map((item, i) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{
-                    delay: i * 0.05,
-                    duration: 0.3,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="border-b border-black/4"
-                >
-                  {item.path ? (
-                    <Link
-                      to={item.path}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center justify-between py-5 text-[18px] font-black uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors"
-                    >
-                      {item.name}
-                      <ArrowUpRight size={17} className="text-slate-300" />
-                    </Link>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() =>
-                          setExpandedMobileItem(
-                            expandedMobileItem === item.name ? null : item.name,
-                          )
-                        }
-                        className="flex items-center justify-between w-full py-5 text-[18px] font-black uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors"
+              {navItems.map((item, i) => {
+                const isOurServices = item.name === "Our Services";
+                const isExpandable = !item.path || isOurServices;
+                const isExpanded = expandedMobileItem === item.name;
+
+                return (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="border-b border-black/4 last:border-0"
+                  >
+                    {!isExpandable ? (
+                      <Link
+                        to={item.path!}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center justify-between py-6 text-[16px] font-black uppercase tracking-widest text-slate-800 hover:text-primary transition-colors"
                       >
                         {item.name}
-                        <motion.span
-                          animate={{
-                            rotate: expandedMobileItem === item.name ? 90 : 0,
-                          }}
-                          transition={{ duration: 0.2 }}
+                        <ArrowUpRight size={18} className="text-primary/40" />
+                      </Link>
+                    ) : (
+                      <div className="py-2">
+                        <button
+                          onClick={() => setExpandedMobileItem(isExpanded ? null : item.name)}
+                          className="flex items-center justify-between w-full py-4 text-[16px] font-black uppercase tracking-widest text-slate-800 hover:text-primary transition-colors text-left"
                         >
-                          <ChevronRight size={17} className="text-slate-300" />
-                        </motion.span>
-                      </button>
-                      <AnimatePresence>
-                        {expandedMobileItem === item.name && (
+                          {item.name}
                           <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{
-                              duration: 0.24,
-                              ease: [0.16, 1, 0.3, 1],
-                            }}
-                            className="overflow-hidden"
+                            animate={{ rotate: isExpanded ? 90 : 0 }}
+                            className="text-primary"
                           >
-                            <div className="pb-5 pl-2 flex flex-col gap-0.5">
-                              {item.name === "Our Services" &&
-                                OUR_SERVICES_TABS.map((tab) => (
-                                  <div key={tab.id} className="mb-4">
-                                    <p className="text-[9px] font-black tracking-[0.22em] text-slate-400 uppercase mb-2 mt-1">
-                                      {tab.label}
-                                    </p>
-                                    {tab.items.map((sub) => (
-                                      <Link
-                                        key={sub.path}
-                                        to={sub.path}
-                                        onClick={() =>
-                                          setIsMobileMenuOpen(false)
-                                        }
-                                        className="block py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 transition-colors"
-                                      >
-                                        {sub.name}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                ))}
-                              {item.name === "Products" &&
-                                PRODUCTS.map((p) => (
-                                  <Link
-                                    key={p.path}
-                                    to={p.path}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 block transition-colors"
-                                  >
-                                    {p.title}
-                                  </Link>
-                                ))}
-                              {item.name === "About ANK" &&
-                                ABOUT_LINKS.map((a) => (
-                                  <Link
-                                    key={a.path}
-                                    to={a.path}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="py-2 text-[13px] text-slate-500 hover:text-slate-900 font-black uppercase tracking-wider pl-2 block transition-colors"
-                                  >
-                                    {a.title}
-                                  </Link>
-                                ))}
-                            </div>
+                            <ChevronRight size={18} />
                           </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  )}
-                </motion.div>
-              ))}
+                        </button>
+                        <AnimatePresence>
+                          {isExpanded && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden bg-slate-50/50 rounded-sm"
+                            >
+                              <div className="p-4 flex flex-col gap-6">
+                                {isOurServices ? (
+                                  OUR_SERVICES_TABS.map((tab) => (
+                                    <div key={tab.id} className="space-y-3">
+                                      <p className="text-[10px] font-black tracking-[0.2em] text-primary/40 uppercase px-2 border-l-2 border-primary/20">
+                                        {tab.label}
+                                      </p>
+                                      <div className="grid grid-cols-1 gap-2 pl-2">
+                                        {tab.items.map((sub) => (
+                                          <Link
+                                            key={sub.path}
+                                            to={sub.path}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="group flex items-center justify-between py-2 px-3 text-[13px] text-slate-600 font-bold uppercase tracking-tight hover:text-primary hover:bg-white rounded-sm transition-all shadow-sm shadow-transparent hover:shadow-black/5"
+                                          >
+                                            {sub.name}
+                                            <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))
+                                ) : item.name === "Products" ? (
+                                  PRODUCTS.map((p) => (
+                                    <Link
+                                      key={p.path}
+                                      to={p.path}
+                                      onClick={() => setIsMobileMenuOpen(false)}
+                                      className="py-3 px-4 text-[14px] text-slate-600 font-bold uppercase tracking-tight hover:text-primary hover:bg-white rounded-sm transition-all"
+                                    >
+                                      {p.title}
+                                    </Link>
+                                  ))
+                                ) : item.name === "About ANK" ? (
+                                  ABOUT_LINKS.map((a) => (
+                                    <Link
+                                      key={a.path}
+                                      to={a.path}
+                                      onClick={() => setIsMobileMenuOpen(false)}
+                                      className="py-3 px-4 text-[14px] text-slate-600 font-bold uppercase tracking-tight hover:text-primary hover:bg-white rounded-sm transition-all"
+                                    >
+                                      {a.title}
+                                    </Link>
+                                  ))
+                                ) : null}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
+              
+              {/* Mobile CTA */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-12"
+              >
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center w-full py-5 bg-primary text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-sm shadow-xl active:scale-95 transition-all"
+                >
+                  Contact Us
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}

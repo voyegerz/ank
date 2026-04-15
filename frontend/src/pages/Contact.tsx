@@ -1,5 +1,6 @@
 import PageLayout from '../components/PageLayout'
 import CommonHero from '../components/CommonHero'
+import MapSection from '../components/MapSection'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
@@ -99,11 +100,13 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      <MapSection />
     </PageLayout>
   )
 }
 
-const ContactInfo = ({ icon, title, detail }: { icon: any, title: string, detail: string }) => (
+const ContactInfo = ({ icon, title, detail }: { icon: React.ReactNode, title: string, detail: string }) => (
   <div className="flex items-start gap-6 group">
     <div className="w-12 h-12 bg-slate-50 border border-black/5 flex items-center justify-center rounded-sm text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm">
       {icon}

@@ -1,156 +1,144 @@
-import { Code, Database, Settings } from "lucide-react";
+import { Layout, Palette, MousePointer2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
-import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const ApplicationDesign = () => {
-  const clients = [
-    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
+  const navigate = useNavigate();
+
+  const appImages = [
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
-        bgImage="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000"
-        caption="High-Performance Software for Local Environments"
-        title="Desktop Applications"
-        subtitle="We build high-end, cross-platform desktop applications for Windows, macOS, and Linux that require local system access and low-latency offline processing."
-        watermarkNumber="08"
+        bgImage="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000"
+        caption="User-Centric Software Design"
+        title="Application Design & UI/UX"
+        subtitle="Creating intuitive, professional, and high-performance user interfaces for industrial and corporate applications. We bridge the gap between complex functionality and seamless user experience."
+        watermarkNumber="12"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000"
-        caption="Precision Desktop Ecosystems"
-        leftTitle="Core Capabilities"
+        images={appImages}
+        caption="Intuitive by Design"
+        leftTitle="Functional User Experiences"
         leftParagraphs={[
-          "Electron & C++ Frameworks: Building powerful, performant desktop apps that combine the flexibility of modern web tech with the power of native system access.",
-          "Low-Level Hardware Access: Developing specialized software that interacts directly with custom PCIe cards, COM ports, and other specialized industrial peripherals.",
-          "Offline Data Processing: Engineering high-frequency data analysis tools that process and store data locally for maximum security and zero reliance on cloud availability.",
-          "Cross-Platform Distribution: Ensuring your application functions flawlessly on Windows, macOS, and Linux with a single deployment strategy and automated updates.",
+          "Great software is only useful if people can actually use it. We specialize in designing application interfaces that simplify complex workflows and empower users to be more productive.",
+          "From industrial dashboards to complex corporate management tools, we focus on creating clear, consistent, and responsive designs that work beautifully across all screen sizes.",
         ]}
-        rightTitle="Why Your Software Needs the Desktop?"
+        rightTitle="Human-Centered Engineering"
         rightParagraphs={[
-          "Certain mission-critical tasks cannot be left to the latency or dependencies of a browser. Our desktop engineering focuses on providing a stable, high-performance environment for your most demanding industrial and commercial applications.",
-          "By prioritizing local system efficiency and secure data management, we deliver desktop software that is as powerful as it is intuitive, giving your team the tools they need to operate without interruption.",
+          "Our design process begins with a deep understanding of your users' needs and pain points. We utilize wireframing and interactive prototyping to validate concepts before a single line of code is written.",
+          "We believe that a professional application should be as aesthetically pleasing as it is functional. Our UI/UX team ensures that your software reflects your brand's commitment to quality and innovation.",
         ]}
         features={[
-          "Native System API Integration",
-          "Multi-Core CPU Optimization",
-          "Encrypted Local Databases",
+          "Industrial Dashboard Design",
+          "Interactive UI Prototyping",
+          "User Workflow Optimization",
+          "Responsive Design Systems",
         ]}
-        ctaLabel="Design Your Desktop Tool"
+        ctaLabel="Design your App"
         onCtaClick={() => {
-          console.log("Desktop CTA clicked");
+          navigate("/contact");
         }}
       />
       <ServiceProcess
         items={[
           {
             number: "01",
-            title: "System Analysis",
+            title: "User Research",
             description:
-              "We begin by identifying the specific OS requirements and hardware interfaces required to meet your operational objectives with the lowest possible latency.",
+              "Interviewing stakeholders and users to define core goals, personas, and critical workflow requirements.",
           },
           {
             number: "02",
-            title: "Core Development",
+            title: "Wireframing",
             description:
-              "Our engineering team develops the application logic using highly efficient languages and frameworks to ensure stability and high-end performance.",
+              "Creating low-fidelity structural blueprints to define the information architecture and navigation flow.",
           },
           {
             number: "03",
-            title: "Hardware Integration",
+            title: "Visual Design",
             description:
-              "We conduct thorough testing of all local system integrations, ensuring seamless communication between the software and your physical hardware assets.",
+              "Applying brand identity, typography, and color systems to create high-fidelity, interactive prototypes.",
           },
           {
             number: "04",
-            title: "Packaging & Deployment",
+            title: "Design Handover",
             description:
-              "Finally, we package the application for your target operating systems, with automated installers and secure update channels for long-term support.",
+              "Providing developers with comprehensive design specs, assets, and documentation for seamless implementation.",
           },
         ]}
       />
-      <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        image="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our desktop philosophy"
-        eyebrowHighlight="desktop"
-        title="Stability Without Boundaries"
+        image="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our design ethos"
+        eyebrowHighlight="ethos"
+        title="Simplicity in Complexity"
         paragraphs={[
-          "Desktop applications represent the pinnacle of software control and performance. Our philosophy centers on respect for system resources—building software that is fast, responsive, and secure by default.",
-          "We believe that industrial and specialized software should never be a bottleneck. That's why we focus on deep optimization and intuitive design, ensuring your desktop applications are as professional as the work they facilitate.",
+          "Complexity is a reality in engineering and industrial applications, but it shouldn't be a hurdle for the user. Our mission is to take complex data and processes and present them with clarity.",
+          "We approach design as an engineering discipline—measurable, structured, and focused on solving specific problems with the most efficient possible interaction model.",
         ]}
         items={[
           {
-            icon: <Code size={32} strokeWidth={1.2} />,
-            label: "Clean Architecture",
-            description: "Maintainable and highly optimized code",
-            progress: 96,
+            icon: <Layout size={32} strokeWidth={1.2} />,
+            label: "Structured Layouts",
+            description: "Logical information hierarchy",
+            progress: 98,
           },
           {
-            icon: <Database size={32} strokeWidth={1.2} />,
-            label: "Local Performance",
-            description: "Zero-latency data processing",
-            progress: 99,
+            icon: <Palette size={32} strokeWidth={1.2} />,
+            label: "Clean Aesthetics",
+            description: "Modern and professional look",
+            progress: 95,
           },
           {
-            icon: <Settings size={32} strokeWidth={1.2} />,
-            label: "Deep Integration",
-            description: "Direct control of system APIs",
-            progress: 94,
+            icon: <MousePointer2 size={32} strokeWidth={1.2} />,
+            label: "Seamless UX",
+            description: "Frictionless user journeys",
+            progress: 100,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="Feedback Highlights"
-        eyebrowHighlight="Highlights"
-        heading="Uncompromising Tools for High-Impact Tasks"
-        watermarkText="Results"
-        bgImage="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="User Feedback"
+        eyebrowHighlight="Feedback"
+        heading="Client Satisfaction"
+        watermarkText="Design"
+        bgImage="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {
-            title: "Blazing Fast Logic",
+            title: "Workflow Transformed",
             rating: 5,
             review:
-              "The custom CAD viewer developed for our engineering team is phenomenal. It handles massive 3D models natively on Windows with zero lag, exactly what we needed.",
-            name: "Alexander Rossi",
-            company: "Engineering Lead, Precision Dynamics",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Seamless Hardware Control",
-            rating: 5,
-            review:
-              "Their grasp of C++ and system-level APIs is incredible. They built a custom testing suite for our production line that manages several PCIe data acquisition cards simultaneously.",
-            name: "Isabella Chen",
-            company: "CTO, NextGen Electronics",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+              "The new dashboard ANK designed for our inventory system reduced operator errors by 30%. It's intuitive, fast, and looks incredibly professional.",
+            name: "Amit S.",
+            company: "Ops Manager, Logistics One",
+            avatar:
+              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Modernize your tools"
-        eyebrowHighlight="tools"
-        heading="Ready to build a desktop applications that provide the power and stability your business demands?"
-        primaryLabel="Discuss Desktop Project"
-        secondaryLabel="View Case Studies"
+        eyebrow="Empower your users"
+        eyebrowHighlight="users"
+        heading="Ready to transform your complex software into an intuitive user experience?"
+        primaryLabel="Talk to our Designers"
+        secondaryLabel="Contact Us"
         onPrimaryClick={() => {
-          console.log("Desktop Start clicked");
+          navigate("/contact");
         }}
         onSecondaryClick={() => {
-          console.log("Case Studies clicked");
+          navigate("/contact");
         }}
       />
     </PageLayout>

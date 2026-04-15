@@ -1,156 +1,144 @@
-import { Globe, ShieldCheck, Zap } from "lucide-react";
+import { Globe, Code, Rocket } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
-import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const WebsiteDesign = () => {
-  const clients = [
-    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
+  const navigate = useNavigate();
+
+  const webImages = [
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
         bgImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
-        caption="Modern Enterprise Ecosystems"
-        title="Web Applications"
-        subtitle="We build high-performance, scalable web platforms designed to streamline operations, engage users, and drive digital growth."
-        watermarkNumber="05"
+        caption="High-Performance Digital Presence"
+        title="Website Design & Development"
+        subtitle="Professional corporate websites and web applications built for speed, conversion, and brand impact. We combine modern aesthetics with robust engineering to deliver digital experiences that represent your technical excellence."
+        watermarkNumber="11"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=2000"
-        caption="Digital Infrastructure"
-        leftTitle="Product Capabilities"
+        images={webImages}
+        caption="Engineering the Web"
+        leftTitle="Impactful Digital Strategy"
         leftParagraphs={[
-          "Custom Web Portals: Architecting bespoke client-facing and internal portals that centralize data management and improve accessibility with high uptime.",
-          "Scalable SaaS Solutions: Designing robust software-as-a-service architectures using modern multi-tenant models that grow alongside your business ecosystem.",
-          "E-commerce Platforms: Engineering high-conversion digital storefronts with secure payment integrations and streamlined inventory synchronization.",
-          "API Design & Integration: Developing secure, high-performance RESTful and GraphQL APIs that serve as the backbone for your interconnected digital services.",
+          "Your website is the digital front door to your business. We design responsive, high-performance websites that communicate your brand's unique value proposition and technical authority to a global audience.",
+          "We focus on creating intuitive user journeys that guide visitors toward your primary goals, whether it's requesting a quote, downloading a specification sheet, or initiating a partnership.",
         ]}
-        rightTitle="Why Our Web Solutions?"
+        rightTitle="Modern Web Engineering"
         rightParagraphs={[
-          "The modern web requires more than just functionality; it demands blazing speed, absolute security, and a seamless user experience. Our development methodology prioritizes performance-first architecture to ensure your platforms are ready for peak traffic.",
-          "By leveraging the power of cloud-native technologies and modern frontend frameworks like React and Next.js, we deliver web applications that are as resilient as they are aesthetically pleasing.",
+          "We utilize industry-leading technologies like React, Tailwind CSS, and headless CMS platforms to build websites that are lightning-fast, secure, and incredibly easy for your team to manage and update.",
+          "Our development process prioritizes SEO best practices, accessibility, and cross-browser compatibility, ensuring that your digital presence performs flawlessly on every device.",
         ]}
         features={[
-          "Performance Optimized React Archi.",
-          "Cloud-Native Serverless Deploy.",
-          "Zero-Trust Security Framework",
+          "Custom Responsive Design",
+          "High-Speed Web Development",
+          "Search Engine Optimization (SEO)",
+          "Content Management Integration",
         ]}
-        ctaLabel="Consult on Web Project"
+        ctaLabel="Build your Website"
         onCtaClick={() => {
-          console.log("Web CTA clicked");
+          navigate("/contact");
         }}
       />
       <ServiceProcess
         items={[
           {
             number: "01",
-            title: "Strategic Blueprinting",
+            title: "Strategy & Wireframing",
             description:
-              "We define the technical roadmap, choosing the optimal tech stack and cloud architecture to ensure long-term scalability and business alignment.",
+              "Defining the site's goals, user personas, and information architecture before creating low-fidelity wireframes.",
           },
           {
             number: "02",
-            title: "User-Centric Design",
+            title: "UI/UX Visual Design",
             description:
-              "Our design team creates intuitive, accessible, and high-fidelity interfaces that prioritize user flow and functional clarity across all devices.",
+              "Developing high-fidelity prototypes that align with your brand identity and provide an exceptional user experience.",
           },
           {
             number: "03",
-            title: "Full-Stack Engineering",
+            title: "Agile Development",
             description:
-              "We develop with a focus on code quality, security, and performance, delivering modular components through a robust CI/CD pipeline.",
+              "Coding the website using modern frameworks, ensuring clean, performant, and scalable code at every step.",
           },
           {
             number: "04",
-            title: "Continuous Optimization",
+            title: "Deployment & Support",
             description:
-              "Post-launch, we provide ongoing monitoring and performance tuning to ensure your application remains cutting-edge and secure.",
+              "Rigorous testing, final deployment to production, and ongoing maintenance to keep your site running perfectly.",
           },
         ]}
       />
-      <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        image="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our digital philosophy"
-        eyebrowHighlight="digital"
-        title="Engineering for the Modern Web"
+        image="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our digital ethos"
+        eyebrowHighlight="ethos"
+        title="Form Meets Function"
         paragraphs={[
-          "Web applications are the central hub of modern business. We approach every project with a commitment to technical excellence, ensuring that your digital assets are built on a foundation of reliability and innovation.",
-          "Our philosophy centers on 'Performance over Placeholders'—we don't just build websites; we engineer high-utility applications that deliver measurable value to your operations and users.",
+          "In the world of professional engineering, a website must be more than just pretty; it must be a precise tool. We approach web design with the same rigor we apply to mechanical or electrical engineering.",
+          "Every pixel, every line of code, and every interaction is designed to support your business objectives and reinforce your reputation for quality and innovation.",
         ]}
         items={[
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
-            label: "Blazing Performance",
-            description: "Sub-second load times and smooth interactions",
-            progress: 96,
-          },
-          {
-            icon: <ShieldCheck size={32} strokeWidth={1.2} />,
-            label: "Absolute Security",
-            description: "Encrypted data and robust auth protocols",
+            icon: <Code size={32} strokeWidth={1.2} />,
+            label: "Clean Code",
+            description: "Scalable and secure frontend",
             progress: 99,
           },
           {
+            icon: <Rocket size={32} strokeWidth={1.2} />,
+            label: "Fast Load Times",
+            description: "Optimized for core web vitals",
+            progress: 98,
+          },
+          {
             icon: <Globe size={32} strokeWidth={1.2} />,
-            label: "Global Scalability",
-            description: "Multi-region cloud-native deployments",
-            progress: 92,
+            label: "Global Outreach",
+            description: "Built for SEO and visibility",
+            progress: 95,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="Partner Insights"
-        eyebrowHighlight="Insights"
-        heading="Scaling the Web with High Precision"
-        watermarkText="Results"
-        bgImage="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Digital Impact"
+        eyebrowHighlight="Impact"
+        heading="Client Feedback"
+        watermarkText="Digital"
+        bgImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {
-            title: "Next-Level Performance",
+            title: "Corporate Identity",
             rating: 5,
             review:
-              "The custom dashboard ANK developed for us has transformed our data visibility. It's incredibly fast even with millions of data points being streamed in real-time.",
-            name: "John Richardson",
-            company: "CTO, DataMatrix Systems",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Seamless Integration",
-            rating: 5,
-            review:
-              "Transitioning our legacy systems to a modern web portal was a daunting task, but ANK's engineering team handled the complexity flawlessly. Highly recommended technical partners.",
-            name: "Sarah Miller",
-            company: "Ops Director, Global Logistics",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+              "ANK's team redesigned our corporate site and the results were incredible. Our page speed tripled, and we saw an immediate increase in high-quality leads from our contact form.",
+            name: "Siddharth J.",
+            company: "Marketing Director, Precision Tools Ltd.",
+            avatar:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Build for change"
-        eyebrowHighlight="change"
-        heading="Ready to build a web application that outpaces the competition and grows with your vision?"
-        primaryLabel="Start Development"
-        secondaryLabel="Explore Portfolio"
+        eyebrow="Elevate your digital presence"
+        eyebrowHighlight="presence"
+        heading="Ready to build a website that matches your technical excellence?"
+        primaryLabel="Start Web Project"
+        secondaryLabel="Contact Us"
         onPrimaryClick={() => {
-          console.log("Web Start clicked");
+          navigate("/contact");
         }}
         onSecondaryClick={() => {
-          console.log("Portfolio clicked");
+          navigate("/contact");
         }}
       />
     </PageLayout>

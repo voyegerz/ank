@@ -1,55 +1,52 @@
-import { Box, Layers, Zap } from "lucide-react";
+import { Layers, Box, Cpu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
-import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const Fdm3DPrinting = () => {
-  const clients = [
-    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
+  const navigate = useNavigate();
+
+  const printingImages = [
+    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
-        bgImage="https://images.unsplash.com/photo-1631034300438-e4b85770337c?auto=format&fit=crop&q=80&w=2000"
-        caption="Rapid Additive Manufacturing"
-        title="FDM 3D Printing"
-        subtitle="High-strength, industrial-grade 3D printing for functional prototypes and low-volume production parts using advanced thermoplastic materials."
-        watermarkNumber="09"
+        bgImage="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000"
+        caption="Industrial Additive Manufacturing"
+        title="3D Printing (FDM)"
+        subtitle="Professional FDM 3D printing services for high-strength functional parts, tooling, and complex prototypes. We work with a wide range of industrial-grade filaments to deliver accurate and durable components for your engineering needs."
+        watermarkNumber="18"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000"
-        caption="Additive Innovation"
-        leftTitle="Core Capabilities"
+        images={printingImages}
+        caption="Precision in every Layer"
+        leftTitle="Industrial Grade Output"
         leftParagraphs={[
-          "Industrial-Grade Thermoplastics: Printing with high-performance materials like Carbon Fiber, Nylon, Polycarbonate, and ASA for maximum strength and thermal resistance.",
-          "Large-Scale Build Volumes: Accommodating substantial industrial parts with high-precision build plates, reducing the need for assembly from smaller segments.",
-          "Complex Geometry Support: Utilizing advanced support structures and soluble filaments to realize intricate designs that are impossible with traditional subtractive manufacturing.",
-          "Functional Part Production: Developing high-fidelity end-use parts for industrial machinery, jigs, fixtures, and specialized low-volume custom products.",
+          "We utilize high-end FDM (Fused Deposition Modeling) systems to produce parts with excellent mechanical properties. Our process is optimized for dimensional accuracy and surface quality, making our 3D printed parts suitable for both testing and end-use applications.",
+          "Whether you need a single prototype or a low-volume production run, we provide fast and cost-effective additive manufacturing solutions that reduce your development time and material waste.",
         ]}
-        rightTitle="Why Our FDM Printing?"
+        rightTitle="Material Versatility"
         rightParagraphs={[
-          "Prototyping speed is the cornerstone of innovation. Our FDM 3D printing services allow you to move from CAD design to a functional, physical part in 24 hours without the cost and time of traditional tooling.",
-          "Whether you need a single proof-of-concept model or a small batch of ruggedized industrial parts, our engineering team ensures dimensional accuracy and structural integrity through every layer.",
+          "Our expertise covers a variety of industrial materials including PLA, ABS, PETG, and high-performance composites like Carbon Fiber reinforced nylon. We help you choose the right material based on your part's strength, temperature, and chemical resistance requirements.",
+          "We offer advanced post-processing options including support removal, vapor smoothing, and mechanical finishing to ensure your 3D printed parts meet your aesthetic and functional specifications.",
         ]}
         features={[
-          "Carbon Fiber Reinforced Filament",
-          "High-Precision Dimensional QC",
-          "Rapid 24-Hour Lead Times",
+          "High-Resolution FDM Printing",
+          "Wide Industrial Material Library",
+          "Large Format Printing Capability",
+          "Advanced Post-Processing",
         ]}
-        ctaLabel="Get Your 3D Quote"
+        ctaLabel="Print your Design"
         onCtaClick={() => {
-          console.log("FDM CTA clicked");
+          navigate("/contact");
         }}
       />
       <ServiceProcess
@@ -58,99 +55,90 @@ const Fdm3DPrinting = () => {
             number: "01",
             title: "STL Optimization",
             description:
-              "We analyze your 3D models for printability, orienting parts for optimal strength and surface finish while minimizing material waste.",
+              "Reviewing your 3D models and optimizing orientation and internal fill patterns for maximum strength and print quality.",
           },
           {
             number: "02",
-            title: "Precision Slicing",
+            title: "Slicing & Setup",
             description:
-              "Using advanced slicing algorithms, we define precise layer heights, infill patterns, and temperature profiles for each specific material profile.",
+              "Generating precision toolpaths and defining critical parameters like layer height, nozzle temperature, and cooling profiles.",
           },
           {
             number: "03",
-            title: "High-Fidelity Printing",
+            title: "High-Precision Print",
             description:
-              "Our industrial printers execute the build with meticulous temperature control and layer-by-layer verification to ensure structural consistency.",
+              "Executing the print on our industrial FDM systems, monitored for consistent extrusion and dimensional stability.",
           },
           {
             number: "04",
-            title: "Post-Processing",
+            title: "Finishing & QC",
             description:
-              "From support removal to heat treatment and surface finishing, we ensure every part meets the required visual and functional specifications.",
+              "Performing necessary post-processing and conducting a final quality check against your original CAD dimensions.",
           },
         ]}
       />
-      <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        image="https://images.unsplash.com/photo-1621333100200-84381387d853?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our printing mandate"
-        eyebrowHighlight="mandate"
-        title="Additive Strength by Design"
+        image="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our additive ethos"
+        eyebrowHighlight="ethos"
+        title="Building the Future Layer by Layer"
         paragraphs={[
-          "3D printing is no longer just for visual models. In the industrial sector, it is a primary tool for functional validation. Our philosophy is to push the boundaries of material science to deliver parts that perform in the real world.",
-          "By strictly adhering to high-precision manufacturing protocols and utilizing only verified industrial filaments, we guarantee that the parts we print will endure the stresses of your specific operational environment.",
+          "3D printing is not just a prototyping tool; it's a fundamental shift in how we think about manufacturing complexity. We believe that additive manufacturing allows for geometric freedoms that traditional subtractive methods cannot match.",
+          "We approach FDM printing with an engineering rigor, focusing on the internal structure and molecular bonding of layers to ensure that every part we produce is ready for the rigors of the industrial environment.",
         ]}
         items={[
           {
             icon: <Layers size={32} strokeWidth={1.2} />,
-            label: "Layer Quality",
-            description: "Exceptional inter-layer adhesion",
+            label: "Layer Precision",
+            description: "Ultra-fine detail settings",
             progress: 98,
-          },
-          {
-            icon: <Zap size={32} strokeWidth={1.2} />,
-            label: "Response Speed",
-            description: "CAD-to-hand in record time",
-            progress: 95,
           },
           {
             icon: <Box size={32} strokeWidth={1.2} />,
             label: "Material Strength",
-            description: "Industrial-grade thermoplastic focus",
-            progress: 94,
+            description: "Industrial-grade polymers",
+            progress: 95,
+          },
+          {
+            icon: <Cpu size={32} strokeWidth={1.2} />,
+            label: "Smart Slicing",
+            description: "Optimized internal structures",
+            progress: 100,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="Client Success"
+        eyebrow="Additive Success"
         eyebrowHighlight="Success"
-        heading="Iterating Faster with Industrial 3D Printing"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
+        heading="Client Feedback"
+        watermarkText="Printed"
+        bgImage="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {
-            title: "Incredible Turnaround",
+            title: "Rapid Tooling",
             rating: 5,
             review:
-              "The carbon fiber parts ANK printed for our robot end-effectors are remarkably stiff and lightweight. We received them within 48 hours, keeping our project ahead of schedule.",
-            name: "Mark Sanderson",
-            company: "Lead Engineer, AeroSystems",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Functional Accuracy",
-            rating: 5,
-            review:
-              "Their grasp of tolerances and material shrink rates is impressive. The functional housing they printed for our high-temp sensor fit the assembly perfectly on the first pass.",
-            name: "Lydia Grant",
-            company: "Founder, Energetic Industries",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+              "ANK produced a custom jig for our assembly line using 3D printing in less than 48 hours. The part was strong, accurate, and significantly cheaper than a machined alternative.",
+            name: "Rahul K.",
+            company: "Ops Lead, Precision Manufacturing India",
+            avatar:
+              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Print your future"
-        eyebrowHighlight="Print"
-        heading="Ready to accelerate your product development with high-performance industrial 3D printing?"
-        primaryLabel="Start Your 3D Build"
-        secondaryLabel="View Capability Guide"
+        eyebrow="Unlock geometric freedom"
+        eyebrowHighlight="freedom"
+        heading="Need high-quality 3D printed parts for your next project?"
+        primaryLabel="Start 3D Print"
+        secondaryLabel="Contact Us"
         onPrimaryClick={() => {
-          console.log("FDM Start clicked");
+          navigate("/contact");
         }}
         onSecondaryClick={() => {
-          console.log("Guide clicked");
+          navigate("/contact");
         }}
       />
     </PageLayout>

@@ -1,156 +1,144 @@
-import { Code, Database, Zap } from "lucide-react";
+import { Monitor, BarChart, Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
-import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const ScadaHmi = () => {
-  const clients = [
-    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
+  const navigate = useNavigate();
+
+  const scadaImages = [
+    "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
-        bgImage="https://images.unsplash.com/photo-1518932945647-7a1c969f8be2?auto=format&fit=crop&q=80&w=2000"
-        caption="Digital Streamlining for Modern Industry"
-        title="Software Automation"
-        subtitle="Custom software tools and scripts designed to eliminate repetitive digital tasks, automate complex data processing, and enhance operational intelligence."
-        watermarkNumber="15"
+        bgImage="https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=2000"
+        caption="Supervisory Control & Data Acquisition"
+        title="DCS / SCADA / HMI"
+        subtitle="Advanced industrial visualization and control systems. We design intuitive HMI screens and comprehensive SCADA/DCS architectures that provide real-time data, historical logging, and remote control of your entire production facility."
+        watermarkNumber="10"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=2000"
-        caption="Logic-Driven Efficiency"
-        leftTitle="Digital Automation Capabilities"
+        images={scadaImages}
+        caption="Visibility & Control"
+        leftTitle="Intuitive Visual Interfaces"
         leftParagraphs={[
-          "Robotic Process Automation (RPA): Developing digital workers that automate complex multi-stage workflows across legacy software without the need for high-end API integration.",
-          "Automated Reporting & ETL: Engineering data pipelines that automatically extract, transform, and load data from your industrial sensors into beautiful cloud dashboards.",
-          "Custom Scripting for Industrial Tools: Developing specialized software scripts to automate repetitive tasks in CAD, PLM, and ERP systems, saving hundreds of engineering hours.",
-          "Database Integration & Sync: Synchronizing digital assets across disparate legacy systems and modern cloud backends for a single source of technical truth.",
+          "We develop Human-Machine Interfaces (HMI) that prioritize clarity and ease of use for operators. Our designs follow high-performance HMI standards to reduce cognitive load and improve reaction times during critical events.",
+          "Our SCADA solutions provide a birds-eye view of your entire process, integrating data from multiple PLCs and devices into a single, unified monitoring platform.",
         ]}
-        rightTitle="Why Automate Your Software?"
+        rightTitle="Data-Driven Insights"
         rightParagraphs={[
-          "Human intelligence is best used for creative and strategic tasks, not repetitive data crunching. Our software automation services are designed to reclaim that lost time by delegating repetitive digital work to custom-engineered scripts and tools.",
-          "By auditing your digital bottlenecks and identifying high-utility automation points, we deliver software solutions that increase data accuracy, reduce human error, and accelerate your time-to-insight.",
+          "Beyond simple control, our systems offer robust data logging and historical trending capabilities. This allows you to analyze production patterns, identify bottlenecks, and make informed decisions for process optimization.",
+          "We implement advanced alarming and reporting features, ensuring that your team is immediately notified of any deviations and has the data needed for thorough post-event analysis.",
         ]}
         features={[
-          "Custom Data Pipelines",
-          "Automated PDF & Report Gen.",
-          "Zero-Error Data Entry",
+          "High-Performance HMI Design",
+          "Comprehensive SCADA Architectures",
+          "Real-time Data Trending & Logging",
+          "Alarm Management & Reporting",
         ]}
-        ctaLabel="Consult Automation Spec."
+        ctaLabel="Explore Visualization"
         onCtaClick={() => {
-          console.log("Software Automation CTA clicked");
+          navigate("/contact");
         }}
       />
       <ServiceProcess
         items={[
           {
             number: "01",
-            title: "Bottleneck Audit",
+            title: "Information Architecture",
             description:
-              "We monitor your current digital workflows to identify repetitive, high-volume tasks that are consuming engineering and administrative time.",
+              "Defining the data hierarchy, tag mapping, and navigation structure for a seamless operator experience.",
           },
           {
             number: "02",
-            title: "Logic Development",
+            title: "Interface Development",
             description:
-              "Our engineering team develops the custom logic, scripts, and automation tools required to handle these tasks with 100% accuracy and speed.",
+              "Designing high-fidelity graphics, control objects, and dynamic trend screens tailored to your specific process.",
           },
           {
             number: "03",
-            title: "System Integration",
+            title: "Network Integration",
             description:
-              "We integrate the new automation tools into your existing software stack, ensuring secure data handling and cross-system compatibility.",
+              "Configuring industrial communication drivers (OPC, Modbus, Profinet) to ensure reliable data flow from field devices.",
           },
           {
             number: "04",
-            title: "Scaling & Support",
+            title: "Validation & Tuning",
             description:
-              "We finalize the automation suite with deployment orchestration and lifecycle support, enabling your team to scale without increased manual labor.",
+              "Fine-tuning update rates, verifying alarm setpoints, and ensuring total system responsiveness in a live environment.",
           },
         ]}
       />
-      <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        image="https://images.unsplash.com/photo-1454165833767-027eeed1a131?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our digital philosophy"
-        eyebrowHighlight="digital"
-        title="Predictable Logic Growth"
+        image="https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our visualization ethos"
+        eyebrowHighlight="ethos"
+        title="Clarifying Complexity"
         paragraphs={[
-          "The best automation is almost invisible—it just works. Our philosophy is to build digital tools that feel like a seamless extension of your existing software, removing friction without adding complexity.",
-          "We believe in the power of precision logic to unlock business value. By automating the routine, we enable your team to focus on the exceptional, driving innovation across every layer of your digital operation.",
+          "A great SCADA system shouldn't just show data; it should provide context. We focus on transforming raw industrial numbers into actionable visual information that empowers your team to operate at peak efficiency.",
+          "Our interfaces are built for the modern industrial age, supporting high-resolution displays, remote web access, and secure data integration with higher-level ERP and MES systems.",
         ]}
         items={[
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
-            label: "Absolute Speed",
-            description: "Processing data millions of times faster",
-            progress: 98,
+            icon: <Monitor size={32} strokeWidth={1.2} />,
+            label: "Superior UX",
+            description: "Designed for fast operator response",
+            progress: 97,
           },
           {
-            icon: <Database size={32} strokeWidth={1.2} />,
-            label: "Data Accuracy",
-            description: "Eliminating manual entry errors",
-            progress: 99,
+            icon: <BarChart size={32} strokeWidth={1.2} />,
+            label: "Deep Insights",
+            description: "Comprehensive data logging",
+            progress: 95,
           },
           {
-            icon: <Code size={32} strokeWidth={1.2} />,
-            label: "Clean Codebase",
-            description: "Modular and maintainable scripts",
-            progress: 94,
+            icon: <Eye size={32} strokeWidth={1.2} />,
+            label: "Total Visibility",
+            description: "Real-time process monitoring",
+            progress: 100,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="Feedback Highlights"
-        eyebrowHighlight="Highlights"
-        heading="Removing Digital Friction with Precision Software"
-        watermarkText="Results"
-        bgImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Visionary Control"
+        eyebrowHighlight="Control"
+        heading="Client Feedback"
+        watermarkText="Monitoring"
+        bgImage="https://images.unsplash.com/photo-1551288049-bbbda536ad0a?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {
-            title: "Unprecedented Time Savings",
+            title: "Data Empowerment",
             rating: 5,
             review:
-              "The custom ETL pipeline ANK built for our engineering audits has saved us over 200 hours of manual data entry every single month. It's transformed our reporting speed.",
-            name: "Isabella Martinez",
-            company: "Lead Auditor, Global Energy",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "A Technical Powerhouse",
-            rating: 5,
-            review:
-              "Transitioning our legacy Excel-based tracking to an automated cloud dashboard was handled with incredible poise. We now have real-time visibility into every project KPI.",
-            name: "Lucas Wright",
-            company: "VP Operations, Nexus Industrial",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+              "ANK's SCADA implementation transformed how we manage our plant. We now have real-time visibility into every machine's status, and the historical data has been invaluable for our OEE improvements.",
+            name: "Rajesh Khanna",
+            company: "Plant Director, Surya Chemicals",
+            avatar:
+              "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Automate your future"
-        eyebrowHighlight="Automate"
-        heading="Ready to eliminate digital repetition with custom software automation and precision data processing?"
-        primaryLabel="Schedule Automation Consult"
-        secondaryLabel="View Success Stories"
+        eyebrow="Visualize your success"
+        eyebrowHighlight="success"
+        heading="Ready to upgrade your industrial monitoring and control interfaces?"
+        primaryLabel="Consult our SCADA Experts"
+        secondaryLabel="Contact Us"
         onPrimaryClick={() => {
-          console.log("Software Automation Start clicked");
+          navigate("/contact");
         }}
         onSecondaryClick={() => {
-          console.log("Success Stories clicked");
+          navigate("/contact");
         }}
       />
     </PageLayout>

@@ -9,8 +9,8 @@ interface ServiceDetailProps {
   caption: string;
   leftTitle: string;
   leftParagraphs: string[];
-  rightTitle: string;
-  rightParagraphs: string[];
+  rightTitle?: string;
+  rightParagraphs?: string[];
   features: string[];
   ctaLabel: string;
   onCtaClick?: () => void;
@@ -42,12 +42,14 @@ const ServiceDetail = ({
   const next = () => setCurrentIdx((prev) => (prev + 1) % displayImages.length);
   const prev = () => setCurrentIdx((prev) => (prev - 1 + displayImages.length) % displayImages.length);
 
+  const hasRightColumn = !!(rightTitle || (rightParagraphs && rightParagraphs.length > 0));
+
   return (
     <section className="w-full mt-10 px-6 md:px-16 lg:px-32 py-16 bg-white rounded-2xl overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-[35%_1fr_1fr] min-h-[450px] gap-10">
+      <div className={`grid grid-cols-1 ${hasRightColumn ? 'lg:grid-cols-[35%_1fr_1fr]' : 'lg:grid-cols-[35%_1fr]'} min-h-[450px] gap-10 lg:gap-16`}>
         {/* ── Image/Carousel column ── */}
         <motion.div
-          className="relative overflow-hidden bg-slate-100 rounded-xl group"
+          className="relative overflow-hidden bg-slate-100 rounded-xl group min-h-[400px]"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -98,7 +100,7 @@ const ServiceDetail = ({
           </div>
         </motion.div>
 
-        {/* ── Left text column ── */}
+        {/* ── Left content column ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -113,50 +115,84 @@ const ServiceDetail = ({
               {p}
             </p>
           ))}
-        </motion.div>
 
-        {/* ── Right features column ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col justify-center"
-        >
-          <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">
-            {rightTitle}
-          </h3>
-          {rightParagraphs.map((p, i) => (
-            <p key={i} className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
-              {p}
-            </p>
-          ))}
+          {!hasRightColumn && (
+            <>
+              <ul className="my-6 space-y-3">
+                {features.map((f, i) => (
+                  <motion.li
+                    key={i}
+                    className="flex items-start gap-3 text-[13px] text-slate-600 font-bold uppercase tracking-tight"
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.25 + i * 0.07 }}
+                  >
+                    <CheckCircle2
+                      size={16}
+                      className="text-primary mt-0.5 shrink-0"
+                    />
+                    {f}
+                  </motion.li>
+                ))}
+              </ul>
 
-          <ul className="my-6 space-y-3">
-            {features.map((f, i) => (
-              <motion.li
-                key={i}
-                className="flex items-start gap-3 text-[13px] text-slate-600 font-bold uppercase tracking-tight"
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.25 + i * 0.07 }}
+              <button
+                onClick={onCtaClick}
+                className="mt-4 bg-primary hover:bg-primary-hover text-white text-[11px] font-black uppercase tracking-[0.2em]
+                           px-10 py-4 rounded-sm transition-all duration-300 shadow-xl shadow-primary/20 self-start"
               >
-                <CheckCircle2
-                  size={16}
-                  className="text-primary mt-0.5 shrink-0"
-                />
-                {f}
-              </motion.li>
-            ))}
-          </ul>
-
-          <button
-            onClick={onCtaClick}
-            className="mt-4 bg-primary hover:bg-primary-hover text-white text-[11px] font-black uppercase tracking-[0.2em]
-                       px-10 py-4 rounded-sm transition-all duration-300 shadow-xl shadow-primary/20 self-start"
-          >
-            {ctaLabel}
-          </button>
+                {ctaLabel}
+              </button>
+            </>
+          )}
         </motion.div>
+
+        {/* ── Right content column (Optional) ── */}
+        {hasRightColumn && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col justify-center"
+          >
+            {rightTitle && (
+              <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">
+                {rightTitle}
+              </h3>
+            )}
+            {rightParagraphs?.map((p, i) => (
+              <p key={i} className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
+                {p}
+              </p>
+            ))}
+
+            <ul className="my-6 space-y-3">
+              {features.map((f, i) => (
+                <motion.li
+                  key={i}
+                  className="flex items-start gap-3 text-[13px] text-slate-600 font-bold uppercase tracking-tight"
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.25 + i * 0.07 }}
+                >
+                  <CheckCircle2
+                    size={16}
+                    className="text-primary mt-0.5 shrink-0"
+                  />
+                  {f}
+                </motion.li>
+              ))}
+            </ul>
+
+            <button
+              onClick={onCtaClick}
+              className="mt-4 bg-primary hover:bg-primary-hover text-white text-[11px] font-black uppercase tracking-[0.2em]
+                         px-10 py-4 rounded-sm transition-all duration-300 shadow-xl shadow-primary/20 self-start"
+            >
+              {ctaLabel}
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );

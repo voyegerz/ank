@@ -1,156 +1,144 @@
-import { Search, Zap, Database } from "lucide-react";
+import { Rocket, Box, Cpu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
-import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
 import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const RapidPrototyping = () => {
-  const clients = [
-    { name: "TechCorp", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-    { name: "Innovate AI", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-    { name: "CloudSync", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-    { name: "DataFlow", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-    { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-    { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
+  const navigate = useNavigate();
+
+  const prototypeImages = [
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
     <PageLayout>
       <CommonHero
-        bgImage="https://images.unsplash.com/photo-1544256718-3b2234b751ee?auto=format&fit=crop&q=80&w=2000"
-        caption="Accelerated Product Development"
+        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
+        caption="From Concept to Reality Fast"
         title="Rapid Prototyping"
-        subtitle="From CAD to physical proof-of-concept in record time, enabling high-fidelity testing, validation, and design refinement before mass manufacturing."
-        watermarkNumber="12"
+        subtitle="Accelerate your product development cycle with our rapid prototyping services. We use advanced manufacturing techniques to quickly create high-fidelity physical models that look, feel, and function like your final product."
+        watermarkNumber="17"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000"
-        caption="Design Verification"
-        leftTitle="Core Prototyping Capabilities"
+        images={prototypeImages}
+        caption="Speed Meets Precision"
+        leftTitle="Accelerated Development"
         leftParagraphs={[
-          "Multi-Material Printing: Utilizing SLA, SLS, and FDM additive manufacturing to deliver prototypes with specific mechanical and thermal properties as per your needs.",
-          "High-Precision CNC Machining: Producing high-fidelity functional prototypes from actual production materials like Aluminum, PEEK, and specialized industrial plastics.",
-          "Vacuum Casting & Low-Volume Polyurethane: Creating small batches of production-grade parts with custom textures and colors for field testing and market validation.",
-          "Functional System Proofs: Developing integrated prototypes that combine physical enclosures with active electronics and firmware for true end-to-end testing.",
+          "Time-to-market is critical in today's competitive landscape. Our rapid prototyping services allow you to test and refine your designs in days rather than months, ensuring your final product is perfected before mass production.",
+          "We combine multiple technologies, including 3D printing, CNC machining, and cast urethane, to create prototypes that match your specific requirements for material, strength, and finish.",
         ]}
-        rightTitle="Why Prototype with ANK?"
+        rightTitle="Functional Validation"
         rightParagraphs={[
-          "Product development is a race against both time and technical uncertainty. Our rapid prototyping services are designed to fail fast and learn faster, identifying potential issues long before they become costly tooling errors.",
-          "By combining additive and subtractive manufacturing techniques under one roof, we provide the most efficient route from an abstract digital model to a physical product that you can hold, test, and present to stakeholders.",
+          "A prototype is more than just a visual aid; it's a critical tool for functional testing. We build prototypes that allow you to verify fit, form, and function in real-world conditions, identifying design flaws early.",
+          "Our engineering team provides feedback on manufacturability during the prototyping phase, helping you optimize your design for full-scale production while your product is still in development.",
         ]}
         features={[
-          "Functional Load Testing",
-          "Aesthetic Surface Finishing",
-          "Rapid Design Iterations",
+          "High-Fidelity Visual Models",
+          "Functional Mechanical Prototypes",
+          "Multi-Material Options",
+          "Design for Manufacture (DFM) Feedback",
         ]}
-        ctaLabel="Prototype Your Idea"
+        ctaLabel="Prototype your Idea"
         onCtaClick={() => {
-          console.log("Rapid Proto Start clicked");
+          navigate("/contact");
         }}
       />
       <ServiceProcess
         items={[
           {
             number: "01",
-            title: "Model Analysis",
+            title: "CAD Review",
             description:
-              "We analyze your CAD geometry for manufacturability, identifying the optimal process—additive or subtractive—to achieve your prototype objectives.",
+              "Analyzing your 3D models to determine the most efficient prototyping method and material for your goals.",
           },
           {
             number: "02",
-            title: "Speed Fabrication",
+            title: "Fabrication",
             description:
-              "Using our in-house suite of industrial technologies, we initiate fabrication immediately, often delivering physical models within 24 to 72 hours.",
+              "Utilizing state-of-the-art additive or subtractive manufacturing to create the physical components of your prototype.",
           },
           {
             number: "03",
-            title: "Finishing & Assembly",
+            title: "Post-Processing",
             description:
-              "We ensure your prototype meets the required visual and functional fidelity through expert sanding, painting, and subsystem integration.",
+              "Cleaning, sanding, painting, or assembling the components to achieve the desired surface finish and functional state.",
           },
           {
             number: "04",
-            title: "Validation Check",
+            title: "Testing & Review",
             description:
-              "Before delivery, every prototype is verified against your design specifications to ensure it provides accurate data for your next development phase.",
+              "Conducting fit-checks and functional tests, followed by a detailed review session to plan for the next design iteration.",
           },
         ]}
       />
-      <ClientMarquee clients={clients} />
 
       <PhilosophySection
-        image="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2000"
-        eyebrow="Our prototyping philosophy"
-        eyebrowHighlight="prototyping"
-        title="Predictable Speed to Market"
+        image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our prototype ethos"
+        eyebrowHighlight="ethos"
+        title="Fail Fast, Succeed Faster"
         paragraphs={[
-          "A prototype is a bridge between a vision and a reality. Our philosophy centers on technical honesty—delivering models that accurately represent the final product's performance and manufacturability.",
-          "We believe that the best prototypes are those that provide actionable data. Whether it is a simple fit-check or a complex functional system, our engineering commitment is to provide the highest clarity in record time.",
+          "Prototyping is an insurance policy for your manufacturing budget. We believe that physical interaction with a design provides insights that simulation alone cannot capture.",
+          "We approach prototyping with an industrial mindset, ensuring that even our fastest models are built with the accuracy needed to make sound engineering decisions.",
         ]}
         items={[
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
-            label: "Rapid Realization",
-            description: "Industry-leading turnaround times",
-            progress: 97,
+            icon: <Rocket size={32} strokeWidth={1.2} />,
+            label: "Rapid Turnaround",
+            description: "From CAD to hand in days",
+            progress: 100,
           },
           {
-            icon: <Database size={32} strokeWidth={1.2} />,
-            label: "Material Breadth",
-            description: "Prototyping with production materials",
-            progress: 94,
+            icon: <Box size={32} strokeWidth={1.2} />,
+            label: "Material Variety",
+            description: "Wide range of industrial polymers",
+            progress: 95,
           },
           {
-            icon: <Search size={32} strokeWidth={1.2} />,
-            label: "Design Clarity",
-            description: "Identifying issues before tooling",
+            icon: <Cpu size={32} strokeWidth={1.2} />,
+            label: "Functional Accuracy",
+            description: "Perfect fit and movement",
             progress: 98,
           },
         ]}
       />
 
       <Testimonials
-        eyebrow="Success Stories"
-        eyebrowHighlight="Stories"
-        heading="From Vision to Hand in Record Time"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Prototype Success"
+        eyebrowHighlight="Success"
+        heading="Client Feedback"
+        watermarkText="Reality"
+        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
         testimonials={[
           {
-            title: "Incredible Speed",
+            title: "Critical Insights",
             rating: 5,
             review:
-              "ANK Design managed to deliver a full-scale CNC machined prototype for our aerospace client in just 4 days. The dimensional accuracy was perfect and the surface finish was exceptional.",
-            name: "Lucas Grant",
-            company: "Engineering VP, Skywards Aerospace",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Essential Insights",
-            rating: 5,
-            review:
-              "Their grasp of both structural printing and functional vacuum casting saved us from a major design flaw that would have cost us thousands in production tooling later on.",
-            name: "Sofia Mendez",
-            company: "CTO, Innovate Lab",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
+              "The functional prototype ANK delivered allowed us to identify a major assembly issue before we committed to expensive tooling. They literally saved our project timeline.",
+            name: "Karan P.",
+            company: "Product Manager, TechFlow Innovations",
+            avatar:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
           },
         ]}
       />
       <CTASection
-        eyebrow="Accelerate your design"
-        eyebrowHighlight="Accelerate"
-        heading="Looking for an engineering team that can transform your complex designs into high-fidelity functional prototypes with record speed?"
-        primaryLabel="Schedule Proto Consult"
-        secondaryLabel="View Gallery"
+        eyebrow="Bring your vision to life"
+        eyebrowHighlight="vision"
+        heading="Ready to see and feel your design in the real world?"
+        primaryLabel="Request a Prototype"
+        secondaryLabel="Contact Us"
         onPrimaryClick={() => {
-          console.log("Rapid Proto Start clicked");
+          navigate("/contact");
         }}
         onSecondaryClick={() => {
-          console.log("Gallery clicked");
+          navigate("/contact");
         }}
       />
     </PageLayout>

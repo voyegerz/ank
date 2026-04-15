@@ -10,8 +10,6 @@ import {
 } from "framer-motion";
 import PageLayout from "../components/PageLayout";
 import {
-  Mail,
-  MapPin,
   CheckCircle2,
   Users,
   Briefcase,
@@ -23,6 +21,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import MapSection from "../components/MapSection";
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
@@ -42,7 +41,7 @@ const slides = [
     subtitle:
       "Expert services in 3D/2D CAD development, PLC & SCADA programming, and industrial automation.",
     cta: "Our Services",
-    link: "/services/software-engineering",
+    link: "/services",
     bg: "https://images.unsplash.com/photo-1581082118775-5c7c8ff6e03e?auto=format&fit=crop&q=80&w=2400",
   },
   {
@@ -420,7 +419,7 @@ const Home = () => {
             {[
               {
                 title: "Product Designs",
-                items: ["Cad Design - 2D/3D", "FEA Analysis", "Reverse Engineering", "SPM"],
+                items: ["Cad Design - 2D & 3D", "FEA Analysis", "Reverse Engineering", "SPM"],
                 icon: <Settings2 size={24} />,
               },
               {
@@ -680,15 +679,18 @@ const Home = () => {
         className="border-t border-black/4 overflow-hidden flex flex-col lg:flex-row bg-slate-900"
         style={{ minHeight: 600 }}
       >
-        <div 
-          className="lg:w-1/2 relative min-h-100 bg-primary"
-          style={{
-            backgroundImage: `url(https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundBlendMode: "multiply",
-          }}
-        >
+        <div className="lg:w-1/2 relative min-h-100 bg-primary">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url(https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          {/* Theme Tint Overlay */}
+          <div className="absolute inset-0 bg-primary/50" />
+          
           {/* Subtle overlay to fade into the right content side */}
           <div
             className="absolute inset-0"
@@ -736,61 +738,7 @@ const Home = () => {
 
 
       {/* ── 13. Map & Locations ───────────────────────────────────────────────── */}
-      <section className="border-t border-black/4 bg-white">
-        <div className="relative h-140 overflow-hidden">
-          <div className="absolute inset-0 grayscale opacity-40">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.123!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1610000000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-            />
-          </div>
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 60%, transparent 100%)",
-            }}
-          />
-
-          {/* Floating info card */}
-          <div className="absolute top-1/2 left-10 lg:left-24 -translate-y-1/2 p-10 rounded-sm max-w-sm pointer-events-auto shadow-2xl bg-white border border-black/4">
-            <p className="text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase mb-6">
-              Visit HQ
-            </p>
-            <h3 className="text-[20px] font-black text-slate-900 uppercase mb-8 font-sans">
-              Pune, India
-            </h3>
-            <div className="space-y-6 mb-10">
-              <div className="flex gap-4 items-start">
-                <MapPin
-                  size={16}
-                  className="text-slate-300 mt-0.5 shrink-0 text-primary-hover"
-                />
-                <p className="text-[14px] text-slate-600 leading-relaxed font-medium">
-                  Office S-4, 2nd Floor, Commercial Building, Pune MH 411001
-                </p>
-              </div>
-              <div className="flex gap-4 items-center">
-                <Mail
-                  size={16}
-                  className="text-slate-300 shrink-0 text-primary-hover"
-                />
-                <p className="text-[14px] text-slate-600 font-medium">
-                  info@ankautomation.com
-                </p>
-              </div>
-            </div>
-            <button className="w-full py-4 rounded-sm text-[11px] font-black tracking-widest text-white uppercase transition-all shadow-xl bg-primary">
-              Get Directions
-            </button>
-          </div>
-        </div>
-
-      </section>
+      <MapSection />
 
       {/* ── 14. Final CTA ─────────────────────────────────────────────────────── */}
       <section className="py-48 bg-slate-50 border-t border-black/4 text-center relative overflow-hidden">
@@ -818,8 +766,8 @@ const Home = () => {
               without the hassle.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <a
-                href="#services"
+              <Link
+                to="/services"
                 className="group inline-flex items-center justify-center gap-3 text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm shadow-2xl transition-all hover:bg-primary-hover bg-primary"
               >
                 Explore Solutions{" "}
@@ -827,9 +775,9 @@ const Home = () => {
                   size={16}
                   className="group-hover:translate-x-1 transition-transform"
                 />
-              </a>
+              </Link>
               <Link
-                to="/services/software-engineering"
+                to="/services"
                 className="inline-flex items-center justify-center gap-3 text-[11px] font-black tracking-widest text-slate-900 uppercase px-12 py-5 rounded-sm border-2 border-slate-900/10 hover:border-slate-900 transition-all bg-white shadow-sm"
               >
                 Our services
