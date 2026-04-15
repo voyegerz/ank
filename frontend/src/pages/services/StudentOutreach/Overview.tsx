@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import PageLayout from "../../../components/PageLayout";
 import CommonHero from "../../../components/CommonHero";
-import { ArrowRight, GraduationCap, BookOpen, Rocket } from "lucide-react";
+import { ArrowRight, GraduationCap, BookOpen, Rocket, Cpu } from "lucide-react";
 
 const SUB_SERVICES = [
   {
@@ -25,6 +25,13 @@ const SUB_SERVICES = [
     desc: "Commercializing technical innovations through professional design, manufacturing, and business mentorship.",
     icon: <Rocket size={24} />,
     image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    title: "DIY Robotics Kits",
+    path: "/products/courses",
+    desc: "Specially designed robotics and electronics kits to help students learn by building real-world applications.",
+    icon: <Cpu size={24} />,
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800"
   }
 ];
 
@@ -40,7 +47,7 @@ const StudentOutreachOverview = () => {
 
       <section className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {SUB_SERVICES.map((service, i) => (
               <motion.div
                 key={i}
