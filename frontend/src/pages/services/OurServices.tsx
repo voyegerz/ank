@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import PageLayout from "../../components/PageLayout";
@@ -60,6 +61,18 @@ const SERVICES_GRID = [
 ];
 
 const OurServices = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = 400;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <PageLayout>
       {/* ── 1. Hero Section (CommonHero) ── */}
@@ -192,12 +205,18 @@ const OurServices = () => {
               </h2>
             </div>
             <div className="hidden md:flex gap-2">
-              <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center text-slate-400 group cursor-pointer hover:border-primary hover:text-primary transition-all">
+              <button 
+                onClick={() => scroll("left")}
+                className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center text-slate-400 group cursor-pointer hover:border-primary hover:text-primary transition-all"
+              >
                 <ChevronRight size={20} className="rotate-180" />
-              </div>
-              <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center text-slate-400 group cursor-pointer hover:border-primary hover:text-primary transition-all">
+              </button>
+              <button 
+                onClick={() => scroll("right")}
+                className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center text-slate-400 group cursor-pointer hover:border-primary hover:text-primary transition-all"
+              >
                 <ChevronRight size={20} />
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -205,6 +224,7 @@ const OurServices = () => {
         {/* Horizontal Scroll Area */}
         <div className="relative ml-7 lg:ml-20">
           <div 
+            ref={scrollRef}
             className="flex gap-6 overflow-x-auto px-6 md:px-12 lg:px-20 pb-12 scrollbar-hide snap-x"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
