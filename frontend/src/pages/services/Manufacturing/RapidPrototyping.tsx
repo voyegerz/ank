@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const RapidPrototyping = () => {
@@ -14,6 +13,8 @@ const RapidPrototyping = () => {
   const prototypeImages = [
     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -30,13 +31,8 @@ const RapidPrototyping = () => {
         caption="Speed Meets Precision"
         leftTitle="Accelerated Development"
         leftParagraphs={[
-          "Time-to-market is critical in today's competitive landscape. Our rapid prototyping services allow you to test and refine your designs in days rather than months, ensuring your final product is perfected before mass production.",
-          "We combine multiple technologies, including 3D printing, CNC machining, and cast urethane, to create prototypes that match your specific requirements for material, strength, and finish.",
-        ]}
-        rightTitle="Functional Validation"
-        rightParagraphs={[
-          "A prototype is more than just a visual aid; it's a critical tool for functional testing. We build prototypes that allow you to verify fit, form, and function in real-world conditions, identifying design flaws early.",
-          "Our engineering team provides feedback on manufacturability during the prototyping phase, helping you optimize your design for full-scale production while your product is still in development.",
+          "Time-to-market is critical in today's competitive landscape. Our rapid prototyping services allow you to test and refine your designs in days rather than months, ensuring your final product is perfected before mass production. We combine multiple technologies, including 3D printing, CNC machining, and cast urethane, to create prototypes that match your specific requirements.",
+          "A prototype is a critical tool for functional testing. We build prototypes that allow you to verify fit, form, and function in real-world conditions, identifying design flaws early. Our engineering team provides feedback on manufacturability during this phase, helping you optimize for full-scale production while your product is still in development.",
         ]}
         features={[
           "High-Fidelity Visual Models",
@@ -84,24 +80,25 @@ const RapidPrototyping = () => {
         eyebrowHighlight="ethos"
         title="Fail Fast, Succeed Faster"
         paragraphs={[
-          "Prototyping is an insurance policy for your manufacturing budget. We believe that physical interaction with a design provides insights that simulation alone cannot capture.",
-          "We approach prototyping with an industrial mindset, ensuring that even our fastest models are built with the accuracy needed to make sound engineering decisions.",
+          "Prototyping is an insurance policy for your manufacturing budget. We believe that physical interaction with a design provides insights that simulation alone cannot capture, ensuring even our fastest models are built with industrial accuracy.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Rocket size={32} strokeWidth={1.2} />,
+            icon: <Rocket size={20} strokeWidth={1.2} />,
             label: "Rapid Turnaround",
             description: "From CAD to hand in days",
             progress: 100,
           },
           {
-            icon: <Box size={32} strokeWidth={1.2} />,
+            icon: <Box size={20} strokeWidth={1.2} />,
             label: "Material Variety",
             description: "Wide range of industrial polymers",
             progress: 95,
           },
           {
-            icon: <Cpu size={32} strokeWidth={1.2} />,
+            icon: <Cpu size={20} strokeWidth={1.2} />,
             label: "Functional Accuracy",
             description: "Perfect fit and movement",
             progress: 98,
@@ -109,25 +106,6 @@ const RapidPrototyping = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Prototype Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="Reality"
-        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Critical Insights",
-            rating: 5,
-            review:
-              "The functional prototype ANK delivered allowed us to identify a major assembly issue before we committed to expensive tooling. They literally saved our project timeline.",
-            name: "Karan P.",
-            company: "Product Manager, TechFlow Innovations",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Bring your vision to life"
         eyebrowHighlight="vision"

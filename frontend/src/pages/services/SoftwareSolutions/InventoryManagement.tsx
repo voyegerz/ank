@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const InventoryManagement = () => {
@@ -14,6 +13,8 @@ const InventoryManagement = () => {
   const inventoryImages = [
     "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1530033358073-9a489bb41204?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -30,13 +31,8 @@ const InventoryManagement = () => {
         caption="Efficiency in Every Unit"
         leftTitle="Unified Stock Visibility"
         leftParagraphs={[
-          "We develop inventory management platforms that provide a single source of truth for your stock across multiple locations. Our systems eliminate manual counting errors and provide instant visibility into stock levels, movements, and valuations.",
-          "From barcode and QR code integration to advanced RFID tracking, we implement the hardware and software needed to automate your data entry and ensure 100% inventory accuracy.",
-        ]}
-        rightTitle="Smart Supply Chain Logic"
-        rightParagraphs={[
-          "Our platforms include intelligent reordering algorithms that analyze historical usage patterns and lead times to prevent stockouts and overstocking. This ensures your capital is utilized as efficiently as possible.",
-          "We focus on creating intuitive administrative dashboards that provide your warehouse and procurement teams with the data they need to make faster, better-informed logistics decisions.",
+          "We develop inventory management platforms that provide a single source of truth for your stock across multiple locations. Our systems eliminate manual counting errors and provide instant visibility into stock levels, movements, and valuations. From barcode and QR code integration to advanced RFID tracking, we implement the hardware and software needed to automate your data entry and ensure 100% inventory accuracy.",
+          "Our platforms include intelligent reordering algorithms that analyze historical usage patterns and lead times to prevent stockouts and overstocking. This ensures your capital is utilized as efficiently as possible while providing your team with the data they need to make faster, better-informed logistics decisions.",
         ]}
         features={[
           "Real-time Stock Tracking",
@@ -85,23 +81,24 @@ const InventoryManagement = () => {
         title="Precision in the Warehouse"
         paragraphs={[
           "Inventory isn't just about items on a shelf; it's about frozen capital. We believe that an effective management system should be invisible, enabling a frictionless flow of goods while providing perfect data behind the scenes.",
-          "We apply the same level of engineering precision to our logistics software as we do to industrial machines, ensuring that every transaction is logged with absolute reliability and performance.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <ClipboardList size={32} strokeWidth={1.2} />,
+            icon: <ClipboardList size={20} strokeWidth={1.2} />,
             label: "Total Accuracy",
             description: "Eliminate manual errors",
             progress: 100,
           },
           {
-            icon: <BarChart3 size={32} strokeWidth={1.2} />,
+            icon: <BarChart3 size={20} strokeWidth={1.2} />,
             label: "Actionable Data",
             description: "Insight-driven procurement",
             progress: 96,
           },
           {
-            icon: <Package size={32} strokeWidth={1.2} />,
+            icon: <Package size={20} strokeWidth={1.2} />,
             label: "Optimized Flow",
             description: "Reduced warehouse lead times",
             progress: 98,
@@ -109,25 +106,6 @@ const InventoryManagement = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Logistics Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="Stock"
-        bgImage="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Procurement Mastery",
-            rating: 5,
-            review:
-              "ANK's custom inventory system completely eliminated our 'out-of-stock' issues. The automated reordering logic has saved us countless hours of manual procurement planning.",
-            name: "Deepak R.",
-            company: "Director, Radiant Logistics",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Streamline your supply chain"
         eyebrowHighlight="supply"

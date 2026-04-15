@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const Workshops = () => {
@@ -14,6 +13,8 @@ const Workshops = () => {
   const workshopImages = [
     "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1523240715630-9918c13bc1ad?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -30,13 +31,8 @@ const Workshops = () => {
         caption="Skill Up for Industry"
         leftTitle="Practical Skill Development"
         leftParagraphs={[
-          "Our workshops are led by experienced industrial engineers who bring real-world projects into the classroom. We focus on teaching the tools and methodologies actually used in the industry today.",
-          "Participants get hands-on experience with professional hardware and software, from wiring control panels and programming PLCs to designing complex 3D assemblies and printing them.",
-        ]}
-        rightTitle="Tailored Learning Paths"
-        rightParagraphs={[
-          "We offer workshops for various skill levels, from introductory sessions for school students to advanced specialized training for engineering graduates and working professionals looking to upskill.",
-          "Our curriculum is constantly updated to reflect the latest trends in industrial automation, digital manufacturing, and sustainable engineering practices.",
+          "Our workshops are led by experienced industrial engineers who bring real-world projects into the classroom. We focus on teaching the tools and methodologies actually used in the industry today, from wiring control panels and programming PLCs to designing complex 3D assemblies.",
+          "We offer workshops for various skill levels, from introductory sessions for school students to advanced specialized training for graduates. Our curriculum is constantly updated to reflect the latest trends in industrial automation, digital manufacturing, and sustainable engineering practices.",
         ]}
         features={[
           "Hands-on PLC & Automation Training",
@@ -84,24 +80,25 @@ const Workshops = () => {
         eyebrowHighlight="ethos"
         title="Knowledge Through Application"
         paragraphs={[
-          "Engineering cannot be mastered through a screen alone. It requires the tactile experience of assembling parts, the logical challenge of debugging code, and the satisfaction of seeing a machine move.",
-          "Our workshops are designed to spark a lifelong passion for building and innovation, providing participants with the confidence to tackle complex technical challenges in their future careers.",
+          "Engineering cannot be mastered through a screen alone. Our workshops are designed to spark a passion for building and innovation, providing the tactile experience of assembling parts and debugging code.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Users size={32} strokeWidth={1.2} />,
+            icon: <Users size={20} strokeWidth={1.2} />,
             label: "Collaborative Learning",
             description: "Learn together, build together",
             progress: 95,
           },
           {
-            icon: <BookOpen size={32} strokeWidth={1.2} />,
+            icon: <BookOpen size={20} strokeWidth={1.2} />,
             label: "Industry Curriculum",
             description: "Tools used by professionals",
             progress: 100,
           },
           {
-            icon: <PenTool size={32} strokeWidth={1.2} />,
+            icon: <PenTool size={20} strokeWidth={1.2} />,
             label: "Hands-on Experience",
             description: "Real hardware, real software",
             progress: 98,
@@ -109,25 +106,6 @@ const Workshops = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Learner Success"
-        eyebrowHighlight="Success"
-        heading="Workshop Feedback"
-        watermarkText="Skills"
-        bgImage="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Career Transformer",
-            rating: 5,
-            review:
-              "The PLC workshop at ANK was the highlight of my semester. I learned more in three days than I did in a whole year of theory. It helped me land my first job in automation!",
-            name: "Megha R.",
-            company: "Junior Engineer, Industrial Automations",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Ignite your technical potential"
         eyebrowHighlight="potential"

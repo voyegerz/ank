@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const SchoolsCollegeProjects = () => {
@@ -14,6 +13,8 @@ const SchoolsCollegeProjects = () => {
   const projectImages = [
     "https://images.unsplash.com/photo-1523240715630-9918c13bc1ad?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581092921461-7d13c937c05b?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -30,13 +31,8 @@ const SchoolsCollegeProjects = () => {
         caption="Learning through Doing"
         leftTitle="Hands-on Technical Support"
         leftParagraphs={[
-          "We believe that the best way to learn engineering is by building real things. We provide students with the components, tools, and technical mentorship needed to bring their school and college projects to life.",
-          "From robotics and automation to electronics and IoT, we offer a curated selection of kits and modules specifically designed for academic learning and competitive projects.",
-        ]}
-        rightTitle="Mentorship & Guidance"
-        rightParagraphs={[
-          "Beyond just providing hardware, our experienced engineers offer guidance on project architecture, circuit design, and troubleshooting. We help students overcome technical hurdles and ensure their projects are successful.",
-          "We also support engineering colleges in setting up innovation labs and provides specialized training for student teams participating in national and international technical competitions.",
+          "We believe that the best way to learn engineering is by building real things. We provide students with the components, tools, and technical mentorship needed to bring their school and college projects to life. From robotics and automation to electronics and IoT, we offer a curated selection of kits and modules Specifically designed for academic learning.",
+          "Beyond hardware, our experienced engineers offer guidance on project architecture, circuit design, and troubleshooting. We also support engineering colleges in setting up innovation labs and provides specialized training for student teams participating in national and international technical competitions.",
         ]}
         features={[
           "Curated Engineering Project Kits",
@@ -84,24 +80,25 @@ const SchoolsCollegeProjects = () => {
         eyebrowHighlight="ethos"
         title="Inspiring Tomorrow's Innovators"
         paragraphs={[
-          "Education is the most powerful tool for engineering the future. We are committed to nurturing the curiosity and technical skills of the next generation through practical, hands-on experience.",
-          "We treat every student project with the same level of respect as a professional industrial project, instilling a culture of quality, precision, and systematic problem-solving.",
+          "Education is the most powerful tool for engineering the future. We are committed to nurturing the curiosity and technical skills of the next generation through practical, hands-on experience and professional-level mentorship.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <GraduationCap size={32} strokeWidth={1.2} />,
+            icon: <GraduationCap size={20} strokeWidth={1.2} />,
             label: "Practical Learning",
             description: "Beyond the textbook",
             progress: 100,
           },
           {
-            icon: <Lightbulb size={32} strokeWidth={1.2} />,
+            icon: <Lightbulb size={20} strokeWidth={1.2} />,
             label: "Innovation Spark",
             description: "Encouraging creative builds",
             progress: 95,
           },
           {
-            icon: <Wrench size={32} strokeWidth={1.2} />,
+            icon: <Wrench size={20} strokeWidth={1.2} />,
             label: "Skill Building",
             description: "Real-world technical skills",
             progress: 98,
@@ -109,25 +106,6 @@ const SchoolsCollegeProjects = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Student Success"
-        eyebrowHighlight="Success"
-        heading="Academic Feedback"
-        watermarkText="Learn"
-        bgImage="https://images.unsplash.com/photo-1523240715630-9918c13bc1ad?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Competition Winners",
-            rating: 5,
-            review:
-              "The technical mentorship from ANK was instrumental in our team winning the state-level robotics competition. Their insights into motor control were a game-changer.",
-            name: "Aditya K.",
-            company: "Student Team Lead, Tech-Vidyapeeth",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Start your engineering journey"
         eyebrowHighlight="journey"

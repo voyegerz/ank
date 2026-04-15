@@ -468,7 +468,9 @@ const Home = () => {
       <section className="py-32 bg-slate-50 border-t border-black/5">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <FadeIn className="text-center mb-20">
-            <Label>ANK Values</Label>
+            <div className="flex justify-center">
+              <Label>ANK Values</Label>
+            </div>
             <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
               Built on <span className="text-primary-hover">Core Principles</span>
             </h2>
@@ -509,58 +511,6 @@ const Home = () => {
                 </p>
               </GlassCard>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. Student Outreach ─────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 skew-x-[-15deg] translate-x-1/2" />
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <FadeIn>
-              <Label color="var(--color-primary-hover)">Student Outreach</Label>
-              <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-[0.95] mb-8 uppercase font-sans">
-                Are you a <span className="text-primary-hover">student?</span>
-              </h2>
-              <p className="text-base text-slate-400 mb-10 leading-relaxed max-w-lg font-medium">
-                We believe engineering begins with education. Our student outreach programs provide hands-on experience, mentorship, and resources to help the next generation of innovators build the future.
-              </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-                {[
-                  "Schools/College Projects",
-                  "Industry Workshops",
-                  "Project to Product (P2P)",
-                  "DIY Robotics Kits",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[12px] font-black uppercase tracking-widest text-slate-300">
-                    <span className="w-2 h-2 bg-primary-hover rounded-full" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-3 bg-primary text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm hover:bg-primary-hover transition-all shadow-2xl"
-              >
-                Get in touch with us <ArrowRight size={16} />
-              </Link>
-            </FadeIn>
-            <FadeIn delay={0.2}>
-              <div className="relative aspect-video rounded-sm overflow-hidden shadow-2xl border border-white/10">
-                <img
-                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200"
-                  className="w-full h-full object-cover grayscale brightness-50"
-                  alt="Student Outreach"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="p-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-sm text-center">
-                    <p className="text-3xl font-black text-white mb-2 uppercase font-sans">1000+</p>
-                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.2em]">Students Empowered</p>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
           </div>
         </div>
       </section>
@@ -607,14 +557,16 @@ const Home = () => {
       </section>
 
       {/* ── 9. Testimonials ────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white relative overflow-hidden">
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-primary rounded-full blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
-          <FadeIn className="text-center mb-20">
-            <Label>Testimonials</Label>
-            <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+          <FadeIn className="text-center mb-12">
+            <div className="flex justify-center">
+              <Label>Testimonials</Label>
+            </div>
+            <h2 className="text-[clamp(1.5rem,3.5vw,2.8rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
               What our <span className="text-primary-hover">clients say</span>
             </h2>
           </FadeIn>
@@ -629,14 +581,14 @@ const Home = () => {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center"
               >
-                <div className="flex justify-center mb-10 text-primary-hover/20">
-                  <Quote size={80} strokeWidth={1} />
+                <div className="flex justify-center mb-6 text-primary-hover/20">
+                  <Quote size={56} strokeWidth={1} />
                 </div>
-                <p className="text-[clamp(1.1rem,2.5vw,1.8rem)] font-black text-slate-800 leading-tight mb-12 font-sans italic">
+                <p className="text-[clamp(1rem,2vw,1.5rem)] font-black text-slate-800 leading-tight mb-8 font-sans italic">
                   "{testimonials[currentTestimonial].quote}"
                 </p>
-                <div className="flex items-center justify-center gap-5">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-hover shadow-xl">
+                <div className="flex items-center justify-center gap-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-hover shadow-xl">
                     <img
                       src={testimonials[currentTestimonial].image}
                       alt=""
@@ -644,10 +596,10 @@ const Home = () => {
                     />
                   </div>
                   <div className="text-left">
-                    <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest">
+                    <p className="text-[13px] font-black text-slate-900 uppercase tracking-widest">
                       {testimonials[currentTestimonial].author}
                     </p>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
                       {testimonials[currentTestimonial].role}
                     </p>
                   </div>
@@ -655,7 +607,7 @@ const Home = () => {
               </motion.div>
             </AnimatePresence>
 
-            <div className="flex justify-center gap-3 mt-16">
+            <div className="flex justify-center gap-3 mt-10">
               {testimonials.map((_, i) => (
                 <button
                   key={i}

@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const CadDesign = () => {
@@ -106,35 +105,6 @@ const CadDesign = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Success Stories"
-        eyebrowHighlight="Stories"
-        heading="Client Satisfaction"
-        watermarkText="Reviews"
-        bgImage="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Precision Engineering",
-            rating: 5,
-            review:
-              "ANK converted our legacy part drawings into perfect 3D models. Their attention to detail in technical drafting ensured our manufacturers had zero issues during the production run.",
-            name: "Rajesh Kumar",
-            company: "Technical Director, Precision Components India",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Seamless Integration",
-            rating: 5,
-            review:
-              "The complex assemblies they modeled for our new automation line were flawless. The 3D kinematics perfectly matched the real-world performance. Highly recommended for CAD services.",
-            name: "Sanjay Shah",
-            company: "Operations Head, Industrial Solutions Group",
-            avatar:
-              "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Bridge the gap to industry"
         eyebrowHighlight="industry"

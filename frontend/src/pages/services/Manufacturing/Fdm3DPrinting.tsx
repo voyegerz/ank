@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const Fdm3DPrinting = () => {
@@ -14,6 +13,8 @@ const Fdm3DPrinting = () => {
   const printingImages = [
     "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -31,12 +32,7 @@ const Fdm3DPrinting = () => {
         leftTitle="Industrial Grade Output"
         leftParagraphs={[
           "We utilize high-end FDM (Fused Deposition Modeling) systems to produce parts with excellent mechanical properties. Our process is optimized for dimensional accuracy and surface quality, making our 3D printed parts suitable for both testing and end-use applications.",
-          "Whether you need a single prototype or a low-volume production run, we provide fast and cost-effective additive manufacturing solutions that reduce your development time and material waste.",
-        ]}
-        rightTitle="Material Versatility"
-        rightParagraphs={[
           "Our expertise covers a variety of industrial materials including PLA, ABS, PETG, and high-performance composites like Carbon Fiber reinforced nylon. We help you choose the right material based on your part's strength, temperature, and chemical resistance requirements.",
-          "We offer advanced post-processing options including support removal, vapor smoothing, and mechanical finishing to ensure your 3D printed parts meet your aesthetic and functional specifications.",
         ]}
         features={[
           "High-Resolution FDM Printing",
@@ -84,24 +80,25 @@ const Fdm3DPrinting = () => {
         eyebrowHighlight="ethos"
         title="Building the Future Layer by Layer"
         paragraphs={[
-          "3D printing is not just a prototyping tool; it's a fundamental shift in how we think about manufacturing complexity. We believe that additive manufacturing allows for geometric freedoms that traditional subtractive methods cannot match.",
-          "We approach FDM printing with an engineering rigor, focusing on the internal structure and molecular bonding of layers to ensure that every part we produce is ready for the rigors of the industrial environment.",
+          "3D printing is a fundamental shift in manufacturing complexity. We believe that additive manufacturing allows for geometric freedoms that traditional subtractive methods cannot match, focusing on internal structure and molecular bonding.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Layers size={32} strokeWidth={1.2} />,
+            icon: <Layers size={20} strokeWidth={1.2} />,
             label: "Layer Precision",
             description: "Ultra-fine detail settings",
             progress: 98,
           },
           {
-            icon: <Box size={32} strokeWidth={1.2} />,
+            icon: <Box size={20} strokeWidth={1.2} />,
             label: "Material Strength",
             description: "Industrial-grade polymers",
             progress: 95,
           },
           {
-            icon: <Cpu size={32} strokeWidth={1.2} />,
+            icon: <Cpu size={20} strokeWidth={1.2} />,
             label: "Smart Slicing",
             description: "Optimized internal structures",
             progress: 100,
@@ -109,25 +106,6 @@ const Fdm3DPrinting = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Additive Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="Printed"
-        bgImage="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Rapid Tooling",
-            rating: 5,
-            review:
-              "ANK produced a custom jig for our assembly line using 3D printing in less than 48 hours. The part was strong, accurate, and significantly cheaper than a machined alternative.",
-            name: "Rahul K.",
-            company: "Ops Lead, Precision Manufacturing India",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Unlock geometric freedom"
         eyebrowHighlight="freedom"

@@ -1,47 +1,316 @@
-import PageLayout from '../../components/PageLayout'
-import { motion } from 'framer-motion'
-import {  ArrowRight } from 'lucide-react'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, CheckCircle2, ArrowRight, Laptop, Globe, Share2, Database, ShieldCheck } from "lucide-react";
+import PageLayout from "../../components/PageLayout";
+import CommonHero from "../../components/CommonHero";
+import Marquee from "../../components/products/Marquee";
+import CTASection from "@/components/service/CTA";
+
+// ─── Online Demo Images (Unsplash) ───────────────────────────────────────────
+const IMG = {
+  hero: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1920",
+  websiteDev: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=900",
+  appDev: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=900",
+  seo: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=900",
+  inventory: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=900",
+  erp: "https://images.unsplash.com/photo-1504868584819-f8eec24217af?auto=format&fit=crop&q=80&w=900",
+};
+
+// ─── Product Data ────────────────────────────────────────────────────────────
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: string;
+  image: string;
+  description: string;
+  features: string[];
+  icon: React.ReactNode;
+}
+
+const products: Product[] = [
+  {
+    id: 1,
+    name: "Industrial Website Solutions",
+    category: "Development",
+    price: "On Request",
+    image: IMG.websiteDev,
+    description:
+      "We develop professional websites tailored for industrial and business requirements. Our digital solutions focus on clarity, functionality, and performance while maintaining a clean and corporate design language.",
+    features: [
+      "Responsive Architecture",
+      "Industrial Design Language",
+      "Performance Optimized",
+      "SEO Ready Structure",
+    ],
+    icon: <Globe size={16} />,
+  },
+  {
+    id: 2,
+    name: "Business Application Suites",
+    category: "Development",
+    price: "On Request",
+    image: IMG.appDev,
+    description:
+      "Custom applications tailored to your specific business workflows. These solutions help organizations strengthen their digital presence and improve internal or customer-facing workflows with robust and scalable architectures.",
+    features: [
+      "Custom Workflow Automation",
+      "Cloud Integration",
+      "Scalable Infrastructure",
+      "User-Centric Interface",
+    ],
+    icon: <Laptop size={16} />,
+  },
+  {
+    id: 3,
+    name: "Search Engine & Social Optimization",
+    category: "Marketing",
+    price: "On Request",
+    image: IMG.seo,
+    description:
+      "Comprehensive SEO and SMO services to help businesses improve online visibility and reach the right audience. Our approach focuses on sustainable growth, content alignment, and performance tracking.",
+    features: [
+      "Online Visibility Growth",
+      "Content Alignment Strategy",
+      "Performance Tracking",
+      "Brand Credibility Building",
+    ],
+    icon: <Share2 size={16} />,
+  },
+  {
+    id: 4,
+    name: "Inventory Management System",
+    category: "Management",
+    price: "On Request",
+    image: IMG.inventory,
+    description:
+      "Full-lifecycle tracking and optimization of your stock and assets. Designed for industrial environments to ensure real-time data accuracy and efficient supply chain management.",
+    features: [
+      "Real-time Stock Tracking",
+      "Automated Alerts",
+      "Asset Lifecycle Management",
+      "Supply Chain Integration",
+    ],
+    icon: <Database size={16} />,
+  },
+];
+
+const categories = ["All", "Development", "Marketing", "Management"];
 
 const SoftwareProducts = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      activeCategory === "All" || product.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const allImages = products.map((p) => p.image);
+
   return (
     <PageLayout>
-      <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10 text-white">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Software <span className="text-indigo-500">Products</span></h1>
-            <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Ready-to-deploy software solutions for industrial and business excellence.</p>
-          </motion.div>
+      <CommonHero
+        bgImage={IMG.hero}
+        title="Software Products"
+        caption="ANK Digital Solutions"
+        subtitle="Professional websites, custom applications, and digital marketing strategies tailored for industrial and business excellence."
+        watermarkNumber="02"
+      />
+
+      <section className="py-24 bg-white px-6 md:px-16 lg:px-32">
+        <div className="max-w-7xl mx-auto">
+          {/* Search and Filters */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-24">
+            <div className="relative w-full lg:w-96">
+              <Search
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                size={20}
+              />
+              <input
+                type="text"
+                placeholder="Search software products..."
+                className="w-full bg-slate-50 border-none px-12 py-4 rounded-sm text-sm font-bold text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary outline-none transition-all"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
+                    activeCategory === cat
+                      ? "bg-primary text-white shadow-lg shadow-primary/20"
+                      : "bg-slate-50 text-slate-500 hover:bg-slate-100"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Detailed Product List */}
+          <div className="space-y-32">
+            <AnimatePresence mode="popLayout">
+              {filteredProducts.map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="group"
+                >
+                  <div
+                    className={`flex flex-col md:flex-row gap-12 lg:gap-20 items-center justify-center ${
+                      index % 2 !== 0 ? "md:flex-row-reverse" : ""
+                    }`}
+                  >
+                    {/* Image Side */}
+                    <div className="w-full md:w-150 aspect-[16/9] overflow-hidden rounded-sm relative shadow-2xl bg-slate-100">
+                      <motion.img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                      />
+                      <div className="absolute top-6 right-6 z-10">
+                        <span className="bg-white/90 backdrop-blur px-4 py-2 text-xs font-black tracking-tighter text-primary shadow-xl">
+                          {product.price}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-6 left-6 z-10">
+                        <span className="inline-flex items-center gap-1.5 bg-primary/90 backdrop-blur text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest shadow-xl">
+                          {product.icon}
+                          {product.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Content Side */}
+                    <div className="w-full space-y-8">
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+                            {product.category}
+                          </span>
+                          <div className="h-px w-12 bg-primary/20" />
+                        </div>
+                        <h2 className="text-3xl lg:text-4xl font-black text-slate-900 uppercase leading-[0.9] tracking-tighter">
+                          {product.name}
+                        </h2>
+                        <p className="text-slate-500 text-sm leading-relaxed max-w-lg">
+                          {product.description}
+                        </p>
+                      </div>
+
+                      <div className="space-y-4">
+                        <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">
+                          Key Capabilities
+                        </h4>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
+                          {product.features.map((feature, i) => (
+                            <li
+                              key={i}
+                              className="flex items-center gap-2 text-xs font-bold text-slate-700"
+                            >
+                              <CheckCircle2
+                                size={14}
+                                className="text-primary"
+                              />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="pt-4">
+                        <button className="inline-flex items-center gap-4 bg-primary text-white hover:bg-slate-900 px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all group/btn">
+                          Request Consultation
+                          <ArrowRight
+                            size={14}
+                            className="transition-transform group-hover/btn:translate-x-1"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 
-      <section className="py-32 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Scalable Digital Products</h2>
-              <p className="text-slate-600 font-medium leading-relaxed mb-10">We offer a range of specialized software products designed for immediate impact.</p>
-              <div className="space-y-6">
-                <CapabilityItem title="Inventory Management" desc="Full-lifecycle tracking and optimization of your stock and assets." />
-                <CapabilityItem title="ERP Solutions" desc="Integrated business management software for streamlined operations." />
-                <CapabilityItem title="Custom Toolkits" desc="Specialized software utilities for industrial automation." />
+      {/* Compliance Strip */}
+      <section className="bg-slate-900 py-16 px-6 md:px-16 lg:px-32">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-10">
+            <div className="flex items-center gap-4 flex-shrink-0">
+              <ShieldCheck size={32} className="text-emerald-400" />
+              <div>
+                <h3 className="text-white font-black text-lg uppercase tracking-tight">
+                  Secure Development
+                </h3>
+                <p className="text-slate-400 text-xs font-medium">
+                  We follow industry-standard security protocols
+                </p>
               </div>
             </div>
-            <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100 flex flex-col justify-center">
-               <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" className="rounded-2xl mb-8 shadow-lg" alt="Software" />
-               <button className="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3">Explore Products <ArrowRight size={20} /></button>
+            <div className="h-px flex-1 bg-slate-700 hidden md:block" />
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              {[
+                "Modern Stack",
+                "Scalable Data",
+                "Cloud Ready",
+                "Enterprise Security",
+              ].map((cert) => (
+                <span
+                  key={cert}
+                  className="px-5 py-2.5 border border-slate-700 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:border-emerald-400 hover:text-emerald-400 transition-colors"
+                >
+                  {cert}
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </section>
+
+      {/* Marquee Gallery */}
+      <section className="bg-slate-50 py-24">
+        <div className="px-6 md:px-16 lg:px-32 mb-12">
+          <div className="flex items-end justify-between">
+            <div className="max-w-xl">
+              <h2 className="text-3xl font-black uppercase tracking-tighter text-slate-900 mb-4">
+                Digital{" "}
+                <span className="text-primary italic">Portfolio</span>
+              </h2>
+              <p className="text-slate-500 text-xs font-medium leading-relaxed uppercase">
+                Explore our software development projects. Every product is built for scalability and user experience.
+              </p>
+            </div>
+          </div>
+        </div>
+        <Marquee images={allImages} speed={40} />
+      </section>
+
+      <CTASection
+        eyebrow="Transform Your Business"
+        eyebrowHighlight="Transform"
+        heading="Ready to optimize your internal workflows with custom software solutions?"
+        primaryLabel="Start Your Project"
+        secondaryLabel="Technical Inquiry"
+      />
     </PageLayout>
-  )
-}
+  );
+};
 
-const CapabilityItem = ({ title, desc }: { title: string, desc: string }) => (
-  <div className="group">
-    <h4 className="text-xl font-black text-slate-900 mb-2 uppercase group-hover:text-indigo-600 transition-colors">{title}</h4>
-    <p className="text-slate-500 font-medium leading-relaxed">{desc}</p>
-  </div>
-)
-
-export default SoftwareProducts
+export default SoftwareProducts;

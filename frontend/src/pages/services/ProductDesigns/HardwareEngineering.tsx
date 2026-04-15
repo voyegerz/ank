@@ -5,7 +5,6 @@ import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const HardwareEngineering = () => {
@@ -17,6 +16,14 @@ const HardwareEngineering = () => {
     { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
     { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
   ];
+
+  const hardwareImages = [
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=2000",
+  ];
+
   return (
     <PageLayout>
       <CommonHero
@@ -27,19 +34,12 @@ const HardwareEngineering = () => {
         watermarkNumber="02"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
+        images={hardwareImages}
         caption="Uncompromising Precision"
         leftTitle="Core Capabilities"
         leftParagraphs={[
-          "PCB Architecture & Layout: Executing high-density interconnect (HDI), multi-layer, and high-speed PCB designs with rigorous attention to signal integrity and thermal dissipation.",
-          "Embedded Systems & Custom Microcontrollers: Designing bespoke compute modules tailored for extreme form-factor constraints and low-power operations, bridging the gap between logic and physical action.",
-          "Power Electronics & Motor Control: Developing efficient power supplies, inverters, and drive systems capable of managing substantial voltages with absolute precision and safety.",
-          "DFM & Production Readiness: Optimizing every component selection and trace routing to ensure seamless transition from prototyping to high-yield mass production without supply chain bottlenecks.",
-        ]}
-        rightTitle="Why Trust Our Hardware?"
-        rightParagraphs={[
-          "Hardware iteration is inherently costly and time-sensitive. We mitigate risk through an uncompromising design methodology, utilizing advanced simulation prior to manufacturing to ensure \"first-pass success.\"",
-          "Whether you are developing next-generation medical devices, aerospace avionics, or ruggedized industrial IoT gateways, our engineers deliver highly optimized, compliant, and durable electronics.",
+          "We execute high-density interconnect (HDI), multi-layer, and high-speed PCB designs with rigorous attention to signal integrity and thermal dissipation. Our engineers deliver bespoke compute modules tailored for extreme form-factor constraints and low-power operations, bridging the gap between logic and physical action.",
+          "Whether developing medical devices or industrial IoT gateways, we mitigate risk through uncompromising simulation prior to manufacturing. Every component and trace is optimized to ensure a seamless transition from prototyping to high-yield mass production without supply chain bottlenecks.",
         ]}
         features={[
           "EMI/EMC Compliance Engineering",
@@ -87,24 +87,25 @@ const HardwareEngineering = () => {
         eyebrowHighlight="mandate"
         title="Engineered for harsh realities"
         paragraphs={[
-          "Industrial hardware does not have the luxury of failing gracefully. It must endure extreme temperatures, intense vibration, and severe electromagnetic interference. Our engineering process is built around survival in these conditions.",
-          "By adhering to IPC Class 2 and Class 3 manufacturing standards, we guarantee that the hardware we design will function reliably for years, dramatically reducing your total cost of ownership and field replacement rates.",
+          "Industrial hardware must endure extreme temperatures, vibration, and electromagnetic interference. Our process guarantees that the hardware we design will function reliably for years in the most demanding conditions.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
+            icon: <Zap size={20} strokeWidth={1.2} />,
             label: "Signal Integrity",
             description: "Flawless high-speed data transmission",
             progress: 94,
           },
           {
-            icon: <Microchip size={32} strokeWidth={1.2} />,
+            icon: <Microchip size={20} strokeWidth={1.2} />,
             label: "Component Reliability",
             description: "Sourcing verified, long-lifecycle parts",
             progress: 99,
           },
           {
-            icon: <Cpu size={32} strokeWidth={1.2} />,
+            icon: <Cpu size={20} strokeWidth={1.2} />,
             label: "Thermal Efficiency",
             description: "Advanced heat dissipation modeling",
             progress: 89,
@@ -112,33 +113,6 @@ const HardwareEngineering = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Partner Success"
-        eyebrowHighlight="Success"
-        heading="Pioneering Electronics Under Pressure"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
-        testimonials={[
-          {
-            title: "Flawless First-Pass Yield",
-            rating: 5,
-            review:
-              "ANK Design managed to condense our cumbersome older architecture into a sleek, efficient 8-layer HDI board. We passed FCC certification on the first attempt—a monumental achievement for our timeline.",
-            name: "David Ross",
-            company: "VP of Engineering, Aether Telemetrics",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Built to Outlast",
-            rating: 5,
-            review:
-              "The custom motor controllers they developed for our autonomous agriculture equipment are phenomenal. They handle extreme heat and vibration without dropping a single packet of telemetry data.",
-            name: "Elena Rodriguez",
-            company: "CEO, TerraDynamics",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Bring your electronics to life"
         eyebrowHighlight="electronics"

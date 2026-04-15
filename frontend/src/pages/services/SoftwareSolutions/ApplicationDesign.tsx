@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const ApplicationDesign = () => {
@@ -14,6 +13,8 @@ const ApplicationDesign = () => {
   const appImages = [
     "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -30,13 +31,8 @@ const ApplicationDesign = () => {
         caption="Intuitive by Design"
         leftTitle="Functional User Experiences"
         leftParagraphs={[
-          "Great software is only useful if people can actually use it. We specialize in designing application interfaces that simplify complex workflows and empower users to be more productive.",
-          "From industrial dashboards to complex corporate management tools, we focus on creating clear, consistent, and responsive designs that work beautifully across all screen sizes.",
-        ]}
-        rightTitle="Human-Centered Engineering"
-        rightParagraphs={[
-          "Our design process begins with a deep understanding of your users' needs and pain points. We utilize wireframing and interactive prototyping to validate concepts before a single line of code is written.",
-          "We believe that a professional application should be as aesthetically pleasing as it is functional. Our UI/UX team ensures that your software reflects your brand's commitment to quality and innovation.",
+          "Great software is only useful if people can actually use it. We specialize in designing application interfaces that simplify complex workflows and empower users to be more productive. Our focus is on creating clear, consistent, and responsive designs that work beautifully across all screen sizes.",
+          "Our design process begins with a deep understanding of your users' needs and pain points. We believe that a professional application should be as aesthetically pleasing as it is functional, reflecting your brand's commitment to quality and innovation.",
         ]}
         features={[
           "Industrial Dashboard Design",
@@ -57,7 +53,7 @@ const ApplicationDesign = () => {
             description:
               "Interviewing stakeholders and users to define core goals, personas, and critical workflow requirements.",
           },
-          {
+            {
             number: "02",
             title: "Wireframing",
             description:
@@ -84,24 +80,25 @@ const ApplicationDesign = () => {
         eyebrowHighlight="ethos"
         title="Simplicity in Complexity"
         paragraphs={[
-          "Complexity is a reality in engineering and industrial applications, but it shouldn't be a hurdle for the user. Our mission is to take complex data and processes and present them with clarity.",
-          "We approach design as an engineering discipline—measurable, structured, and focused on solving specific problems with the most efficient possible interaction model.",
+          "Complexity is a reality in engineering and industrial applications, but it shouldn't be a hurdle for the user. We approach design as an engineering discipline—measurable, structured, and focused on clarity.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Layout size={32} strokeWidth={1.2} />,
+            icon: <Layout size={20} strokeWidth={1.2} />,
             label: "Structured Layouts",
             description: "Logical information hierarchy",
             progress: 98,
           },
           {
-            icon: <Palette size={32} strokeWidth={1.2} />,
+            icon: <Palette size={20} strokeWidth={1.2} />,
             label: "Clean Aesthetics",
             description: "Modern and professional look",
             progress: 95,
           },
           {
-            icon: <MousePointer2 size={32} strokeWidth={1.2} />,
+            icon: <MousePointer2 size={20} strokeWidth={1.2} />,
             label: "Seamless UX",
             description: "Frictionless user journeys",
             progress: 100,
@@ -109,25 +106,6 @@ const ApplicationDesign = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="User Feedback"
-        eyebrowHighlight="Feedback"
-        heading="Client Satisfaction"
-        watermarkText="Design"
-        bgImage="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Workflow Transformed",
-            rating: 5,
-            review:
-              "The new dashboard ANK designed for our inventory system reduced operator errors by 30%. It's intuitive, fast, and looks incredibly professional.",
-            name: "Amit S.",
-            company: "Ops Manager, Logistics One",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Empower your users"
         eyebrowHighlight="users"
