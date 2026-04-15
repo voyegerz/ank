@@ -13,6 +13,7 @@ import {
   Menu,
   X,
   ArrowUpRight,
+  Cpu,
 } from "lucide-react";
 
 import logo from "../assets/images/logo.svg";
@@ -36,7 +37,7 @@ const PRODUCTS = [
     path: "/products/software",
   },
   {
-    title: "Industrial Equipment",
+    title: "Industrial Automation",
     desc: "Heavy-duty hardware",
     icon: <Zap size={15} />,
     path: "/products/industrial",
@@ -52,6 +53,12 @@ const PRODUCTS = [
     desc: "Precision engineering",
     icon: <Stethoscope size={15} />,
     path: "/products/medical",
+  },
+  {
+    title: "DIY Robotics Kits",
+    desc: "Hands-on learning",
+    icon: <Cpu size={15} />,
+    path: "/products/diy-robotics-catalog",
   },
 ];
 
@@ -223,7 +230,7 @@ const OUR_SERVICES_TABS = [
       },
       {
         name: "DIY Robotics Kits",
-        path: "/products/courses",
+        path: "/products/diy-robotics-kit",
         image:
           "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800",
       },

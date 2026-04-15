@@ -13,6 +13,8 @@ const SPM = () => {
   const spmImages = [
     "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581092162384-8987c1d64718?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -30,7 +32,7 @@ const SPM = () => {
         leftTitle="Bespoke Automation"
         leftParagraphs={[
           "When standard machinery isn't enough, we design and build custom solutions tailored specifically to your production requirements. Our SPM development covers a wide range of applications including assembly, testing, and material handling.",
-          "We integrate mechanical precision with advanced control systems to create reliable, high-performance machines that integrate seamlessly into your existing factory floor. Our approach is holistic, engineering the entire system including mechanical frames, pneumatics, hydraulics, and electronic controls with a focus on safety and high uptime.",
+          "We integrate mechanical precision with advanced control systems to create reliable, high-performance machines. Our approach is holistic, engineering the entire system including mechanical frames, pneumatics, hydraulics, and electronic controls with a focus on safety and high uptime.",
         ]}
         features={[
           "Custom Concept Development",

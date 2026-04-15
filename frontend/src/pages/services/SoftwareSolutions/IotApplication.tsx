@@ -13,6 +13,8 @@ const IotApplication = () => {
   const iotImages = [
     "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1563770660941-20978e870811?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -29,13 +31,8 @@ const IotApplication = () => {
         caption="Intelligence at the Edge"
         leftTitle="Connected Industrial Assets"
         leftParagraphs={[
-          "We specialize in bridging the gap between physical sensors and digital intelligence. Our IoT platforms collect real-time data from your equipment, providing you with actionable insights through intuitive web and mobile dashboards.",
-          "From edge computing and firmware development to secure cloud data storage and advanced analytics, we provide a complete ecosystem for your connected industrial products.",
-        ]}
-        rightTitle="Remote Monitoring & Control"
-        rightParagraphs={[
-          "Our IoT solutions empower you to monitor and control your assets from anywhere in the world. We implement robust security protocols to ensure that your industrial data and control commands remain private and safe.",
-          "We focus on creating highly responsive systems that provide real-time status updates and predictive alerts, helping you reduce downtime and optimize the performance of your distributed assets.",
+          "We specialize in bridging the gap between physical sensors and digital intelligence. Our IoT platforms collect real-time data from your equipment, providing you with actionable insights through intuitive web and mobile dashboards. From edge computing and firmware development to secure cloud data storage, we provide a complete ecosystem for your connected industrial products.",
+          "Our IoT solutions empower you to monitor and control your assets from anywhere in the world. We implement robust security protocols to ensure that your industrial data remains private while providing highly responsive systems that help you reduce downtime and optimize performance.",
         ]}
         features={[
           "Edge Device & Firmware Dev",
@@ -84,23 +81,24 @@ const IotApplication = () => {
         title="Data with a Pulse"
         paragraphs={[
           "IoT is not just about connecting devices; it's about making sense of physical reality in real-time. We believe that every data point from a machine tells a story about its health, efficiency, and future.",
-          "We apply rigorous industrial engineering standards to our software development, ensuring that our IoT platforms are as robust and reliable as the physical machinery they connect to.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Signal size={32} strokeWidth={1.2} />,
+            icon: <Signal size={20} strokeWidth={1.2} />,
             label: "Seamless Connectivity",
             description: "Reliable data flow from edge",
             progress: 98,
           },
           {
-            icon: <BarChart3 size={32} strokeWidth={1.2} />,
+            icon: <BarChart3 size={20} strokeWidth={1.2} />,
             label: "Actionable Insights",
             description: "Data-driven decision making",
             progress: 95,
           },
           {
-            icon: <Cpu size={32} strokeWidth={1.2} />,
+            icon: <Cpu size={20} strokeWidth={1.2} />,
             label: "Hardware Mastery",
             description: "Deep integration with devices",
             progress: 100,

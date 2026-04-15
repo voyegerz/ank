@@ -13,6 +13,8 @@ const PcbDesign = () => {
   const pcbImages = [
     "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -29,13 +31,8 @@ const PcbDesign = () => {
         caption="Intelligence on a Board"
         leftTitle="Precision Electronics Design"
         leftParagraphs={[
-          "We specialize in creating robust PCB designs that meet your specific electrical and mechanical requirements. Our team focuses on optimal component placement, signal integrity, and thermal management to ensure long-term reliability.",
-          "From simple single-layer boards to complex multi-layer high-speed designs, we provide comprehensive schematic capture and layout services using industry-leading EDA tools.",
-        ]}
-        rightTitle="Turnkey Manufacturing"
-        rightParagraphs={[
-          "Our PCB services extend beyond design. We manage the entire fabrication and assembly process, including component procurement and quality inspection. This ensures that your electronics are built to the highest standards.",
-          "We offer both prototyping and low-to-medium volume assembly services, providing you with fully tested and functional boards that are ready for integration into your products or systems.",
+          "We specialize in creating robust PCB designs that meet your specific electrical and mechanical requirements. Our team focuses on optimal component placement, signal integrity, and thermal management to ensure long-term reliability. From simple single-layer boards to complex multi-layer high-speed designs, we provide comprehensive schematic capture and layout services using industry-leading EDA tools.",
+          "Our PCB services extend beyond design; we manage the entire fabrication and assembly process, including component procurement and quality inspection. We offer both prototyping and low-to-medium volume assembly services, providing fully tested and functional boards ready for integration.",
         ]}
         features={[
           "Custom Schematic & PCB Layout",
@@ -83,24 +80,25 @@ const PcbDesign = () => {
         eyebrowHighlight="ethos"
         title="Logic in Copper"
         paragraphs={[
-          "A well-designed PCB is a work of engineering art. It requires a perfect understanding of physics, electricity, and manufacturing limitations to create a truly reliable foundation for digital intelligence.",
-          "We approach electronics with a focus on 'Design for Excellence' (DFX), ensuring that our boards are not only functional but also cost-effective to manufacture and easy to assemble.",
+          "A well-designed PCB is a work of engineering art. We approach electronics with a focus on 'Design for Excellence' (DFX), ensuring that our boards are not only functional but also cost-effective and reliable.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Cpu size={32} strokeWidth={1.2} />,
+            icon: <Cpu size={20} strokeWidth={1.2} />,
             label: "Signal Integrity",
             description: "Clean data and power flow",
             progress: 100,
           },
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
+            icon: <Zap size={20} strokeWidth={1.2} />,
             label: "High Reliability",
             description: "Built for industrial lifecycles",
             progress: 98,
           },
           {
-            icon: <Settings size={32} strokeWidth={1.2} />,
+            icon: <Settings size={20} strokeWidth={1.2} />,
             label: "Precision Layout",
             description: "Optimized for dense footprints",
             progress: 99,

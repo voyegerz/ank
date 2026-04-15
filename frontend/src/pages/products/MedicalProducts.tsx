@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, CheckCircle2, ArrowRight, ShieldCheck, HeartPulse, Microscope, Syringe, Activity, Bone } from "lucide-react";
+import { Search, CheckCircle2, ArrowRight, Activity, Bone } from "lucide-react";
 import PageLayout from "../../components/PageLayout";
 import CommonHero from "../../components/CommonHero";
 import Marquee from "../../components/products/Marquee";
@@ -34,152 +34,42 @@ interface Product {
 const products: Product[] = [
   {
     id: 1,
-    name: "Vital-Track Pro Monitor",
-    category: "Monitoring",
-    price: "₹1,85,000",
-    image: IMG.patientMonitor,
+    name: "Lung Pulmonary Function Test Device",
+    category: "Diagnostics",
+    price: "On Request",
+    image: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&q=80&w=900",
     description:
-      "A next-generation multi-parameter patient monitoring system designed for ICU, OT, and emergency care environments. Features real-time vitals tracking with intelligent alarm prioritization and seamless EMR integration.",
+      "Designed to measure and analyze lung function parameters with accuracy and reliability. It supports diagnostic and monitoring applications in medical and clinical environments. Developed with a strong focus on functional performance, usability, and dependable operation.",
     features: [
-      "12-Lead ECG Display",
-      "SpO₂ & EtCO₂ Tracking",
-      "HL7/FHIR Data Export",
-      "Touch-Enabled 15\" Panel",
+      "Lung Function Measurement",
+      "Clinical Accuracy",
+      "Dependable Operation",
+      "Diagnostic Support",
     ],
     icon: <Activity size={16} />,
   },
   {
     id: 2,
-    name: "SteriFlex Instrument Kit",
-    category: "Surgical",
-    price: "₹4,20,000",
-    image: IMG.surgicalInstrument,
-    description:
-      "Precision-manufactured surgical instrument sets crafted from medical-grade titanium alloy. Each tool undergoes CNC machining, electro-polishing, and gamma sterilization for uncompromising surgical performance.",
-    features: [
-      "Titanium Alloy Construction",
-      "Ergonomic Grip Design",
-      "Autoclave Compatible",
-      "Laser-Etched Traceability",
-    ],
-    icon: <Syringe size={16} />,
-  },
-  {
-    id: 3,
-    name: "DiagnoScan X200",
-    category: "Diagnostics",
-    price: "₹12,50,000",
-    image: IMG.diagnosticUnit,
-    description:
-      "An advanced point-of-care diagnostic station combining AI-driven image analysis with rapid biochemical assays. Delivers lab-accurate results in under 8 minutes, transforming bedside diagnostics in rural and urban clinics alike.",
-    features: [
-      "AI-Powered Image Analysis",
-      "8-Minute Result Cycle",
-      "Cloud Sync Dashboard",
-      "Multi-Panel Test Cartridge",
-    ],
-    icon: <Microscope size={16} />,
-  },
-  {
-    id: 4,
-    name: "RehabMotion Exo-Assist",
+    name: "Flexion Therapy Device",
     category: "Rehabilitation",
-    price: "₹8,75,000",
-    image: IMG.rehabilitationDevice,
-    description:
-      "A robotic-assisted rehabilitation exoskeleton for lower-limb physiotherapy. Adaptive torque control and real-time gait analytics accelerate patient recovery while reducing therapist workload by up to 40%.",
-    features: [
-      "Adaptive Torque Control",
-      "Real-Time Gait Analytics",
-      "Lightweight Carbon Frame",
-      "Wireless Therapist Console",
-    ],
-    icon: <Bone size={16} />,
-  },
-  {
-    id: 5,
-    name: "MicroLab S-Series Analyzer",
-    category: "Laboratory",
-    price: "₹6,30,000",
-    image: IMG.labEquipment,
-    description:
-      "A fully automated benchtop hematology and biochemistry analyzer designed for mid-volume laboratories. Features self-cleaning microfluidic channels and disposable reagent cartridges for zero-contamination workflows.",
-    features: [
-      "Automated Sample Handling",
-      "Microfluidic Channels",
-      "Disposable Reagent System",
-      "LIMS Integration Ready",
-    ],
-    icon: <Microscope size={16} />,
-  },
-  {
-    id: 6,
-    name: "OrthoMatrix Implant System",
-    category: "Implants",
     price: "On Request",
-    image: IMG.implantSystem,
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=900",
     description:
-      "A comprehensive orthopedic implant range including plates, screws, and intramedullary nails manufactured from ASTM F136 Ti-6Al-4V. All components undergo rigorous fatigue testing and are CE & FDA 510(k) compliant.",
+      "Developed to support controlled therapeutic movement for rehabilitation and recovery applications. The design emphasizes smooth operation, safety, and consistent performance. This device reflects ANK’s capability to design application-specific medical engineering solutions.",
     features: [
-      "ASTM F136 Titanium",
-      "CE & FDA Compliant",
-      "3D-Printed Custom Options",
-      "Fatigue-Tested to 10⁷ Cycles",
+      "Controlled Therapeutic Movement",
+      "Smooth Operation",
+      "Rehabilitation Support",
+      "Consistent Performance",
     ],
     icon: <Bone size={16} />,
-  },
-  {
-    id: 7,
-    name: "ShieldCore Enclosure Pro",
-    category: "Enclosures",
-    price: "₹2,40,000",
-    image: IMG.medicalEnclosure,
-    description:
-      "IP67-rated custom medical enclosures engineered for sensitive electronic assemblies. Designed with EMI/RFI shielding, thermal management pathways, and tool-less panel access for field-serviceable medical devices.",
-    features: [
-      "IP67 Ingress Protection",
-      "EMI/RFI Shielding",
-      "Thermal Management Fins",
-      "Tool-Less Panel Access",
-    ],
-    icon: <ShieldCheck size={16} />,
-  },
-  {
-    id: 8,
-    name: "PulseWear Vitals Band",
-    category: "Wearables",
-    price: "₹45,000",
-    image: IMG.wearableDevice,
-    description:
-      "A clinical-grade wearable vital signs monitor for continuous remote patient monitoring. Tracks heart rate, HRV, SpO₂, skin temperature, and activity with 7-day battery life and BLE 5.3 connectivity.",
-    features: [
-      "Clinical-Grade PPG Sensor",
-      "7-Day Battery Life",
-      "BLE 5.3 + Wi-Fi",
-      "HIPAA-Compliant Cloud",
-    ],
-    icon: <HeartPulse size={16} />,
   },
 ];
 
 const categories = [
   "All",
-  "Monitoring",
-  "Surgical",
   "Diagnostics",
   "Rehabilitation",
-  "Laboratory",
-  "Implants",
-  "Enclosures",
-  "Wearables",
-];
-
-// ─── Stats Bar Data ──────────────────────────────────────────────────────────
-const stats = [
-  { value: "200+", label: "Devices Deployed" },
-  { value: "ISO 13485", label: "Certified QMS" },
-  { value: "50+", label: "Hospital Partners" },
-  { value: "99.97%", label: "Uptime Record" },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -208,29 +98,6 @@ const MedicalProducts = () => {
         subtitle="Precision-engineered medical devices, instruments, and systems built to the highest standards of safety, accuracy, and regulatory compliance."
         watermarkNumber="05"
       />
-
-      {/* ── Stats Bar ───────────────────────────────────────────────────── */}
-      <section className="bg-primary">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex flex-col items-center justify-center py-10 border-r border-white/10 last:border-r-0"
-            >
-              <span className="text-2xl md:text-3xl font-black text-white tracking-tight">
-                {stat.value}
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white/60 mt-1">
-                {stat.label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
       {/* ── Product Catalog ─────────────────────────────────────────────── */}
       <section className="py-24 bg-white px-6 md:px-16 lg:px-32">
@@ -375,48 +242,6 @@ const MedicalProducts = () => {
               </div>
             )}
           </div>
-        </div>
-      </section>
-
-      {/* ── Compliance Strip ────────────────────────────────────────────── */}
-      <section className="bg-slate-900 py-16 px-6 md:px-16 lg:px-32">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row items-center gap-10"
-          >
-            <div className="flex items-center gap-4 flex-shrink-0">
-              <ShieldCheck size={32} className="text-emerald-400" />
-              <div>
-                <h3 className="text-white font-black text-lg uppercase tracking-tight">
-                  Regulatory Compliance
-                </h3>
-                <p className="text-slate-400 text-xs font-medium">
-                  All products meet international standards
-                </p>
-              </div>
-            </div>
-            <div className="h-px flex-1 bg-slate-700 hidden md:block" />
-            <div className="flex flex-wrap items-center justify-center gap-6">
-              {[
-                "ISO 13485",
-                "CE Marked",
-                "FDA 510(k)",
-                "IEC 60601",
-                "RoHS",
-                "REACH",
-              ].map((cert) => (
-                <span
-                  key={cert}
-                  className="px-5 py-2.5 border border-slate-700 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:border-emerald-400 hover:text-emerald-400 transition-colors"
-                >
-                  {cert}
-                </span>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </section>
 

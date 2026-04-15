@@ -13,6 +13,8 @@ const ReverseEngineering = () => {
   const reImages = [
     "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581092162384-8987c1d64718?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -29,8 +31,8 @@ const ReverseEngineering = () => {
         caption="From Physical to Digital"
         leftTitle="Reconstructing Excellence"
         leftParagraphs={[
-          "Our reverse engineering process begins with high-precision scanning and measurement of the physical component, capturing every critical dimension and intricate detail.",
-          "We convert raw scan data into clean, parametric 3D CAD models that are fully editable and ready for manufacturing. This process is essential for legacy part recovery, competitive analysis, and creating digital twins of physical prototypes.",
+          "Our reverse engineering process begins with high-precision scanning and measurement of the physical component, capturing every critical dimension and intricate detail. We convert raw scan data into clean, parametric 3D CAD models that are fully editable and ready for manufacturing.",
+          "This process is essential for legacy part recovery, competitive analysis, and creating digital twins of physical prototypes. We look beyond the surface to identify functional constraints and performance requirements by blending high-tech scanning with traditional engineering knowledge.",
         ]}
         features={[
           "Parametric 3D CAD Reconstruction",

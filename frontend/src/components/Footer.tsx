@@ -26,9 +26,10 @@ const Footer = () => {
   const productLinks = [
     { name: "Decor Products", path: "/products/decor" },
     { name: "Software Products", path: "/products/software" },
-    { name: "Industrial Equipment", path: "/products/industrial" },
+    { name: "Industrial Automation", path: "/products/industrial" },
     { name: "Courses", path: "/products/courses" },
     { name: "Medical Products", path: "/products/medical" },
+    { name: "DIY Robotics Kits", path: "/products/diy-robotics-catalog" },
   ];
 
   const aboutLinks = [
@@ -154,7 +155,7 @@ const Footer = () => {
             </div>
 
             {/* Newsletter & Socials Row */}
-            <div className="xl:mt-5 xl:pt-10 lg:mt-20 lg:pt-10 border-white/5 grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+            <div className="xl:mt-5 xl:pt-10 lg:mt-10 lg:pt-10 border-white/5 grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
               {/* Newsletter */}
               <div className="max-w-md">
                 <h4 className="text-sm font-bold mb-4 uppercase tracking-widest">Stay Updated</h4>

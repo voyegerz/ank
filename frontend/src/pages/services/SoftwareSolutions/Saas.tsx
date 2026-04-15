@@ -13,6 +13,8 @@ const Saas = () => {
   const saasImages = [
     "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -29,13 +31,8 @@ const Saas = () => {
         caption="Innovation in the Cloud"
         leftTitle="Multi-Tenant Architectures"
         leftParagraphs={[
-          "We specialize in building robust SaaS architectures that support thousands of concurrent users while maintaining strict data isolation and security. Our solutions are designed to scale horizontally as your user base grows.",
-          "From subscription management and billing integration to advanced user permission systems, we handle the complex core logic that powers successful SaaS businesses.",
-        ]}
-        rightTitle="Continuous Value Delivery"
-        rightParagraphs={[
-          "Our SaaS development philosophy focuses on agility and reliability. We implement modern DevOps practices to ensure that your platform can be updated seamlessly without interrupting service for your users.",
-          "We integrate powerful analytics and reporting tools directly into your SaaS platform, providing you and your users with deep insights into usage patterns and performance metrics.",
+          "We specialize in building robust SaaS architectures that support thousands of concurrent users while maintaining strict data isolation and security. Our solutions are designed to scale horizontally as your user base grows. From subscription management and billing integration to advanced user permission systems, we handle the complex core logic that powers successful SaaS businesses.",
+          "Our SaaS development philosophy focuses on agility and reliability. We implement modern DevOps practices to ensure that your platform can be updated seamlessly without interrupting service for your users while providing deep insights into usage patterns.",
         ]}
         features={[
           "Multi-tenant Cloud Architecture",
@@ -83,24 +80,25 @@ const Saas = () => {
         eyebrowHighlight="ethos"
         title="Scale Without Limits"
         paragraphs={[
-          "A successful SaaS platform is never 'finished'—it's an evolving organism. We build platforms with a long-term vision, ensuring the foundation is strong enough to support years of growth and innovation.",
-          "Security and uptime are our non-negotiables. We treat your users' data with the highest level of respect, implementing multi-layered security protocols and redundant cloud architectures.",
+          "A successful SaaS platform is an evolving organism. We build platforms with a long-term vision, ensuring the foundation is strong enough to support years of growth and innovation with absolute data security.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Cloud size={32} strokeWidth={1.2} />,
+            icon: <Cloud size={20} strokeWidth={1.2} />,
             label: "Cloud Native",
             description: "Built for AWS, Azure, or GCP",
             progress: 100,
           },
           {
-            icon: <Layers size={32} strokeWidth={1.2} />,
+            icon: <Layers size={20} strokeWidth={1.2} />,
             label: "Scalable Logic",
             description: "Supports rapid user growth",
             progress: 98,
           },
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
+            icon: <Zap size={20} strokeWidth={1.2} />,
             label: "High Availability",
             description: "99.9% uptime architectures",
             progress: 99,

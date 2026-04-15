@@ -59,6 +59,8 @@ import IndustrialEquipment from "./pages/products/IndustrialEquipment";
 import Courses from "./pages/products/Courses";
 import MedicalProducts from "./pages/products/MedicalProducts";
 import ProjectsModelling from "./pages/products/ProjectsModelling";
+import DiyRoboticsKit from "./pages/products/DiyRoboticsKit";
+import DiyRoboticsProducts from "./pages/products/DiyRoboticsProducts";
 
 // --- About ---
 import CompanyOverview from "./pages/about/CompanyOverview";
@@ -189,6 +191,14 @@ function App() {
               <Route
                 path="/products/modelling"
                 element={<ProjectsModelling />}
+              />
+              <Route
+                path="/products/diy-robotics-kit"
+                element={<DiyRoboticsKit />}
+              />
+              <Route
+                path="/products/diy-robotics-catalog"
+                element={<DiyRoboticsProducts />}
               />
 
               {/* About Section */}

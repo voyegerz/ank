@@ -13,6 +13,8 @@ const ScadaHmi = () => {
   const scadaImages = [
     "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -27,15 +29,10 @@ const ScadaHmi = () => {
       <ServiceDetail
         images={scadaImages}
         caption="Visibility & Control"
-        leftTitle="Intuitive Visual Interfaces"
+        leftTitle="Industrial Visualization"
         leftParagraphs={[
-          "We develop Human-Machine Interfaces (HMI) that prioritize clarity and ease of use for operators. Our designs follow high-performance HMI standards to reduce cognitive load and improve reaction times during critical events.",
-          "Our SCADA solutions provide a birds-eye view of your entire process, integrating data from multiple PLCs and devices into a single, unified monitoring platform.",
-        ]}
-        rightTitle="Data-Driven Insights"
-        rightParagraphs={[
-          "Beyond simple control, our systems offer robust data logging and historical trending capabilities. This allows you to analyze production patterns, identify bottlenecks, and make informed decisions for process optimization.",
-          "We implement advanced alarming and reporting features, ensuring that your team is immediately notified of any deviations and has the data needed for thorough post-event analysis.",
+          "We develop Human-Machine Interfaces (HMI) that prioritize clarity and ease of use for operators. Our SCADA solutions provide a birds-eye view of your entire process, integrating data from multiple PLCs and devices into a single, unified monitoring platform.",
+          "Beyond simple control, our systems offer robust data logging and historical trending capabilities. We implement advanced alarming and reporting features, ensuring your team has the data needed for thorough post-event analysis.",
         ]}
         features={[
           "High-Performance HMI Design",
@@ -84,23 +81,24 @@ const ScadaHmi = () => {
         title="Clarifying Complexity"
         paragraphs={[
           "A great SCADA system shouldn't just show data; it should provide context. We focus on transforming raw industrial numbers into actionable visual information that empowers your team to operate at peak efficiency.",
-          "Our interfaces are built for the modern industrial age, supporting high-resolution displays, remote web access, and secure data integration with higher-level ERP and MES systems.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Monitor size={32} strokeWidth={1.2} />,
+            icon: <Monitor size={20} strokeWidth={1.2} />,
             label: "Superior UX",
             description: "Designed for fast operator response",
             progress: 97,
           },
           {
-            icon: <BarChart size={32} strokeWidth={1.2} />,
+            icon: <BarChart size={20} strokeWidth={1.2} />,
             label: "Deep Insights",
             description: "Comprehensive data logging",
             progress: 95,
           },
           {
-            icon: <Eye size={32} strokeWidth={1.2} />,
+            icon: <Eye size={20} strokeWidth={1.2} />,
             label: "Total Visibility",
             description: "Real-time process monitoring",
             progress: 100,

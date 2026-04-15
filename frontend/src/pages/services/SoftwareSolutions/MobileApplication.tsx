@@ -13,6 +13,8 @@ const MobileApplication = () => {
   const mobileImages = [
     "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2000",
     "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1510511459019-5dee995ad3ff?auto=format&fit=crop&q=80&w=2000",
   ];
 
   return (
@@ -29,13 +31,8 @@ const MobileApplication = () => {
         caption="Innovation in your Pocket"
         leftTitle="Native-Feel Experiences"
         leftParagraphs={[
-          "We specialize in developing mobile applications that feel fast and fluid. Our team utilizes modern frameworks like React Native and Flutter to deliver near-native performance with the efficiency of a single codebase.",
-          "From consumer-facing apps to specialized industrial mobile tools, we focus on creating intuitive touch interfaces and robust offline capabilities that ensure your app works perfectly everywhere.",
-        ]}
-        rightTitle="End-to-End Mobile Strategy"
-        rightParagraphs={[
-          "Our mobile development process covers everything from initial concept and UI/UX design to App Store submission and ongoing support. We ensure your app integrates seamlessly with your existing backend systems.",
-          "We prioritize security, performance, and battery efficiency, ensuring that your application provides a premium experience that keeps users coming back.",
+          "We specialize in developing mobile applications that feel fast and fluid. Our team utilizes modern frameworks like React Native and Flutter to deliver near-native performance with the efficiency of a single codebase. From consumer-facing apps to specialized industrial mobile tools, we focus on creating intuitive touch interfaces and robust offline capabilities.",
+          "Our mobile development process covers everything from initial concept and UI/UX design to App Store submission and ongoing support. We prioritize security, performance, and battery efficiency, ensuring that your application provides a premium experience that keeps users coming back.",
         ]}
         features={[
           "Cross-Platform App Development",
@@ -83,24 +80,25 @@ const MobileApplication = () => {
         eyebrowHighlight="ethos"
         title="Mobility Without Compromise"
         paragraphs={[
-          "Mobile applications are the most personal way to connect with your users. We believe that a great mobile experience is one that respects the user's time and attention with speed and clarity.",
-          "Whether it's an internal tool for your field engineers or a marketplace for your customers, we apply the same high standards of engineering excellence to every line of mobile code we write.",
+          "Mobile applications are the most personal way to connect with your users. We believe that a great mobile experience is one that respects the user's time and attention with speed, clarity, and uncompromising quality.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Smartphone size={32} strokeWidth={1.2} />,
+            icon: <Smartphone size={20} strokeWidth={1.2} />,
             label: "Pocket Power",
             description: "High-performance native feel",
             progress: 99,
           },
           {
-            icon: <Tablet size={32} strokeWidth={1.2} />,
+            icon: <Tablet size={20} strokeWidth={1.2} />,
             label: "Multi-Device",
             description: "Optimized for all screens",
             progress: 97,
           },
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
+            icon: <Zap size={20} strokeWidth={1.2} />,
             label: "Fast Response",
             description: "Instant loading & interactions",
             progress: 100,

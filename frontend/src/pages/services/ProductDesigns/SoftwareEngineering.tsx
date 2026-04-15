@@ -16,6 +16,14 @@ const SoftwareEngineering = () => {
     { name: "LogicGate", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
     { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
   ];
+
+  const softwareImages = [
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
+  ];
+
   return (
     <PageLayout>
       <CommonHero
@@ -26,19 +34,12 @@ const SoftwareEngineering = () => {
         watermarkNumber="01"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000"
+        images={softwareImages}
         caption="Digital Transformation"
         leftTitle="Core Capabilities"
         leftParagraphs={[
-          "Embedded Software & Firmware: Developing low-level firmware and embedded control applications for complex hardware systems, ensuring real-time responsiveness and reliability.",
-          "Industrial IoT & Connectivity: Architecting seamless communication networks between physical assets and cloud infrastructure using modern protocols like MQTT, OPC UA, and Edge Computing.",
-          "Enterprise Application Development: Engineering scalable web and desktop applications that provide intuitive data visualization, control interfaces, and operational oversight.",
-          "Data Analytics & Machine Learning: Harnessing operational data through advanced algorithms to enable predictive maintenance and intelligent automation.",
-        ]}
-        rightTitle="Why Partner With Us?"
-        rightParagraphs={[
-          "Our software engineering division operates at the intersection of bits and atoms. We don't just write code; we develop mission-critical software that drives physical machinery, secures industrial networks, and interprets high-frequency sensor data.",
-          "By employing Agile methodologies complemented by rigorous compliance and security testing, we ensure that every software deployment is resilient against both system failures and cyber threats."
+          "Our software engineering division operates at the intersection of bits and atoms. We develop mission-critical embedded firmware, industrial IoT platforms, and scalable enterprise applications that drive physical machinery and interpret high-frequency sensor data with absolute reliability.",
+          "By employing Agile methodologies complemented by rigorous compliance and security testing, we ensure that every deployment—from real-time OS components to cloud-native architectures—is resilient against both system failures and cyber threats.",
         ]}
         features={[
           "Real-Time OS (RTOS) Expertise",
@@ -86,26 +87,27 @@ const SoftwareEngineering = () => {
         eyebrowHighlight="execution"
         title="Predictable Quality in Every Release"
         paragraphs={[
-          "Software in the industrial sector must perform flawlessly under the most demanding conditions. We adhere strictly to industry standards such as ISO/IEC 27001 for information security and IEC 62443 for industrial control system security.",
-          "Our quality assurance process guarantees that from the lowest-level firmware to the highest-level graphical interface, our solutions are highly performant, observable, and deeply integrated into your strategic goals.",
+          "Software in the industrial sector must perform flawlessly under the most demanding conditions. We adhere strictly to industry standards ensuring that our solutions are highly performant, observable, and deeply integrated.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Code2 size={32} strokeWidth={1.2} />,
+            icon: <Code2 size={20} strokeWidth={1.2} />,
             label: "Clean Code",
             description: "Maintainable, peer-reviewed codebases",
             progress: 95,
           },
           {
-            icon: <GitBranch size={32} strokeWidth={1.2} />,
+            icon: <GitBranch size={20} strokeWidth={1.2} />,
             label: "CI/CD Pipeline",
-            description: "Automated testing and continuous delivery",
+            description: "Automated testing and delivery",
             progress: 88,
           },
           {
-            icon: <ShieldCheck size={32} strokeWidth={1.2} />,
+            icon: <ShieldCheck size={20} strokeWidth={1.2} />,
             label: "Cybersecurity",
-            description: "Zero-trust models and vulnerability testing",
+            description: "Zero-trust models and testing",
             progress: 98,
           },
         ]}

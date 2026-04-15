@@ -17,6 +17,13 @@ const MaintenanceTroubleshooting = () => {
     { name: "NetSys", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Samsung_wordmark.svg" },
   ];
 
+  const maintenanceImages = [
+    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=2000",
+  ];
+
   return (
     <PageLayout>
       <CommonHero
@@ -27,19 +34,12 @@ const MaintenanceTroubleshooting = () => {
         watermarkNumber="13"
       />
       <ServiceDetail
-        image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
+        images={maintenanceImages}
         caption="Mission-Critical Reliability"
         leftTitle="Support Capabilities"
         leftParagraphs={[
-          "Predictive Maintenance Plans: Utilizing sensor data and ML models to identify potential system failures before they occur, allowing for scheduled, non-disruptive servicing.",
-          "24/7 Remote Troubleshooting: Providing instant technical oversight and diagnosis via secure remote access, resolving software and connectivity issues in record time.",
-          "On-Site Hardware Repair: Our specialized engineering teams provide rapid on-site intervention for complex mechanical and electronic system failures.",
-          "Lifecycle System Audits: Periodic deep-dive evaluations of your hardware and software stacks to ensure they remain compliant and perform at peak efficiency.",
-        ]}
-        rightTitle="Why Our Support?"
-        rightParagraphs={[
-          "In modern industry, downtime is not just a nuisance—it's a critical financial loss. Our maintenance philosophy is centered on prevention. We don't just fix problems; we engineer the systems that avoid them.",
-          "With ANK as your technical partner, you gain access to a dedicated support infrastructure that understands the unique pressures of your operational environment and responds with precision and speed.",
+          "Utilizing sensor data and diagnostic models to identify potential system failures before they occur, allowing for scheduled, non-disruptive servicing. We provide instant technical oversight via secure remote access, resolving software and connectivity issues in record time.",
+          "Our specialized engineering teams provide rapid on-site intervention for complex mechanical and electronic system failures. Periodic deep-dive evaluations ensure your hardware and software stacks remain compliant and perform at peak efficiency, avoiding critical financial loss from downtime.",
         ]}
         features={[
           "Guaranteed SLA Response",
@@ -87,26 +87,27 @@ const MaintenanceTroubleshooting = () => {
         eyebrowHighlight="support"
         title="Predictable System Health"
         paragraphs={[
-          "Maintenance should never be an afterthought. Our philosophy is to turn technical support from a reactive cost into a proactive strategic advantage. We believe in visibility, transparency, and absolute technical honesty.",
-          "By combining real-time data monitoring with a deep understanding of industrial mechanics, we provide a layer of security and peace of mind that allows your team to focus on growth while we handle the complexity of the machine.",
+          "Maintenance should never be an afterthought. Our philosophy is to turn technical support from a reactive cost into a proactive strategic advantage, providing peace of mind and operational security through absolute technical honesty.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Settings size={32} strokeWidth={1.2} />,
+            icon: <Settings size={20} strokeWidth={1.2} />,
             label: "Predictive Control",
             description: "Identifying issues before they disrupt",
             progress: 98,
           },
           {
-            icon: <ShieldCheck size={32} strokeWidth={1.2} />,
+            icon: <ShieldCheck size={20} strokeWidth={1.2} />,
             label: "Verified Compliance",
             description: "Ensuring safety and industry standards",
             progress: 99,
           },
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
+            icon: <Zap size={20} strokeWidth={1.2} />,
             label: "Rapid Recovery",
-            description: "Industry-leading MTTR (Mean Time To Repair)",
+            description: "Industry-leading MTTR",
             progress: 94,
           },
         ]}
