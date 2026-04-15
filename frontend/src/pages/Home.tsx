@@ -665,8 +665,8 @@ const Home = () => {
             </p>
             <div className="flex gap-12 mb-14">
               {[
-                ["12+", "Positions"],
-                ["4", "Units"],
+                ["8+", "Years Experience"],
+                ["15+", "Years of Excellence"],
               ].map(([v, l]) => (
                 <div key={l}>
                   <p className="text-4xl font-black text-white mb-2 font-sans">
