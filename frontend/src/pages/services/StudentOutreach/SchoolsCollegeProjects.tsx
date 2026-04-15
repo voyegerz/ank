@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const SchoolsCollegeProjects = () => {
@@ -109,25 +108,6 @@ const SchoolsCollegeProjects = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Student Success"
-        eyebrowHighlight="Success"
-        heading="Academic Feedback"
-        watermarkText="Learn"
-        bgImage="https://images.unsplash.com/photo-1523240715630-9918c13bc1ad?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Competition Winners",
-            rating: 5,
-            review:
-              "The technical mentorship from ANK was instrumental in our team winning the state-level robotics competition. Their insights into motor control were a game-changer.",
-            name: "Aditya K.",
-            company: "Student Team Lead, Tech-Vidyapeeth",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Start your engineering journey"
         eyebrowHighlight="journey"

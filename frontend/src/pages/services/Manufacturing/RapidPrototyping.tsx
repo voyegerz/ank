@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const RapidPrototyping = () => {
@@ -109,25 +108,6 @@ const RapidPrototyping = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Prototype Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="Reality"
-        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Critical Insights",
-            rating: 5,
-            review:
-              "The functional prototype ANK delivered allowed us to identify a major assembly issue before we committed to expensive tooling. They literally saved our project timeline.",
-            name: "Karan P.",
-            company: "Product Manager, TechFlow Innovations",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Bring your vision to life"
         eyebrowHighlight="vision"

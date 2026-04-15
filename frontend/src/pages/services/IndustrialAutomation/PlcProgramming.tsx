@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const PlcProgramming = () => {
@@ -30,13 +29,8 @@ const PlcProgramming = () => {
         caption="Intelligence at the Edge"
         leftTitle="Robust Control Logic"
         leftParagraphs={[
-          "We specialize in developing clean, well-documented, and highly reliable PLC code that forms the brain of your industrial systems. Our approach prioritizes safety, speed, and ease of future modifications.",
-          "Whether it's a simple machine or a complex multi-stage production line, we design logic that handles real-world variability and ensures continuous uptime.",
-        ]}
-        rightTitle="Platform Versatility"
-        rightParagraphs={[
-          "Our engineering team is proficient across all major PLC brands and communication protocols. We bridge the gap between different hardware environments to create a unified control strategy.",
-          "We don't just write code; we optimize system performance by fine-tuning PID loops, motion control profiles, and interlocking sequences for maximum throughput.",
+          "We specialize in developing clean, well-documented, and highly reliable PLC code that forms the brain of your industrial systems. Our approach prioritizes safety, speed, and ease of future modifications, ensuring continuous uptime for both simple machines and complex multi-stage production lines.",
+          "Our engineering team is proficient across all major PLC brands and communication protocols. We optimize system performance by fine-tuning PID loops, motion control profiles, and interlocking sequences to create a unified and efficient control strategy.",
         ]}
         features={[
           "Multi-Platform Development",
@@ -84,24 +78,25 @@ const PlcProgramming = () => {
         eyebrowHighlight="ethos"
         title="Logic that never fails"
         paragraphs={[
-          "Industrial automation depends on logic that can handle thousands of cycles without a single glitch. We approach PLC programming with a rigorous emphasis on state-machine design and fail-safe error handling.",
-          "Our code is built to be understood by your maintenance teams, with clear comments and logical structuring that reduces the cost of long-term ownership and troubleshooting.",
+          "Industrial automation depends on logic that can handle thousands of cycles without a glitch. We emphasize state-machine design and fail-safe error handling, building code that is easily understood by maintenance teams to reduce long-term ownership costs.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Terminal size={32} strokeWidth={1.2} />,
+            icon: <Terminal size={20} strokeWidth={1.2} />,
             label: "Clean Architecture",
             description: "Modular and scalable code",
             progress: 99,
           },
           {
-            icon: <Zap size={32} strokeWidth={1.2} />,
+            icon: <Zap size={20} strokeWidth={1.2} />,
             label: "High Performance",
             description: "Optimized cycle times",
             progress: 96,
           },
           {
-            icon: <Cpu size={32} strokeWidth={1.2} />,
+            icon: <Cpu size={20} strokeWidth={1.2} />,
             label: "Seamless Integration",
             description: "Works across all hardware",
             progress: 100,
@@ -109,25 +104,6 @@ const PlcProgramming = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Proven Control"
-        eyebrowHighlight="Control"
-        heading="Client Feedback"
-        watermarkText="Logic"
-        bgImage="https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Flawless Migration",
-            rating: 5,
-            review:
-              "ANK helped us migrate our old S5 system to modern TIA Portal logic. The transition was seamless, and the new code is much easier for our team to maintain.",
-            name: "Suresh P.",
-            company: "Maintenance Manager, Global FMCG Brand",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Intelligent Automation"
         eyebrowHighlight="Automation"

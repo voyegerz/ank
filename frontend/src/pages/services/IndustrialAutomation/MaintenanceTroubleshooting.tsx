@@ -5,7 +5,6 @@ import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const MaintenanceTroubleshooting = () => {
@@ -113,33 +112,6 @@ const MaintenanceTroubleshooting = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Partner Success"
-        eyebrowHighlight="Success"
-        heading="Keeping High-Value Assets Online and Efficient"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
-        testimonials={[
-          {
-            title: "Critical Support in Crisis",
-            rating: 5,
-            review:
-              "An unplanned system crash threatened our entire quarterly output. ANK's remote engineering team was on the line within 10 minutes and resolved the issue in under an hour. Breathtaking response.",
-            name: "Richard Vance",
-            company: "Plant Manager, Precision Castings",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Proactive Peace of Mind",
-            rating: 5,
-            review:
-              "Since implementing their predictive maintenance audit, our unplanned downtime has dropped by 80%. They solve problems we didn't even know we had.",
-            name: "Elena Rodriguez",
-            company: "CEO, TerraDynamics",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Protect your operations"
         eyebrowHighlight="Protect"

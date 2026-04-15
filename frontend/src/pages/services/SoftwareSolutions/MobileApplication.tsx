@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const MobileApplication = () => {
@@ -109,25 +108,6 @@ const MobileApplication = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Mobile Impact"
-        eyebrowHighlight="Impact"
-        heading="Client Feedback"
-        watermarkText="Mobile"
-        bgImage="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Field Efficiency",
-            rating: 5,
-            review:
-              "ANK developed a custom mobile inspection tool for our site engineers. It's incredibly stable even in low-connectivity areas, and the offline sync works like a charm.",
-            name: "Vikram S.",
-            company: "Tech Lead, Global Infrastructure Corp.",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Connect with users anywhere"
         eyebrowHighlight="anywhere"

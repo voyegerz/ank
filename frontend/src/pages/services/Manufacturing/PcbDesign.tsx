@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const PcbDesign = () => {
@@ -109,25 +108,6 @@ const PcbDesign = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Electronic Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="PCBA"
-        bgImage="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Miniaturization Mastery",
-            rating: 5,
-            review:
-              "ANK helped us shrink our sensor board by 50% without compromising on signal quality. Their expertise in 4-layer PCB layout was exactly what we needed for our IoT project.",
-            name: "Dr. Arun V.",
-            company: "CTO, SmartSense Systems",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Empower your product"
         eyebrowHighlight="product"

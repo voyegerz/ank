@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const InventoryManagement = () => {
@@ -109,25 +108,6 @@ const InventoryManagement = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Logistics Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="Stock"
-        bgImage="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Procurement Mastery",
-            rating: 5,
-            review:
-              "ANK's custom inventory system completely eliminated our 'out-of-stock' issues. The automated reordering logic has saved us countless hours of manual procurement planning.",
-            name: "Deepak R.",
-            company: "Director, Radiant Logistics",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Streamline your supply chain"
         eyebrowHighlight="supply"

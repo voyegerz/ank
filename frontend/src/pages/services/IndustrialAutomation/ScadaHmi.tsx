@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const ScadaHmi = () => {
@@ -109,25 +108,6 @@ const ScadaHmi = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Visionary Control"
-        eyebrowHighlight="Control"
-        heading="Client Feedback"
-        watermarkText="Monitoring"
-        bgImage="https://images.unsplash.com/photo-1551288049-bbbda536ad0a?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Data Empowerment",
-            rating: 5,
-            review:
-              "ANK's SCADA implementation transformed how we manage our plant. We now have real-time visibility into every machine's status, and the historical data has been invaluable for our OEE improvements.",
-            name: "Rajesh Khanna",
-            company: "Plant Director, Surya Chemicals",
-            avatar:
-              "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Visualize your success"
         eyebrowHighlight="success"

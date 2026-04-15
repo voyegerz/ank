@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const ApplicationDesign = () => {
@@ -109,25 +108,6 @@ const ApplicationDesign = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="User Feedback"
-        eyebrowHighlight="Feedback"
-        heading="Client Satisfaction"
-        watermarkText="Design"
-        bgImage="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Workflow Transformed",
-            rating: 5,
-            review:
-              "The new dashboard ANK designed for our inventory system reduced operator errors by 30%. It's intuitive, fast, and looks incredibly professional.",
-            name: "Amit S.",
-            company: "Ops Manager, Logistics One",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Empower your users"
         eyebrowHighlight="users"

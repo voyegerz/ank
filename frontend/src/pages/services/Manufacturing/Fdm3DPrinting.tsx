@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const Fdm3DPrinting = () => {
@@ -109,25 +108,6 @@ const Fdm3DPrinting = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Additive Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="Printed"
-        bgImage="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Rapid Tooling",
-            rating: 5,
-            review:
-              "ANK produced a custom jig for our assembly line using 3D printing in less than 48 hours. The part was strong, accurate, and significantly cheaper than a machined alternative.",
-            name: "Rahul K.",
-            company: "Ops Lead, Precision Manufacturing India",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Unlock geometric freedom"
         eyebrowHighlight="freedom"

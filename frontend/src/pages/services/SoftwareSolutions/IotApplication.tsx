@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const IotApplication = () => {
@@ -109,25 +108,6 @@ const IotApplication = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Connected Success"
-        eyebrowHighlight="Success"
-        heading="Client Feedback"
-        watermarkText="IoT"
-        bgImage="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Real-time Visibility",
-            rating: 5,
-            review:
-              "ANK's IoT platform gave us instant visibility into our distributed solar pump network. We can now detect failures remotely, saving us thousands in site visits.",
-            name: "Sunil G.",
-            company: "Founder, GreenEnergy Systems",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Digitize your physical world"
         eyebrowHighlight="world"

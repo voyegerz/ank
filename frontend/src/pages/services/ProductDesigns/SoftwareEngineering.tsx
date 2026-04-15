@@ -5,7 +5,6 @@ import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const SoftwareEngineering = () => {
@@ -112,33 +111,6 @@ const SoftwareEngineering = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Client Perspectives"
-        eyebrowHighlight="Perspectives"
-        heading="Transforming Operations Through Code"
-        watermarkText="Reviews"
-        bgImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000"
-        testimonials={[
-          {
-            title: "Unprecedented Reliability",
-            rating: 5,
-            review:
-              "ANK Design & Automation delivered a custom SCADA integration that fundamentally changed how we monitor our production floor. The software is intuitive, blazing fast, and hasn't suffered a single minute of downtime.",
-            name: "Michael Chen",
-            company: "Director of Operations, Nexus Manufacturing",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "A True Technical Partner",
-            rating: 5,
-            review:
-              "Their grasp of bridging complex hardware protocols with modern cloud architectures is unparalleled. They delivered a predictive maintenance ML model that saved us millions in unplanned downtime.",
-            name: "Sarah Jenkins",
-            company: "CTO, Horizon Energy",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Accelerate your digital journey"
         eyebrowHighlight="Accelerate"

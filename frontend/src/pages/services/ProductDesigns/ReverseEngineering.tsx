@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const ReverseEngineering = () => {
@@ -31,12 +30,7 @@ const ReverseEngineering = () => {
         leftTitle="Reconstructing Excellence"
         leftParagraphs={[
           "Our reverse engineering process begins with high-precision scanning and measurement of the physical component, capturing every critical dimension and intricate detail.",
-          "We convert raw scan data (point clouds/STL) into clean, parametric 3D CAD models that are fully editable and ready for manufacturing or further engineering modifications.",
-        ]}
-        rightTitle="Legacy Part Recovery"
-        rightParagraphs={[
-          "Don't let missing drawings stop your production. We specialize in creating digital documentation for legacy parts where the original designs have been lost or never existed.",
-          "We analyze material properties and wear patterns to not just replicate the part, but potentially improve its design for modern manufacturing processes.",
+          "We convert raw scan data into clean, parametric 3D CAD models that are fully editable and ready for manufacturing. This process is essential for legacy part recovery, competitive analysis, and creating digital twins of physical prototypes.",
         ]}
         features={[
           "Parametric 3D CAD Reconstruction",
@@ -84,24 +78,25 @@ const ReverseEngineering = () => {
         eyebrowHighlight="ethos"
         title="Restoring the Lost"
         paragraphs={[
-          "Reverse engineering is more than just copying; it's about understanding the original designer's intent. We look beyond the surface to identify functional constraints and performance requirements.",
-          "By blending high-tech scanning with traditional engineering knowledge, we bridge the gap between old-world physical components and modern digital manufacturing workflows.",
+          "Reverse engineering is more than just copying; it's about understanding the original designer's intent. We look beyond the surface to identify functional constraints and performance requirements by blending high-tech scanning with traditional engineering knowledge.",
         ]}
+        imageSize="xs"
+        iconSize={80}
         items={[
           {
-            icon: <Scan size={32} strokeWidth={1.2} />,
+            icon: <Scan size={20} strokeWidth={1.2} />,
             label: "High Resolution",
             description: "Capturing the finest details",
             progress: 99,
           },
           {
-            icon: <Microscope size={32} strokeWidth={1.2} />,
+            icon: <Microscope size={20} strokeWidth={1.2} />,
             label: "Deep Analysis",
             description: "Understanding design intent",
             progress: 95,
           },
           {
-            icon: <RotateCw size={32} strokeWidth={1.2} />,
+            icon: <RotateCw size={20} strokeWidth={1.2} />,
             label: "Parametric Output",
             description: "Fully editable digital models",
             progress: 100,
@@ -109,25 +104,6 @@ const ReverseEngineering = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Precision Replicas"
-        eyebrowHighlight="Replicas"
-        heading="Client Feedback"
-        watermarkText="Legacy"
-        bgImage="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Legacy Recovery",
-            rating: 5,
-            review:
-              "We had a 20-year-old machine part with no drawings. ANK reverse-engineered it perfectly, and the new part fits and performs better than the original.",
-            name: "Anil Deshmukh",
-            company: "Plant Manager, Heritage Textile Mills",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Bring the past to life"
         eyebrowHighlight="life"

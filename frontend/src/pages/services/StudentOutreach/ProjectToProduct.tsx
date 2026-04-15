@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const ProjectToProduct = () => {
@@ -109,25 +108,6 @@ const ProjectToProduct = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Innovator Success"
-        eyebrowHighlight="Success"
-        heading="Program Feedback"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Dream to Reality",
-            rating: 5,
-            review:
-              "The P2P program helped us turn our final year IoT project into a commercial smart energy meter. ANK's help with PCB manufacturing and plastic casing was invaluable.",
-            name: "Sandeep T.",
-            company: "Founder, EnerGrid Solutions",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Turn your project into a product"
         eyebrowHighlight="product"

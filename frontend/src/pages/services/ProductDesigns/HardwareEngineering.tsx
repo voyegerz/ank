@@ -5,7 +5,6 @@ import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import ClientMarquee from "@/components/service/ClientsMarque";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const HardwareEngineering = () => {
@@ -112,33 +111,6 @@ const HardwareEngineering = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Partner Success"
-        eyebrowHighlight="Success"
-        heading="Pioneering Electronics Under Pressure"
-        watermarkText="Impact"
-        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
-        testimonials={[
-          {
-            title: "Flawless First-Pass Yield",
-            rating: 5,
-            review:
-              "ANK Design managed to condense our cumbersome older architecture into a sleek, efficient 8-layer HDI board. We passed FCC certification on the first attempt—a monumental achievement for our timeline.",
-            name: "David Ross",
-            company: "VP of Engineering, Aether Telemetrics",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
-          },
-          {
-            title: "Built to Outlast",
-            rating: 5,
-            review:
-              "The custom motor controllers they developed for our autonomous agriculture equipment are phenomenal. They handle extreme heat and vibration without dropping a single packet of telemetry data.",
-            name: "Elena Rodriguez",
-            company: "CEO, TerraDynamics",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Bring your electronics to life"
         eyebrowHighlight="electronics"

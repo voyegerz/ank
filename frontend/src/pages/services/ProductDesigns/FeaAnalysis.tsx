@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const FeaAnalysis = () => {
@@ -104,25 +103,6 @@ const FeaAnalysis = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Proven Results"
-        eyebrowHighlight="Results"
-        heading="Client Trust"
-        watermarkText="Verified"
-        bgImage="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Structural Validation",
-            rating: 5,
-            review:
-              "ANK's FEA reports were instrumental in getting our heavy machinery certified. Their simulation matched our physical drop test results with remarkable accuracy.",
-            name: "Vikram Mehta",
-            company: "Engineering Head, Mahavir Heavy Industries",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Simulate the future"
         eyebrowHighlight="future"

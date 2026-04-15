@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const WebsiteDesign = () => {
@@ -109,25 +108,6 @@ const WebsiteDesign = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Digital Impact"
-        eyebrowHighlight="Impact"
-        heading="Client Feedback"
-        watermarkText="Digital"
-        bgImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Corporate Identity",
-            rating: 5,
-            review:
-              "ANK's team redesigned our corporate site and the results were incredible. Our page speed tripled, and we saw an immediate increase in high-quality leads from our contact form.",
-            name: "Siddharth J.",
-            company: "Marketing Director, Precision Tools Ltd.",
-            avatar:
-              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Elevate your digital presence"
         eyebrowHighlight="presence"

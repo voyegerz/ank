@@ -5,7 +5,6 @@ import CommonHero from "../../../components/CommonHero";
 import ServiceDetail from "../../../components/service/ServiceDetail";
 import ServiceProcess from "@/components/service/ServiceProcess";
 import PhilosophySection from "@/components/service/Philosophy";
-import Testimonials from "@/components/service/Testinomials";
 import CTASection from "@/components/service/CTA";
 
 const Workshops = () => {
@@ -109,25 +108,6 @@ const Workshops = () => {
         ]}
       />
 
-      <Testimonials
-        eyebrow="Learner Success"
-        eyebrowHighlight="Success"
-        heading="Workshop Feedback"
-        watermarkText="Skills"
-        bgImage="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000&auto=format&fit=crop"
-        testimonials={[
-          {
-            title: "Career Transformer",
-            rating: 5,
-            review:
-              "The PLC workshop at ANK was the highlight of my semester. I learned more in three days than I did in a whole year of theory. It helped me land my first job in automation!",
-            name: "Megha R.",
-            company: "Junior Engineer, Industrial Automations",
-            avatar:
-              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-          },
-        ]}
-      />
       <CTASection
         eyebrow="Ignite your technical potential"
         eyebrowHighlight="potential"
