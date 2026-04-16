@@ -36,7 +36,7 @@ const Contact = () => {
                     <ContactInfo 
                       icon={<Phone size={20} />} 
                       title="Phone Lines" 
-                      detail="+91 6354230924 / 9409588709" 
+                      detail="+91 6354230924  +91 9409588709" 
                     />
                     <ContactInfo 
                       icon={<MapPin size={20} />} 
@@ -112,8 +112,8 @@ const ContactInfo = ({ icon, title, detail }: { icon: React.ReactNode, title: st
       {icon}
     </div>
     <div>
-      <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">{title}</h4>
-      <p className="text-sm font-black text-slate-900 leading-relaxed uppercase tracking-tight">{detail}</p>
+      <h4 className="text-[10px] font-black text-slate-400  tracking-widest mb-2">{title}</h4>
+      <p className="text-sm font-black text-slate-900 leading-relaxed  tracking-tight max-w-32">{detail}</p>
     </div>
   </div>
 )

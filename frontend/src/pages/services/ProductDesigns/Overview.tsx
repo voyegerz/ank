@@ -32,20 +32,6 @@ const SUB_SERVICES = [
     desc: "Custom machinery solutions designed to automate unique industrial tasks and enhance productivity.",
     icon: <Cpu size={24} />,
     image: "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    title: "Hardware Engineering",
-    path: "/services/hardware-engineering",
-    desc: "Comprehensive electronic hardware design and system integration for robust industrial applications.",
-    icon: <Settings2 size={24} />,
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    title: "Software Engineering",
-    path: "/services/software-engineering",
-    desc: "Embedded systems and specialized software development to power your product's intelligence.",
-    icon: <ArrowRight size={24} />,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
   }
 ];
 

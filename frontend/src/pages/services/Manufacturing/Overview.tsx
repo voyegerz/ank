@@ -25,13 +25,6 @@ const SUB_SERVICES = [
     desc: "End-to-end electronics solutions from schematic capture to fully assembled and tested boards.",
     icon: <Cpu size={24} />,
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    title: "Product Assembly",
-    path: "/services/product-assembly",
-    desc: "Complete electro-mechanical assembly services ensuring high quality and precision for your end products.",
-    icon: <Hammer size={24} />,
-    image: "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=800"
   }
 ];
 

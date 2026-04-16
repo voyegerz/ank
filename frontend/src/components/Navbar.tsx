@@ -230,7 +230,7 @@ const OUR_SERVICES_TABS = [
       },
       {
         name: "DIY Robotics Kits",
-        path: "/products/diy-robotics-kit",
+        path: "/services/student-outreach/diy-robotics-kit",
         image:
           "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800",
       },

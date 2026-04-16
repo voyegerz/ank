@@ -71,7 +71,7 @@ const SUB_SERVICES = [
   },
   {
     title: "DIY Robotics Kits",
-    path: "/products/diy-robotics-kit",
+    path: "/services/student-outreach/diy-robotics-kit",
     desc: "Specially designed robotics and electronics kits to help students learn by building real-world applications.",
     icon: <Cpu size={24} />,
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800"

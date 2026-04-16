@@ -25,13 +25,6 @@ const SUB_SERVICES = [
     desc: "Advanced industrial visualization and control systems for real-time monitoring and data management.",
     icon: <Monitor size={24} />,
     image: "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    title: "Maintenance & Troubleshooting",
-    path: "/services/maintenance-troubleshooting",
-    desc: "Expert support for existing automation systems, ensuring high uptime and operational reliability.",
-    icon: <Wrench size={24} />,
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
   }
 ];
 

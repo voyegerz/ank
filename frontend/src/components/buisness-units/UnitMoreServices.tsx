@@ -18,7 +18,7 @@ const defaultServices: Service[] = [
     image:
       "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800",
     icon: <Settings size={24} />,
-    link: "/services/product-assembly",
+    link: "/services/rapid-prototyping",
   },
   {
     title: "Precision & quality",

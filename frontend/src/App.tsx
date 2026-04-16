@@ -16,17 +16,14 @@ import OurServices from "./pages/services/OurServices";
 
 // Product Designs
 import ProductDesignsOverview from "./pages/services/ProductDesigns/Overview";
-import HardwareEngineering from "./pages/services/ProductDesigns/HardwareEngineering";
 import CadDesign from "./pages/services/ProductDesigns/CadDesign";
 import ReverseEngineering from "./pages/services/ProductDesigns/ReverseEngineering";
 import SPM from "./pages/services/ProductDesigns/SPM";
-import SoftwareEngineering from "./pages/services/ProductDesigns/SoftwareEngineering";
 import FeaAnalysis from "./pages/services/ProductDesigns/FeaAnalysis";
 
 // Manufacturing
 import ManufacturingOverview from "./pages/services/Manufacturing/Overview";
 import PcbDesign from "./pages/services/Manufacturing/PcbDesign";
-import ProductAssembly from "./pages/services/Manufacturing/ProductAssembly";
 import RapidPrototyping from "./pages/services/Manufacturing/RapidPrototyping";
 import Fdm3DPrinting from "./pages/services/Manufacturing/Fdm3DPrinting";
 
@@ -44,7 +41,6 @@ import IndustrialAutomationOverview from "./pages/services/IndustrialAutomation/
 import ScadaHmi from "./pages/services/IndustrialAutomation/ScadaHmi";
 import PlcProgramming from "./pages/services/IndustrialAutomation/PlcProgramming";
 import PanelAutomation from "./pages/services/IndustrialAutomation/PanelAutomation";
-import MaintenanceTroubleshooting from "./pages/services/IndustrialAutomation/MaintenanceTroubleshooting";
 
 // Student Outreach
 import StudentOutreachOverview from "./pages/services/StudentOutreach/Overview";
@@ -102,14 +98,6 @@ function App() {
 
               {/* Services */}
               <Route
-                path="/services/software-engineering"
-                element={<SoftwareEngineering />}
-              />
-              <Route
-                path="/services/hardware-engineering"
-                element={<HardwareEngineering />}
-              />
-              <Route
                 path="/services/cad-design"
                 element={<CadDesign />}
               />
@@ -120,10 +108,6 @@ function App() {
               <Route path="/services/spm" element={<SPM />} />
               <Route path="/services/fea-analysis" element={<FeaAnalysis />} />
               <Route path="/services/pcb-design" element={<PcbDesign />} />
-              <Route
-                path="/services/product-assembly"
-                element={<ProductAssembly />}
-              />
               <Route
                 path="/services/rapid-prototyping"
                 element={<RapidPrototyping />}
@@ -166,10 +150,6 @@ function App() {
                 element={<PanelAutomation />}
               />
               <Route
-                path="/services/maintenance-troubleshooting"
-                element={<MaintenanceTroubleshooting />}
-              />
-              <Route
                 path="/services/schools-college-projects"
                 element={<SchoolsCollegeProjects />}
               />
@@ -193,7 +173,7 @@ function App() {
                 element={<ProjectsModelling />}
               />
               <Route
-                path="/products/diy-robotics-kit"
+                path="/services/student-outreach/diy-robotics-kit"
                 element={<DiyRoboticsKit />}
               />
               <Route
