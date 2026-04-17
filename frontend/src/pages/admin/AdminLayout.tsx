@@ -12,6 +12,7 @@ import {
   X,
   ChevronRight,
   Layers,
+  Briefcase,
 } from "lucide-react";
 
 // Shadcn Components
@@ -19,7 +20,6 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import logo from "@/assets/images/logo.svg";
-
 
 const sidebarLinks = [
   {
@@ -34,6 +34,16 @@ const sidebarLinks = [
     icon: Package,
   },
   {
+    label: "Categories",
+    path: "/admin/dashboard/categories",
+    icon: Layers,
+  },
+  {
+    label: "Careers",
+    path: "/admin/dashboard/careers",
+    icon: Briefcase,
+  },
+  {
     label: "Applications",
     path: "/admin/dashboard/applications",
     icon: Inbox,
@@ -42,11 +52,6 @@ const sidebarLinks = [
     label: "Case Studies",
     path: "/admin/dashboard/case-studies",
     icon: FileText,
-  },
-  {
-    label: "Categories",
-    path: "/admin/dashboard/categories",
-    icon: Layers,
   },
 ];
 
@@ -113,7 +118,7 @@ const AdminLayout = () => {
                   <Button
                     variant="ghost"
                     className={`w-full justify-start gap-3 h-11 px-4 rounded-xl text-[12px] font-bold uppercase tracking-wider transition-all duration-200 border-none ${
-                        isActive
+                      isActive
                         ? "bg-white/10 text-white shadow-lg shadow-black/10 hover:bg-white/20"
                         : "text-white/40 hover:text-white/80 hover:bg-white/5"
                     }`}
@@ -151,7 +156,11 @@ const AdminLayout = () => {
       {/* ── Mobile Header ── */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-slate-900 z-50 flex items-center justify-between px-5">
         <div className="flex items-center gap-3">
-          <img src={logo} alt="ANK" className="h-7 w-auto brightness-0 invert" />
+          <img
+            src={logo}
+            alt="ANK"
+            className="h-7 w-auto brightness-0 invert"
+          />
           <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
             Admin
           </span>
@@ -183,7 +192,11 @@ const AdminLayout = () => {
               className="lg:hidden fixed top-0 left-0 h-screen w-[260px] bg-slate-900 z-[60] flex flex-col"
             >
               <div className="px-5 py-5 border-b border-white/5 flex items-center justify-between">
-                <img src={logo} alt="ANK" className="h-8 w-auto brightness-0 invert" />
+                <img
+                  src={logo}
+                  alt="ANK"
+                  className="h-8 w-auto brightness-0 invert"
+                />
                 <button
                   onClick={() => setSidebarOpen(false)}
                   className="text-white/40 hover:text-white"

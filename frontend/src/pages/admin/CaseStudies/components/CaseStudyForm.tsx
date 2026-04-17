@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Loader2, Image as ImageIcon } from "lucide-react";
+import { Plus, Trash2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+  useCreateCaseStudy,
+  useUpdateCaseStudy,
+  useAddStudyItem,
+  useUpdateStudyItem,
+  useDeleteStudyItem,
+} from "../../../../hooks/useContentQueries";
 import contentService from "../../../../appwrite/services/content";
 
 interface CaseStudyFormProps {
@@ -12,14 +19,25 @@ interface CaseStudyFormProps {
   onCancel: () => void;
 }
 
-const CaseStudyForm = ({ initialData, onSuccess, onCancel }: CaseStudyFormProps) => {
+const CaseStudyForm = ({
+  initialData,
+  onSuccess,
+  onCancel,
+}: CaseStudyFormProps) => {
   const [csTitle, setCsTitle] = useState("");
   const [csContent, setCsContent] = useState("");
   const [csImage, setCsImage] = useState<File | null>(null);
-  const [csItems, setCsItems] = useState<{ label: string; description: string; $id?: string }[]>(
-    [{ label: "", description: "" }]
-  );
+  const [csItems, setCsItems] = useState<
+    { label: string; description: string; $id?: string }[]
+  >([{ label: "", description: "" }]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Mutations
+  const createStudy = useCreateCaseStudy();
+  const updateStudy = useUpdateCaseStudy();
+  const addStudyItem = useAddStudyItem();
+  const updateStudyItem = useUpdateStudyItem();
+  const deleteStudyItem = useDeleteStudyItem();
 
   useEffect(() => {
     if (initialData) {
@@ -32,7 +50,7 @@ const CaseStudyForm = ({ initialData, onSuccess, onCancel }: CaseStudyFormProps)
               description: it.description,
               $id: it.$id,
             }))
-          : [{ label: "", description: "" }]
+          : [{ label: "", description: "" }],
       );
     }
   }, [initialData]);
@@ -41,13 +59,19 @@ const CaseStudyForm = ({ initialData, onSuccess, onCancel }: CaseStudyFormProps)
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      let studyId = initialData?.$id;
+      let currentStudyId = initialData?.$id;
       let image_id = initialData?.image_id;
 
       // 1. Image Upload
       if (csImage) {
         const fileObj = await contentService.uploadProjectImage(csImage);
         image_id = fileObj.$id;
+        // Delete old image if it exists
+        if (initialData?.image_id) {
+          await contentService
+            .deleteProjectImage(initialData.image_id)
+            .catch(console.error);
+        }
       }
 
       const studyData = {
@@ -58,50 +82,53 @@ const CaseStudyForm = ({ initialData, onSuccess, onCancel }: CaseStudyFormProps)
 
       // 2. Create or Update Study
       if (initialData) {
-        await contentService.updateCaseStudy(initialData.$id, studyData);
+        await updateStudy.mutateAsync({ id: initialData.$id, data: studyData });
       } else {
-        const newStudy = await contentService.createCaseStudy(studyData);
-        studyId = newStudy.$id;
+        const newStudy = await createStudy.mutateAsync(studyData);
+        currentStudyId = newStudy.$id;
       }
 
-      // 3. Handle Items (Relational Logic)
-      if (studyId) {
+      // 3. Handle Items
+      if (currentStudyId) {
         const filteredItems = csItems.filter(
-          (item) => item.label.trim() !== "" || item.description.trim() !== ""
+          (item) => item.label.trim() !== "" || item.description.trim() !== "",
         );
 
         if (initialData) {
           // Handle deletions
-          const existingItemIds = initialData.items?.map((item: any) => item.$id) || [];
-          const currentItemIds = filteredItems.map((item) => item.$id).filter(Boolean);
-          const toDelete = existingItemIds.filter((id: string) => !currentItemIds.includes(id));
+          const existingItemIds =
+            initialData.items?.map((item: any) => item.$id) || [];
+          const currentItemIds = filteredItems
+            .map((item) => item.$id)
+            .filter(Boolean);
+          const toDelete = existingItemIds.filter(
+            (id: string) => !currentItemIds.includes(id),
+          );
 
-          if (toDelete.length > 0) {
-            for (const id of toDelete) {
-              await contentService.deleteStudyItem(id);
-            }
+          for (const id of toDelete) {
+            await deleteStudyItem.mutateAsync(id);
           }
 
           // Handle updates and adds
           for (const item of filteredItems) {
             if (item.$id) {
-              await contentService.updateStudyItem(item.$id, {
-                label: item.label,
-                description: item.description,
+              await updateStudyItem.mutateAsync({
+                id: item.$id,
+                data: { label: item.label, description: item.description },
               });
             } else {
-              await contentService.addItemToStudy(studyId, {
-                label: item.label,
-                description: item.description,
+              await addStudyItem.mutateAsync({
+                studyId: currentStudyId,
+                data: { label: item.label, description: item.description },
               });
             }
           }
         } else {
           // Fresh creation adds
           for (const item of filteredItems) {
-            await contentService.addItemToStudy(studyId, {
-              label: item.label,
-              description: item.description,
+            await addStudyItem.mutateAsync({
+              studyId: currentStudyId,
+              data: { label: item.label, description: item.description },
             });
           }
         }
@@ -153,7 +180,9 @@ const CaseStudyForm = ({ initialData, onSuccess, onCancel }: CaseStudyFormProps)
             type="button"
             variant="outline"
             size="sm"
-            onClick={() => setCsItems([...csItems, { label: "", description: "" }])}
+            onClick={() =>
+              setCsItems([...csItems, { label: "", description: "" }])
+            }
             className="h-8 px-3 rounded-xl text-[10px] uppercase font-bold border-slate-200 hover:bg-slate-50"
           >
             <Plus size={14} className="mr-1.5" /> Add Milestone Row

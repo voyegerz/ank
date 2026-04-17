@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -28,51 +28,38 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
-import contentService from "../../../appwrite/services/content";
+import {
+  useCaseStudies,
+  useStudyItems,
+} from "../../../hooks/useContentQueries";
 import CaseStudyForm from "./components/CaseStudyForm";
 
 const CaseStudiesPage = () => {
   const navigate = useNavigate();
-  const [caseStudies, setCaseStudies] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
   // Modals state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingStudy, setEditingStudy] = useState<any | null>(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // Queries
+  const { data: studies = [], isLoading: loadingStudies } = useCaseStudies();
+  const { data: items = [], isLoading: loadingItems } = useStudyItems();
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const [csRes, itemsRes] = await Promise.all([
-        contentService.getCaseStudies(),
-        contentService.getStudyItems(),
-      ]);
+  const loading = loadingStudies || loadingItems;
 
-      const studiesWithItems = csRes.documents.map((study: any) => {
-        return {
-          ...study,
-          items: itemsRes.documents.filter((item: any) => {
-            const relationId =
-              typeof item.caseStudies === "string"
-                ? item.caseStudies
-                : item.caseStudies?.$id;
-            return relationId === study.$id;
-          }),
-        };
-      });
-
-      setCaseStudies(studiesWithItems);
-    } catch (error) {
-      console.error("Failed to fetch case studies/items:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const caseStudies = useMemo(() => {
+    return studies.map((study: any) => ({
+      ...study,
+      items: items.filter((item: any) => {
+        const relationId =
+          typeof item.caseStudies === "string"
+            ? item.caseStudies
+            : item.caseStudies?.$id;
+        return relationId === study.$id;
+      }),
+    }));
+  }, [studies, items]);
 
   const getFilteredStudies = () => {
     return caseStudies.filter((c) =>
@@ -108,7 +95,7 @@ const CaseStudiesPage = () => {
           onClick={openAddModal}
           className="rounded-xl font-bold uppercase tracking-wider h-11 px-6 shadow-lg shadow-primary/20"
         >
-          <Plus className="mr-2" size={16} /> Add Case Study
+          <Plus size={16} /> Add Case Study
         </Button>
       </div>
 
@@ -160,11 +147,9 @@ const CaseStudiesPage = () => {
                 className="h-full border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-300 transition-all group flex flex-col cursor-pointer"
               >
                 <div className="aspect-video bg-slate-100 relative overflow-hidden flex-shrink-0">
-                  {study.image_id ? (
+                  {study.imageUrl ? (
                     <img
-                      src={contentService.getProjectImagePreview(
-                        study.image_id,
-                      )}
+                      src={study.imageUrl}
                       alt={study.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -218,7 +203,6 @@ const CaseStudiesPage = () => {
               initialData={editingStudy}
               onSuccess={() => {
                 setIsModalOpen(false);
-                fetchData();
               }}
               onCancel={closeModal}
             />

@@ -1,7 +1,12 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Package, FileText, Inbox, TrendingUp, ArrowUpRight,  } from "lucide-react";
+import {
+  Package,
+  FileText,
+  Inbox,
+  TrendingUp,
+  ArrowUpRight,
+} from "lucide-react";
 
 // Shadcn Components
 import {
@@ -12,45 +17,30 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-
-import catalogService from "../../appwrite/services/catalog";
-import contentService from "../../appwrite/services/content";
-import inquiryService from "../../appwrite/services/inquiry";
-import careersService from "../../appwrite/services/careers";
+import { useProducts } from "../../hooks/useCatalogQueries";
+import { useCaseStudies } from "../../hooks/useContentQueries";
+import { useInquiries } from "../../hooks/useInquiryQueries";
+import { useApplications } from "../../hooks/useCareerQueries";
 
 const Overview = () => {
   const navigate = useNavigate();
-  const [stats, setStats] = useState({
-    products: 0,
-    caseStudies: 0,
-    inquiries: 0,
-    jobApplications: 0,
-  });
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const [products, studies, inquiries, applications] = await Promise.all([
-          catalogService.getProducts().catch(() => ({ total: 0 })),
-          contentService.getCaseStudies().catch(() => ({ total: 0 })),
-          inquiryService.getInquiries().catch(() => ({ total: 0 })),
-          careersService.getApplications().catch(() => ({ total: 0 })),
-        ]);
-        setStats({
-          products: products.total,
-          caseStudies: studies.total,
-          inquiries: inquiries.total,
-          jobApplications: applications.total,
-        });
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchStats();
-  }, []);
+  // Queries — reuses cached data from other admin pages
+  const { data: products = [], isLoading: loadingProducts } = useProducts();
+  const { data: caseStudies = [], isLoading: loadingStudies } =
+    useCaseStudies();
+  const { data: inquiries = [], isLoading: loadingInquiries } = useInquiries();
+  const { data: applications = [], isLoading: loadingApps } = useApplications();
+
+  const loading =
+    loadingProducts || loadingStudies || loadingInquiries || loadingApps;
+
+  const stats = {
+    products: products.length,
+    caseStudies: caseStudies.length,
+    inquiries: inquiries.length,
+    jobApplications: applications.length,
+  };
 
   const cards = [
     {
@@ -113,7 +103,11 @@ const Overview = () => {
             key={card.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              delay: i * 0.08,
+              duration: 0.4,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             onClick={() => navigate(card.path)}
             className="cursor-pointer"
           >
@@ -173,16 +167,41 @@ const Overview = () => {
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: "Total Products", value: stats.products, color: "text-indigo-600", bg: "bg-indigo-50/50" },
-                { label: "Case Studies", value: stats.caseStudies, color: "text-purple-600", bg: "bg-purple-50/50" },
-                { label: "Inquiries", value: stats.inquiries, color: "text-emerald-600", bg: "bg-emerald-50/50" },
-                { label: "Job Applications", value: stats.jobApplications, color: "text-orange-600", bg: "bg-orange-50/50" },
+                {
+                  label: "Total Products",
+                  value: stats.products,
+                  color: "text-indigo-600",
+                  bg: "bg-indigo-50/50",
+                },
+                {
+                  label: "Case Studies",
+                  value: stats.caseStudies,
+                  color: "text-purple-600",
+                  bg: "bg-purple-50/50",
+                },
+                {
+                  label: "Inquiries",
+                  value: stats.inquiries,
+                  color: "text-emerald-600",
+                  bg: "bg-emerald-50/50",
+                },
+                {
+                  label: "Job Applications",
+                  value: stats.jobApplications,
+                  color: "text-orange-600",
+                  bg: "bg-orange-50/50",
+                },
               ].map((item) => (
-                <div key={item.label} className={`${item.bg} rounded-xl p-4 transition-colors`}>
+                <div
+                  key={item.label}
+                  className={`${item.bg} rounded-xl p-4 transition-colors`}
+                >
                   {loading ? (
                     <div className="h-7 w-12 bg-slate-200 rounded animate-pulse mb-1" />
                   ) : (
-                    <p className={`text-2xl font-black ${item.color}`}>{item.value}</p>
+                    <p className={`text-2xl font-black ${item.color}`}>
+                      {item.value}
+                    </p>
                   )}
                   <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mt-1">
                     {item.label}

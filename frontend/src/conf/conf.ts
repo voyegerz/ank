@@ -9,6 +9,7 @@ const conf = {
   // Table IDs
   appwriteProductsTableId: import.meta.env.VITE_APPWRITE_PRODUCTS_TABLE,
   appwriteCategoryTableId: import.meta.env.VITE_APPWRITE_CATEGORY_TABLE,
+  appwriteSubCategoryTableId: import.meta.env.VITE_APPWRITE_SUB_CATEGORY_TABLE,
   appwriteCaseStudiesTableId: import.meta.env.VITE_APPWRITE_CASE_STUDIES_TABLE,
   appwriteCaseStudyItemsTableId: import.meta.env
     .VITE_APPWRITE_CASE_STUDY_ITEMS_TABLE,

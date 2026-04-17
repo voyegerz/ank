@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 
-import adminAuthService from "../../appwrite/services/auth";
 
 const AdminLogin = () => {
   const navigate = useNavigate();

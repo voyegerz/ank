@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -21,51 +21,47 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import contentService from "../../../appwrite/services/content";
-import { Query } from "appwrite";
+import {
+  useCaseStudy,
+  useStudyItems,
+  useDeleteCaseStudy,
+} from "../../../hooks/useContentQueries";
 import CaseStudyForm from "./components/CaseStudyForm";
 
 const AdminCaseStudyDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [study, setStudy] = useState<any>(null);
-  const [items, setItems] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   // Edit Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchDetail = async () => {
-    if (!id) return;
-    try {
-      const [studyRes, itemsRes] = await Promise.all([
-        contentService.getCaseStudy(id),
-        contentService.getStudyItems([Query.equal("caseStudies", [id])]),
-      ]);
-      setStudy(studyRes);
-      setItems(itemsRes.documents);
-    } catch (error) {
-      console.error("Failed to fetch project details:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Queries
+  const { data: study, isLoading: loadingStudy } = useCaseStudy(id);
+  const { data: allItems = [], isLoading: loadingItems } = useStudyItems();
 
-  useEffect(() => {
-    fetchDetail();
-  }, [id]);
+  const loading = loadingStudy || loadingItems;
+
+  // Filter items belonging to this case study
+  const items = useMemo(() => {
+    if (!id) return [];
+    return allItems.filter((item: any) => {
+      const relationId =
+        typeof item.caseStudies === "string"
+          ? item.caseStudies
+          : item.caseStudies?.$id;
+      return relationId === id;
+    });
+  }, [allItems, id]);
+
+  // Mutations
+  const deleteMutation = useDeleteCaseStudy();
 
   const handleDelete = async () => {
-    if (!study) return;
+    if (!study || !id) return;
     if (!window.confirm("Are you sure you want to delete this case study?"))
       return;
     try {
-      await contentService.deleteCaseStudy(study.$id);
-      if (study.image_id) {
-        await contentService
-          .deleteProjectImage(study.image_id)
-          .catch(console.error);
-      }
+      await deleteMutation.mutateAsync({ id, imageId: study.image_id });
       navigate("/admin/dashboard/case-studies");
     } catch (error) {
       console.error("Failed to delete case study", error);
@@ -190,9 +186,9 @@ const AdminCaseStudyDetail = () => {
         <div className="space-y-6">
           <Card className="border-none shadow-sm rounded-2xl overflow-hidden aspect-square">
             <div className="w-full h-full bg-slate-50 relative">
-              {study.image_id ? (
+              {study.imageUrl ? (
                 <img
-                  src={contentService.getProjectImagePreview(study.image_id)}
+                  src={study.imageUrl}
                   alt={study.title}
                   className="w-full h-full object-cover"
                 />
@@ -223,7 +219,6 @@ const AdminCaseStudyDetail = () => {
               initialData={{ ...study, items }}
               onSuccess={() => {
                 setIsModalOpen(false);
-                fetchDetail();
               }}
               onCancel={() => setIsModalOpen(false)}
             />

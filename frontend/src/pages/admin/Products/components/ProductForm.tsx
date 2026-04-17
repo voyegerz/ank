@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Loader2, Image as ImageIcon, X } from "lucide-react";
+import { Plus, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,6 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  useCreateProduct,
+  useUpdateProduct,
+  useSubCategories,
+} from "@/hooks/useCatalogQueries";
 import catalogService from "@/appwrite/services/catalog";
 
 interface ProductFormProps {
@@ -29,15 +34,30 @@ const ProductForm = ({
   const [prodName, setProdName] = useState("");
   const [prodDesc, setProdDesc] = useState("");
   const [prodCategoryId, setProdCategoryId] = useState("");
+  const [prodSubCategoryId, setProdSubCategoryId] = useState("");
   const [prodSpecs, setProdSpecs] = useState<string[]>([""]);
   const [prodImage, setProdImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Fetch sub-categories when category changes
+  const { data: subCategories = [], isLoading: loadingSubCategories } =
+    useSubCategories(prodCategoryId || undefined);
+
+  // Mutations
+  const createMutation = useCreateProduct();
+  const updateMutation = useUpdateProduct();
 
   useEffect(() => {
     if (initialData) {
       setProdName(initialData.name || "");
       setProdDesc(initialData.description || "");
-      setProdCategoryId(initialData.category?.$id || "");
+      // Handle both relation object and direct ID
+      const categoryId =
+        initialData.category?.$id || initialData.category || "";
+      const subCategoryId =
+        initialData.subCategory?.$id || initialData.subCategory || "";
+      setProdCategoryId(categoryId);
+      setProdSubCategoryId(subCategoryId);
       setProdSpecs(
         initialData.key_specs && initialData.key_specs.length > 0
           ? initialData.key_specs
@@ -46,6 +66,13 @@ const ProductForm = ({
       setProdImage(null);
     }
   }, [initialData]);
+
+  // Reset sub-category when category changes
+  useEffect(() => {
+    if (!initialData) {
+      setProdSubCategoryId("");
+    }
+  }, [prodCategoryId, initialData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,31 +92,40 @@ const ProductForm = ({
         }
       }
 
-      const productData = {
+      const productData: any = {
         name: prodName,
         category: prodCategoryId,
+        subCategory: prodSubCategoryId,
         description: prodDesc,
         key_specs: prodSpecs.filter((s) => s.trim() !== ""),
         image_id: uploadedImageId,
       };
 
+      console.log("Submitting product data:", productData);
+
       // 2. Create or Update
       if (initialData) {
-        await catalogService.updateProduct(initialData.$id, productData);
+        updateMutation.mutate(
+          { id: initialData.$id, data: productData },
+          {
+            onSuccess: () => onSuccess(),
+            onSettled: () => setIsSubmitting(false),
+          },
+        );
       } else {
         if (!uploadedImageId) {
           alert("Please upload a product image.");
           setIsSubmitting(false);
           return;
         }
-        await catalogService.createProduct(productData);
+        createMutation.mutate(productData, {
+          onSuccess: () => onSuccess(),
+          onSettled: () => setIsSubmitting(false),
+        });
       }
-
-      onSuccess();
     } catch (error) {
       console.error("Product submission failed:", error);
       alert("Failed to save product.");
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -137,11 +173,58 @@ const ProductForm = ({
                 <SelectValue placeholder="Select Category" />
               </SelectTrigger>
               <SelectContent className="rounded-xl">
-                {categories.map((c) => (
-                  <SelectItem key={c.$id} value={c.$id}>
-                    {c.name}
+                {categories.length === 0 ? (
+                  <SelectItem value="no-categories">
+                    No categories available
                   </SelectItem>
-                ))}
+                ) : (
+                  categories.map((c) => (
+                    <SelectItem key={c.$id} value={c.$id}>
+                      {c.name}
+                    </SelectItem>
+                  ))
+                )}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Sub-Category Dropdown - Dependent on Category */}
+          <div className="space-y-2">
+            <Label className="text-[11px] font-black uppercase text-slate-500 tracking-wider">
+              Sub-Category
+            </Label>
+            <Select
+              value={prodSubCategoryId}
+              onValueChange={setProdSubCategoryId}
+              disabled={!prodCategoryId || loadingSubCategories}
+            >
+              <SelectTrigger className="h-12 rounded-xl bg-slate-50 border-slate-200 focus:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                <SelectValue
+                  placeholder={
+                    !prodCategoryId
+                      ? "Select a category first"
+                      : loadingSubCategories
+                        ? "Loading sub-categories..."
+                        : subCategories.length === 0
+                          ? "No sub-categories available"
+                          : "Select Sub-Category"
+                  }
+                />
+              </SelectTrigger>
+              <SelectContent className="rounded-xl">
+                {subCategories.length === 0 ? (
+                  <SelectItem value="no-subcategories" disabled>
+                    {loadingSubCategories
+                      ? "Loading..."
+                      : "No sub-categories available"}
+                  </SelectItem>
+                ) : (
+                  subCategories.map((sc: any) => (
+                    <SelectItem key={sc.$id} value={sc.$id}>
+                      {sc.name}
+                    </SelectItem>
+                  ))
+                )}
               </SelectContent>
             </Select>
           </div>

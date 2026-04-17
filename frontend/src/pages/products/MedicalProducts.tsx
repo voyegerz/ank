@@ -1,92 +1,104 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, CheckCircle2, ArrowRight, Activity, Bone } from "lucide-react";
+import {
+  Search,
+  CheckCircle2,
+  ArrowRight,
+  Activity,
+  Bone,
+  Loader2,
+} from "lucide-react";
 import PageLayout from "../../components/PageLayout";
 import CommonHero from "../../components/CommonHero";
 import Marquee from "../../components/products/Marquee";
 import CTASection from "@/components/service/CTA";
+import {
+  useProductsByCategoryName,
+  useSubCategoriesByCategoryName,
+} from "@/hooks/useCatalogQueries";
+import type { Product } from "@/types/product";
+import { transformProducts } from "@/utils/productTransform";
 
 // ─── Online Demo Images (Unsplash) ───────────────────────────────────────────
 const IMG = {
   hero: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1920",
-  patientMonitor: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=900",
-  surgicalInstrument: "https://images.unsplash.com/photo-1551190822-a9ce113ac100?auto=format&fit=crop&q=80&w=900",
-  diagnosticUnit: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=900",
-  rehabilitationDevice: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=900",
-  labEquipment: "https://images.unsplash.com/photo-1582719471384-894fbb16f461?auto=format&fit=crop&q=80&w=900",
-  implantSystem: "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&q=80&w=900",
-  medicalEnclosure: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80&w=900",
-  wearableDevice: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=900",
+  patientMonitor:
+    "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=900",
+  surgicalInstrument:
+    "https://images.unsplash.com/photo-1551190822-a9ce113ac100?auto=format&fit=crop&q=80&w=900",
+  diagnosticUnit:
+    "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=900",
+  rehabilitationDevice:
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=900",
+  labEquipment:
+    "https://images.unsplash.com/photo-1582719471384-894fbb16f461?auto=format&fit=crop&q=80&w=900",
+  implantSystem:
+    "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&q=80&w=900",
+  medicalEnclosure:
+    "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80&w=900",
+  wearableDevice:
+    "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=900",
 };
 
-// ─── Product Data ────────────────────────────────────────────────────────────
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: string;
-  image: string;
-  description: string;
-  features: string[];
-  icon: React.ReactNode;
-}
+const CATEGORY_NAME = "medical";
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "Lung Pulmonary Function Test Device",
-    category: "Diagnostics",
-    price: "On Request",
-    image: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&q=80&w=900",
-    description:
-      "Designed to measure and analyze lung function parameters with accuracy and reliability. It supports diagnostic and monitoring applications in medical and clinical environments. Developed with a strong focus on functional performance, usability, and dependable operation.",
-    features: [
-      "Lung Function Measurement",
-      "Clinical Accuracy",
-      "Dependable Operation",
-      "Diagnostic Support",
-    ],
-    icon: <Activity size={16} />,
-  },
-  {
-    id: 2,
-    name: "Flexion Therapy Device",
-    category: "Rehabilitation",
-    price: "On Request",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=900",
-    description:
-      "Developed to support controlled therapeutic movement for rehabilitation and recovery applications. The design emphasizes smooth operation, safety, and consistent performance. This device reflects ANK’s capability to design application-specific medical engineering solutions.",
-    features: [
-      "Controlled Therapeutic Movement",
-      "Smooth Operation",
-      "Rehabilitation Support",
-      "Consistent Performance",
-    ],
-    icon: <Bone size={16} />,
-  },
-];
-
-const categories = [
-  "All",
-  "Diagnostics",
-  "Rehabilitation",
-];
+// Icon mapping for categories
+const getCategoryIcon = (category: string) => {
+  switch (category.toLowerCase()) {
+    case "diagnostics":
+      return <Activity size={16} />;
+    case "rehabilitation":
+      return <Bone size={16} />;
+    default:
+      return <Activity size={16} />;
+  }
+};
 
 // ─── Component ───────────────────────────────────────────────────────────────
 const MedicalProducts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
+  // Fetch products by category name using two-step resolver
+  const {
+    data: productsData,
+    isLoading: isLoadingProducts,
+    error,
+  } = useProductsByCategoryName(CATEGORY_NAME);
+
+  // Fetch sub-categories for the current category
+  const { data: subCategoriesData } =
+    useSubCategoriesByCategoryName(CATEGORY_NAME);
+
+  // Prepare filter buttons dynamically from sub-categories
+  const subCategoryFilters = useMemo(() => {
+    if (!subCategoriesData) return ["All"];
+    return ["All", ...subCategoriesData.map((sub: any) => sub.name)];
+  }, [subCategoriesData]);
+
+  // Transform fetched products using shared utility
+  const products: Product[] = useMemo(
+    () =>
+      transformProducts(productsData, {
+        defaultImage: IMG.hero,
+        getIcon: getCategoryIcon,
+      }),
+    [productsData],
+  );
+
+  // Updated filter logic - match against subCategory name
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.category.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      activeCategory === "All" || product.category === activeCategory;
-    return matchesSearch && matchesCategory;
+    // Match activeCategory (Name) against product.subCategory (contains name from Query.select)
+    const matchesSubCategory =
+      activeCategory === "All" || product.subCategory === activeCategory;
+    return matchesSearch && matchesSubCategory;
   });
 
-  const allImages = products.map((p) => p.image);
+  const allImages =
+    products.length > 0 ? products.map((p) => p.image) : Object.values(IMG);
 
   return (
     <PageLayout>
@@ -119,129 +131,155 @@ const MedicalProducts = () => {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => (
+              {subCategoryFilters.map((catName) => (
                 <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  key={catName}
+                  onClick={() => setActiveCategory(catName)}
                   className={`px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
-                    activeCategory === cat
+                    activeCategory === catName
                       ? "bg-primary text-white shadow-lg shadow-primary/20"
                       : "bg-slate-50 text-slate-500 hover:bg-slate-100"
                   }`}
                 >
-                  {cat}
+                  {catName}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Detailed Product List */}
-          <div className="space-y-32">
-            <AnimatePresence mode="popLayout">
-              {filteredProducts.map((product, index) => (
-                <motion.div
-                  key={product.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="group"
-                >
-                  <div
-                    className={`flex flex-col md:flex-row gap-12 lg:gap-20 items-center justify-center ${
-                      index % 2 !== 0 ? "md:flex-row-reverse" : ""
-                    }`}
-                  >
-                    {/* Image Side */}
-                    <div className="w-full md:w-150 aspect-[1/1] overflow-hidden rounded-sm relative shadow-2xl bg-slate-100">
-                      <motion.img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                      />
-                      <div className="absolute top-6 right-6 z-10">
-                        <span className="bg-white/90 backdrop-blur px-4 py-2 text-xs font-black tracking-tighter text-primary shadow-xl">
-                          {product.price}
-                        </span>
-                      </div>
-                      {/* Category badge */}
-                      <div className="absolute bottom-6 left-6 z-10">
-                        <span className="inline-flex items-center gap-1.5 bg-primary/90 backdrop-blur text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest shadow-xl">
-                          {product.icon}
-                          {product.category}
-                        </span>
-                      </div>
-                    </div>
+          {/* Loading State */}
+          {isLoadingProducts && (
+            <div className="py-32 text-center">
+              <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
+              <p className="text-slate-500 font-medium">Loading products...</p>
+            </div>
+          )}
 
-                    {/* Content Side */}
-                    <div className="w-full space-y-8">
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+          {/* Error State */}
+          {error && (
+            <div className="py-32 text-center">
+              <h3 className="text-2xl font-black text-red-500 uppercase italic mb-4">
+                Failed to load products
+              </h3>
+              <p className="text-slate-500 mb-4">{(error as Error).message}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="text-primary font-bold text-sm underline"
+              >
+                Try again
+              </button>
+            </div>
+          )}
+
+          {/* Detailed Product List */}
+          {!isLoadingProducts && !error && (
+            <div className="space-y-32">
+              <AnimatePresence mode="popLayout">
+                {filteredProducts.map((product, index) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="group"
+                  >
+                    <div
+                      className={`flex flex-col md:flex-row gap-12 lg:gap-20 items-center justify-center ${
+                        index % 2 !== 0 ? "md:flex-row-reverse" : ""
+                      }`}
+                    >
+                      {/* Image Side */}
+                      <div className="w-full md:w-150 aspect-[1/1] overflow-hidden rounded-sm relative shadow-2xl bg-slate-100">
+                        <motion.img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        />
+                        <div className="absolute top-6 right-6 z-10">
+                          <span className="bg-white/90 backdrop-blur px-4 py-2 text-xs font-black tracking-tighter text-primary shadow-xl">
+                            {product.price}
+                          </span>
+                        </div>
+                        {/* Category badge */}
+                        <div className="absolute bottom-6 left-6 z-10">
+                          <span className="inline-flex items-center gap-1.5 bg-primary/90 backdrop-blur text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest shadow-xl">
+                            {product.icon}
                             {product.category}
                           </span>
-                          <div className="h-px w-12 bg-primary/20" />
                         </div>
-                        <h2 className="text-3xl lg:text-4xl font-black text-slate-900 uppercase leading-[0.9] tracking-tighter">
-                          {product.name}
-                        </h2>
-                        <p className="text-slate-500 text-sm leading-relaxed max-w-lg">
-                          {product.description}
-                        </p>
                       </div>
 
-                      <div className="space-y-4">
-                        <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">
-                          Key Specifications
-                        </h4>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
-                          {product.features.map((feature, i) => (
-                            <li
-                              key={i}
-                              className="flex items-center gap-2 text-xs font-bold text-slate-700"
-                            >
-                              <CheckCircle2
-                                size={14}
-                                className="text-primary"
-                              />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      {/* Content Side */}
+                      <div className="w-full space-y-8">
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-3">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+                              {product.subCategory}
+                            </span>
+                            <div className="h-px w-12 bg-primary/20" />
+                          </div>
+                          <h2 className="text-3xl lg:text-4xl font-black text-slate-900 uppercase leading-[0.9] tracking-tighter">
+                            {product.name}
+                          </h2>
+                          <p className="text-slate-500 text-sm leading-relaxed max-w-lg">
+                            {product.description}
+                          </p>
+                        </div>
 
-                      <div className="pt-4">
-                        <button className="inline-flex items-center gap-4 bg-primary text-white hover:bg-slate-900 px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all group/btn">
-                          Request Quotation
-                          <ArrowRight
-                            size={14}
-                            className="transition-transform group-hover/btn:translate-x-1"
-                          />
-                        </button>
+                        <div className="space-y-4">
+                          <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">
+                            Key Specifications
+                          </h4>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
+                            {product.features.map((feature, i) => (
+                              <li
+                                key={i}
+                                className="flex items-center gap-2 text-xs font-bold text-slate-700"
+                              >
+                                <CheckCircle2
+                                  size={14}
+                                  className="text-primary"
+                                />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="pt-4">
+                          <button className="inline-flex items-center gap-4 bg-primary text-white hover:bg-slate-900 px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all group/btn">
+                            Request Quotation
+                            <ArrowRight
+                              size={14}
+                              className="transition-transform group-hover/btn:translate-x-1"
+                            />
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
 
-            {filteredProducts.length === 0 && (
-              <div className="py-32 text-center">
-                <h3 className="text-2xl font-black text-slate-200 uppercase italic">
-                  No matches found for your search...
-                </h3>
-                <button
-                  onClick={() => {
-                    setSearchTerm("");
-                    setActiveCategory("All");
-                  }}
-                  className="mt-6 text-primary font-bold text-sm underline"
-                >
-                  Clear all filters
-                </button>
-              </div>
-            )}
-          </div>
+              {filteredProducts.length === 0 && (
+                <div className="py-32 text-center">
+                  <h3 className="text-2xl font-black text-slate-200 uppercase italic">
+                    No matches found for your search...
+                  </h3>
+                  <button
+                    onClick={() => {
+                      setSearchTerm("");
+                      setActiveCategory("All");
+                    }}
+                    className="mt-6 text-primary font-bold text-sm underline"
+                  >
+                    Clear all filters
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
@@ -251,8 +289,7 @@ const MedicalProducts = () => {
           <div className="flex items-end justify-between">
             <div className="max-w-xl">
               <h2 className="text-3xl font-black uppercase tracking-tighter text-slate-900 mb-4">
-                Product{" "}
-                <span className="text-primary italic">Showcase</span>
+                Product <span className="text-primary italic">Showcase</span>
               </h2>
               <p className="text-slate-500 text-xs font-medium leading-relaxed uppercase">
                 Browse our complete medical product portfolio. Every device is

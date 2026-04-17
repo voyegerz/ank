@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -27,52 +27,25 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
 
-import catalogService from "@/appwrite/services/catalog";
+import { useProducts, useCategories } from "@/hooks/useCatalogQueries";
 import ProductForm from "./components/ProductForm";
 
 const ProductsPage = () => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState<any[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterCategory, setFilterCategory] = useState("All");
+
+  // Queries - TanStack Query for auto-refresh
+  const { data: products = [], isLoading: loadingProducts } = useProducts();
+  const { data: categories = [], isLoading: loadingCategories } =
+    useCategories();
+
+  const loading = loadingProducts || loadingCategories;
 
   // Modals state
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any | null>(null);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const [prods, cats] = await Promise.all([
-        catalogService.getProducts(),
-        catalogService.getCategories(),
-      ]);
-
-      const productsWithImages = prods.documents.map((product) => {
-        return {
-          ...product,
-          imageUrl: product.image_id
-            ? catalogService.getProductImagePreview(product.image_id)
-            : null,
-        };
-      });
-
-      setProducts(productsWithImages);
-      setCategories(cats.documents);
-    } catch (error) {
-      console.error("Failed to fetch data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getFilteredProducts = () => {
     return products.filter((p) => {
@@ -80,7 +53,7 @@ const ProductsPage = () => {
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
       const matchesCat =
-        filterCategory === "All" || p.category === filterCategory;
+        filterCategory === "All" || p.category?.$id === filterCategory;
       return matchesSearch && matchesCat;
     });
   };
@@ -104,14 +77,13 @@ const ProductsPage = () => {
             Manage your product catalog
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <Button
-            onClick={openAddModal}
-            className="rounded-xl font-bold uppercase tracking-wider"
-          >
-            <Plus className="mr-2" size={16} /> Add Product
-          </Button>
-        </div>
+
+        <Button
+          onClick={openAddModal}
+          className="rounded-xl font-bold uppercase tracking-wider h-11 px-6 shadow-lg shadow-primary/20"
+        >
+          <Plus size={16} /> Add Product
+        </Button>
       </div>
 
       {/* Filters Area */}
@@ -226,7 +198,6 @@ const ProductsPage = () => {
               categories={categories}
               onSuccess={() => {
                 setIsProductModalOpen(false);
-                fetchData();
               }}
               onCancel={() => setIsProductModalOpen(false)}
             />

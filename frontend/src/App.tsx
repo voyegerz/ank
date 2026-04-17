@@ -74,10 +74,11 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import AdminOverview from "./pages/admin/Overview";
 import AdminProducts from "./pages/admin/Products/ProductsPage";
 import AdminProductDetail from "./pages/admin/Products/ProductDetailPage";
-import AdminCategories from "./pages/admin/CategoriesPage";
+import AdminCategories from "./pages/admin/Categories/CategoriesPage";
 import AdminApplications from "./pages/admin/ApplicationsPage";
 import AdminCaseStudies from "./pages/admin/CaseStudies/CaseStudiesPage";
 import AdminCaseStudyDetail from "./pages/admin/CaseStudies/CaseStudyDetail";
+import AdminCareers from "./pages/admin/CareersPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -242,6 +243,7 @@ function App() {
                 <Route path="products/:id" element={<AdminProductDetail />} />
                 <Route path="categories" element={<AdminCategories />} />
                 <Route path="applications" element={<AdminApplications />} />
+                <Route path="careers" element={<AdminCareers />} />
                 <Route path="case-studies" element={<AdminCaseStudies />} />
                 <Route
                   path="case-studies/:id"

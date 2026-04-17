@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -18,54 +18,34 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import catalogService from "@/appwrite/services/catalog";
+import {
+  useProduct,
+  useCategories,
+  useDeleteProduct,
+} from "@/hooks/useCatalogQueries";
 import ProductForm from "./components/ProductForm";
 
 const AdminProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [product, setProduct] = useState<any>(null);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const fetchProduct = async () => {
-    if (!id) return;
-    try {
-      const [productRes, categoriesRes] = await Promise.all([
-        catalogService.getProduct(id),
-        catalogService.getCategories(),
-      ]);
+  // Queries
+  const { data: product, isLoading: loadingProduct } = useProduct(id || "");
+  const { data: categories = [], isLoading: loadingCategories } =
+    useCategories();
 
-      setProduct({
-        ...productRes,
-        imageUrl: productRes.image_id
-          ? catalogService.getProductImagePreview(productRes.image_id)
-          : null,
-      });
-      setCategories(categoriesRes.documents);
-    } catch (error) {
-      console.error("Failed to fetch product details:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Mutations
+  const deleteMutation = useDeleteProduct();
 
-  useEffect(() => {
-    fetchProduct();
-  }, [id]);
+  const loading = loadingProduct || loadingCategories;
 
   const handleDelete = async () => {
-    if (!product) return;
+    if (!product || !id) return;
     if (!window.confirm("Are you sure you want to delete this product?"))
       return;
     try {
-      await catalogService.deleteProduct(product.$id);
-      if (product.image_id) {
-        await catalogService
-          .deleteProductImage(product.image_id)
-          .catch(console.error);
-      }
+      await deleteMutation.mutateAsync({ id, imageId: product.image_id });
       navigate("/admin/dashboard/products");
     } catch (error) {
       console.error("Failed to delete product", error);
@@ -153,7 +133,7 @@ const AdminProductDetail = () => {
           {product.category && (
             <div className="absolute top-8 left-8">
               <Badge className="bg-white/90 backdrop-blur-md text-primary font-black uppercase px-4 py-2 rounded-full shadow-lg border-none tracking-[0.2em] text-[10px]">
-                {product.category.name}
+                
               </Badge>
             </div>
           )}
@@ -221,7 +201,6 @@ const AdminProductDetail = () => {
               categories={categories}
               onSuccess={() => {
                 setIsEditModalOpen(false);
-                fetchProduct();
               }}
               onCancel={() => setIsEditModalOpen(false)}
             />

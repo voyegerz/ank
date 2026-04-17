@@ -16,39 +16,32 @@ import {
 // Shadcn Components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Card
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 
 import inquiryService from "../../appwrite/services/inquiry";
+import { useApplications } from "../../hooks/useCareerQueries";
 import careersService from "../../appwrite/services/careers";
 
 const ApplicationsPage = () => {
   const [activeTab, setActiveTab] = useState<"inquiries" | "jobs">("inquiries");
   const [inquiries, setInquiries] = useState<any[]>([]);
-  const [jobApps, setJobApps] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Fetch job applications with vacancy names
+  const { data: jobApps = [], isLoading: loadingJobs } = useApplications();
+
   useEffect(() => {
-    fetchData();
+    fetchInquiries();
   }, []);
 
-  const fetchData = async () => {
-    setLoading(true);
+  const fetchInquiries = async () => {
     try {
-      const [inqRes, jobRes] = await Promise.all([
-        inquiryService.getInquiries(),
-        careersService.getApplications(),
-      ]);
+      const inqRes = await inquiryService.getInquiries();
       setInquiries(inqRes.documents);
-      setJobApps(jobRes.documents);
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -70,7 +63,7 @@ const ApplicationsPage = () => {
       return;
     try {
       await inquiryService.deleteInquiry(id);
-      await fetchData();
+      await fetchInquiries();
     } catch (error) {
       console.error(error);
     }
@@ -80,13 +73,17 @@ const ApplicationsPage = () => {
     if (!window.confirm("Are you sure you want to delete this application?"))
       return;
     try {
-      await careersService.deleteVacancy(id); // Wait... wait. The service method does NOT exist for deleteApplication?
-      // Wait, there is no deleteApplication in careersService. It's actually a document in appwriteJobApplicationsTableId
-      // Let me just omit delete for job applications if it's not fully defined or I would need to write direct db call.
-      // Actually, looking at careers.ts, it doesn't have deleteApplication exposed.
-      alert("Delete application not currently exposed in careers service.");
+      // Delete resume if it exists
+      if (resumeId) {
+        await careersService.deleteResume(resumeId);
+      }
+      // Delete the application document
+      await careersService.deleteApplication(id);
+      // Refetch applications
+      window.location.reload();
     } catch (error) {
       console.error(error);
+      alert("Failed to delete application.");
     }
   };
 
@@ -118,18 +115,36 @@ const ApplicationsPage = () => {
       </div>
 
       {/* Tabs and Search */}
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="w-full">
+      <Tabs
+        value={activeTab}
+        onValueChange={(v) => setActiveTab(v as any)}
+        className="w-full"
+      >
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
-          <TabsList className="h-12 bg-white border border-slate-200 p-1 rounded-xl">
-            <TabsTrigger value="inquiries" className="rounded-lg h-10 px-6 font-bold uppercase tracking-wider data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-              <Inbox size={16} className="mr-2" /> Inquiries
-              <Badge variant="secondary" className="ml-2 bg-slate-100 text-slate-500 group-data-[state=active]:bg-white/20 group-data-[state=active]:text-white">
+          <TabsList className="py-5 bg-slate-200 border border-slate-200">
+            <TabsTrigger
+              value="inquiries"
+              className="h-10 rounded-lg px-5 font-bold uppercase tracking-wider gap-2 data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              <Inbox size={16} />
+              Inquiries
+              <Badge
+                variant="secondary"
+                className="ml-1 bg-slate-200 text-slate-600 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+              >
                 {inquiries.length}
               </Badge>
             </TabsTrigger>
-            <TabsTrigger value="jobs" className="rounded-lg h-10 px-6 font-bold uppercase tracking-wider data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-              <Briefcase size={16} className="mr-2" /> Job Apps
-              <Badge variant="secondary" className="ml-2 bg-slate-100 text-slate-500 group-data-[state=active]:bg-white/20 group-data-[state=active]:text-white">
+            <TabsTrigger
+              value="jobs"
+              className="rounded-lg h-10 px-5 font-bold uppercase tracking-wider gap-2 data-[state=active]:bg-primary data-[state=active]:text-white"
+            >
+              <Briefcase size={16} />
+              Job Apps
+              <Badge
+                variant="secondary"
+                className="ml-1 bg-slate-200 text-slate-600 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+              >
                 {jobApps.length}
               </Badge>
             </TabsTrigger>
@@ -149,7 +164,7 @@ const ApplicationsPage = () => {
           </div>
         </div>
 
-        {loading ? (
+        {loadingJobs ? (
           <div className="flex items-center justify-center h-64">
             <Loader2 size={32} className="animate-spin text-indigo-500" />
           </div>
@@ -190,8 +205,12 @@ const ApplicationsPage = () => {
                           </div>
                         </div>
                         <div className="flex items-center gap-4">
-                          <Badge variant="outline" className="border-slate-200 text-slate-400 text-[10px] font-bold uppercase tracking-wider">
-                            <Calendar size={12} className="mr-1" /> {formatDate(inq.$createdAt)}
+                          <Badge
+                            variant="outline"
+                            className="border-slate-200 text-slate-400 text-[10px] font-bold uppercase tracking-wider"
+                          >
+                            <Calendar size={12} className="mr-1" />{" "}
+                            {formatDate(inq.$createdAt)}
                           </Badge>
                           <Button
                             variant="ghost"
@@ -256,17 +275,27 @@ const ApplicationsPage = () => {
                       </div>
 
                       <div className="flex items-center gap-3">
-                        <Badge variant="outline" className="border-slate-200 text-slate-400 text-[10px] font-bold uppercase tracking-wider mr-2">
-                          <Calendar size={12} className="mr-1" /> {formatDate(app.$createdAt)}
+                        <Badge
+                          variant="outline"
+                          className="border-slate-200 text-slate-400 text-[10px] font-bold uppercase tracking-wider mr-2"
+                        >
+                          <Calendar size={12} className="mr-1" />{" "}
+                          {formatDate(app.$createdAt)}
                         </Badge>
                         {app.resume_id ? (
-                          <Button asChild variant="outline" className="bg-indigo-50 text-indigo-700 border-indigo-100 hover:bg-indigo-100 rounded-xl font-bold uppercase text-[11px] tracking-wider">
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="bg-indigo-50 text-indigo-700 border-indigo-100 hover:bg-indigo-100 rounded-xl font-bold uppercase text-[11px] tracking-wider"
+                          >
                             <a
-                              href={careersService.getResumeDownloadUrl(app.resume_id)}
+                              href={careersService.getResumeDownloadUrl(
+                                app.resume_id,
+                              )}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <FileText size={14} className="mr-2" /> View Resume
+                              <FileText size={14} /> View Resume
                             </a>
                           </Button>
                         ) : (
@@ -277,7 +306,9 @@ const ApplicationsPage = () => {
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={() => alert("Delete not currently exposed in careers service.")}
+                          onClick={() =>
+                            handleDeleteJobApp(app.$id, app.resume_id)
+                          }
                           className="text-slate-300 hover:text-red-500 hover:bg-red-50"
                         >
                           <Trash2 size={16} />
@@ -294,6 +325,5 @@ const ApplicationsPage = () => {
     </div>
   );
 };
-   
 
 export default ApplicationsPage;
