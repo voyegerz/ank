@@ -25,24 +25,27 @@ const CommonHero = ({
     <section className="relative h-screen min-h-[560px] flex items-center overflow-hidden">
       {/* ── Background image ── */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 grayscale-[5%]"
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundBlendMode: "multiply",
         }}
         initial={{ scale: 1 }}
         animate={{ scale: 1.06 }}
         transition={{ duration: 8, ease: "easeOut" }}
       />
 
-      {/* ── Blue overlay ── */}
-      <div className="absolute inset-0 z-[1] bg-[#010080]/50" />
+      {/* ── Theme Tint Overlay ── */}
+      <div className="absolute inset-0 z-[1] bg-primary/50" />
+
+      {/* ── Gradient overlays ── */}
+      <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#052352]/95 via-[#052352]/45 to-transparent" />
+      
 
       {/* ── Subtle grid ── */}
       <motion.div
-        className="absolute inset-0 z-[2]"
+        className="absolute inset-0 z-[3]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px)",
@@ -56,7 +59,7 @@ const CommonHero = ({
 
       {/* ── Watermark number ── */}
       <motion.span
-        className="absolute right-[-20px] bottom-[-30px] z-[3] select-none pointer-events-none
+        className="absolute right-[-20px] bottom-[-30px] z-[4] select-none pointer-events-none
                    font-black text-white/[0.025] leading-none tracking-[-0.02em]"
         style={{
           fontFamily: "var(--font-sans)",
@@ -78,7 +81,7 @@ const CommonHero = ({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
           <span className="text-[#7dd3f8] text-[11px] font-semibold tracking-[.12em] uppercase">
             {caption}
           </span>
@@ -128,7 +131,7 @@ const CommonHero = ({
               style={{ originX: 0 }}
             />
             <p
-              className="text-white/60 max-w-[560px] leading-[1.75] font-normal"
+              className="text-white/80 max-w-[560px] leading-[1.75] font-normal"
               style={{ fontSize: "clamp(.875rem, 1.5vw, 1rem)" }}
             >
               {subtitle}

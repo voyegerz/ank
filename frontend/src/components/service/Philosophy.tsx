@@ -14,16 +14,18 @@ interface PhilosophySectionProps {
   eyebrow: string; // "Our" highlighted + rest e.g. "Our philosophy"
   eyebrowHighlight: string; // the highlighted word e.g. "Our"
   title: string;
-  paragraphs: [string, string]; // exactly 2 columns of body text
+  paragraphs: string[]; // array of body text
   items: PhilosophyItem[];
   image?: string;
+  imageSize?: "xs" | "small" | "large";
+  iconSize?: number;
 }
 
 // Animated arc circle
 const ProgressRing = ({
   progress,
   size = 130,
-  stroke = 4,
+  stroke,
 }: {
   progress: number;
   size?: number;
@@ -33,7 +35,8 @@ const ProgressRing = ({
   const inView = useInView(ref, { once: true });
   const [current, setCurrent] = useState(0);
 
-  const radius = (size - stroke * 2) / 2;
+  const ringStroke = stroke || Math.max(2, Math.floor(size / 30));
+  const radius = (size - ringStroke * 2) / 2;
   const circumference = 2 * Math.PI * radius;
 
   useEffect(() => {
@@ -65,7 +68,7 @@ const ProgressRing = ({
         r={radius}
         fill="none"
         stroke="#e5e7eb"
-        strokeWidth={stroke}
+        strokeWidth={ringStroke}
       />
       {/* Progress arc */}
       <circle
@@ -75,7 +78,7 @@ const ProgressRing = ({
         r={radius}
         fill="none"
         stroke="var(--color-primary)"
-        strokeWidth={stroke}
+        strokeWidth={ringStroke}
         strokeLinecap="round"
         strokeDasharray={circumference}
         strokeDashoffset={dashOffset}
@@ -92,11 +95,24 @@ const PhilosophySection = ({
   paragraphs,
   items,
   image,
+  imageSize = "large",
+  iconSize = 130,
 }: PhilosophySectionProps) => {
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const eyebrowRest = eyebrow.replace(eyebrowHighlight, "").trim();
+
+  const getImageClasses = () => {
+    switch (imageSize) {
+      case "xs":
+        return "min-h-[200px] md:min-h-[250px] lg:min-h-[320px] max-w-sm mx-auto w-full";
+      case "small":
+        return "min-h-[250px] md:min-h-[300px] lg:min-h-[400px] max-w-md mx-auto w-full";
+      default:
+        return "min-h-[300px] md:min-h-[400px] lg:min-h-[520px]";
+    }
+  };
 
   return (
     <section
@@ -130,9 +146,9 @@ const PhilosophySection = ({
           {title}
         </motion.h2>
 
-        {/* Two-column paragraphs */}
+        {/* Paragraphs */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8"
+          className={`grid grid-cols-1 ${paragraphs.length > 1 ? 'sm:grid-cols-2' : ''} gap-6 mb-8`}
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -160,9 +176,9 @@ const PhilosophySection = ({
               {/* Progress ring with icon inside */}
               <div
                 className="relative flex items-center justify-center"
-                style={{ width: 130, height: 130 }}
+                style={{ width: iconSize, height: iconSize }}
               >
-                <ProgressRing progress={item.progress} size={130} stroke={4} />
+                <ProgressRing progress={item.progress} size={iconSize} />
                 <div className="absolute inset-0 flex items-center justify-center text-gray-600">
                   {item.icon}
                 </div>
@@ -183,7 +199,7 @@ const PhilosophySection = ({
 
       {/* ── Right image ── */}
       <motion.div
-        className="relative min-h-[300px] md:min-h-[400px] lg:min-h-[520px] order-first lg:order-last shadow-xl"
+        className={`relative ${getImageClasses()} order-first lg:order-last flex items-center justify-center`}
         initial={{ opacity: 0, scale: 1.04 }}
         animate={inView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -191,7 +207,7 @@ const PhilosophySection = ({
         <img
           src={image || PhilosophyImage}
           alt="Philosophy"
-          className="absolute inset-0 w-full h-full object-cover rounded-lg lg:rounded-none"
+          className={`w-full h-full object-cover ${imageSize !== 'large' ? 'rounded-xl shadow-2xl' : 'rounded-lg lg:rounded-none'}`}
         />
       </motion.div>
     </section>

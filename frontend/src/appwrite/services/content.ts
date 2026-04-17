@@ -1,4 +1,4 @@
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 import { databases, storage } from "../client";
 import conf from "../../conf/conf";
 
@@ -100,8 +100,7 @@ export class ContentService {
         }
     }
 
-    async getStudyItemsByStudyId(queries: string[] = []) {
-        // Assume one of the queries is Query.equal("caseStudyId", [studyId]);
+    async getStudyItems(queries: string[] = []) {
         try {
             return await databases.listDocuments(
                 conf.appwriteDatabaseId,
@@ -109,7 +108,7 @@ export class ContentService {
                 queries
             );
         } catch (error) {
-            console.error("ContentService :: getStudyItemsByStudyId :: error", error);
+            console.error("ContentService :: getStudyItems :: error", error);
             throw error;
         }
     }
@@ -173,7 +172,7 @@ export class ContentService {
     }
 
     getProjectImagePreview(fileId: string) {
-        return storage.getFilePreview(
+        return storage.getFileView(
             conf.appwriteBucketID,
             fileId
         );

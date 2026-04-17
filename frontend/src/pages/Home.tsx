@@ -5,11 +5,11 @@ import {
   useScroll,
   useTransform,
   useInView,
+  useMotionValue,
+  useSpring,
 } from "framer-motion";
 import PageLayout from "../components/PageLayout";
 import {
-  Mail,
-  MapPin,
   CheckCircle2,
   Users,
   Briefcase,
@@ -21,6 +21,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import MapSection from "../components/MapSection";
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
@@ -40,7 +41,7 @@ const slides = [
     subtitle:
       "Expert services in 3D/2D CAD development, PLC & SCADA programming, and industrial automation.",
     cta: "Our Services",
-    link: "/services/software-engineering",
+    link: "/services",
     bg: "https://images.unsplash.com/photo-1581082118775-5c7c8ff6e03e?auto=format&fit=crop&q=80&w=2400",
   },
   {
@@ -159,6 +160,115 @@ const Label = ({
   </p>
 );
 
+// ─── 3D Glass Card ──────────────────────────────────────────────────────────
+const GlassCard = ({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseX = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseY = useSpring(y, { stiffness: 300, damping: 30 });
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [15, -15]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-15, 15]);
+
+  const glareX = useTransform(mouseX, [-0.5, 0.5], ["0%", "100%"]);
+  const glareY = useTransform(mouseY, [-0.5, 0.5], ["0%", "100%"]);
+  const glareOpacity = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const mouseXVal = (e.clientX - rect.left) / rect.width - 0.5;
+    const mouseYVal = (e.clientY - rect.top) / rect.height - 0.5;
+    
+    x.set(mouseXVal);
+    y.set(mouseYVal);
+    glareOpacity.set(0.6);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    glareOpacity.set(0);
+  };
+
+  return (
+    <FadeIn delay={delay} className="h-full">
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          perspective: "1200px",
+        }}
+        className={`relative h-full w-full group ${className}`}
+      >
+        <motion.div
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
+          }}
+          className="h-full w-full relative"
+        >
+          {/* External glow */}
+          <div 
+            className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle at center, var(--color-primary-hover) 0%, transparent 80%)",
+              filter: "blur(60px)",
+              transform: "translateZ(-20px)",
+            }}
+          />
+
+          {/* Main Card */}
+          <div
+            className="h-full w-full p-10 rounded-sm border border-white/40 transition-all duration-500 backdrop-blur-2xl relative overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(1,0,128,0.1)] group-hover:shadow-[0_20px_80px_rgba(125,211,248,0.2)]"
+            style={{
+              background: "linear-gradient(135deg, rgba(125, 211, 248, 0.15) 0%, rgba(1, 0, 128, 0.05) 50%, rgba(125, 211, 248, 0.05) 100%)",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {/* Ambient inner glow */}
+            <div className="absolute inset-0 bg-radial-gradient from-white/10 to-transparent opacity-50 pointer-events-none" />
+
+            {/* Dynamic Glare */}
+            <motion.div 
+              style={{
+                background: `radial-gradient(circle at center, rgba(125,211,248,0.5) 0%, transparent 80%)`,
+                left: glareX,
+                top: glareY,
+                opacity: glareOpacity,
+                width: "150%",
+                height: "150%",
+                translateX: "-50%",
+                translateY: "-50%",
+              }}
+              className="absolute pointer-events-none z-20 mix-blend-overlay"
+            />
+
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/p6.png')] z-0" />
+            
+            <div style={{ transform: "translateZ(50px)" }} className="relative z-10 flex flex-col h-full">
+              {children}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </FadeIn>
+  );
+};
+
 // ─── Home ──────────────────────────────────────────────────────────────────────
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -205,22 +315,24 @@ const Home = () => {
                 backgroundImage: `url(${slides[currentSlide].bg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                backgroundBlendMode: "multiply",
               }}
-              className="absolute inset-0 scale-110 bg-primary"
+              className="absolute inset-0 scale-110"
             />
-            {/* Dark gradient overlay with Navy tint */}
+            {/* Theme Tint Overlay */}
+            <div className="absolute inset-0 bg-primary/50" />
+
+            {/* Dark gradient overlay for text readability */}
             <div
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(120deg, var(--color-primary)CC 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%)`,
+                background: `linear-gradient(120deg, rgba(15, 35, 82, 0.8) 0%, rgba(15, 35, 82, 0.4) 50%, transparent 100%)`,
               }}
             />
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)",
+                  "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)",
               }}
             />
           </motion.div>
@@ -307,7 +419,7 @@ const Home = () => {
             {[
               {
                 title: "Product Designs",
-                items: ["Cad Design - 2D/3D", "FEA Analysis", "Reverse Engineering", "SPM"],
+                items: ["Cad Design - 2D & 3D", "FEA Analysis", "Reverse Engineering", "SPM"],
                 icon: <Settings2 size={24} />,
               },
               {
@@ -331,24 +443,22 @@ const Home = () => {
                 icon: <Users size={24} />,
               },
             ].map((service, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="p-10 rounded-sm border border-black/5 bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 group h-full">
-                  <div className="w-12 h-12 bg-white rounded-sm flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-black text-slate-900 uppercase mb-6 font-sans group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {service.items.map((item, j) => (
-                      <li key={j} className="flex items-center gap-2 text-[13px] text-slate-500 font-bold uppercase tracking-tight">
-                        <CheckCircle2 size={14} className="text-primary/40" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+              <GlassCard key={i} delay={i * 0.1}>
+                <div className="w-12 h-12 bg-white/50 rounded-sm flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+                  {service.icon}
                 </div>
-              </FadeIn>
+                <h3 className="text-xl font-black text-slate-900 uppercase mb-6 font-sans group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                <ul className="space-y-3">
+                  {service.items.map((item, j) => (
+                    <li key={j} className="flex items-center gap-2 text-[13px] text-slate-500 font-bold uppercase tracking-tight">
+                      <CheckCircle2 size={14} className="text-primary/40" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
             ))}
           </div>
         </div>
@@ -358,7 +468,9 @@ const Home = () => {
       <section className="py-32 bg-slate-50 border-t border-black/5">
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
           <FadeIn className="text-center mb-20">
-            <Label>ANK Values</Label>
+            <div className="flex justify-center">
+              <Label>ANK Values</Label>
+            </div>
             <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
               Built on <span className="text-primary-hover">Core Principles</span>
             </h2>
@@ -387,72 +499,18 @@ const Home = () => {
                 icon: <Settings2 size={24} />,
               },
             ].map((value, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="p-10 rounded-sm bg-white border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 group text-center">
-                  <div className="w-14 h-14 bg-slate-50 rounded-sm flex items-center justify-center mb-8 mx-auto group-hover:bg-primary group-hover:text-white transition-colors">
-                    {value.icon}
-                  </div>
-                  <h3 className="text-lg font-black text-slate-900 uppercase mb-4 font-sans">
-                    {value.title}
-                  </h3>
-                  <p className="text-[13px] text-slate-500 font-medium leading-relaxed uppercase tracking-tight">
-                    {value.desc}
-                  </p>
+              <GlassCard key={i} delay={i * 0.1}>
+                <div className="w-14 h-14 bg-white/50 rounded-sm flex items-center justify-center mb-8 mx-auto group-hover:bg-primary group-hover:text-white transition-colors">
+                  {value.icon}
                 </div>
-              </FadeIn>
+                <h3 className="text-lg font-black text-slate-900 uppercase mb-4 font-sans text-center">
+                  {value.title}
+                </h3>
+                <p className="text-[13px] text-slate-500 font-medium leading-relaxed uppercase tracking-tight text-center">
+                  {value.desc}
+                </p>
+              </GlassCard>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. Student Outreach ─────────────────────────────────────────────── */}
-      <section className="py-32 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 skew-x-[-15deg] translate-x-1/2" />
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <FadeIn>
-              <Label color="var(--color-primary-hover)">Student Outreach</Label>
-              <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-[0.95] mb-8 uppercase font-sans">
-                Are you a <span className="text-primary-hover">student?</span>
-              </h2>
-              <p className="text-base text-slate-400 mb-10 leading-relaxed max-w-lg font-medium">
-                We believe engineering begins with education. Our student outreach programs provide hands-on experience, mentorship, and resources to help the next generation of innovators build the future.
-              </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-                {[
-                  "Schools/College Projects",
-                  "Industry Workshops",
-                  "Project to Product (P2P)",
-                  "DIY Robotics Kits",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[12px] font-black uppercase tracking-widest text-slate-300">
-                    <span className="w-2 h-2 bg-primary-hover rounded-full" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-3 bg-primary text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm hover:bg-primary-hover transition-all shadow-2xl"
-              >
-                Get in touch with us <ArrowRight size={16} />
-              </Link>
-            </FadeIn>
-            <FadeIn delay={0.2}>
-              <div className="relative aspect-video rounded-sm overflow-hidden shadow-2xl border border-white/10">
-                <img
-                  src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200"
-                  className="w-full h-full object-cover grayscale brightness-50"
-                  alt="Student Outreach"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="p-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-sm text-center">
-                    <p className="text-3xl font-black text-white mb-2 uppercase font-sans">1000+</p>
-                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.2em]">Students Empowered</p>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
           </div>
         </div>
       </section>
@@ -499,14 +557,16 @@ const Home = () => {
       </section>
 
       {/* ── 9. Testimonials ────────────────────────────────────────────────────── */}
-      <section className="py-32 bg-white relative overflow-hidden">
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-primary rounded-full blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
-          <FadeIn className="text-center mb-20">
-            <Label>Testimonials</Label>
-            <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
+          <FadeIn className="text-center mb-12">
+            <div className="flex justify-center">
+              <Label>Testimonials</Label>
+            </div>
+            <h2 className="text-[clamp(1.5rem,3.5vw,2.8rem)] font-black text-slate-900 leading-[0.95] uppercase font-sans">
               What our <span className="text-primary-hover">clients say</span>
             </h2>
           </FadeIn>
@@ -521,14 +581,14 @@ const Home = () => {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center"
               >
-                <div className="flex justify-center mb-10 text-primary-hover/20">
-                  <Quote size={80} strokeWidth={1} />
+                <div className="flex justify-center mb-6 text-primary-hover/20">
+                  <Quote size={56} strokeWidth={1} />
                 </div>
-                <p className="text-[clamp(1.1rem,2.5vw,1.8rem)] font-black text-slate-800 leading-tight mb-12 font-sans italic">
+                <p className="text-[clamp(1rem,2vw,1.5rem)] font-black text-slate-800 leading-tight mb-8 font-sans italic">
                   "{testimonials[currentTestimonial].quote}"
                 </p>
-                <div className="flex items-center justify-center gap-5">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-hover shadow-xl">
+                <div className="flex items-center justify-center gap-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-hover shadow-xl">
                     <img
                       src={testimonials[currentTestimonial].image}
                       alt=""
@@ -536,10 +596,10 @@ const Home = () => {
                     />
                   </div>
                   <div className="text-left">
-                    <p className="text-[14px] font-black text-slate-900 uppercase tracking-widest">
+                    <p className="text-[13px] font-black text-slate-900 uppercase tracking-widest">
                       {testimonials[currentTestimonial].author}
                     </p>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
                       {testimonials[currentTestimonial].role}
                     </p>
                   </div>
@@ -547,7 +607,7 @@ const Home = () => {
               </motion.div>
             </AnimatePresence>
 
-            <div className="flex justify-center gap-3 mt-16">
+            <div className="flex justify-center gap-3 mt-10">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
@@ -571,15 +631,18 @@ const Home = () => {
         className="border-t border-black/4 overflow-hidden flex flex-col lg:flex-row bg-slate-900"
         style={{ minHeight: 600 }}
       >
-        <div 
-          className="lg:w-1/2 relative min-h-100 bg-primary"
-          style={{
-            backgroundImage: `url(https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundBlendMode: "multiply",
-          }}
-        >
+        <div className="lg:w-1/2 relative min-h-100 bg-primary">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url(https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          {/* Theme Tint Overlay */}
+          <div className="absolute inset-0 bg-primary/50" />
+          
           {/* Subtle overlay to fade into the right content side */}
           <div
             className="absolute inset-0"
@@ -602,8 +665,8 @@ const Home = () => {
             </p>
             <div className="flex gap-12 mb-14">
               {[
-                ["12+", "Positions"],
-                ["4", "Units"],
+                ["8+", "Years Experience"],
+                ["15+", "Years of Excellence"],
               ].map(([v, l]) => (
                 <div key={l}>
                   <p className="text-4xl font-black text-white mb-2 font-sans">
@@ -627,61 +690,7 @@ const Home = () => {
 
 
       {/* ── 13. Map & Locations ───────────────────────────────────────────────── */}
-      <section className="border-t border-black/4 bg-white">
-        <div className="relative h-140 overflow-hidden">
-          <div className="absolute inset-0 grayscale opacity-40">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.123!2d73.8567!3d18.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjQiTiA3M8KwNTEnMjQuMSJF!5e0!3m2!1sen!2sin!4v1610000000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-            />
-          </div>
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 60%, transparent 100%)",
-            }}
-          />
-
-          {/* Floating info card */}
-          <div className="absolute top-1/2 left-10 lg:left-24 -translate-y-1/2 p-10 rounded-sm max-w-sm pointer-events-auto shadow-2xl bg-white border border-black/4">
-            <p className="text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase mb-6">
-              Visit HQ
-            </p>
-            <h3 className="text-[20px] font-black text-slate-900 uppercase mb-8 font-sans">
-              Pune, India
-            </h3>
-            <div className="space-y-6 mb-10">
-              <div className="flex gap-4 items-start">
-                <MapPin
-                  size={16}
-                  className=" mt-0.5 shrink-0 text-primary-hover"
-                />
-                <p className="text-[14px] text-slate-600 leading-relaxed font-medium">
-                  Office S-4, 2nd Floor, Commercial Building, Pune MH 411001
-                </p>
-              </div>
-              <div className="flex gap-4 items-center">
-                <Mail
-                  size={16}
-                  className=" shrink-0 text-primary-hover"
-                />
-                <p className="text-[14px] text-slate-600 font-medium">
-                  info@ankautomation.com
-                </p>
-              </div>
-            </div>
-            <button className="w-full py-4 rounded-sm text-[11px] font-black tracking-widest text-white uppercase transition-all shadow-xl bg-primary">
-              Get Directions
-            </button>
-          </div>
-        </div>
-
-      </section>
+      <MapSection />
 
       {/* ── 14. Final CTA ─────────────────────────────────────────────────────── */}
       <section className="py-48 bg-slate-50 border-t border-black/4 text-center relative overflow-hidden">
@@ -709,8 +718,8 @@ const Home = () => {
               without the hassle.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <a
-                href="#services"
+              <Link
+                to="/services"
                 className="group inline-flex items-center justify-center gap-3 text-white text-[11px] font-black tracking-widest uppercase px-12 py-5 rounded-sm shadow-2xl transition-all hover:bg-primary-hover bg-primary"
               >
                 Explore Solutions{" "}
@@ -718,9 +727,9 @@ const Home = () => {
                   size={16}
                   className="group-hover:translate-x-1 transition-transform"
                 />
-              </a>
+              </Link>
               <Link
-                to="/services/software-engineering"
+                to="/services"
                 className="inline-flex items-center justify-center gap-3 text-[11px] font-black tracking-widest text-slate-900 uppercase px-12 py-5 rounded-sm border-2 border-slate-900/10 hover:border-slate-900 transition-all bg-white shadow-sm"
               >
                 Our services

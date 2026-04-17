@@ -1,47 +1,345 @@
-import PageLayout from '../../components/PageLayout'
-import { motion } from 'framer-motion'
-import {  ArrowRight } from 'lucide-react'
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Search,
+  CheckCircle2,
+  ArrowRight,
+  Cpu,
+  Zap,
+  Settings,
+  ShieldCheck,
+  Cog,
+  Loader2,
+} from "lucide-react";
+import PageLayout from "../../components/PageLayout";
+import CommonHero from "../../components/CommonHero";
+import Marquee from "../../components/products/Marquee";
+import CTASection from "@/components/service/CTA";
+import {
+  useProductsByCategoryName,
+  useSubCategoriesByCategoryName,
+} from "@/hooks/useCatalogQueries";
+import type { Product } from "@/types/product";
+import { transformProducts } from "@/utils/productTransform";
+
+// ─── Online Demo Images (Unsplash) ───────────────────────────────────────────
+const IMG = {
+  hero: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1920",
+  plc: "https://images.unsplash.com/photo-1518433278988-2b2f1f6c5fd5?auto=format&fit=crop&q=80&w=900",
+  scada:
+    "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?auto=format&fit=crop&q=80&w=900",
+  panel:
+    "https://images.unsplash.com/photo-1565608438257-fac3c27beb36?auto=format&fit=crop&q=80&w=900",
+  home: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=900",
+};
+
+const CATEGORY_NAME = "industrial";
+
+// Icon mapping for categories
+const getCategoryIcon = (category: string) => {
+  switch (category.toLowerCase()) {
+    case "automation":
+      return <Settings size={16} />;
+    case "electrical":
+      return <Zap size={16} />;
+    case "residential":
+      return <Cog size={16} />;
+    default:
+      return <Cpu size={16} />;
+  }
+};
 
 const IndustrialEquipment = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  // Fetch products by category name using two-step resolver
+  const {
+    data: productsData,
+    isLoading: isLoadingProducts,
+    error,
+  } = useProductsByCategoryName(CATEGORY_NAME);
+
+  // Fetch sub-categories for the current category
+  const { data: subCategoriesData } =
+    useSubCategoriesByCategoryName(CATEGORY_NAME);
+
+  // Prepare filter buttons dynamically from sub-categories
+  const subCategoryFilters = useMemo(() => {
+    if (!subCategoriesData) return ["All"];
+    return ["All", ...subCategoriesData.map((sub: any) => sub.name)];
+  }, [subCategoriesData]);
+
+  // Transform fetched products using shared utility
+  const products: Product[] = useMemo(
+    () =>
+      transformProducts(productsData, {
+        defaultImage: IMG.plc,
+        getIcon: getCategoryIcon,
+      }),
+    [productsData],
+  );
+
+  // Updated filter logic - match against subCategory name
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase());
+    // Match activeCategory (Name) against product.subCategory (contains name from Query.select)
+    const matchesSubCategory =
+      activeCategory === "All" || product.subCategory === activeCategory;
+    return matchesSearch && matchesSubCategory;
+  });
+
+  const allImages =
+    products.length > 0
+      ? products.map((p) => p.image)
+      : [IMG.plc, IMG.scada, IMG.panel, IMG.home];
+
   return (
     <PageLayout>
-      <section className="relative pt-40 pb-20 bg-slate-900 overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10 text-white">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black tracking-normal uppercase mb-6">Industrial <span className="text-indigo-500">Equipment</span></h1>
-            <p className="text-xl md:text-2xl text-slate-300 max-w-3xl font-medium">Heavy-duty, high-precision hardware for modern production lines.</p>
-          </motion.div>
+      <CommonHero
+        bgImage={IMG.hero}
+        title="Industrial Automation"
+        caption="ANK Professional Automation Solutions"
+        subtitle="Heavy-duty, high-precision automation hardware and software solutions engineered for modern production lines and industrial excellence."
+        watermarkNumber="03"
+      />
+
+      <section className="py-24 bg-white px-6 md:px-16 lg:px-32">
+        <div className="max-w-7xl mx-auto">
+          {/* Search and Filters */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-24">
+            <div className="relative w-full lg:w-96">
+              <Search
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                size={20}
+              />
+              <input
+                type="text"
+                placeholder="Search solutions, hardware..."
+                className="w-full bg-slate-50 border-none px-12 py-4 rounded-sm text-sm font-bold text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary outline-none transition-all"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {subCategoryFilters.map((catName) => (
+                <button
+                  key={catName}
+                  onClick={() => setActiveCategory(catName)}
+                  className={`px-6 py-3 text-[10px] font-black uppercase tracking-widest transition-all ${
+                    activeCategory === catName
+                      ? "bg-primary text-white shadow-lg shadow-primary/20"
+                      : "bg-slate-50 text-slate-500 hover:bg-slate-100"
+                  }`}
+                >
+                  {catName}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Loading State */}
+          {isLoadingProducts && (
+            <div className="py-32 text-center">
+              <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
+              <p className="text-slate-500 font-medium">Loading products...</p>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="py-32 text-center">
+              <h3 className="text-2xl font-black text-red-500 uppercase italic mb-4">
+                Failed to load products
+              </h3>
+              <p className="text-slate-500 mb-4">{(error as Error).message}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="text-primary font-bold text-sm underline"
+              >
+                Try again
+              </button>
+            </div>
+          )}
+
+          {/* Detailed Product List */}
+          {!isLoadingProducts && !error && (
+            <div className="space-y-32">
+              <AnimatePresence mode="popLayout">
+                {filteredProducts.map((product, index) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="group"
+                  >
+                    <div
+                      className={`flex flex-col md:flex-row gap-12 lg:gap-20 items-center justify-center ${
+                        index % 2 !== 0 ? "md:flex-row-reverse" : ""
+                      }`}
+                    >
+                      {/* Image Side */}
+                      <div className="w-full md:w-150 aspect-[16/9] overflow-hidden rounded-sm relative shadow-2xl bg-slate-100">
+                        <motion.img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        />
+                        <div className="absolute top-6 right-6 z-10">
+                          <span className="bg-white/90 backdrop-blur px-4 py-2 text-xs font-black tracking-tighter text-primary shadow-xl">
+                            {product.price}
+                          </span>
+                        </div>
+                        <div className="absolute bottom-6 left-6 z-10">
+                          <span className="inline-flex items-center gap-1.5 bg-primary/90 backdrop-blur text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest shadow-xl">
+                            {product.icon}
+                            {product.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content Side */}
+                      <div className="w-full space-y-8">
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-3">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+                              {product.subCategory}
+                            </span>
+                            <div className="h-px w-12 bg-primary/20" />
+                          </div>
+                          <h2 className="text-3xl lg:text-4xl font-black text-slate-900 uppercase leading-[0.9] tracking-tighter">
+                            {product.name}
+                          </h2>
+                          <p className="text-slate-500 text-sm leading-relaxed max-w-lg">
+                            {product.description}
+                          </p>
+                        </div>
+
+                        <div className="space-y-4">
+                          <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">
+                            System Specifications
+                          </h4>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
+                            {product.features.map((feature, i) => (
+                              <li
+                                key={i}
+                                className="flex items-center gap-2 text-xs font-bold text-slate-700"
+                              >
+                                <CheckCircle2
+                                  size={14}
+                                  className="text-primary"
+                                />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="pt-4">
+                          <button className="inline-flex items-center gap-4 bg-primary text-white hover:bg-slate-900 px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all group/btn">
+                            View Solution Details
+                            <ArrowRight
+                              size={14}
+                              className="transition-transform group-hover/btn:translate-x-1"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+
+              {filteredProducts.length === 0 && !isLoadingProducts && (
+                <div className="py-32 text-center">
+                  <h3 className="text-2xl font-black text-slate-200 uppercase italic">
+                    {products.length === 0
+                      ? "No products available in this category yet..."
+                      : "No matches found for your search..."}
+                  </h3>
+                  <button
+                    onClick={() => {
+                      setSearchTerm("");
+                      setActiveCategory("All");
+                    }}
+                    className="mt-6 text-primary font-bold text-sm underline"
+                  >
+                    Clear all filters
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
-      <section className="py-32 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            <div>
-              <h2 className="text-3xl font-black text-slate-900 mb-8 uppercase tracking-normal">Industrial Grade Hardware</h2>
-              <p className="text-slate-600 font-medium leading-relaxed mb-10">Our equipment is engineered to withstand harsh environments while delivering unmatched accuracy.</p>
-              <div className="space-y-6">
-                <CapabilityItem title="Automated Test Equipment" desc="Specialized hardware for rigorous product validation and quality checks." />
-                <CapabilityItem title="Custom Controller Units" desc="Robust hardware interfaces for industrial machinery and automation." />
-                <CapabilityItem title="Precision Tooling" desc="High-quality mechanical components for specialized manufacturing needs." />
+      {/* Compliance Strip */}
+      <section className="bg-slate-900 py-16 px-6 md:px-16 lg:px-32">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-10">
+            <div className="flex items-center gap-4 flex-shrink-0">
+              <ShieldCheck size={32} className="text-emerald-400" />
+              <div>
+                <h3 className="text-white font-black text-lg uppercase tracking-tight">
+                  Industrial Compliance
+                </h3>
+                <p className="text-slate-400 text-xs font-medium">
+                  Engineered to meet rigorous industrial standards
+                </p>
               </div>
             </div>
-            <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100 flex flex-col justify-center">
-               <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" className="rounded-2xl mb-8 shadow-lg" alt="Industrial" />
-               <button className="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-slate-900 transition-all flex items-center justify-center gap-3">View Equipment <ArrowRight size={20} /></button>
+            <div className="h-px flex-1 bg-slate-700 hidden md:block" />
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              {[
+                "IEC Standards",
+                "IP65 Rated",
+                "EMI/RFI Safe",
+                "Industrial Grade",
+              ].map((cert) => (
+                <span
+                  key={cert}
+                  className="px-5 py-2.5 border border-slate-700 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:border-emerald-400 hover:text-emerald-400 transition-colors"
+                >
+                  {cert}
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </section>
+
+      {/* Marquee Gallery */}
+      <section className="bg-slate-50 py-24">
+        <div className="px-6 md:px-16 lg:px-32 mb-12">
+          <div className="flex items-end justify-between">
+            <div className="max-w-xl">
+              <h2 className="text-3xl font-black uppercase tracking-tighter text-slate-900 mb-4">
+                Automation <span className="text-primary italic">Showcase</span>
+              </h2>
+              <p className="text-slate-500 text-xs font-medium leading-relaxed uppercase">
+                Explore our industrial automation hardware and implementations.
+                Built for long-term operational stability.
+              </p>
+            </div>
+          </div>
+        </div>
+        <Marquee images={allImages} speed={40} />
+      </section>
+
+      <CTASection
+        eyebrow="Optimize Your Production"
+        eyebrowHighlight="Optimize"
+        heading="From single machine control to plant-wide SCADA — we build the nervous system of your factory."
+        primaryLabel="Technical Consultation"
+        secondaryLabel="Contact Us"
+      />
     </PageLayout>
-  )
-}
+  );
+};
 
-const CapabilityItem = ({ title, desc }: { title: string, desc: string }) => (
-  <div className="group">
-    <h4 className="text-xl font-black text-slate-900 mb-2 uppercase group-hover:text-indigo-600 transition-colors">{title}</h4>
-    <p className="text-slate-500 font-medium leading-relaxed">{desc}</p>
-  </div>
-)
-
-export default IndustrialEquipment
+export default IndustrialEquipment;

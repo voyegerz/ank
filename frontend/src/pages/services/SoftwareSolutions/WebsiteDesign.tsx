@@ -1,0 +1,126 @@
+import { Globe, Code, Rocket } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import PageLayout from "../../../components/PageLayout";
+import CommonHero from "../../../components/CommonHero";
+import ServiceDetail from "../../../components/service/ServiceDetail";
+import ServiceProcess from "@/components/service/ServiceProcess";
+import PhilosophySection from "@/components/service/Philosophy";
+import CTASection from "@/components/service/CTA";
+
+const WebsiteDesign = () => {
+  const navigate = useNavigate();
+
+  const webImages = [
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=2000",
+    "https://images.unsplash.com/photo-1522542550221-31fd19255a77?auto=format&fit=crop&q=80&w=2000",
+  ];
+
+  return (
+    <PageLayout>
+      <CommonHero
+        bgImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
+        caption="High-Performance Digital Presence"
+        title="Website Design & Development"
+        subtitle="Professional corporate websites and web applications built for speed, conversion, and brand impact. We combine modern aesthetics with robust engineering to deliver digital experiences that represent your technical excellence."
+        watermarkNumber="11"
+      />
+      <ServiceDetail
+        images={webImages}
+        caption="Engineering the Web"
+        leftTitle="Impactful Digital Strategy"
+        leftParagraphs={[
+          "Your website is the digital front door to your business. We design responsive, high-performance websites that communicate your brand's unique value proposition and technical authority to a global audience. We focus on creating intuitive user journeys that guide visitors toward your primary goals.",
+          "We utilize industry-leading technologies like React, Tailwind CSS, and modern CMS platforms to build websites that are lightning-fast, secure, and incredibly easy for your team to manage and update while maintaining SEO best practices.",
+        ]}
+        features={[
+          "Custom Responsive Design",
+          "High-Speed Web Development",
+          "Search Engine Optimization (SEO)",
+          "Content Management Integration",
+        ]}
+        ctaLabel="Build your Website"
+        onCtaClick={() => {
+          navigate("/contact");
+        }}
+      />
+      <ServiceProcess
+        items={[
+          {
+            number: "01",
+            title: "Strategy & Wireframing",
+            description:
+              "Defining the site's goals, user personas, and information architecture before creating low-fidelity wireframes.",
+          },
+          {
+            number: "02",
+            title: "UI/UX Visual Design",
+            description:
+              "Developing high-fidelity prototypes that align with your brand identity and provide an exceptional user experience.",
+          },
+          {
+            number: "03",
+            title: "Agile Development",
+            description:
+              "Coding the website using modern frameworks, ensuring clean, performant, and scalable code at every step.",
+          },
+          {
+            number: "04",
+            title: "Deployment & Support",
+            description:
+              "Rigorous testing, final deployment to production, and ongoing maintenance to keep your site running perfectly.",
+          },
+        ]}
+      />
+
+      <PhilosophySection
+        image="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000"
+        eyebrow="Our digital ethos"
+        eyebrowHighlight="ethos"
+        title="Form Meets Function"
+        paragraphs={[
+          "In the world of professional engineering, a website must be more than just pretty; it must be a precise tool. We approach web design with the same rigor we apply to mechanical or electrical engineering, ensuring every pixel supports your business objectives.",
+        ]}
+        imageSize="xs"
+        iconSize={80}
+        items={[
+          {
+            icon: <Code size={20} strokeWidth={1.2} />,
+            label: "Clean Code",
+            description: "Scalable and secure frontend",
+            progress: 99,
+          },
+          {
+            icon: <Rocket size={20} strokeWidth={1.2} />,
+            label: "Fast Load Times",
+            description: "Optimized for core web vitals",
+            progress: 98,
+          },
+          {
+            icon: <Globe size={20} strokeWidth={1.2} />,
+            label: "Global Outreach",
+            description: "Built for SEO and visibility",
+            progress: 95,
+          },
+        ]}
+      />
+
+      <CTASection
+        eyebrow="Elevate your digital presence"
+        eyebrowHighlight="presence"
+        heading="Ready to build a website that matches your technical excellence?"
+        primaryLabel="Start Web Project"
+        secondaryLabel="Contact Us"
+        onPrimaryClick={() => {
+          navigate("/contact");
+        }}
+        onSecondaryClick={() => {
+          navigate("/contact");
+        }}
+      />
+    </PageLayout>
+  );
+};
+
+export default WebsiteDesign;

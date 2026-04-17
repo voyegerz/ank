@@ -39,7 +39,7 @@ export class AdminAuthService {
             // Since the project only permits one user (the Admin), 
             // having an active account session inherently means the Admin is active.
             return currentAccount;
-        } catch (error) {
+        } catch {
             console.error("AdminAuthService :: getAdminSession :: Not logged in or error");
             return null;
         }
